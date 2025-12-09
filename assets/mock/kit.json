@@ -1,0 +1,11 @@
+{
+  "kitId": "k1",
+  "category": "Cosmetics",
+  "items": [
+    { "id": "lipstick-red", "name": "Lipstick", "price": 16, "preference": "Shade: Red" },
+    { "id": "foundation-medium", "name": "Foundation", "price": 28, "preference": "Shade: Medium" },
+    { "id": "compact-natural", "name": "Compact Powder", "price": 18, "preference": "Finish: Natural" },
+    { "id": "blush-peach", "name": "Blush", "price": 14, "preference": "Color: Peach" }
+  ],
+  "totalPrice": 76
+}

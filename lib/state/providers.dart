@@ -8,7 +8,7 @@ part 'providers.g.dart';
 
 // Service Provider
 @riverpod
-ApiService apiService(ApiServiceRef ref) => ApiService();
+ApiService apiService(ref) => ApiService();
 
 // User State
 @riverpod

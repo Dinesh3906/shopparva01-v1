@@ -1,0 +1,9 @@
+{
+  "profile": { "id": "u1", "name": "Luffy", "avatar": "https://via.placeholder.com/100x100.png?text=L" },
+  "filters": {
+    "brands": ["Apple", "Samsung", "Sony"],
+    "price_ranges": ["any", "<500", "500-1000", ">1000"],
+    "performance": ["Gaming", "Work", "Everyday"],
+    "usage": ["Home", "Office", "Travel"]
+  }
+}

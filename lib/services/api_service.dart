@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:dio/dio.dart';
 import '../models/product.dart';
 import '../models/kit.dart';
@@ -31,7 +33,7 @@ class ApiService {
           .toList();
     } catch (e) {
       // Fallback/Mock behavior if backend is unreachable
-      print('Error searching products: $e');
+      developer.log('Error searching products: $e', name: 'ApiService.searchProducts');
       return [];
     }
   }

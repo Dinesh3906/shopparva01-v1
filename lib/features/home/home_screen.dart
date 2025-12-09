@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../../state/providers.dart';
-import '../../core/theme_tokens.dart';
 import 'widgets/product_card.dart';
-import 'widgets/assistant_widget.dart';
+import '../../core/theme_tokens.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -14,238 +14,332 @@ class HomeScreen extends ConsumerStatefulWidget {
   ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-
-
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  final List<String> _categories = const ['All', 'Electronics', 'Fashion', 'Home', 'Beauty', 'Sports'];
   String _selectedCategory = 'All';
+  int _bottomNavIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final homeFeed = ref.watch(homeFeedProvider);
-    final isHighContrast = ref.watch(highContrastProvider);
     final user = ref.watch(userStateProvider);
+    
+    // Theme Colors from Tokens
+    const backgroundColor = ThemeTokens.backgroundDark;
+    const surfaceColor = ThemeTokens.surfaceDark;
+    const accentColor = ThemeTokens.primary;
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [ThemeTokens.primary, ThemeTokens.secondary],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      backgroundColor: backgroundColor,
+      body: SafeArea(
+        bottom: false,
+        child: Stack(
           children: [
-            Text(
-              user?.name != null ? 'Welcome, ${user!.name}' : 'Welcome to ShopParva',
-              style: ThemeTokens.bodySmall.copyWith(color: Colors.white70),
-            ),
-            Text(
-              'Smart price comparison',
-              style: ThemeTokens.headlineMedium.copyWith(color: Colors.white, fontSize: 20),
-            ),
-          ],
-        ),
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: const Icon(Icons.menu, color: Colors.white),
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.white),
-            onPressed: () => context.push('/search'),
-          ),
-          IconButton(
-            icon: const Icon(Icons.favorite_border, color: Colors.white),
-            onPressed: () => context.push('/watchlist'),
-          ),
-          const SizedBox(width: 8),
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-             UserAccountsDrawerHeader(
-                decoration: const BoxDecoration(color: ThemeTokens.primary),
-                accountName: Text(user?.name ?? 'Guest', style: const TextStyle(fontWeight: FontWeight.bold)),
-                accountEmail: Text(user?.email ?? ''),
-             ),
-             ListTile(
-               title: const Text('Home'),
-               leading: const Icon(Icons.home),
-               onTap: () => context.go('/'),
-             ),
-             ListTile(
-               title: const Text('Kit Builder'),
-               leading: const Icon(Icons.build),
-               onTap: () => context.push('/kit-builder'),
-             ),
-             SwitchListTile.adaptive(
-               title: const Text('High contrast mode'),
-               secondary: const Icon(Icons.contrast),
-               value: isHighContrast,
-               onChanged: (value) => ref.read(highContrastProvider.notifier).state = value,
-             ),
-             const Divider(),
-             ListTile(
-               title: const Text('Sign Out'),
-               leading: const Icon(Icons.logout),
-               onTap: () {
-                 ref.read(userStateProvider.notifier).logout();
-                 context.go('/login');
-               },
-             ),
-          ],
-        ),
-      ),
-      body: Stack(
-        children: [
-          homeFeed.when(
-            data: (products) {
-              if (products.isEmpty) {
-                 return const Center(child: Text('No products found. Please make sure the backend server is running.'));
-              }
-
-              final filteredProducts = _selectedCategory == 'All'
-                  ? products
-                  : products
-                      .where((p) => p.categories.contains(_selectedCategory))
-                      .toList();
-
-              if (filteredProducts.isEmpty) {
-                return Center(child: Text('No products in the $_selectedCategory category yet.'));
-              }
-
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    final crossAxisCount = constraints.maxWidth > 900 
-                      ? 4 
-                      : constraints.maxWidth > 600 ? 3 : 2;
-                    
-                    return MasonryGridView.count(
-                      crossAxisCount: crossAxisCount,
-                      mainAxisSpacing: 16,
-                      crossAxisSpacing: 16,
-                      itemCount: filteredProducts.length + 1,
-                      itemBuilder: (context, index) {
-                        if (index == 0) {
-                          return _HomeHeroSection(
-                            categories: _categories,
-                            selectedCategory: _selectedCategory,
-                            onCategorySelected: (value) {
-                              setState(() => _selectedCategory = value);
-                            },
-                          );
-                        }
-
-                        final product = filteredProducts[index - 1];
-                        return SizedBox(
-                          child: ProductCard(
-                            product: product,
-                            onTap: () => context.push('/product/${product.id}'),
+            CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // 1. Top Search Bar
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: surfaceColor,
+                                  borderRadius: BorderRadius.circular(25),
+                                  border: Border.all(
+                                    color: Colors.white.withValues(
+                                      alpha: 0.1,
+                                    ),
+                                  ),
+                                ),
+                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.search, color: ThemeTokens.neutral500),
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      child: Text(
+                                        'Search products...',
+                                        style: TextStyle(
+                                          color: Colors.white.withValues(
+                                            alpha: 0.5,
+                                          ),
+                                          fontFamily: GoogleFonts.inter().fontFamily,
+                                        ),
+                                      ),
+                                    ),
+                                    const Icon(Icons.mic, color: ThemeTokens.neutral500),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            // AI Assistant Bubble
+                            Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    accentColor,
+                                    accentColor.withValues(alpha: 0.7),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: accentColor.withValues(alpha: 0.3),
+                                    blurRadius: 10,
+                                    offset: const Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                              child: InkWell(
+                                onTap: () {
+                                  showDialog(context: context, builder: (_) => AlertDialog(
+                                    title: const Text("Shopping Assistant"),
+                                    content: const Text("I can help you find the best deals! Try searching for a brand like 'Sony' or 'Apple'."),
+                                    actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text("Close"))],
+                                  ));
+                                },
+                                child: const Icon(Icons.chat_bubble_outline, color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                        
+                        const SizedBox(height: 30),
+                        
+                        // 2. Greeting Section (Dynamic)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Hello ${user?.name ?? 'Guest'} 👋',
+                              style: ThemeTokens.headlineLarge.copyWith(color: Colors.white, fontSize: 28),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              "Let's find the best deals for you.",
+                              style: ThemeTokens.bodyMedium.copyWith(
+                                color: Colors.white.withValues(
+                                  alpha: 0.6,
+                                ),
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                        
+                        const SizedBox(height: 30),
+                        
+                        // 3. Category Chips (Scrollable Row - Dynamic)
+                        homeFeed.when(
+                          data: (products) {
+                            // Extract unique categories from products
+                            final allCategories = {'All', ...products.expand((p) => p.categories)}.toList();
+                            return SizedBox(
+                              height: 40,
+                              child: ListView.separated(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: allCategories.length,
+                                separatorBuilder: (_, __) => const SizedBox(width: 12),
+                                itemBuilder: (context, index) {
+                                  final cat = allCategories[index];
+                                  final isSelected = cat == _selectedCategory;
+                                  return GestureDetector(
+                                    onTap: () => setState(() => _selectedCategory = cat),
+                                    child: AnimatedContainer(
+                                      duration: const Duration(milliseconds: 200),
+                                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                                      decoration: BoxDecoration(
+                                        color: isSelected
+                                            ? accentColor.withValues(
+                                                alpha: 0.1,
+                                              )
+                                            : surfaceColor,
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: isSelected ? accentColor : Colors.transparent,
+                                          width: 1.5,
+                                        ),
+                                        boxShadow: isSelected ? [
+                                          BoxShadow(
+                                            color: accentColor.withValues(
+                                              alpha: 0.2,
+                                            ),
+                                            blurRadius: 8,
+                                            spreadRadius: 0,
+                                          ) 
+                                        ] : [],
+                                      ),
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        cat,
+                                        style: TextStyle(
+                                          color: isSelected ? accentColor : Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: GoogleFonts.inter().fontFamily,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          loading: () => const SizedBox(height: 40),
+                          error: (_, __) => const SizedBox(),
+                        ),
+                        
+                        const SizedBox(height: 30),
+                        
+                        // 4. "Smart Deals For You" Section Title
+                        Text(
+                          "Smart Deals For You",
+                          style: ThemeTokens.headlineMedium.copyWith(color: Colors.white, fontSize: 20),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                
+                // Smart Deals Grid
+                homeFeed.when(
+                  data: (products) {
+                     final filteredProducts = _selectedCategory == 'All'
+                        ? products
+                        : products.where((p) => p.categories.contains(_selectedCategory)).toList();
+                        
+                    if (filteredProducts.isEmpty) {
+                      return SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.all(32.0),
+                          child: Center(
+                            child: Text(
+                                'No products found.',
+                                style: TextStyle(
+                                  color: Colors.white.withValues(
+                                    alpha: 0.5,
+                                  ),
+                                ),
+                            ),
                           ),
-                        );
-                      },
+                        ),
+                      );
+                    }
+                    
+                    return SliverPadding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      sliver: SliverMasonryGrid.count(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 16,
+                        crossAxisSpacing: 16,
+                        childCount: filteredProducts.length,
+                        itemBuilder: (context, index) {
+                           return ProductCard(
+                             product: filteredProducts[index],
+                             onTap: () => context.push('/product/${filteredProducts[index].id}'),
+                           );
+                        },
+                      ),
                     );
                   },
+                  loading: () => const SliverToBoxAdapter(
+                     child: SizedBox(
+                       height: 200,
+                       child: Center(child: CircularProgressIndicator(color: ThemeTokens.primary)),
+                     )
+                  ),
+                  error: (e, s) => SliverToBoxAdapter(child: Text('Error: $e', style: const TextStyle(color: Colors.white))),
                 ),
-              );
-            },
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (err, stack) => Center(child: Text('Error: $err')),
+                
+                // Bottom Spacing
+                const SliverToBoxAdapter(child: SizedBox(height: 100)),
+              ],
+            ),
+          ],
+        ),
+      ),
+      // 5. Floating Action Button
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Open settings/filter
+        },
+        backgroundColor: surfaceColor,
+        foregroundColor: accentColor,
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: accentColor.withValues(
+                  alpha: 0.2,
+                ),
+                blurRadius: 10,
+              )
+            ]
           ),
-          AssistantFloatingWidget(
-            onTap: () {
-               showDialog(context: context, builder: (_) => AlertDialog(
-                 title: const Text("Shopping Assistant"),
-                 content: const Text("I can help you find the best deals! Try searching for a brand like 'Sony' or 'Apple'."),
-                 actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text("Close"))],
-               ));
-            },
+          child: const Icon(Icons.settings),
+        ),
+      ),
+      // 6. Bottom Navigation Bar
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          color: Color(0xFF151925),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
           ),
-        ],
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _buildNavItem(Icons.home, "Home", 0, isActive: _bottomNavIndex == 0),
+            _buildNavItem(Icons.local_offer, "Deals", 1, isActive: _bottomNavIndex == 1),
+            _buildNavItem(Icons.inventory_2, "Kits", 2, isActive: _bottomNavIndex == 2),
+            _buildNavItem(Icons.view_in_ar, "AR Try", 3, isActive: _bottomNavIndex == 3),
+            _buildNavItem(Icons.person, "Profile", 4, isActive: _bottomNavIndex == 4),
+          ],
+        ),
       ),
     );
   }
-}
 
-class _HomeHeroSection extends StatelessWidget {
-  final List<String> categories;
-  final String selectedCategory;
-  final ValueChanged<String> onCategorySelected;
-
-  const _HomeHeroSection({
-    required this.categories,
-    required this.selectedCategory,
-    required this.onCategorySelected,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [ThemeTokens.primary, ThemeTokens.secondary],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 16,
-            offset: Offset(0, 8),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(20),
+  Widget _buildNavItem(IconData icon, String label, int index, {bool isActive = false}) {
+    final color = isActive
+        ? ThemeTokens.primary
+        : Colors.white.withValues(
+            alpha: 0.5,
+          );
+    return InkWell(
+      onTap: () {
+        setState(() => _bottomNavIndex = index);
+        if (index == 2) context.push('/kit-builder'); 
+      },
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
+          Icon(icon, color: color, size: 24),
+          const SizedBox(height: 4),
           Text(
-            'Compare prices across marketplaces',
-            style: ThemeTokens.headlineMedium.copyWith(
-              color: Colors.white,
-              fontSize: 22,
+            label,
+            style: TextStyle(
+              color: color,
+              fontSize: 10,
+              fontWeight: FontWeight.w600,
+              fontFamily: GoogleFonts.inter().fontFamily,
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Browse curated products and instantly spot the best deal before you buy.',
-            style: ThemeTokens.bodyMedium.copyWith(
-              color: Colors.white70,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              for (final category in categories)
-                ChoiceChip(
-                  label: Text(category),
-                  selected: selectedCategory == category,
-                  selectedColor: Colors.white,
-                  labelStyle: TextStyle(
-                    color: selectedCategory == category
-                        ? ThemeTokens.primary
-                        : Colors.white,
-                  ),
-                  backgroundColor: Colors.white.withOpacity(0.15),
-                  onSelected: (_) => onCategorySelected(category),
-                ),
-            ],
           ),
         ],
       ),

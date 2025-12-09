@@ -3,18 +3,20 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ThemeTokens {
   // Brand colors
-  static const Color primary = Color(0xFF0FA3B1);
-  static const Color secondary = Color(0xFFFF6B6B);
+  static const Color primary = Color(0xFF0FA3B1); // Teal primary
+  static const Color accent = Color(0xFF00E5C4); // Bright teal CTA
+  static const Color secondary = Color(0xFFFF6B6B); // Danger / secondary
 
   // High-contrast accents (slightly deeper for AA+ contrast)
   static const Color primaryHighContrast = Color(0xFF00808D);
   static const Color secondaryHighContrast = Color(0xFFDC2626);
 
-  // Neutrals (light 894 dark)
+  // Neutrals & surfaces
   static const Color backgroundLight = Color(0xFFF8F9FA);
-  static const Color backgroundDark = Color(0xFF121212);
+  static const Color backgroundDark = Color(0xFF0F1720); // Deep navy/charcoal
   static const Color surfaceLight = Colors.white;
-  static const Color surfaceDark = Color(0xFF1E1E1E);
+  static const Color surfaceDark = Color(0xFF141821); // Card background
+  static const Color surfaceMuted = Color(0xFF1B2328); // Muted surfaces / panels
   static const Color neutral100 = Color(0xFFF5F5F5);
   static const Color neutral200 = Color(0xFFE5E7EB);
   static const Color neutral300 = Color(0xFFD1D5DB);
@@ -48,22 +50,24 @@ class ThemeTokens {
   static const double elevationMedium = 4.0;
   static const double elevationHigh = 12.0;
 
-  // Typography (TextStyles) 894 Inter across the UI
-  static TextStyle get headlineLarge => GoogleFonts.inter(
+  // Typography
+  // Headings: Poppins, Body: Inter
+  static TextStyle get headlineLarge => GoogleFonts.poppins(
         fontSize: 32,
         fontWeight: FontWeight.w700,
         height: 1.2,
       );
 
-  static TextStyle get headlineMedium => GoogleFonts.inter(
+  static TextStyle get headlineMedium => GoogleFonts.poppins(
         fontSize: 24,
         fontWeight: FontWeight.w600,
         height: 1.25,
       );
 
-  static TextStyle get titleLarge => GoogleFonts.inter(
+  static TextStyle get titleLarge => GoogleFonts.poppins(
         fontSize: 20,
         fontWeight: FontWeight.w600,
+        height: 1.25,
       );
 
   static TextStyle get bodyMedium => GoogleFonts.inter(

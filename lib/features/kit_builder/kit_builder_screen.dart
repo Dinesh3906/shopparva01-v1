@@ -58,10 +58,8 @@ class _KitBuilderScreenState extends ConsumerState<KitBuilderScreen> {
              
              ref.read(apiServiceProvider).generateKit(query, _budget).then((kit) {
                 ref.read(localKitProvider.notifier).state = AsyncValue.data(kit);
-                if (kit != null) {
-                   _showKitResult(context, kit);
-                }
-             }).catchError((err) {
+                 _showKitResult(context, kit);
+                           }).catchError((err) {
                 ref.read(localKitProvider.notifier).state = AsyncValue.error(err, StackTrace.current);
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $err')));
              });
@@ -180,7 +178,7 @@ class _KitBuilderScreenState extends ConsumerState<KitBuilderScreen> {
                    const SizedBox(height: 12),
                    Text('Kit Generated!', style: ThemeTokens.headlineMedium),
                    Text(kit.name, style: ThemeTokens.titleLarge),
-                   Text('Total: \$${kit.totalPrice}', style: TextStyle(color: ThemeTokens.primary, fontWeight: FontWeight.bold, fontSize: 20)),
+                   Text('Total: \$${kit.totalPrice}', style: const TextStyle(color: ThemeTokens.primary, fontWeight: FontWeight.bold, fontSize: 20)),
                 ],
               ),
             ),

@@ -25,7 +25,7 @@ class PriceChart extends StatelessWidget {
          decoration: BoxDecoration(
             color: ThemeTokens.surfaceLight,
             borderRadius: BorderRadius.circular(ThemeTokens.r16),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10)],
+            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10)],
          ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +81,7 @@ class PriceChart extends StatelessWidget {
                       dotData: const FlDotData(show: true),
                       belowBarData: BarAreaData(
                         show: true,
-                        color: ThemeTokens.primary.withOpacity(0.1),
+                        color: ThemeTokens.primary.withValues(alpha: 0.1),
                       ),
                     ),
                   ],

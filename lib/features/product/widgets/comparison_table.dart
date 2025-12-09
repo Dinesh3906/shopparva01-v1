@@ -35,7 +35,7 @@ class ComparisonTable extends StatelessWidget {
 
              return Container(
                decoration: BoxDecoration(
-                 color: isBest ? Colors.green.withOpacity(0.05) : null,
+                 color: isBest ? Colors.green.withValues(alpha: 0.05) : null,
                  border: Border(bottom: BorderSide(color: Colors.grey[100]!)),
                ),
                child: ListTile(
@@ -82,7 +82,7 @@ class ComparisonTable extends StatelessWidget {
                  },
                ),
              );
-          }).toList(),
+          }),
         ],
       ),
     );

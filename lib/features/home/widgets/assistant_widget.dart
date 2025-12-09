@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import '../../../core/theme_tokens.dart';
 
 class AssistantFloatingWidget extends StatefulWidget {
@@ -54,7 +53,7 @@ class _AssistantFloatingWidgetState extends State<AssistantFloatingWidget> with 
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: ThemeTokens.secondary.withOpacity(0.4),
+                      color: ThemeTokens.secondary.withValues(alpha: 0.4),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),

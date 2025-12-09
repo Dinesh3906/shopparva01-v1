@@ -78,9 +78,9 @@ class LoginScreen extends ConsumerWidget {
                         ),
                       ),
                       const SizedBox(height: 12),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text(
                             'Secure login',
                             style: TextStyle(fontSize: 12, color: Colors.grey),

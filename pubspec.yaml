@@ -16,17 +16,28 @@ dependencies:
 
   # Networking
   dio: ^5.4.0
-  
-  # Routing
+
+  # Routing (kept for potential deep-linking, core app uses nested Navigator)
   go_router: ^12.1.0
 
   # UI Utils
   flutter_animate: ^4.3.0
   google_fonts: ^6.1.0
   fl_chart: ^0.66.2
+  meta: ^1.10.0
   lottie: ^3.1.0
   cached_network_image: ^3.3.1
   flutter_staggered_grid_view: ^0.7.0
+  flutter_svg: ^2.0.9
+
+  # Charts & visualizations
+  charts_flutter: ^0.12.0
+
+  # Persistence & storage
+  shared_preferences: ^2.2.2
+
+  # Camera / AR preview
+  camera: ^0.11.0+1
   
   # Data Class Generator
   freezed_annotation: ^2.4.1
@@ -49,3 +60,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/logo.jpg
+    - assets/mock/
