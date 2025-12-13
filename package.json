@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "server": "node server.js",
+    "backend": "cd backend && npm start",
     "start": "npm --prefix frontend start"
   },
   "dependencies": {

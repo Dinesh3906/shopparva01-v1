@@ -2535,54 +2535,77 @@ const server = http.createServer((req, res) => {
   if (path === '/api/v1/products/search') {
     const query = url.searchParams.get('q')?.toLowerCase() || '';
     const results = products
-      .filter(p => 
-        p.title.toLowerCase().includes(query) || 
+      .filter(p =>
+        p.title.toLowerCase().includes(query) ||
         p.brand.toLowerCase().includes(query) ||
         p.category.toLowerCase().includes(query)
       )
       .map(normalizeProduct);
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(results));
-  } 
-  
+  }
+
   else if (path === '/api/v1/products/compare') {
-      const id = url.searchParams.get('id');
-      const product = products.find(p => p.id === id);
-      if (product) {
-          res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify(normalizeProduct(product)));
-      } else {
-          res.writeHead(404);
-          res.end(JSON.stringify({ error: 'Not found' }));
-      }
+    const id = url.searchParams.get('id');
+    const product = products.find(p => p.id === id);
+    if (product) {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(normalizeProduct(product)));
+    } else {
+      res.writeHead(404);
+      res.end(JSON.stringify({ error: 'Not found' }));
+    }
   }
 
   else if (path === '/api/v1/kits/generate') {
-      if (req.method === 'POST') {
-          let body = '';
-          req.on('data', chunk => body += chunk);
-          req.on('end', () => {
-             const { type, budget } = JSON.parse(body || '{}');
-             // Mock generation: pick random items fitting budget
-             const kitItems = products.slice(0, 5).map(normalizeProduct); // Just pick first 5 for demo
-             const totalPrice = kitItems.reduce((sum, item) => sum + item.offers[0].price, 0);
-             
-             const kit = {
-                 id: "kit_" + Date.now(),
-                 name: `${type} Build`,
-                 budget: budget,
-                 items: kitItems,
-                 totalPrice: totalPrice
-             };
-             res.writeHead(200, { 'Content-Type': 'application/json' });
-             res.end(JSON.stringify(kit));
-          });
-      }
+    if (req.method === 'POST') {
+      let body = '';
+      req.on('data', chunk => body += chunk);
+      req.on('end', () => {
+        const { type, budget } = JSON.parse(body || '{}');
+        // Mock generation: pick random items fitting budget
+        const kitItems = products.slice(0, 5).map(normalizeProduct); // Just pick first 5 for demo
+        const totalPrice = kitItems.reduce((sum, item) => sum + item.offers[0].price, 0);
+
+        const kit = {
+          id: "kit_" + Date.now(),
+          name: `${type} Build`,
+          budget: budget,
+          items: kitItems,
+          totalPrice: totalPrice
+        };
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(kit));
+      });
+    }
   }
-  
+
+  else if (path === '/api/v1/user/profile') {
+    const mockProfile = {
+      id: "user_123",
+      name: "Demo User",
+      email: "demo@shopparva.com",
+      preferences: {
+        theme: "dark",
+        notifications: true
+      }
+    };
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(mockProfile));
+  }
+
+  else if (path === '/api/v1/ar-assets') {
+    // Mock AR assets response
+    const assets = [
+      { id: "ar_1", type: "glasses", modelUrl: "/models/glasses.glb", preview: "/images/glasses_preview.png" }
+    ];
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(assets));
+  }
+
   else {
-      res.writeHead(404);
-      res.end('Not Found');
+    res.writeHead(404);
+    res.end('Not Found');
   }
 });
 

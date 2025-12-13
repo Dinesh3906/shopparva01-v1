@@ -1,4 +1,4 @@
-import 'package:charts_flutter/flutter.dart' as charts;
+// import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -232,6 +232,7 @@ class ProductDetailModal extends ConsumerWidget {
   }
 }
 
+
 class _PriceSparkline extends StatelessWidget {
   const _PriceSparkline({
     required this.data,
@@ -241,31 +242,20 @@ class _PriceSparkline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final series = [
-      charts.Series<double, int>(
-        id: 'price',
-        colorFn: (_, __) => charts.ColorUtil.fromDartColor(ThemeTokens.accent),
-        domainFn: (value, index) => index ?? 0,
-        measureFn: (value, _) => value,
-        data: data,
-      ),
-    ];
-
-    return SizedBox(
+    // charts_flutter is broken on newer Flutter versions.
+    // Placeholder for future fl_chart implementation.
+    return Container(
       height: 72,
-      child: charts.LineChart(
-        series,
-        animate: true,
-        defaultRenderer: charts.LineRendererConfig(
-          includeArea: true,
-          stacked: false,
-          includePoints: false,
-        ),
-        primaryMeasureAxis: const charts.NumericAxisSpec(showAxisLine: false,
-            renderSpec: charts.NoneRenderSpec()),
-        domainAxis: const charts.NumericAxisSpec(showAxisLine: false,
-            renderSpec: charts.NoneRenderSpec()),
+      decoration: BoxDecoration(
+        color: ThemeTokens.surfaceMuted,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      alignment: Alignment.center,
+      child: Text(
+        'Price History Chart',
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white30),
       ),
     );
   }
 }
+

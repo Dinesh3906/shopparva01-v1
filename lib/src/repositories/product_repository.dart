@@ -27,18 +27,16 @@ class ProductRepository {
     Map<String, dynamic>? filters,
   }) async {
     final params = <String, dynamic>{
-      if (query != null && query.isNotEmpty) 'q': query,
+      'q': query ?? '',
       if (category != null && category.isNotEmpty) 'category': category,
-      'page': page,
-      'limit': limit,
-      if (filters != null && filters.isNotEmpty) 'filters': jsonEncode(filters),
+      // Backend doesn't support pagination yet, but keeping params for future
     };
 
     final Response<dynamic> response =
-        await _client.dio.get('/products', queryParameters: params);
+        await _client.dio.get('/products/search', queryParameters: params);
 
-    final data = response.data as Map<String, dynamic>;
-    final List<dynamic> items = data['data'] as List<dynamic>;
+    // Backend returns a direct List<dynamic>
+    final List<dynamic> items = response.data as List<dynamic>;
 
     final products = items
         .map((e) => Product.fromJson(e as Map<String, dynamic>))
