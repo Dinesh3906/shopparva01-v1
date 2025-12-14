@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../core/theme_tokens.dart';
 import '../models/product.dart';
@@ -8,7 +10,7 @@ import '../widgets/empty_and_loading.dart';
 import '../widgets/product_detail_modal.dart';
 import '../widgets/product_grid.dart';
 import 'price_tracker_screen.dart';
-import 'search_screen.dart';
+
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -27,12 +29,38 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     'Beauty',
     'Essentials',
   ];
-  int _selectedCategoryIndex = 0;
+  
+  // Speech-to-text
+  late stt.SpeechToText _speech;
+  bool _isListening = false;
+  bool _speechAvailable = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initSpeech();
+  }
 
   @override
   void dispose() {
     _searchController.dispose();
+    _speech.stop();
     super.dispose();
+  }
+  
+  void _initSpeech() async {
+    _speech = stt.SpeechToText();
+    _speechAvailable = await _speech.initialize(
+      onStatus: (status) {
+        if (status == 'done' || status == 'notListening') {
+          setState(() => _isListening = false);
+        }
+      },
+      onError: (error) {
+        setState(() => _isListening = false);
+      },
+    );
+    setState(() {});
   }
 
   @override
@@ -140,10 +168,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ),
         const SizedBox(width: 12),
-        CircleAvatar(
-          radius: 20,
-          backgroundColor: ThemeTokens.surfaceMuted,
-          child: const Icon(Icons.person_rounded, color: Colors.white),
+        InkWell(
+          onTap: () {
+            // Navigate to profile screen (index 4) using the navigation provider
+            ref.read(navigationIndexProvider.notifier).state = 4;
+          },
+          borderRadius: BorderRadius.circular(20),
+          child: CircleAvatar(
+            radius: 20,
+            backgroundColor: ThemeTokens.surfaceMuted,
+            child: const Icon(Icons.person_rounded, color: Colors.white),
+          ),
         ),
       ],
     );
@@ -186,19 +221,34 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ),
         const SizedBox(width: 8),
-        Container(
-          decoration: BoxDecoration(
-            color: ThemeTokens.surfaceDark,
-            borderRadius: BorderRadius.circular(20),
+        InkWell(
+          onTap: _isListening ? _stopListening : _startListening,
+          borderRadius: BorderRadius.circular(20),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            decoration: BoxDecoration(
+              color: _isListening 
+                  ? ThemeTokens.primary.withOpacity(0.3)
+                  : ThemeTokens.surfaceDark,
+              borderRadius: BorderRadius.circular(20),
+              border: _isListening 
+                  ? Border.all(color: ThemeTokens.primary, width: 2)
+                  : null,
+            ),
+            padding: const EdgeInsets.all(10),
+            child: Icon(
+              _isListening ? Icons.mic_rounded : Icons.mic_none_rounded,
+              color: _isListening ? ThemeTokens.primary : Colors.white70,
+            ),
           ),
-          padding: const EdgeInsets.all(10),
-          child: const Icon(Icons.mic_none_rounded, color: Colors.white70),
         ),
       ],
     );
   }
 
   Widget _buildCategoryChips() {
+    final selectedCategory = ref.watch(selectedHomePageCategoryProvider);
+
     return SizedBox(
       height: 48,
       child: ListView.separated(
@@ -207,11 +257,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         itemCount: _categories.length,
         separatorBuilder: (_, __) => const SizedBox(width: 8),
         itemBuilder: (context, index) {
-          final selected = index == _selectedCategoryIndex;
+          final category = _categories[index];
+          final selected = category == selectedCategory;
+          
           return GestureDetector(
             onTap: () {
-              setState(() => _selectedCategoryIndex = index);
-              // Category filtering could call ProductRepository with category
+              ref.read(selectedHomePageCategoryProvider.notifier).state = category;
             },
             child: AnimatedScale(
               duration: const Duration(milliseconds: 200),
@@ -242,7 +293,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: Center(
                     child: Text(
-                      _categories[index],
+                      category,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: Colors.white,
                           ),
@@ -271,5 +322,59 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         );
       },
     );
+  }
+
+  void _startListening() async {
+    if (!_speechAvailable) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Speech recognition not available'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return;
+    }
+
+    // Request microphone permission
+    final status = await Permission.microphone.request();
+    if (!status.isGranted) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Microphone permission is required for voice search'),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+      return;
+    }
+
+    setState(() => _isListening = true);
+    
+    await _speech.listen(
+      onResult: (result) {
+        if (result.finalResult) {
+          setState(() {
+            _searchController.text = result.recognizedWords;
+            _isListening = false;
+          });
+          
+          // Automatically submit the search
+          if (result.recognizedWords.trim().isNotEmpty) {
+            ref.read(dealSearchQueryProvider.notifier).state = result.recognizedWords;
+          }
+        }
+      },
+      listenFor: const Duration(seconds: 10),
+      pauseFor: const Duration(seconds: 3),
+      partialResults: true,
+      cancelOnError: true,
+      listenMode: stt.ListenMode.confirmation,
+    );
+  }
+
+  void _stopListening() async {
+    await _speech.stop();
+    setState(() => _isListening = false);
   }
 }

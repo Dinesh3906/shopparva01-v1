@@ -1,10 +1,10 @@
-// import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/theme_tokens.dart';
 import '../models/product.dart';
 import '../state/app_providers.dart';
+import '../screens/price_tracker_screen.dart';
 
 class ProductDetailModal extends ConsumerWidget {
   const ProductDetailModal({
@@ -197,28 +197,41 @@ class ProductDetailModal extends ConsumerWidget {
                   alignment: Alignment.centerRight,
                   child: Consumer(
                     builder: (context, ref, _) {
-                      final userAsync = ref.watch(userProfileProvider);
-                      return userAsync.when(
-                        data: (user) => TextButton.icon(
-                          onPressed: () async {
-                            final repo = ref.read(productRepositoryProvider);
-                            await repo.trackProduct(
-                              productId: p.id,
-                              userId: user.id,
-                            );
+                      final trackedNotifier = ref.watch(trackedProductsNotifierProvider.notifier);
+                      final isTracked = trackedNotifier.isTracked(p.id);
+
+                      return TextButton.icon(
+                        onPressed: () async {
+                          if (isTracked) {
+                            await trackedNotifier.untrackProduct(p.id);
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  content: Text('Tracking enabled for this product'),
+                                  content: Text('Product removed from tracking'),
+                                  duration: Duration(seconds: 1),
                                 ),
                               );
                             }
-                          },
-                          icon: const Icon(Icons.notifications_active_rounded),
-                          label: const Text('Track Price'),
+                          } else {
+                            await trackedNotifier.trackProduct(p);
+                            if (context.mounted) {
+                              ref.read(selectedTrackedProductProvider.notifier).state = p;
+                              Navigator.of(context).pop(); // Close modal
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const PriceTrackerScreen(),
+                                ),
+                              );
+                            }
+                          }
+                        },
+                        icon: Icon(
+                          isTracked
+                              ? Icons.notifications_active_rounded
+                              : Icons.notifications_outlined,
+                          color: isTracked ? ThemeTokens.primary : null,
                         ),
-                        loading: () => const SizedBox.shrink(),
-                        error: (_, __) => const SizedBox.shrink(),
+                        label: Text(isTracked ? 'Tracking Active' : 'Track Price'),
                       );
                     },
                   ),

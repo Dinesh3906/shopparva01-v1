@@ -7,8 +7,57 @@ const PORT = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 
-// Optional: serve static images if you add any under ./images
-// app.use('/images', express.static('images'));
+// Helper function to generate realistic price history
+function generatePriceHistory(basePrice, days) {
+  const history = [];
+  const now = new Date();
+
+  // Generate a trend: -1 (downward), 0 (stable), 1 (upward)
+  const trend = Math.random() < 0.4 ? -1 : (Math.random() < 0.7 ? 0 : 1);
+
+  for (let i = days - 1; i >= 0; i--) {
+    const date = new Date(now);
+    date.setDate(date.getDate() - i);
+
+    // Create price variation with trend
+    const dayProgress = (days - i) / days;
+    const trendEffect = trend * dayProgress * 0.15; // Max 15% trend effect
+    const randomVariation = (Math.random() - 0.5) * 0.1; // Random ±5% variation
+    const totalVariation = 1 + trendEffect + randomVariation;
+
+    const price = basePrice * totalVariation;
+
+    history.push({
+      date: date.toISOString().split('T')[0],
+      price: Math.round(price * 100) / 100
+    });
+  }
+
+  return history;
+}
+
+// Helper to analyze price trend
+function analyzePriceTrend(priceHistory) {
+  if (!priceHistory || priceHistory.length < 2) {
+    return { trend: 'stable', percentage: 0 };
+  }
+
+  const firstPrice = priceHistory[0].price;
+  const lastPrice = priceHistory[priceHistory.length - 1].price;
+  const change = ((lastPrice - firstPrice) / firstPrice) * 100;
+
+  let trend = 'stable';
+  if (change < -2) trend = 'down';
+  else if (change > 2) trend = 'up';
+
+  return {
+    trend,
+    percentage: Math.round(change * 10) / 10,
+    lowest: Math.min(...priceHistory.map(p => p.price)),
+    highest: Math.max(...priceHistory.map(p => p.price)),
+    average: priceHistory.reduce((sum, p) => sum + p.price, 0) / priceHistory.length
+  };
+}
 
 const products = [
   {
@@ -68,6 +117,8 @@ app.get('/products', (req, res) => {
   const category = (req.query.category || '').toLowerCase();
   const priceMin = Number(req.query.priceMin || 0);
   const priceMax = Number(req.query.priceMax || Infinity);
+  const includePriceHistory = req.query.priceHistory === 'true';
+  const historyDays = Number(req.query.historyDays || 30);
 
   let results = products.filter((p) => {
     const haystack = `${p.title} ${p.description} ${p.brand}`.toLowerCase();
@@ -78,10 +129,45 @@ app.get('/products', (req, res) => {
     return matchesQuery && matchesBrand && matchesCategory && matchesPrice;
   });
 
+  // Enrich with price history if requested
+  if (includePriceHistory) {
+    results = results.map(product => {
+      const priceHistory = generatePriceHistory(product.price, historyDays);
+      const trend = analyzePriceTrend(priceHistory);
+
+      return {
+        ...product,
+        price_history: priceHistory,
+        price_trend: trend
+      };
+    });
+  }
+
   // Simulate small latency for testing
   setTimeout(() => {
     res.json({ count: results.length, results });
   }, 300);
+});
+
+// Get single product with full details including price history
+app.get('/products/:id', (req, res) => {
+  const productId = parseInt(req.params.id);
+  const historyDays = Number(req.query.historyDays || 30);
+
+  const product = products.find(p => p.id === productId);
+
+  if (!product) {
+    return res.status(404).json({ error: 'Product not found' });
+  }
+
+  const priceHistory = generatePriceHistory(product.price, historyDays);
+  const trend = analyzePriceTrend(priceHistory);
+
+  res.json({
+    ...product,
+    price_history: priceHistory,
+    price_trend: trend
+  });
 });
 
 app.listen(PORT, () => {

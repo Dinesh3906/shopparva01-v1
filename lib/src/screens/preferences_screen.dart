@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/theme_tokens.dart';
 import '../models/user.dart';
-import '../repositories/user_repository.dart';
+
 import '../state/app_providers.dart';
 
 final preferencesProvider = FutureProvider.autoDispose<UserPreferences>((ref) async {
@@ -26,7 +26,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
     try {
       final repo = ref.read(userRepositoryProvider);
       await repo.updatePreferences(preferences);
-      ref.refresh(preferencesProvider);
+      ref.invalidate(preferencesProvider);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Preferences updated')),

@@ -1,4 +1,4 @@
-import 'dart:convert';
+
 
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -72,6 +72,13 @@ class ProductRepository {
     if (!tracked.contains(productId)) {
       await prefs.setStringList('tracked_products', [...tracked, productId]);
     }
+  }
+
+  Future<void> untrackProduct(String productId) async {
+    final prefs = await SharedPreferences.getInstance();
+    final tracked = prefs.getStringList('tracked_products') ?? <String>[];
+    tracked.remove(productId);
+    await prefs.setStringList('tracked_products', tracked);
   }
 
   Future<List<Product>> getTrackedProducts() async {

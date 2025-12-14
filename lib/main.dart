@@ -62,8 +62,6 @@ class _RootShell extends ConsumerStatefulWidget {
 
 class _RootShellState extends ConsumerState<_RootShell>
     with SingleTickerProviderStateMixin {
-  int _currentIndex = 0;
-
   late final AnimationController _assistantController = AnimationController(
     vsync: this,
     duration: const Duration(seconds: 2),
@@ -75,9 +73,7 @@ class _RootShellState extends ConsumerState<_RootShell>
     // Listen to dealSearchQueryProvider to switch to Deals tab
     ref.listenManual(dealSearchQueryProvider, (previous, next) {
       if (next != null && next.isNotEmpty) {
-        setState(() {
-          _currentIndex = 1; // Switch to Deals tab
-        });
+        ref.read(navigationIndexProvider.notifier).state = 1; // Switch to Deals tab
       }
     });
   }
@@ -90,6 +86,8 @@ class _RootShellState extends ConsumerState<_RootShell>
 
   @override
   Widget build(BuildContext context) {
+    final currentIndex = ref.watch(navigationIndexProvider);
+    
     final pages = [
       const HomeScreen(),
       const DealsScreen(),
@@ -101,12 +99,12 @@ class _RootShellState extends ConsumerState<_RootShell>
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: IndexedStack(
-        index: _currentIndex,
+        index: currentIndex,
         children: pages,
       ),
       bottomNavigationBar: BottomNavBar(
-        currentIndex: _currentIndex,
-        onTap: (index) => setState(() => _currentIndex = index),
+        currentIndex: currentIndex,
+        onTap: (index) => ref.read(navigationIndexProvider.notifier).state = index,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingAssistantButton(
