@@ -4,8 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/theme_tokens.dart';
 import '../models/product.dart';
 import '../models/user.dart';
-import '../repositories/product_repository.dart';
-import '../repositories/user_repository.dart';
+
 import '../state/app_providers.dart';
 import '../widgets/empty_and_loading.dart';
 import '../widgets/product_detail_modal.dart';
@@ -107,7 +106,7 @@ class WishlistScreen extends ConsumerWidget {
     try {
       final repo = ref.read(userRepositoryProvider);
       await repo.removeFromWishlist(wishlistId);
-      ref.refresh(wishlistProvider);
+      ref.invalidate(wishlistProvider);
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Removed from wishlist')),

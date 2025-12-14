@@ -66,9 +66,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           ),
           onSubmitted: (_) => _runSearch(),
         ),
-        actions: [
-          // Filters removed - search now goes directly to Deal Tab for comparison
-        ],
+        actions: const [],
       ),
       body: Center(
         child: Padding(

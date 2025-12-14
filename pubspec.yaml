@@ -42,6 +42,10 @@ dependencies:
   # Camera / AR preview
   camera: ^0.11.0+1
   
+  # Speech Recognition
+  speech_to_text: ^6.6.0
+  permission_handler: ^11.3.0
+  
   # Data Class Generator
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1

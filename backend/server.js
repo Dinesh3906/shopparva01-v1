@@ -1145,17 +1145,60 @@ function normalizeQuery(query) {
   // Remove noise words and normalize
   const noiseWords = ['buy', 'price', 'online', 'best', 'cheapest', 'deal', 'offer'];
   let normalized = query.toLowerCase().trim();
-  
+
   noiseWords.forEach(word => {
     normalized = normalized.replace(new RegExp(`\\b${word}\\b`, 'gi'), '');
   });
-  
+
   return normalized.trim().replace(/\s+/g, ' ');
+}
+
+function generatePriceHistory(basePrice, days) {
+  const history = [];
+  const now = new Date();
+  let currentPrice = basePrice;
+  const volatility = 0.05; // 5% max daily change
+
+  for (let i = days; i >= 0; i--) {
+    const date = new Date(now);
+    date.setDate(date.getDate() - i);
+
+    // Random walk price generation
+    const change = 1 + (Math.random() * volatility * 2 - volatility);
+    currentPrice = Math.max(basePrice * 0.7, Math.min(basePrice * 1.3, currentPrice * change));
+
+    history.push({
+      date: date.toISOString(),
+      price: Math.round(currentPrice)
+    });
+  }
+  return history;
+}
+
+function getPriceTrend(history) {
+  if (history.length < 2) return { trend: 'stable', percentage: 0 };
+
+  const start = history[0].price;
+  const end = history[history.length - 1].price;
+  const prices = history.map(h => h.price);
+  const min = Math.min(...prices);
+  const max = Math.max(...prices);
+  const avg = prices.reduce((a, b) => a + b, 0) / prices.length;
+
+  const change = ((end - start) / start) * 100;
+
+  return {
+    trend: change > 0.5 ? 'up' : (change < -0.5 ? 'down' : 'stable'),
+    percentage: parseFloat(change.toFixed(1)),
+    lowest: min,
+    highest: max,
+    average: avg
+  };
 }
 
 function groupProductsByModel(products) {
   const grouped = {};
-  
+
   products.forEach(product => {
     const modelName = product.modelName || product.title;
     if (!grouped[modelName]) {
@@ -1169,7 +1212,7 @@ function groupProductsByModel(products) {
         deals: []
       };
     }
-    
+
     // Add each offer as a deal
     if (product.offers && product.offers.length > 0) {
       product.offers.forEach(offer => {
@@ -1185,13 +1228,13 @@ function groupProductsByModel(products) {
       });
     }
   });
-  
+
   // Identify best price for each model and sort deals by price
   Object.values(grouped).forEach(model => {
     if (model.deals.length > 0) {
       // Sort deals by price (lowest first)
       model.deals.sort((a, b) => a.price - b.price);
-      
+
       // Mark best price
       const minPrice = Math.min(...model.deals.map(d => d.price));
       model.deals.forEach(deal => {
@@ -1199,7 +1242,7 @@ function groupProductsByModel(products) {
       });
     }
   });
-  
+
   return Object.values(grouped);
 }
 
@@ -1235,7 +1278,7 @@ const server = http.createServer((req, res) => {
   else if (path === '/api/v1/search/compare' || path === '/api/search') {
     const query = url.searchParams.get('q')?.toLowerCase() || '';
     const normalizedQuery = normalizeQuery(query);
-    
+
     // Filter products matching query (search in title, brand, modelName)
     const matchedProducts = products.filter(p =>
       p.title.toLowerCase().includes(normalizedQuery) ||
@@ -1244,10 +1287,10 @@ const server = http.createServer((req, res) => {
       p.category.toLowerCase().includes(normalizedQuery) ||
       p.description.toLowerCase().includes(normalizedQuery)
     );
-    
+
     // Group by model and create comparison structure
     const comparisonResults = groupProductsByModel(matchedProducts);
-    
+
     // Return results in format expected by frontend (array of ProductDeal objects)
     // Each result represents one product model with all its platform deals
     res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -1556,6 +1599,59 @@ const server = http.createServer((req, res) => {
     ];
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(assets));
+  }
+
+  // Dynamic route for Product Details & History
+  // Matches /api/v1/products/:id
+  else if (path.startsWith('/api/v1/products/') && !path.includes('/search') && !path.includes('/compare')) {
+    const id = path.split('/').pop();
+    const product = products.find(p => p.id === id);
+
+    if (product) {
+      if (req.method === 'GET') {
+        const historyDays = parseInt(url.searchParams.get('historyDays')) || 0;
+        console.log(`[DEBUG] Product ID: ${id}, HistoryDays: ${historyDays}`);
+
+        const responseData = normalizeProduct(product);
+
+
+        if (historyDays > 0) {
+          // Attach mock price history and trend
+          // Use the first offer price or a default
+          const basePrice = product.offers && product.offers.length > 0
+            ? product.offers[0].price
+            : 50000;
+
+          const history = generatePriceHistory(basePrice, historyDays);
+          responseData.price_history = history;
+          responseData.price_trend = getPriceTrend(history);
+
+          // Also add platform comparisons if not present (mocking them)
+          if (!responseData.comparisons) {
+            responseData.comparisons = product.offers.map((o, index) => ({
+              store: o.marketplace || o.seller,
+              price: o.price,
+              rating: 4.0 + (index * 0.2),
+              shipping: index === 0 ? 0 : 50
+            }));
+          }
+        }
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(responseData));
+      }
+    } else {
+      res.writeHead(404);
+      res.end(JSON.stringify({ error: 'Product not found' }));
+    }
+  }
+
+  else if (path === '/api/v1/track') {
+    if (req.method === 'POST') {
+      // Mock success for tracking
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true }));
+    }
   }
 
   else {

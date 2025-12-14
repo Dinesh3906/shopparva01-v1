@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/theme_tokens.dart';
 import '../models/user.dart';
-import '../repositories/user_repository.dart';
+
 import '../state/app_providers.dart';
 import '../widgets/empty_and_loading.dart';
 import 'add_edit_address_screen.dart';
@@ -88,7 +88,7 @@ class AddressesScreen extends ConsumerWidget {
       MaterialPageRoute(builder: (_) => const AddEditAddressScreen()),
     );
     if (result == true) {
-      ref.refresh(addressesProvider);
+      ref.invalidate(addressesProvider);
     }
   }
 
@@ -98,7 +98,7 @@ class AddressesScreen extends ConsumerWidget {
       MaterialPageRoute(builder: (_) => AddEditAddressScreen(address: address)),
     );
     if (result == true) {
-      ref.refresh(addressesProvider);
+      ref.invalidate(addressesProvider);
     }
   }
 
@@ -129,7 +129,7 @@ class AddressesScreen extends ConsumerWidget {
       try {
         final repo = ref.read(userRepositoryProvider);
         await repo.deleteAddress(addressId);
-        ref.refresh(addressesProvider);
+        ref.invalidate(addressesProvider);
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Address deleted')),
@@ -149,7 +149,7 @@ class AddressesScreen extends ConsumerWidget {
     try {
       final repo = ref.read(userRepositoryProvider);
       await repo.updateAddress(address.copyWith(isDefault: true));
-      ref.refresh(addressesProvider);
+      ref.invalidate(addressesProvider);
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Default address updated')),

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/theme_tokens.dart';
 import '../models/user.dart';
-import '../repositories/user_repository.dart';
+
 import '../state/app_providers.dart';
 
 class AddEditAddressScreen extends ConsumerStatefulWidget {
