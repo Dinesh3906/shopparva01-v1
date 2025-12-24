@@ -293,10 +293,20 @@ class _PriceTrackerScreenState extends ConsumerState<PriceTrackerScreen> {
         }
 
         final data = snapshot.data!;
-        final priceHistory = (data['price_history'] as List)
-            .map((e) => PriceHistoryPoint.fromJson(e as Map<String, dynamic>))
-            .toList();
-        final priceTrend = data['price_trend'] as Map<String, dynamic>;
+        
+        // Handle both camelCase (priceHistory) and snake_case (price_history)
+        final rawHistory = data['price_history'] ?? data['priceHistory'];
+        final priceHistory = (rawHistory != null && rawHistory is List)
+            ? rawHistory.map((e) => PriceHistoryPoint.fromJson(e as Map<String, dynamic>)).toList()
+            : <PriceHistoryPoint>[];
+        
+        final priceTrend = data['price_trend'] as Map<String, dynamic>? ?? {
+          'trend': 'stable',
+          'percentage': 0.0,
+          'lowest': product.price,
+          'highest': product.price,
+          'average': product.price,
+        };
 
         // Mark lowest and highest points
         if (priceHistory.isNotEmpty) {

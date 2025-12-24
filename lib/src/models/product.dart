@@ -36,7 +36,7 @@ class Product {
     
     // Price extraction
     double price = 0.0;
-    if (json['offers'] != null && (json['offers'] as List).isNotEmpty) {
+    if (json['offers'] is List && (json['offers'] as List).isNotEmpty) {
       final firstOffer = (json['offers'] as List).first;
       price = (firstOffer['price'] as num).toDouble();
     } else if (json['price'] != null) {
@@ -45,7 +45,7 @@ class Product {
 
     // Image extraction
     String image = '';
-    if (json['images'] != null && (json['images'] as List).isNotEmpty) {
+    if (json['images'] is List && (json['images'] as List).isNotEmpty) {
       image = (json['images'] as List).first as String;
     } else if (json['image'] is String) {
       image = json['image'] as String;
@@ -53,7 +53,7 @@ class Product {
 
     // Store count
     int stores = 0;
-    if (json['offers'] != null) {
+    if (json['offers'] is List) {
       stores = (json['offers'] as List).length;
     } else {
        stores = (json['stores'] as num?)?.toInt() ?? 0;
@@ -68,20 +68,20 @@ class Product {
       image: image,
       stores: stores,
       badges: (json['badges'] as List?)?.cast<String>() ?? const [],
-      priceHistory: (json['price_history'] as List?)
-          ?.map((e) => (e as num).toDouble())
-          .toList(),
-      comparisons: (json['offers'] as List?)
-          ?.map((e) => PriceComparison.fromJson({
+      priceHistory: (json['price_history'] is List)
+          ? (json['price_history'] as List).map((e) => (e as num).toDouble()).toList()
+          : null,
+      comparisons: (json['offers'] is List)
+          ? (json['offers'] as List).map((e) => PriceComparison.fromJson({
                 'store': e['marketplace'] ?? e['seller'] ?? 'Unknown',
                 'price': e['price'],
                 'shipping': 0.0,
                 'rating': 4.5, // Mock rating
               }))
-          .toList() ?? 
-          (json['price_comparisons'] as List?)
-          ?.map((e) => PriceComparison.fromJson(e as Map<String, dynamic>))
-          .toList(),
+          .toList()
+          : (json['price_comparisons'] is List)
+              ? (json['price_comparisons'] as List).map((e) => PriceComparison.fromJson(e as Map<String, dynamic>)).toList()
+              : null,
     );
   }
 
