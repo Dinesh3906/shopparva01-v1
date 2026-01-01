@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'dart:math';
 
 import '../../core/theme_tokens.dart';
 import '../models/product_deal.dart';
+import '../models/product.dart';
 import '../state/app_providers.dart';
 import '../widgets/empty_and_loading.dart';
+import '../widgets/product_detail_modal.dart';
 
 class DealsScreen extends ConsumerStatefulWidget {
   const DealsScreen({super.key, this.searchQuery});
@@ -29,18 +33,7 @@ class _DealsScreenState extends ConsumerState<DealsScreen> {
     _loadDeals();
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Watch for changes from provider (when navigating to Deal Tab with search)
-    final providerQuery = ref.watch(dealSearchQueryProvider);
-    if (providerQuery != null && providerQuery != _searchController.text) {
-      _searchController.text = providerQuery;
-      _loadDeals();
-      // Clear the provider after using it
-      Future.microtask(() => ref.read(dealSearchQueryProvider.notifier).state = null);
-    }
-  }
+
 
   void _loadDeals() {
     final repo = ref.read(productRepositoryProvider);
@@ -62,6 +55,18 @@ class _DealsScreenState extends ConsumerState<DealsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Listen to changes in search query provider
+    ref.listen(dealSearchQueryProvider, (previous, next) {
+      if (next != null && next.isNotEmpty && next != _searchController.text) {
+        setState(() {
+          _searchController.text = next;
+        });
+        _loadDeals();
+        // Clear the provider after using it to prevent loop
+        ref.read(dealSearchQueryProvider.notifier).state = null;
+      }
+    });
+
     return Scaffold(
       backgroundColor: ThemeTokens.backgroundDark,
       appBar: AppBar(
@@ -132,104 +137,179 @@ class _DealsScreenState extends ConsumerState<DealsScreen> {
   }
 }
 
-/// Widget that displays a product with price comparison across platforms
 class _ProductComparisonCard extends StatelessWidget {
   const _ProductComparisonCard({required this.deal});
 
+
   final ProductDeal deal;
+
+  void _openDetail(BuildContext context) {
+    // Convert ProductDeal to Product for the modal
+    final product = Product(
+      id: deal.productId,
+      name: deal.modelName,
+      brand: deal.brand,
+      currency: deal.deals.isNotEmpty ? deal.deals.first.currency : '₹',
+      price: deal.deals.isNotEmpty 
+          ? deal.deals.map((e) => e.price).reduce(min) 
+          : 0,
+      image: deal.image,
+      rating: deal.rating.toDouble(),
+      stores: deal.deals.length,
+      comparisons: deal.deals.map((d) => PriceComparison(
+        store: d.platform,
+        price: d.price,
+        shipping: d.delivery == 'Free' ? 0.0 : null,
+        rating: null, // DealOffer doesn't have individual rating
+      )).toList(),
+      priceHistory: [],
+    );
+
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      barrierColor: Colors.black54,
+      builder: (context) {
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+          child: ProductDetailModal(product: product),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(bottom: 12), // Reduced margin
       decoration: BoxDecoration(
         color: ThemeTokens.surfaceDark,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12), // Reduced radius
+        boxShadow: [ // Added subtle shadow
+          BoxShadow(
+             color: Colors.black.withOpacity(0.2),
+             blurRadius: 8,
+             offset: const Offset(0, 2),
+          )
+        ],
         border: Border.all(
-          color: Colors.white.withOpacity(0.1),
+          color: Colors.white.withOpacity(0.05),
           width: 1,
         ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Product header
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              children: [
-                Container(
-                  width: 64,
-                  height: 64,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: ThemeTokens.surfaceMuted,
-                  ),
-                  child: const Icon(Icons.devices, color: Colors.white54, size: 32),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        deal.modelName,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
+          // Product header - Compact
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () => _openDetail(context),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              child: Padding(
+                padding: const EdgeInsets.all(12), // Reduced padding
+                child: Row(
+                  children: [
+                    Container(
+                      width: 52, // Reduced image size (64->52)
+                      height: 52,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: ThemeTokens.surfaceMuted,
+                        image: deal.image.isNotEmpty
+                            ? DecorationImage(
+                                image: NetworkImage(deal.image),
+                                fit: BoxFit.cover,
+                              )
+                            : null,
                       ),
-                      const SizedBox(height: 4),
-                      Row(
+                      child: deal.image.isEmpty
+                          ? const Icon(Icons.devices, color: Colors.white54, size: 24)
+                          : null,
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            deal.brand,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(color: Colors.white70),
+                            deal.modelName,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith( // Reduced font
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.2,
+                                ),
                           ),
-                          const SizedBox(width: 8),
-                          Icon(Icons.star_rounded,
-                              size: 14, color: Colors.amber.shade400),
-                          const SizedBox(width: 4),
-                          Text(
-                            deal.rating.toStringAsFixed(1),
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(color: Colors.white70),
+                          const SizedBox(height: 2),
+                          Row(
+                            children: [
+                              Text(
+                                deal.brand,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(color: Colors.white70, fontSize: 11),
+                              ),
+                              const SizedBox(width: 8),
+                              Icon(Icons.star_rounded,
+                                  size: 12, color: Colors.amber.shade400),
+                              const SizedBox(width: 2),
+                              Text(
+                                deal.rating.toStringAsFixed(1),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(color: Colors.white70, fontSize: 11),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), // Compact badge
+                      decoration: BoxDecoration(
+                        color: ThemeTokens.primary.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        '${deal.deals.length} offers',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(color: ThemeTokens.primary, fontSize: 10, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: ThemeTokens.primary.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    '${deal.deals.length} offers',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall
-                        ?.copyWith(color: ThemeTokens.primary),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
-          const Divider(height: 1, color: Colors.white12),
+          const Divider(height: 1, color: Colors.white10),
           // Platform comparison cards
           Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8), // Reduced
             child: Column(
               children: deal.deals.map((offer) {
-                return _PlatformOfferCard(offer: offer);
+                return InkWell(
+                  onTap: () async {
+                    final urlString = offer.url ?? 'https://www.google.com/search?q=${Uri.encodeComponent('${deal.modelName} ${offer.platform}')}';
+                    final url = Uri.parse(urlString);
+                    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+                         if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                               const SnackBar(content: Text('Could not open link')),
+                            );
+                         }
+                    }
+                  },
+                  borderRadius: BorderRadius.circular(8),
+                  child: _PlatformOfferCard(offer: offer),
+                );
               }).toList(),
             ),
           ),
@@ -370,7 +450,7 @@ class _PlatformOfferCard extends StatelessWidget {
                   if (offer.discount != null && offer.discount!.isNotEmpty)
                     const SizedBox(width: 8),
                   Text(
-                    '${offer.currency}${offer.price.toStringAsFixed(0)}',
+                    '${offer.currency.replaceAll('\$', '₹')}${offer.price.toStringAsFixed(0)}',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: offer.isBestPrice
                               ? ThemeTokens.accent

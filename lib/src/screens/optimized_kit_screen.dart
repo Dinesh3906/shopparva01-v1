@@ -62,14 +62,22 @@ class OptimizedKitScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Container(
-                            width: 40,
-                            height: 40,
+                            width: 64,
+                            height: 64,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: ThemeTokens.surfaceMuted,
+                              image: item.image != null && item.image!.isNotEmpty
+                                  ? DecorationImage(
+                                      image: NetworkImage(item.image!),
+                                      fit: BoxFit.cover,
+                                    )
+                                  : null,
                             ),
-                            child: const Icon(Icons.shopping_bag,
-                                color: Colors.white70, size: 20),
+                            child: item.image == null || item.image!.isEmpty
+                                ? const Icon(Icons.shopping_bag,
+                                    color: Colors.white70, size: 24)
+                                : null,
                           ),
                           const SizedBox(width: 12),
                           Expanded(
@@ -107,7 +115,7 @@ class OptimizedKitScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
-                              '\\${item.price.toStringAsFixed(0)}',
+                              '₹${item.price.toStringAsFixed(0)}',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyMedium
@@ -132,7 +140,7 @@ class OptimizedKitScreen extends StatelessWidget {
                         ?.copyWith(color: Colors.white70),
                   ),
                   Text(
-                    '\\${kit.totalPrice.toStringAsFixed(0)}',
+                    '₹${kit.totalPrice.toStringAsFixed(0)}',
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge

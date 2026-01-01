@@ -135,9 +135,9 @@ class AIInsightCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildStatItem('Low', '\$${lowestPrice.toStringAsFixed(0)}', Colors.green),
-          _buildStatItem('Avg', '\$${averagePrice.toStringAsFixed(0)}', Colors.white70),
-          _buildStatItem('High', '\$${highestPrice.toStringAsFixed(0)}', Colors.red),
+          _buildStatItem('Low', '₹${lowestPrice.toStringAsFixed(0)}', Colors.green),
+          _buildStatItem('Avg', '₹${averagePrice.toStringAsFixed(0)}', Colors.white70),
+          _buildStatItem('High', '₹${highestPrice.toStringAsFixed(0)}', Colors.red),
         ],
       ),
     );

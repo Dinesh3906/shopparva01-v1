@@ -9,7 +9,9 @@ import '../state/app_providers.dart';
 import '../widgets/empty_and_loading.dart';
 import '../widgets/product_detail_modal.dart';
 import '../widgets/product_grid.dart';
+import '../widgets/product_grid.dart';
 import 'price_tracker_screen.dart';
+import 'cart_screen.dart';
 
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -27,7 +29,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     'Fashion',
     'Sports',
     'Beauty',
-    'Essentials',
   ];
   
   // Speech-to-text
@@ -124,9 +125,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         onProductTap: (product) => _openProductDetail(context, product),
                       ),
                 loading: () => const LoadingShimmer(),
-                error: (_, __) => const EmptyStateCard(
-                  title: 'Something went wrong',
-                  message: 'We could not load your deals. Please try again.',
+                error: (error, stack) => EmptyStateCard(
+                  title: 'Error Loading Deals',
+                  message: '$error\n\n$stack',
                 ),
               ),
             ),
@@ -140,8 +141,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       BuildContext context, AsyncValue<dynamic> userAsync) {
     final greeting = userAsync.when<String>(
       data: (user) => 'Hello ${user.name} 👋',
-      loading: () => 'Hello Luffy 👋',
-      error: (_, __) => 'Hello Luffy 👋',
+      loading: () => 'Hello 👋',
+      error: (_, __) => 'Hello 👋',
     );
 
     return Row(
@@ -167,6 +168,54 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ],
           ),
         ),
+        const SizedBox(width: 8),
+        // Cart Icon
+        Consumer(builder: (context, ref, _) {
+          final cartCount = ref.watch(cartProvider).length;
+          return Stack(
+            clipBehavior: Clip.none,
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const CartScreen()),
+                  );
+                },
+                borderRadius: BorderRadius.circular(20),
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: ThemeTokens.surfaceMuted,
+                  child: const Icon(Icons.shopping_cart_rounded, color: Colors.white, size: 20),
+                ),
+              ),
+              if (cartCount > 0)
+                Positioned(
+                  right: -4,
+                  top: -4,
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: const BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                    ),
+                    constraints: const BoxConstraints(
+                      minWidth: 16,
+                      minHeight: 16,
+                    ),
+                    child: Text(
+                      '$cartCount',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+            ],
+          );
+        }),
         const SizedBox(width: 12),
         InkWell(
           onTap: () {

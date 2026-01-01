@@ -5,6 +5,7 @@ import '../../core/theme_tokens.dart';
 import '../models/product.dart';
 import '../state/app_providers.dart';
 import '../screens/price_tracker_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductDetailModal extends ConsumerWidget {
   const ProductDetailModal({
@@ -69,7 +70,7 @@ class ProductDetailModal extends ConsumerWidget {
                     ),
                     const Spacer(),
                     Text(
-                      '${p.currency.isNotEmpty ? p.currency : '\u0000'}${p.price.toStringAsFixed(0)}',
+                      '${p.currency.isNotEmpty ? p.currency.replaceAll('\$', '₹') : '₹'}${p.price.toStringAsFixed(0)}',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             color: ThemeTokens.accent,
                           ),
@@ -139,7 +140,7 @@ class ProductDetailModal extends ConsumerWidget {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    '${p.currency.isNotEmpty ? p.currency : '\u0000'}${c.price.toStringAsFixed(0)}',
+                                    '${p.currency.isNotEmpty ? p.currency.replaceAll('\$', '₹') : '₹'}${c.price.toStringAsFixed(0)}',
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleLarge
@@ -176,7 +177,16 @@ class ProductDetailModal extends ConsumerWidget {
                     Expanded(
                       child: FilledButton(
                         onPressed: () {
-                          // Add to cart stub
+                          ref.read(cartProvider.notifier).addToCart(p);
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('${p.name} added to cart'),
+                                duration: const Duration(seconds: 1),
+                              ),
+                            );
+                            Navigator.of(context).pop();
+                          }
                         },
                         child: const Text('Add to Cart'),
                       ),
@@ -184,8 +194,18 @@ class ProductDetailModal extends ConsumerWidget {
                     const SizedBox(width: 12),
                     Expanded(
                       child: OutlinedButton(
-                        onPressed: () {
-                          // View best deal stub
+                        onPressed: () async {
+                           // Construct search URL for demonstrative purposes or use real URL if available
+                           // Using Google Shopping search as fallback since we don't have real URLs
+                           final query = Uri.encodeComponent(p.name);
+                           final url = Uri.parse('https://www.google.com/search?q=$query&tbm=shop');
+                           if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Could not open link')),
+                                );
+                              }
+                           }
                         },
                         child: const Text('View Best Deal'),
                       ),

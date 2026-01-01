@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:go_router/go_router.dart';
 import '../../state/providers.dart';
 import '../../core/theme_tokens.dart';
+import '../../src/models/product.dart';
+import '../../models/cart_item.dart';
 
 // Provider to hold the generated kit state locally for the wizard
 final localKitProvider = StateProvider<AsyncValue<dynamic>>((ref) => const AsyncValue.data(null));
@@ -105,7 +108,7 @@ class _KitBuilderScreenState extends ConsumerState<KitBuilderScreen> {
             content: Column(
               children: [
                 const SizedBox(height: 20),
-                Text('\$${_budget.toInt()}', style: ThemeTokens.headlineLarge.copyWith(color: ThemeTokens.primary)),
+                Text('₹${_budget.toInt()}', style: ThemeTokens.headlineLarge.copyWith(color: ThemeTokens.primary)),
                 const SizedBox(height: 20),
                 Slider(
                   value: _budget,
@@ -177,8 +180,8 @@ class _KitBuilderScreenState extends ConsumerState<KitBuilderScreen> {
                    const Icon(Icons.check_circle, color: Colors.green, size: 48),
                    const SizedBox(height: 12),
                    Text('Kit Generated!', style: ThemeTokens.headlineMedium),
-                   Text(kit.name, style: ThemeTokens.titleLarge),
-                   Text('Total: \$${kit.totalPrice}', style: const TextStyle(color: ThemeTokens.primary, fontWeight: FontWeight.bold, fontSize: 20)),
+                   Text(kit.category, style: ThemeTokens.titleLarge), // Kit has category, not name? Checking Kit model... id, category, items, totalPrice.
+                   Text('Total: ₹${kit.totalPrice}', style: const TextStyle(color: ThemeTokens.primary, fontWeight: FontWeight.bold, fontSize: 20)),
                 ],
               ),
             ),
@@ -189,33 +192,30 @@ class _KitBuilderScreenState extends ConsumerState<KitBuilderScreen> {
                 separatorBuilder: (_, __) => const Divider(),
                 itemBuilder: (context, index) {
                   final item = kit.items[index];
-                  final hasOffers = item.offers.isNotEmpty;
-                  final priceText = hasOffers
-                      ? '\$${item.offers.first.price.toStringAsFixed(0)}'
-                      : 'Price unavailable';
+                  final priceText = '₹${item.price.toStringAsFixed(0)}';
 
                   return ListTile(
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Image.network(
-                        item.images.first,
+                        item.image ?? 'https://via.placeholder.com/50',
                         width: 50,
                         height: 50,
                         fit: BoxFit.cover,
                         errorBuilder: (_, __, ___) => const Icon(Icons.computer),
                       ),
-                    ), // Use Image.network directly for simplicity here or Cached
+                    ),
                     title: Text(
-                      item.title,
+                      item.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    subtitle: Text(item.brand),
+                    subtitle: item.preference != null ? Text(item.preference!) : null,
                     trailing: Text(
                       priceText,
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    onTap: () => context.push('/product/${item.id}'),
+                    onTap: () {}, // No product details page for kit items yet 
                   );
                 },
               ),
@@ -227,7 +227,21 @@ class _KitBuilderScreenState extends ConsumerState<KitBuilderScreen> {
                 child: FilledButton(
                   onPressed: () { 
                     Navigator.pop(context);
-                    // Add to cart logic would go here
+                    // Add all items to cart
+                    for (final item in kit.items) {
+                      // Map KitItem to Product
+                      final product = Product(
+                        id: item.id,
+                        name: item.name,
+                        price: item.price,
+                        rating: 0.0,
+                        image: item.image ?? '',
+                        stores: 1,
+                        currency: '₹',
+                        badges: const [],
+                      );
+                      ref.read(cartProvider.notifier).addToCart(product);
+                    }
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Kit added to cart!")));
                   },
                   child: const Text('Add All to Cart'),

@@ -224,8 +224,8 @@ class _PriceTrackerScreenState extends ConsumerState<PriceTrackerScreen> {
                         ),
                       ),
                       Text(
-                        '\$${product.price.toStringAsFixed(0)}',
-                        style: TextStyle(
+                        '₹${product.price.toStringAsFixed(0)}',
+                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           color: isSelected ? ThemeTokens.primary : ThemeTokens.accent,
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -456,8 +456,8 @@ class _PriceTrackerScreenState extends ConsumerState<PriceTrackerScreen> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              '\$${comparison.price.toStringAsFixed(2)}',
-                              style: TextStyle(
+                              '₹${comparison.price.toStringAsFixed(2)}',
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                 color: isBestDeal ? Colors.green : ThemeTokens.accent,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w700,
@@ -465,11 +465,14 @@ class _PriceTrackerScreenState extends ConsumerState<PriceTrackerScreen> {
                             ),
                             if (comparison.shipping != null && comparison.shipping! > 0)
                               Text(
-                                '+\$${comparison.shipping!.toStringAsFixed(2)} shipping',
-                                style: const TextStyle(
-                                  color: Colors.white54,
-                                  fontSize: 10,
-                                ),
+                                '+₹${comparison.shipping!.toStringAsFixed(2)} shipping',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      color: Colors.white54,
+                                      fontSize: 10,
+                                    ),
                               ),
                           ],
                         ),
@@ -531,11 +534,8 @@ class _PriceTrackerScreenState extends ConsumerState<PriceTrackerScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Target: \$${alert.targetPrice.toStringAsFixed(0)}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        'Target: ₹${alert.targetPrice.toStringAsFixed(0)}',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white70),
                       ),
                       const SizedBox(height: 4),
                       Text(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../models/product.dart';
+import '../../../src/models/product.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -16,7 +16,7 @@ class ProductCard extends StatelessWidget {
     const priceColor = Color(0xFF14C38E); // Green #14C38E
     
     return Semantics(
-      label: '${product.title}, by ${product.brand}, rated ${product.rating} stars',
+      label: '${product.name}, by ${product.brand}, rated ${product.rating} stars',
       button: true,
       child: GestureDetector(
         onTap: onTap,
@@ -45,7 +45,7 @@ class ProductCard extends StatelessWidget {
                     Hero(
                       tag: 'product_${product.id}',
                       child: CachedNetworkImage(
-                        imageUrl: product.images.first,
+                        imageUrl: product.image,
                         fit: BoxFit.cover, 
                         // Use a darker background for transparency
                         color: Colors.black.withValues(alpha: 0.05),
@@ -73,7 +73,7 @@ class ProductCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      product.title,
+                      product.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.inter(
@@ -86,7 +86,7 @@ class ProductCard extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          '\$${(product.offers.isNotEmpty ? product.offers.first.price : 0).toStringAsFixed(0)}',
+                          '₹${product.price.toStringAsFixed(0)}',
                           style: GoogleFonts.inter(
                             color: priceColor,
                             fontSize: 18,
@@ -112,7 +112,7 @@ class ProductCard extends StatelessWidget {
                         Icon(Icons.balance, size: 14, color: Colors.white.withValues(alpha: 0.6)),
                         const SizedBox(width: 4),
                         Text(
-                          'vs ${product.offers.length} stores',
+                          'vs ${product.stores} stores',
                           style: TextStyle(
                             color: Colors.white.withValues(alpha: 0.6),
                             fontSize: 10,

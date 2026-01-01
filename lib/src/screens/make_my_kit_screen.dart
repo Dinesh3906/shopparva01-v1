@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/theme_tokens.dart';
-import '../state/app_providers.dart';
-import '../widgets/kit_item_row.dart';
-import 'optimized_kit_screen.dart';
 
 // --- Data Models ---
+
+class KitVariantOption {
+  final String title;
+  final List<String> choices;
+  const KitVariantOption(this.title, this.choices);
+}
+
 class KitItemDefinition {
   final String id;
   final String label;
   final String subtitle;
-  final double price;
-  final String preferenceLabel;
-  final List<String> preferences;
+  final double estimatedCost;
+  final String priority;
+  final List<KitVariantOption> variants;
 
   const KitItemDefinition({
     required this.id,
     required this.label,
     required this.subtitle,
-    required this.price,
-    required this.preferenceLabel,
-    required this.preferences,
+    required this.estimatedCost,
+    required this.priority,
+    required this.variants,
   });
 }
 
@@ -29,173 +34,70 @@ class KitItemDefinition {
 const Map<String, List<KitItemDefinition>> _categoryItems = {
   'Cosmetics': [
     KitItemDefinition(
-      id: 'lipstick',
-      label: 'Lipstick',
-      subtitle: '₹1,500',
-      price: 1500,
-      preferenceLabel: 'Shade',
-      preferences: ['Red', 'Nude', 'Pink', 'Berry'],
-    ),
-    KitItemDefinition(
       id: 'foundation',
       label: 'Foundation',
-      subtitle: '₹2,200',
-      price: 2200,
-      preferenceLabel: 'Skin Tone',
-      preferences: ['Fair', 'Light', 'Medium', 'Tan', 'Deep'],
+      subtitle: 'Base Layer',
+      estimatedCost: 2200,
+      priority: 'high',
+      variants: [
+        KitVariantOption('Shade Match', ['Fair', 'Light', 'Medium', 'Tan', 'Deep', 'Custom']),
+        KitVariantOption('Skin Type', ['Oily', 'Dry', 'Combination']),
+        KitVariantOption('Coverage', ['Light', 'Medium', 'Full']),
+      ],
+    ),
+    KitItemDefinition(
+      id: 'lipstick',
+      label: 'Lipstick',
+      subtitle: 'Color Pop',
+      estimatedCost: 1500,
+      priority: 'medium',
+      variants: [
+        KitVariantOption('Finish', ['Matte', 'Gloss', 'Cream']),
+        KitVariantOption('Color Tone', ['Red', 'Nude', 'Pink', 'Wine']),
+        KitVariantOption('Long-Wear', ['Yes', 'No']),
+      ],
     ),
     KitItemDefinition(
       id: 'compact',
       label: 'Compact Powder',
-      subtitle: '₹950',
-      price: 950,
-      preferenceLabel: 'Finish',
-      preferences: ['Matte', 'Natural', 'Dewy'],
+      subtitle: 'Finish',
+      estimatedCost: 950,
+      priority: 'medium',
+      variants: [
+        KitVariantOption('Finish', ['Matte', 'HD', 'Natural']),
+        KitVariantOption('Skin Type', ['Oily', 'Dry', 'Normal']),
+      ],
     ),
     KitItemDefinition(
       id: 'blush',
       label: 'Blush',
-      subtitle: '₹1,200',
-      price: 1200,
-      preferenceLabel: 'Color',
-      preferences: ['Peach', 'Rose', 'Coral'],
+      subtitle: 'Color',
+      estimatedCost: 1200,
+      priority: 'low',
+      variants: [
+        KitVariantOption('Texture', ['Powder', 'Cream', 'Liquid']),
+        KitVariantOption('Tone', ['Peach', 'Pink', 'Coral']),
+      ],
     ),
     KitItemDefinition(
       id: 'mascara',
       label: 'Mascara',
-      subtitle: '₹800',
-      price: 800,
-      preferenceLabel: 'Type',
-      preferences: ['Volumizing', 'Lengthening', 'Waterproof'],
-    ),
-  ],
-  'Gaming': [
-    KitItemDefinition(
-      id: 'console',
-      label: 'Gaming Console',
-      subtitle: '₹49,990',
-      price: 49990,
-      preferenceLabel: 'Edition',
-      preferences: ['Standard', 'Digital'],
-    ),
-    KitItemDefinition(
-      id: 'controller',
-      label: 'Extra Controller',
-      subtitle: '₹5,500',
-      price: 5500,
-      preferenceLabel: 'Color',
-      preferences: ['Black', 'White', 'Red', 'Blue'],
-    ),
-    KitItemDefinition(
-      id: 'headset',
-      label: 'Gaming Headset',
-      subtitle: '₹8,990',
-      price: 8990,
-      preferenceLabel: 'Type',
-      preferences: ['Wired', 'Wireless'],
-    ),
-    KitItemDefinition(
-      id: 'game_title',
-      label: 'Top Game Title',
-      subtitle: '₹4,500',
-      price: 4500,
-      preferenceLabel: 'Genre',
-      preferences: ['Action', 'RPG', 'Sports', 'Shooter'],
-    ),
-    KitItemDefinition(
-      id: 'monitor',
-      label: 'Gaming Monitor',
-      subtitle: '₹22,000',
-      price: 22000,
-      preferenceLabel: 'Size',
-      preferences: ['24 inch', '27 inch', '32 inch'],
-    ),
-  ],
-  'Fitness': [
-    KitItemDefinition(
-      id: 'yoga_mat',
-      label: 'Yoga Mat',
-      subtitle: '₹1,500',
-      price: 1500,
-      preferenceLabel: 'Thickness',
-      preferences: ['4mm', '6mm', '10mm'],
-    ),
-    KitItemDefinition(
-      id: 'dumbbells',
-      label: 'Dumbbells Set',
-      subtitle: '₹3,500',
-      price: 3500,
-      preferenceLabel: 'Weight',
-      preferences: ['2kg', '5kg', '10kg'],
-    ),
-    KitItemDefinition(
-      id: 'resistance_bands',
-      label: 'Resistance Bands',
-      subtitle: '₹800',
-      price: 800,
-      preferenceLabel: 'Strength',
-      preferences: ['Light', 'Medium', 'Heavy'],
-    ),
-    KitItemDefinition(
-      id: 'protein',
-      label: 'Whey Protein',
-      subtitle: '₹3,200',
-      price: 3200,
-      preferenceLabel: 'Flavor',
-      preferences: ['Chocolate', 'Vanilla', 'Strawberry'],
-    ),
-    KitItemDefinition(
-      id: 'smartwatch',
-      label: 'Fitness Tracker',
-      subtitle: '₹4,500',
-      price: 4500,
-      preferenceLabel: 'Color',
-      preferences: ['Black', 'Blue', 'Pink'],
-    ),
-  ],
-  'Travel': [
-    KitItemDefinition(
-      id: 'backpack',
-      label: 'Travel Backpack',
-      subtitle: '₹3,500',
-      price: 3500,
-      preferenceLabel: 'Capacity',
-      preferences: ['30L', '40L', '50L'],
-    ),
-    KitItemDefinition(
-      id: 'neck_pillow',
-      label: 'Neck Pillow',
-      subtitle: '₹900',
-      price: 900,
-      preferenceLabel: 'Material',
-      preferences: ['Memory Foam', 'Microbeads'],
-    ),
-    KitItemDefinition(
-      id: 'powerbank',
-      label: 'Power Bank',
-      subtitle: '₹2,000',
-      price: 2000,
-      preferenceLabel: 'Capacity',
-      preferences: ['10000mAh', '20000mAh'],
-    ),
-    KitItemDefinition(
-      id: 'adapter',
-      label: 'Universal Adapter',
-      subtitle: '₹1,200',
-      price: 1200,
-      preferenceLabel: 'Type',
-      preferences: ['Type C', 'Multi-port'],
-    ),
-    KitItemDefinition(
-      id: 'toiletry_bag',
-      label: 'Toiletry Kit',
-      subtitle: '₹800',
-      price: 800,
-      preferenceLabel: 'Size',
-      preferences: ['Small', 'Large'],
+      subtitle: 'Lashes',
+      estimatedCost: 800,
+      priority: 'low',
+      variants: [
+        KitVariantOption('Type', ['Volumizing', 'Lengthening', 'Waterproof']),
+      ],
     ),
   ],
 };
+
+// --- Providers ---
+final kitBudgetProvider = StateProvider<double>((ref) => 5000);
+// Store selected item IDs
+final kitSelectionsProvider = StateProvider<Set<String>>((ref) => {});
+// Store variant selections: ItemID -> { VariantTitle -> Choice }
+final kitVariantSelectionsProvider = StateProvider<Map<String, Map<String, String>>>((ref) => {});
 
 class MakeMyKitScreen extends ConsumerStatefulWidget {
   const MakeMyKitScreen({super.key});
@@ -205,327 +107,427 @@ class MakeMyKitScreen extends ConsumerStatefulWidget {
 }
 
 class _MakeMyKitScreenState extends ConsumerState<MakeMyKitScreen> {
-  final List<String> _categories = _categoryItems.keys.toList();
-  int _selectedCategoryIndex = 0;
-  
-  // State: One map per category to persist selections when switching tabs? 
-  // Requirement: "On category change: The previously selected category’s sub-options should be replaced."
-  // Usually this means we track state PER category so user can jump back and forth, 
-  // OR we reset. Let's persist for better UX.
-  final Map<String, Set<String>> _selectedItemIds = {};
-  final Map<String, Map<String, String>> _itemPreferences = {};
-  
-  static const double _maxBudget = 100000;
-
-  @override
-  void initState() {
-    super.initState();
-    // Initialize state containers
-    for (final cat in _categories) {
-      _selectedItemIds[cat] = {};
-      _itemPreferences[cat] = {};
-    }
-    // Auto-select first category in provider if needed, or just sync local index
-  }
-
-  String get _currentCategory => _categories[_selectedCategoryIndex];
-
-  List<KitItemDefinition> get _currentItems => 
-      _categoryItems[_currentCategory] ?? [];
-
-  Set<String> get _currentSelections => _selectedItemIds[_currentCategory]!;
-  Map<String, String> get _currentPreferences => _itemPreferences[_currentCategory]!;
-
-  double get _currentTotalCost {
-    double total = 0;
-    for (final item in _currentItems) {
-      if (_currentSelections.contains(item.id)) {
-        total += item.price;
-      }
-    }
-    return total;
-  }
-
-
-
-  void _toggleItem(KitItemDefinition item, bool selected) {
-    if (selected) {
-      if (_currentTotalCost + item.price > _maxBudget) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text('Budget limit exceeded! Remove items to add this one.'),
-              backgroundColor: Colors.redAccent,
-              behavior: SnackBarBehavior.floating,
-              duration: const Duration(seconds: 2),
-            ),
-          );
-        }
-        return;
-      }
-      setState(() {
-        _currentSelections.add(item.id);
-      });
-    } else {
-      setState(() {
-        _currentSelections.remove(item.id);
-      });
-    }
-  }
+  final String _selectedCategory = 'Cosmetics';
 
   @override
   Widget build(BuildContext context) {
-    final userAsync = ref.watch(userProfileProvider);
-    final theme = Theme.of(context);
-    final budgetUsagePercent = (_currentTotalCost / _maxBudget).clamp(0.0, 1.0);
+    final budget = ref.watch(kitBudgetProvider);
+    final selections = ref.watch(kitSelectionsProvider);
 
     return Scaffold(
       backgroundColor: ThemeTokens.backgroundDark,
-      appBar: AppBar(
-        title: const Text('Make My Kit'),
-      ),
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top Section: Category Selector
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                   Text(
-                    'Choose a category to build your kit.',
-                    style: theme.textTheme.bodyMedium?.copyWith(color: Colors.white70),
-                  ),
-                  const SizedBox(height: 12),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        for (var i = 0; i < _categories.length; i++)
-                          Padding(
-                            padding: const EdgeInsets.only(right: 8),
-                            child: ChoiceChip(
-                              label: Text(_categories[i]),
-                              selected: _selectedCategoryIndex == i,
-                              onSelected: (selected) {
-                                if (selected) {
-                                  setState(() => _selectedCategoryIndex = i);
-                                  // Update provider if needed downstream
-                                  ref.read(currentCategoryProvider.notifier).state =
-                                      _categories[i];
-                                }
-                              },
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            
+            _buildHeader(context, budget),
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(24),
                 children: [
-                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Select Items',
-                        style: theme.textTheme.titleLarge?.copyWith(
-                          color: Colors.white.withOpacity(0.9),
-                        ),
-                      ),
-                      Text(
-                        '${_currentSelections.length} Selected',
-                        style: theme.textTheme.bodySmall?.copyWith(color: Colors.white70),
-                      ),
-                    ],
+                   Text(
+                    'SELECT ESSENTIALS',
+                    style: GoogleFonts.inter(
+                      color: Colors.white54,
+                      fontSize: 12,
+                      letterSpacing: 1.5,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: 16),
-                  
-                  // Dynamic Items List
-                  if (_currentItems.isEmpty)
-                    const Padding(
-                      padding: EdgeInsets.all(24),
-                      child: Center(child: Text('Coming soon for this category!', style: TextStyle(color: Colors.white54))),
-                    )
-                  else
-                    ..._currentItems.map((item) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 12),
-                        child: KitItemRow(
-                          label: item.label,
-                          subtitle: item.subtitle, // Display formatted price
-                          selected: _currentSelections.contains(item.id),
-                          onSelectedChanged: (v) => _toggleItem(item, v),
-                          preferenceLabel: item.preferenceLabel,
-                          preferenceValue: _currentPreferences[item.id],
-                          onPreferenceTap: () => _selectPreference(
-                            context,
-                            key: item.id,
-                            options: item.preferences,
-                          ),
-                        ),
-                      );
-                    }),
+                  ...(_categoryItems[_selectedCategory] ?? []).map((item) {
+                    return _KitItemCard(item: item);
+                  }),
                 ],
               ),
             ),
+            _buildGenerateButton(context, budget, selections),
+          ],
+        ),
+      ),
+    );
+  }
 
-            // Bottom Section: Budget & Action
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: ThemeTokens.surfaceDark,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black45,
-                    blurRadius: 10,
-                    offset: Offset(0, -4),
-                  ),
+  Widget _buildHeader(BuildContext context, double budget) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: ThemeTokens.surfaceDark,
+        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(32)),
+        boxShadow: [
+          BoxShadow(
+            color: ThemeTokens.primary.withOpacity(0.1),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Make My Kit',
+                style: GoogleFonts.outfit(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  letterSpacing: -0.5,
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: ThemeTokens.primary.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: ThemeTokens.primary.withOpacity(0.5)),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.auto_awesome, color: ThemeTokens.primary, size: 16),
+                    const SizedBox(width: 8),
+                    Text(
+                      'AI Powered',
+                      style: GoogleFonts.inter(
+                          color: ThemeTokens.primary, fontWeight: FontWeight.w600, fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 32),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('TOTAL BUDGET', style: GoogleFonts.inter(color: Colors.white54, fontSize: 12, letterSpacing: 1.5, fontWeight: FontWeight.w600)),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text('₹', style: GoogleFonts.outfit(fontSize: 24, fontWeight: FontWeight.w400, color: ThemeTokens.primary)),
+                  const SizedBox(width: 4),
+                  Text(budget.toStringAsFixed(0), style: GoogleFonts.outfit(fontSize: 48, fontWeight: FontWeight.bold, color: Colors.white, height: 1.0)),
                 ],
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ],
+          ),
+          const SizedBox(height: 16),
+          SliderTheme(
+            data: SliderTheme.of(context).copyWith(
+              activeTrackColor: ThemeTokens.primary,
+              inactiveTrackColor: ThemeTokens.surfaceMuted,
+              trackHeight: 4,
+              thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 10),
+              thumbColor: Colors.white,
+              overlayColor: ThemeTokens.primary.withOpacity(0.2),
+            ),
+            child: Slider(
+              value: budget,
+              min: 500,
+              max: 50000,
+              divisions: 100,
+              onChanged: (value) => ref.read(kitBudgetProvider.notifier).state = value,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGenerateButton(BuildContext context, double budget, Set<String> selections) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: ThemeTokens.backgroundDark,
+        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.05))),
+      ),
+      child: SafeArea(
+        child: ElevatedButton(
+          onPressed: selections.isEmpty ? null : () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              builder: (context) => _KitPreviewModal(budget: budget, selections: selections),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: ThemeTokens.primary,
+            foregroundColor: Colors.black,
+            disabledBackgroundColor: ThemeTokens.surfaceMuted,
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            elevation: 0,
+            shadowColor: ThemeTokens.primary.withOpacity(0.5),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Generate Kit', style: GoogleFonts.outfit(fontSize: 18, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+              if (selections.isNotEmpty) ...[
+                const SizedBox(width: 8),
+                const Icon(Icons.arrow_forward_rounded, size: 20),
+              ]
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _KitItemCard extends ConsumerWidget {
+  final KitItemDefinition item;
+
+  const _KitItemCard({required this.item});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selections = ref.watch(kitSelectionsProvider);
+    final variantSelections = ref.watch(kitVariantSelectionsProvider);
+    final isSelected = selections.contains(item.id);
+
+    return GestureDetector(
+      onTap: () {
+        final current = ref.read(kitSelectionsProvider);
+        if (current.contains(item.id)) {
+           // Deselect logic if needed, or just stay to expand
+           // Requirement says: "The user can select any combination... selected options should glow"
+           // Let's implement toggle.
+           ref.read(kitSelectionsProvider.notifier).state = {...current}..remove(item.id);
+        } else {
+           ref.read(kitSelectionsProvider.notifier).state = {...current, item.id};
+        }
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: isSelected ? ThemeTokens.primary.withOpacity(0.08) : ThemeTokens.surfaceDark,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isSelected ? ThemeTokens.primary : Colors.white.withOpacity(0.05),
+            width: isSelected ? 1.5 : 1,
+          ),
+          boxShadow: isSelected ? [
+            BoxShadow(
+              color: ThemeTokens.primary.withOpacity(0.1),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            )
+          ] : [],
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: ThemeTokens.surfaceMuted,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(Icons.inventory_2_outlined, color: Colors.white54, size: 20),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Budget Used',
-                        style: theme.textTheme.bodyMedium?.copyWith(color: Colors.white70),
+                      Text(item.label, style: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white)),
+                      Text(item.subtitle, style: GoogleFonts.inter(fontSize: 11, color: Colors.white54)),
+                    ],
+                  ),
+                ),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: isSelected ? ThemeTokens.primary : Colors.transparent,
+                    border: Border.all(color: isSelected ? ThemeTokens.primary : Colors.white24, width: 1.5),
+                  ),
+                  child: isSelected ? const Icon(Icons.check, size: 12, color: Colors.black) : null,
+                ),
+              ],
+            ),
+            
+            // Accordion for Variants
+            AnimatedSize(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              child: SizedBox(
+                height: isSelected ? null : 0,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Divider(color: Colors.white10),
+                      const SizedBox(height: 8),
+                      ...item.variants.map((v) {
+                         final currentMap = variantSelections[item.id] ?? {};
+                         final currentChoice = currentMap[v.title];
+                         
+                         return Column(
+                           crossAxisAlignment: CrossAxisAlignment.start,
+                           children: [
+                             Text(v.title, style: GoogleFonts.inter(color: Colors.white38, fontSize: 10, fontWeight: FontWeight.w600, letterSpacing: 0.5)),
+                             const SizedBox(height: 8),
+                             Wrap(
+                               spacing: 8,
+                               runSpacing: 8,
+                               children: v.choices.map((choice) {
+                                 final isChoiceSelected = currentChoice == choice;
+                                 return GestureDetector(
+                                   onTap: () {
+                                     // Update Variant Selection
+                                     final oldMap = ref.read(kitVariantSelectionsProvider);
+                                     final newMap = Map<String, Map<String, String>>.from(oldMap);
+                                     
+                                     if (!newMap.containsKey(item.id)) newMap[item.id] = {};
+                                     newMap[item.id]![v.title] = choice;
+                                     
+                                     ref.read(kitVariantSelectionsProvider.notifier).state = newMap;
+                                   },
+                                   child: AnimatedContainer(
+                                     duration: const Duration(milliseconds: 200),
+                                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                     decoration: BoxDecoration(
+                                       color: isChoiceSelected ? ThemeTokens.primary.withOpacity(0.2) : Colors.transparent,
+                                       borderRadius: BorderRadius.circular(20),
+                                       border: Border.all(
+                                         color: isChoiceSelected ? ThemeTokens.primary : Colors.white24,
+                                       ),
+                                     ),
+                                     child: Text(
+                                       choice,
+                                       style: GoogleFonts.inter(
+                                         color: isChoiceSelected ? ThemeTokens.primary : Colors.white70,
+                                         fontSize: 10,
+                                         fontWeight: isChoiceSelected ? FontWeight.w600 : FontWeight.normal,
+                                       ),
+                                     ),
+                                   ),
+                                 );
+                               }).toList(),
+                             ),
+                             const SizedBox(height: 12),
+                           ],
+                         );
+                      }),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _KitPreviewModal extends ConsumerWidget {
+  final double budget;
+  final Set<String> selections;
+  const _KitPreviewModal({required this.budget, required this.selections});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final items = _categoryItems['Cosmetics']!.where((i) => selections.contains(i.id)).toList();
+    final variants = ref.watch(kitVariantSelectionsProvider);
+
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.85,
+      decoration: BoxDecoration(
+        color: ThemeTokens.backgroundDark,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+        border: Border.all(color: Colors.white.withOpacity(0.1)),
+      ),
+      child: Column(
+        children: [
+          Center(
+              child: Container(
+                  margin: const EdgeInsets.only(top: 12), width: 40, height: 4, decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2)))),
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              children: [
+                const Icon(Icons.check_circle, color: ThemeTokens.primary, size: 48),
+                const SizedBox(height: 16),
+                Text('Perfect Match Found!', style: GoogleFonts.outfit(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+                Text('Optimized for your ₹${budget.toStringAsFixed(0)} budget', style: GoogleFonts.inter(color: ThemeTokens.primary, fontWeight: FontWeight.w500)),
+              ],
+            ),
+          ),
+          const Divider(color: Colors.white10),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(24),
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                final item = items[index];
+                final itemVariants = variants[item.id] ?? {};
+                
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 64, height: 64,
+                        decoration: BoxDecoration(
+                            color: ThemeTokens.surfaceDark,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: Colors.white12)),
+                        child: const Icon(Icons.shopping_bag_outlined, color: Colors.white54),
                       ),
-                      RichText(
-                        text: TextSpan(
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TextSpan(
-                              text: '₹${_currentTotalCost.toStringAsFixed(0)}',
-                              style: theme.textTheme.titleMedium?.copyWith(
-                                color: budgetUsagePercent > 0.9 ? Colors.redAccent : ThemeTokens.accent,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            TextSpan(
-                              text: ' / ₹${_maxBudget.toStringAsFixed(0)}',
-                              style: theme.textTheme.bodySmall?.copyWith(color: Colors.white54),
-                            ),
+                            Text(item.label, style: GoogleFonts.inter(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white)),
+                            if (itemVariants.isNotEmpty)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 4),
+                                child: Wrap(
+                                  spacing: 4,
+                                  children: itemVariants.entries.map((e) => Text(
+                                    '${e.value} · ',
+                                    style: GoogleFonts.inter(fontSize: 11, color: Colors.white54),
+                                  )).toList(),
+                                ),
+                              )
+                            else 
+                               Text('Optimized · ${item.priority.toUpperCase()}', style: GoogleFonts.inter(fontSize: 12, color: Colors.white54)),
                           ],
                         ),
                       ),
+                      const Icon(Icons.check_circle_outline, color: ThemeTokens.success),
                     ],
                   ),
-                  const SizedBox(height: 12),
-                  LinearProgressIndicator(
-                    value: budgetUsagePercent,
-                    backgroundColor: Colors.white10,
-                    color: budgetUsagePercent > 0.9 ? Colors.redAccent : ThemeTokens.accent,
-                    borderRadius: BorderRadius.circular(4),
-                    minHeight: 8,
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: double.infinity,
-                    child: userAsync.when(
-                      data: (user) => FilledButton(
-                        onPressed: _currentSelections.isEmpty
-                            ? null
-                            : () => _generateKit(context, user.id),
-                        style: FilledButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          backgroundColor: ThemeTokens.accent,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        ),
-                        child: Text('Generate ${_categories[_selectedCategoryIndex]} Kit'),
-                      ),
-                      loading: () => const Center(child: CircularProgressIndicator()),
-                      error: (_, __) => const Text('Error loading profile'),
-                    ),
-                  ),
-                ],
-              ),
+                );
+              },
             ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: ElevatedButton(
+              onPressed: () => Navigator.pop(context),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white, foregroundColor: Colors.black, minimumSize: const Size(double.infinity, 56),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
+              child: Text('Add Kit to Cart', style: GoogleFonts.outfit(fontWeight: FontWeight.bold)),
+            ),
+          ),
+        ],
       ),
     );
-  }
-
-  Future<void> _selectPreference(
-    BuildContext context, {
-    required String key,
-    required List<String> options,
-  }) async {
-    final selected = await showModalBottomSheet<String>(
-      context: context,
-      backgroundColor: ThemeTokens.surfaceDark,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      builder: (_) => SafeArea(
-        child: ListView(
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          children: [
-             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Text('Select Option', style: Theme.of(context).textTheme.titleMedium),
-            ),
-            for (final o in options)
-              ListTile(
-                title: Text(o),
-                onTap: () => Navigator.of(context).pop(o),
-              ),
-          ],
-        ),
-      ),
-    );
-
-    if (selected != null) {
-      setState(() => _currentPreferences[key] = selected);
-    }
-  }
-
-  Future<void> _generateKit(BuildContext context, String userId) async {
-    final repo = ref.read(kitRepositoryProvider);
-
-    final selections = <Map<String, dynamic>>[];
-    for (final id in _currentSelections) {
-      selections.add({
-        'itemId': id,
-        'preferences': _currentPreferences[id],
-        // Pass price so backend knows (optional, depending on backend logic)
-        'estimatedPrice': _currentItems.firstWhere((i) => i.id == id).price,
-      });
-    }
-
-    try {
-      // Show loading? The button doesn't toggle loading state here but async gap protects it slightly
-      
-      final kit = await repo.generateKit(
-        userId: userId,
-        category: _categories[_selectedCategoryIndex],
-        selections: selections,
-        budget: _currentTotalCost, // Using actual cost as the budget input for generation logic
-      );
-
-      if (!mounted) return;
-
-      Navigator.of(context).push(
-        MaterialPageRoute<void>(
-          builder: (_) => OptimizedKitScreen(kit: kit),
-        ),
-      );
-    } catch (e) {
-      debugPrint('Error generating kit: $e');
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(content: Text('Failed to generate kit: $e')),
-      );
-    }
   }
 }

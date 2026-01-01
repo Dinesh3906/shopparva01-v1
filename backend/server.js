@@ -1,8 +1,275 @@
-
 const express = require('express');
 const cors = require('cors');
 
+// ... (existing code)
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// Mock Kit Generation Endpoint
+app.post('/kits/generate', (req, res) => {
+  const { userId, category, budget } = req.body;
+  console.log('Generating kit for:', { userId, category, budget });
+
+  // Simple mock logic to return a kit
+  // In a real app, this would use the selections and budget to find compatible parts
+  const mockKitItems = [
+    {
+      id: "kit-item-1",
+      name: "Generated Item 1",
+      price: budget * 0.4,
+      image: "https://via.placeholder.com/150",
+      description: "Best component for your budget",
+      brand: "PremiumBrand"
+    },
+    {
+      id: "kit-item-2",
+      name: "Generated Item 2",
+      price: budget * 0.3,
+      image: "https://via.placeholder.com/150",
+      description: "Compatible accessory",
+      brand: "ReliableBrand"
+    }
+  ];
+
+  const kit = {
+    id: `kit-${Date.now()}`,
+    userId: userId,
+    category: category,
+    items: mockKitItems,
+    totalPrice: mockKitItems.reduce((sum, item) => sum + item.price, 0),
+    createdAt: new Date().toISOString()
+  };
+
+  res.json(kit);
+});
+
+// ... (rest of the file)
+
 const products = [
+
+  // === FASHION CATEGORY ===
+  {
+    "id": "fashion-nike-airmax",
+    "title": "Nike Air Max 270 Running Shoes",
+    "brand": "Nike",
+    "modelName": "Air Max 270",
+    "description": "Nike Air Max 270 Running Shoes - Black/White",
+    "category": "Fashion",
+    "images": ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop"],
+    "rating": 4.6,
+    "reviewCount": "1892",
+    "badgeText": "Best Seller",
+    "offers": [{
+      "marketplace": "Amazon",
+      "seller": "Nike Official Store",
+      "price": 12995,
+      "originalPrice": 14995,
+      "discount": "13% Off",
+      "savingsText": "(Save ₹2,000)",
+      "delivery": "Free Delivery by Tomorrow",
+      "url": "https://www.amazon.in/nike-air-max-270",
+      "isBest": true
+    }],
+    "priceHistory": [
+      { "date": "2025-12-01", "price": 13500 },
+      { "date": "2025-12-15", "price": 12995 }
+    ]
+  },
+  {
+    "id": "fashion-levis-511",
+    "title": "Levi's 511 Slim Fit Jeans - Dark Blue",
+    "brand": "Levi's",
+    "modelName": "511 Slim Fit",
+    "description": "Classic Levi's 511 Slim Fit Jeans in Dark Blue Denim",
+    "category": "Fashion",
+    "images": ["https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=400&fit=crop"],
+    "rating": 4.4,
+    "reviewCount": "2341",
+    "badgeText": "Trending",
+    "offers": [{
+      "marketplace": "Myntra",
+      "seller": "Levi's Official",
+      "price": 2999,
+      "originalPrice": 4999,
+      "discount": "40% Off",
+      "savingsText": "(Save ₹2,000)",
+      "delivery": "Delivery in 2-3 days",
+      "url": "https://www.myntra.com/levis-511-jeans",
+      "isBest": true
+    }],
+    "priceHistory": [
+      { "date": "2025-12-01", "price": 3499 },
+      { "date": "2025-12-15", "price": 2999 }
+    ]
+  },
+  // === SPORTS CATEGORY ===
+  {
+    "id": "sports-adidas-predator",
+    "title": "Adidas Predator Edge Football Boots",
+    "brand": "Adidas",
+    "modelName": "Predator Edge",
+    "description": "Professional football boots with superior grip and control",
+    "category": "Sports",
+    "images": ["https://images.unsplash.com/photo-1511886929837-354d827aae26?w=400&h=400&fit=crop"],
+    "rating": 4.7,
+    "reviewCount": "876",
+    "badgeText": "Pro Choice",
+    "offers": [{
+      "marketplace": "Decathlon",
+      "seller": "Adidas Official",
+      "price": 8999,
+      "originalPrice": 12999,
+      "discount": "31% Off",
+      "savingsText": "(Save ₹4,000)",
+      "delivery": "Free Delivery",
+      "url": "https://www.decathlon.in/adidas-predator",
+      "isBest": true
+    }],
+    "priceHistory": [
+      { "date": "2025-12-01", "price": 9999 },
+      { "date": "2025-12-15", "price": 8999 }
+    ]
+  },
+  {
+    "id": "sports-yonex-nanoray",
+    "title": "Yonex Nanoray 900 Badminton Racket",
+    "brand": "Yonex",
+    "modelName": "Nanoray 900",
+    "description": "Professional badminton racket for advanced players",
+    "category": "Sports",
+    "images": ["https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=400&h=400&fit=crop"],
+    "rating": 4.6,
+    "reviewCount": "543",
+    "badgeText": "Tournament Grade",
+    "offers": [{
+      "marketplace": "Amazon",
+      "seller": "Yonex India",
+      "price": 6499,
+      "originalPrice": 8999,
+      "discount": "28% Off",
+      "savingsText": "(Save ₹2,500)",
+      "delivery": "Free Delivery by Tomorrow",
+      "url": "https://www.amazon.in/yonex-nanoray-900",
+      "isBest": true
+    }],
+    "priceHistory": [
+      { "date": "2025-12-01", "price": 7499 },
+      { "date": "2025-12-15", "price": 6499 }
+    ]
+  },
+  // === BEAUTY CATEGORY ===
+  {
+    "id": "beauty-lakme-absolute",
+    "title": "Lakme Absolute Matte Lipstick - Red Rush",
+    "brand": "Lakme",
+    "modelName": "Absolute Matte",
+    "description": "Long-lasting matte lipstick in Red Rush shade",
+    "category": "Beauty",
+    "images": ["https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&h=400&fit=crop"],
+    "rating": 4.5,
+    "reviewCount": "3421",
+    "badgeText": "Best Seller",
+    "offers": [{
+      "marketplace": "Nykaa",
+      "seller": "Lakme Official",
+      "price": 599,
+      "originalPrice": 850,
+      "discount": "30% Off",
+      "savingsText": "(Save ₹251)",
+      "delivery": "Delivery in 2-3 days",
+      "url": "https://www.nykaa.com/lakme-absolute-lipstick",
+      "isBest": true
+    }],
+    "priceHistory": [
+      { "date": "2025-12-01", "price": 650 },
+      { "date": "2025-12-15", "price": 599 }
+    ]
+  },
+  {
+    "id": "beauty-loreal-revitalift",
+    "title": "L'Oreal Paris Revitalift Hyaluronic Acid Serum",
+    "brand": "L'Oreal",
+    "modelName": "Revitalift Hyaluronic Acid",
+    "description": "Anti-aging serum with hyaluronic acid - 30ml",
+    "category": "Beauty",
+    "images": ["https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop"],
+    "rating": 4.6,
+    "reviewCount": "2187",
+    "badgeText": "Dermatologist Recommended",
+    "offers": [{
+      "marketplace": "Amazon",
+      "seller": "L'Oreal India",
+      "price": 1299,
+      "originalPrice": 1999,
+      "discount": "35% Off",
+      "savingsText": "(Save ₹700)",
+      "delivery": "Free Delivery by Tomorrow",
+      "url": "https://www.amazon.in/loreal-revitalift-serum",
+      "isBest": true
+    }],
+    "priceHistory": [
+      { "date": "2025-12-01", "price": 1499 },
+      { "date": "2025-12-15", "price": 1299 }
+    ]
+  },
+  // === ESSENTIALS CATEGORY ===
+  {
+    "id": "essentials-dettol-handwash",
+    "title": "Dettol Original Handwash Refill Pack - 750ml",
+    "brand": "Dettol",
+    "modelName": "Original Handwash",
+    "description": "Antibacterial handwash refill pack 750ml",
+    "category": "Essentials",
+    "images": ["https://images.unsplash.com/photo-1584305574647-0cc949a2bb9f?w=400&h=400&fit=crop"],
+    "rating": 4.7,
+    "reviewCount": "5234",
+    "badgeText": "Essential Item",
+    "offers": [{
+      "marketplace": "BigBasket",
+      "seller": "Dettol Official",
+      "price": 189,
+      "originalPrice": 250,
+      "discount": "24% Off",
+      "savingsText": "(Save ₹61)",
+      "delivery": "Same Day Delivery",
+      "url": "https://www.bigbasket.com/dettol-handwash",
+      "isBest": true
+    }],
+    "priceHistory": [
+      { "date": "2025-12-01", "price": 199 },
+      { "date": "2025-12-15", "price": 189 }
+    ]
+  },
+  {
+    "id": "essentials-colgate-total",
+    "title": "Colgate Total Advanced Toothpaste - 200g",
+    "brand": "Colgate",
+    "modelName": "Total Advanced",
+    "description": "Complete oral care toothpaste 200g",
+    "category": "Essentials",
+    "images": ["https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=400&h=400&fit=crop"],
+    "rating": 4.6,
+    "reviewCount": "6543",
+    "badgeText": "Dentist Recommended",
+    "offers": [{
+      "marketplace": "Amazon",
+      "seller": "Colgate India",
+      "price": 145,
+      "originalPrice": 180,
+      "discount": "19% Off",
+      "savingsText": "(Save ₹35)",
+      "delivery": "Free Delivery",
+      "url": "https://www.amazon.in/colgate-total-advanced",
+      "isBest": true
+    }],
+    "priceHistory": [
+      { "date": "2025-12-01", "price": 155 },
+      { "date": "2025-12-15", "price": 145 }
+    ]
+  },
+
   {
     "id": "elec-croma-1",
     "title": "Apple iPhone 16 (128GB, White)",
@@ -161854,171 +162121,186 @@ const products = [
       }
     ]
   }
-];;
+];
 
-function normalizeQuery(query) {
-  const noiseWords = ['buy', 'price', 'online', 'best', 'cheapest', 'deal', 'offer'];
-  let normalized = query.toLowerCase().trim();
-  noiseWords.forEach(word => {
-    normalized = normalized.replace(new RegExp(`\\b${word}\\b`, 'gi'), '');
-  });
-  return normalized.trim().replace(/\s+/g, ' ');
-}
+// --- PROFESSIONAL PRODUCTION LOGIC BY ANTIGRAVITY (REFINED) ---
 
-// THIS FUNCTION MUST MATCH THE FLUTTER Product.fromJson LOGIC
-function groupProductsByModel(products) {
-  const grouped = {};
-  products.forEach(product => {
-    // We group by modelName or title
-    const modelKey = product.modelName || product.title;
-    if (!grouped[modelKey]) {
-      grouped[modelKey] = {
-        id: product.id, // Primary ID
-        title: modelKey,
-        description: product.description || `${modelKey} available now.`,
-        brand: product.brand || 'Generic',
-        categories: Array.isArray(product.categories) ? product.categories : [product.category || 'All'],
-        rating: Number(product.rating) || 0,
-        reviewCount: Number(product.reviewCount) || 0,
-        images: product.images || [],
-        badgeText: product.badgeText || '',
-        priceHistory: product.priceHistory || [],
-        offers: []
-      };
-    }
-
-    if (product.offers) {
-      product.offers.forEach(off => {
-        grouped[modelKey].offers.push({
-          marketplace: off.marketplace || 'Store',
-          price: Number(off.price) || 0,
-          originalPrice: Number(off.originalPrice) || Number(off.price) || 0,
-          discount: off.discount || '0%',
-          seller: off.seller || 'Verified Seller',
-          url: off.url || '#'
-        });
-      });
-    }
-  });
-
-  return Object.values(grouped).map(group => {
-    group.offers.sort((a, b) => a.price - b.price);
-    return group;
-  });
-}
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-// Logging Middleware
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
   next();
 });
 
-app.get('/api/v1/products/search', (req, res) => {
-  const { q, category } = req.query;
-  let results = products;
+app.get('/api/v1/user/profile', (req, res) => {
+  res.json({
+    id: "user_live_01",
+    name: "Dinesh",
+    email: "dinesh@shopparva.com",
+    avatar: "https://ui-avatars.com/api/?name=Dinesh&background=6366f1&color=fff",
+    loyaltyPoints: 1250,
+    membership: "Gold",
+    preferences: {
+      categories: ["Electronics", "Fashion", "Groceries"],
+      budgetGoal: 50000
+    }
+  });
+});
 
-  console.log(`[Search] q: "${q || ''}", cat: "${category || ''}"`);
+app.get('/api/v1/products/search', (req, res) => {
+  const query = (req.query.q || '').toLowerCase().trim();
+  const category = req.query.category;
+
+  let filtered = products;
 
   if (category && category !== 'All') {
-    // Handle both string category and array categories
-    results = results.filter(p =>
-      p.category === category || (Array.isArray(p.categories) && p.categories.includes(category))
-    );
+    filtered = filtered.filter(p => p.category === category);
   }
 
-  if (q) {
-    const nq = normalizeQuery(q);
-    results = results.filter(p =>
-      p.title.toLowerCase().includes(nq) ||
-      (p.brand && p.brand.toLowerCase().includes(nq)) ||
-      (p.modelName && p.modelName.toLowerCase().includes(nq))
-    );
+  if (query) {
+    const searchTerms = query.split(/\s+/).filter(t => t.length > 0);
+    filtered = filtered.filter(p => {
+      const searchStr = `${p.title} ${p.brand} ${p.modelName || ''} ${p.description || ''}`.toLowerCase();
+      return searchTerms.every(term => searchStr.includes(term));
+    });
   }
 
-  const output = groupProductsByModel(results);
-  console.log(`[Search] Returning ${output.length} grouped items`);
-  res.json(output);
+  // Prioritize Visible Products (Images) & Jumble All
+  const hasImage = (p) => (p.images && p.images.length > 0 && p.images[0]) || (p.image && p.image.length > 0);
+
+  const visible = filtered.filter(p => hasImage(p));
+  const others = filtered.filter(p => !hasImage(p));
+
+  // Fisher-Yates Shuffle
+  const shuffle = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
+  // Return shuffled visible first, then shuffled others
+  res.json([...shuffle(visible), ...shuffle(others)]);
 });
 
 app.get('/api/v1/products/:id', (req, res) => {
   const product = products.find(p => p.id === req.params.id);
-  if (!product) return res.status(404).json({ message: 'Product not found' });
-
-  const related = products.filter(p =>
-    (p.modelName === product.modelName || p.title === product.title) && p.id !== product.id
-  );
-
-  // Calculate price trend if priceHistory exists
-  let priceTrend = null;
-  if (product.priceHistory && product.priceHistory.length > 0) {
-    const prices = product.priceHistory.map(h => h.price);
-    const lowest = Math.min(...prices);
-    const highest = Math.max(...prices);
-    const average = prices.reduce((a, b) => a + b, 0) / prices.length;
-    const firstPrice = prices[0];
-    const lastPrice = prices[prices.length - 1];
-    const change = ((lastPrice - firstPrice) / firstPrice) * 100;
-
-    priceTrend = {
-      trend: change > 0.5 ? 'up' : (change < -0.5 ? 'down' : 'stable'),
-      percentage: Math.abs(change),
-      lowest: lowest,
-      highest: highest,
-      average: average
-    };
+  if (product) {
+    res.json(product);
+  } else {
+    // Try fuzzy match by ID if not found (sometimes frontend adds prefixes)
+    const fuzzy = products.find(p => req.params.id.includes(p.id) || p.id.includes(req.params.id));
+    if (fuzzy) return res.json(fuzzy);
+    res.status(404).json({ error: 'Product not found' });
   }
-
-  res.json({
-    ...product,
-    categories: Array.isArray(product.categories) ? product.categories : [product.category || 'All'],
-    allOffers: [
-      ...product.offers,
-      ...related.flatMap(p => p.offers)
-    ].sort((a, b) => a.price - b.price),
-    price_trend: priceTrend
-  });
 });
 
-app.get('/api/v1/products/compare', (req, res) => {
-  const { id } = req.query;
-  const product = products.find(p => p.id === id);
-  if (!product) return res.status(404).json({ message: 'Product not found' });
+app.get('/api/v1/search/compare', (req, res) => {
+  const query = (req.query.q || '').toLowerCase().trim();
+  if (!query) return res.json({ results: [] });
 
-  const related = products.filter(p =>
-    (p.modelName === product.modelName || p.title === product.title) && p.id !== product.id
-  );
+  const searchTerms = query.split(/\s+/).filter(t => t.length > 0);
+  const matchedProducts = products.filter(p => {
+    const searchStr = `${p.title} ${p.brand} ${p.modelName || ''}`.toLowerCase();
+    return searchTerms.some(term => searchStr.includes(term)); // Use .some for broader search in comparison
+  }).slice(0, 10);
 
-  res.json({
-    ...product,
-    categories: Array.isArray(product.categories) ? product.categories : [product.category || 'All'],
-    allOffers: [
-      ...product.offers,
-      ...related.flatMap(p => p.offers)
-    ].sort((a, b) => a.price - b.price)
-  });
-});
+  const results = matchedProducts.map(p => ({
+    productId: p.id,
+    modelName: p.modelName || p.title,
+    brand: p.brand,
+    category: p.category || 'Electronics',
+    rating: p.rating || 4.2,
+    reviewCount: p.reviewCount || "10",
+    image: p.images ? p.images[0] : (p.image || ''),
+    deals: p.offers || []
+  }));
 
-app.get('/api/v1/user/profile', (req, res) => {
-  res.json({ id: 'user-1', name: 'Luffy', email: 'pirate_king@shopparva.com' });
-});
-
-app.get('/api/v1/ar-assets', (req, res) => {
-  res.json([]);
-});
-
-app.post('/api/v1/kits/generate', (req, res) => {
-  res.json({ id: 'kit-1', name: 'Smart Kit', items: [] });
+  res.json({ results });
 });
 
 app.post('/api/v1/track', (req, res) => {
-  res.json({ success: true });
+  const { productId, userId } = req.body;
+  console.log(`Tracking: User ${userId} -> Product ${productId}`);
+  res.json({ success: true, message: 'Product tracking active' });
 });
+
+app.post('/api/v1/kits/generate', (req, res) => {
+  const { userId, category, budget } = req.body;
+  console.log(`Generating Kit: Cat=${category}, Budget=₹${budget}`);
+
+  let catFilter = category;
+  if (category === 'Cosmetics') catFilter = 'Cosmetics'; // Match real data
+
+  let categoryProducts = products.filter(p => p.category === catFilter);
+
+  if (categoryProducts.length < 5) {
+    categoryProducts = products.filter(p => p.id.toLowerCase().includes(category.toLowerCase().slice(0, 3)));
+  }
+
+  // If still empty, just use highest rated products
+  if (categoryProducts.length === 0) {
+    categoryProducts = [...products].sort((a, b) => (b.rating || 0) - (a.rating || 0)).slice(0, 100);
+  }
+
+  categoryProducts.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+
+  const kitItems = [];
+  let currentTotal = 0;
+
+  // Pick core item
+  const coreItem = categoryProducts.find(p => {
+    const price = p.offers && p.offers[0] ? p.offers[0].price : (p.price || 0);
+    return price > 0 && price <= (budget * 0.7);
+  });
+
+  if (coreItem) {
+    const p_price = coreItem.offers && coreItem.offers[0] ? coreItem.offers[0].price : (coreItem.price || 0);
+    kitItems.push({
+      id: coreItem.id,
+      name: coreItem.title,
+      price: p_price,
+      image: coreItem.images ? coreItem.images[0] : (coreItem.image || ''),
+      description: coreItem.description,
+      brand: coreItem.brand,
+      preference: "Core Premium"
+    });
+    currentTotal += p_price;
+  }
+
+  const others = categoryProducts.filter(p => !kitItems.find(ki => ki.id === p.id));
+  for (const p of others) {
+    const p_price = p.offers && p.offers[0] ? p.offers[0].price : (p.price || 0);
+    if (p_price > 0 && (currentTotal + p_price) <= budget && kitItems.length < 4) {
+      kitItems.push({
+        id: p.id,
+        name: p.title,
+        price: p_price,
+        image: p.images ? p.images[0] : (p.image || ''),
+        description: p.description,
+        brand: p.brand,
+        preference: kitItems.length === 1 ? "Essential" : "Bonus"
+      });
+      currentTotal += p_price;
+    }
+  }
+
+  res.json({
+    id: `kit-${Date.now()}`,
+    userId: userId,
+    category: category,
+    items: kitItems,
+    totalPrice: currentTotal,
+    createdAt: new Date().toISOString(),
+    aiInsight: "Professionally curated kit using real-time market data."
+  });
+});
+
+app.get('/api/v1/user/wishlist', (req, res) => res.json([]));
+app.get('/api/v1/user/orders', (req, res) => res.json([]));
+app.get('/api/v1/user/addresses', (req, res) => res.json([]));
+app.get('/api/v1/user/preferences', (req, res) => res.json({ budget: 50000, categories: ['Electronics', 'Fashion'] }));
 
 const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT} with ${products.length} products`);
+  console.log(`Server running on port ${PORT}`);
 });

@@ -21,12 +21,13 @@ class ProductGrid extends StatelessWidget {
         final isTablet = constraints.maxWidth >= 600;
         final crossAxisCount = isTablet ? 3 : 2;
         return GridView.builder(
-          padding: const EdgeInsets.only(bottom: 80),
+          // Breathable spacing + bottom padding
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 100),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: crossAxisCount,
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16,
-            childAspectRatio: 0.72,
+            mainAxisSpacing: 20, // Increased spacing
+            crossAxisSpacing: 20, // Increased spacing
+            childAspectRatio: 0.80, // Shorter cards (25% reduction approx)
           ),
           itemCount: products.length,
           itemBuilder: (context, index) {
@@ -56,23 +57,23 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final priceColor = ThemeTokens.accent;
-    final vsStores = product.stores > 0 ? 'vs ${product.stores} stores' : '';
+    final vsStores = product.stores > 0 ? 'vs ${product.stores}' : ''; // Shorter text
 
     return Semantics(
       button: true,
       label: product.name,
       child: InkWell(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(16), // Slightly tighter radius
         onTap: onTap,
         child: Ink(
           decoration: BoxDecoration(
             color: ThemeTokens.surfaceDark,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.6),
-                blurRadius: 16,
-                offset: const Offset(0, 8),
+                color: Colors.black.withOpacity(0.4), // Softer shadow
+                blurRadius: 12,
+                offset: const Offset(0, 4),
               ),
             ],
           ),
@@ -81,7 +82,7 @@ class ProductCard extends StatelessWidget {
             children: [
               Expanded(
                 child: ClipRRect(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
                   child: CachedNetworkImage(
                     imageUrl: product.image,
                     fit: BoxFit.cover,
@@ -98,7 +99,7 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(10), // Reduced padding
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -108,6 +109,8 @@ class ProductCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600,
+                        fontSize: 13, // Reduced font
+                        height: 1.2,
                         color: Colors.white.withOpacity(0.9),
                       ),
                     ),
@@ -115,12 +118,12 @@ class ProductCard extends StatelessWidget {
                     Row(
                       children: [
                         Icon(Icons.star_rounded,
-                            size: 16, color: Colors.amber.shade400),
+                            size: 14, color: Colors.amber.shade400),
                         const SizedBox(width: 4),
                         Text(
                           product.rating.toStringAsFixed(1),
                           style: theme.textTheme.bodySmall
-                              ?.copyWith(color: Colors.white70),
+                              ?.copyWith(color: Colors.white70, fontSize: 11),
                         ),
                       ],
                     ),
@@ -129,24 +132,20 @@ class ProductCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${product.currency.isNotEmpty ? product.currency : ' '}${product.price.toStringAsFixed(0)}',
-                          style: theme.textTheme.titleLarge?.copyWith(
+                          '${product.currency.isNotEmpty ? product.currency.replaceAll('\$', '₹') : '₹'}${product.price.toStringAsFixed(0)}',
+                          style: theme.textTheme.titleMedium?.copyWith( // Smaller price title
                             color: priceColor,
-                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15, 
                           ),
                         ),
-                        Row(
-                          children: [
-                            const Icon(Icons.compare_arrows_rounded,
-                                size: 16, color: Colors.white54),
-                            const SizedBox(width: 4),
-                            Text(
-                              vsStores,
-                              style: theme.textTheme.bodySmall
-                                  ?.copyWith(color: Colors.white54),
+                        if (vsStores.isNotEmpty)
+                          Text(
+                            vsStores,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: Colors.white38, fontSize: 10
                             ),
-                          ],
-                        ),
+                          ),
                       ],
                     ),
                   ],

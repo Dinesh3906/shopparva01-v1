@@ -5,6 +5,7 @@ import '../models/kit.dart';
 import '../models/product.dart';
 import '../models/user.dart';
 import '../models/price_alert.dart';
+import '../models/cart_item.dart';
 import '../repositories/ar_repository.dart';
 import '../repositories/kit_repository.dart';
 import '../repositories/product_repository.dart';
@@ -48,8 +49,8 @@ final smartDealsProvider = FutureProvider<List<Product>>((ref) async {
   final repo = ref.read(productRepositoryProvider);
   
   // Pass category to repository if it's not 'All'
+  // No limit - show all products in the category
   return repo.getProducts(
-    limit: 20, 
     category: category == 'All' ? null : category,
   );
 });
@@ -176,4 +177,40 @@ final highContrastProvider = StateProvider<bool>((ref) => false);
 
 // Navigation
 final navigationIndexProvider = StateProvider<int>((ref) => 0);
+
+// Cart
+final cartProvider = StateNotifierProvider<CartNotifier, List<CartItem>>((ref) {
+  return CartNotifier();
+});
+
+class CartNotifier extends StateNotifier<List<CartItem>> {
+  CartNotifier() : super([]);
+
+  void addToCart(Product product, {int quantity = 1}) {
+    // Check if product already exists
+    final existingIndex = state.indexWhere((item) => item.product.id == product.id);
+    
+    if (existingIndex >= 0) {
+      // Update quantity
+      final existingItem = state[existingIndex];
+      final updatedItem = existingItem.copyWith(quantity: existingItem.quantity + quantity);
+      
+      final newState = [...state];
+      newState[existingIndex] = updatedItem;
+      state = newState;
+    } else {
+      // Add new item
+      state = [...state, CartItem(product: product, quantity: quantity)];
+    }
+  }
+
+  void removeFromCart(String productId) {
+    state = state.where((item) => item.product.id != productId).toList();
+  }
+
+  void clearCart() {
+    state = [];
+  }
+}
+
 

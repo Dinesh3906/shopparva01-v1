@@ -39,6 +39,7 @@ class _PriceAlertDialogState extends ConsumerState<PriceAlertDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Dialog(
       backgroundColor: ThemeTokens.surfaceDark,
       shape: RoundedRectangleBorder(
@@ -95,8 +96,8 @@ class _PriceAlertDialogState extends ConsumerState<PriceAlertDialog> {
               ),
               const SizedBox(height: 8),
               Text(
-                'Current Price: \$${widget.product.price.toStringAsFixed(0)}',
-                style: TextStyle(
+                'Current Price: ₹${widget.product.price.toStringAsFixed(0)}',
+                style: theme.textTheme.titleMedium?.copyWith(
                   color: ThemeTokens.accent,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -124,7 +125,7 @@ class _PriceAlertDialogState extends ConsumerState<PriceAlertDialog> {
                   fontWeight: FontWeight.w600,
                 ),
                 decoration: InputDecoration(
-                  prefixText: '\$ ',
+                  prefixText: '₹ ',
                   prefixStyle: const TextStyle(
                     color: Colors.white70,
                     fontSize: 18,
