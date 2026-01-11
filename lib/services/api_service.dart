@@ -10,11 +10,16 @@ class ApiService {
 
   ApiService() : _dio = Dio(BaseOptions(baseUrl: AppConstants.apiBaseUrl));
 
-  Future<List<Product>> searchProducts(String query) async {
+  Future<List<Product>> searchProducts(String query, {Map<String, dynamic>? filters}) async {
     try {
+      final queryParams = {'q': query};
+      if (filters != null) {
+        queryParams.addAll(filters);
+      }
+      
       final response = await _dio.get(
         '/products/search',
-        queryParameters: {'q': query},
+        queryParameters: queryParams,
       );
 
       final data = response.data;

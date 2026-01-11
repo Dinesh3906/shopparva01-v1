@@ -39,13 +39,18 @@ class EmptyStateCard extends StatelessWidget {
                   ?.copyWith(color: Colors.white.withOpacity(0.9)),
             ),
             const SizedBox(height: 8),
-            Text(
-              message,
-              textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(color: Colors.white70),
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 150),
+              child: SingleChildScrollView(
+                child: Text(
+                  message,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: Colors.white70),
+                ),
+              ),
             ),
             if (action != null) ...[
               const SizedBox(height: 16),

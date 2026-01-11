@@ -21,17 +21,26 @@ class ProductDeal {
   final List<DealOffer> deals;
 
   factory ProductDeal.fromJson(Map<String, dynamic> json) {
+    // Robust image extraction
+    String image = json['image'] as String? ?? '';
+    if (image.isEmpty && json['images'] is List && (json['images'] as List).isNotEmpty) {
+      image = (json['images'] as List).first.toString();
+    }
+
+    // Robust deals mapping
+    final list = (json['deals'] as List? ?? json['offers'] as List?);
+    final deals = list != null
+        ? list.map((e) => DealOffer.fromJson(e as Map<String, dynamic>)).toList()
+        : <DealOffer>[];
+
     return ProductDeal(
-      productId: json['productId'] as String? ?? '',
-      modelName: json['modelName'] as String? ?? 'Unknown Product',
+      productId: json['productId']?.toString() ?? json['id']?.toString() ?? '',
+      modelName: json['modelName'] as String? ?? json['title'] as String? ?? 'Unknown Product',
       brand: json['brand'] as String? ?? '',
       category: json['category'] as String? ?? '',
       rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
-      image: json['image'] as String? ?? '',
-      deals: (json['deals'] as List?)
-              ?.map((e) => DealOffer.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
+      image: image,
+      deals: deals,
     );
   }
 
@@ -70,12 +79,12 @@ class DealOffer {
 
   factory DealOffer.fromJson(Map<String, dynamic> json) {
     return DealOffer(
-      platform: json['platform'] as String? ?? 'Unknown',
+      platform: json['platform'] as String? ?? json['marketplace'] as String? ?? 'Unknown',
       seller: json['seller'] as String? ?? '',
       price: (json['price'] as num?)?.toDouble() ?? 0.0,
-      currency: json['currency'] as String? ?? '\$',
+      currency: json['currency'] as String? ?? '₹',
       url: json['url'] as String?,
-      isBestPrice: json['isBestPrice'] as bool? ?? false,
+      isBestPrice: json['isBestPrice'] as bool? ?? json['isBest'] as bool? ?? false,
       delivery: json['delivery'] as String?,
       discount: json['discount'] as String?,
     );

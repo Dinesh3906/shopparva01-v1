@@ -1,4 +1,4 @@
-const express = require('express');
+﻿const express = require('express');
 const cors = require('cors');
 
 // ... (existing code)
@@ -67,7 +67,7 @@ const products = [
       "price": 12995,
       "originalPrice": 14995,
       "discount": "13% Off",
-      "savingsText": "(Save ₹2,000)",
+      "savingsText": "(Save â‚¹2,000)",
       "delivery": "Free Delivery by Tomorrow",
       "url": "https://www.amazon.in/nike-air-max-270",
       "isBest": true
@@ -94,7 +94,7 @@ const products = [
       "price": 2999,
       "originalPrice": 4999,
       "discount": "40% Off",
-      "savingsText": "(Save ₹2,000)",
+      "savingsText": "(Save â‚¹2,000)",
       "delivery": "Delivery in 2-3 days",
       "url": "https://www.myntra.com/levis-511-jeans",
       "isBest": true
@@ -122,7 +122,7 @@ const products = [
       "price": 8999,
       "originalPrice": 12999,
       "discount": "31% Off",
-      "savingsText": "(Save ₹4,000)",
+      "savingsText": "(Save â‚¹4,000)",
       "delivery": "Free Delivery",
       "url": "https://www.decathlon.in/adidas-predator",
       "isBest": true
@@ -149,7 +149,7 @@ const products = [
       "price": 6499,
       "originalPrice": 8999,
       "discount": "28% Off",
-      "savingsText": "(Save ₹2,500)",
+      "savingsText": "(Save â‚¹2,500)",
       "delivery": "Free Delivery by Tomorrow",
       "url": "https://www.amazon.in/yonex-nanoray-900",
       "isBest": true
@@ -177,7 +177,7 @@ const products = [
       "price": 599,
       "originalPrice": 850,
       "discount": "30% Off",
-      "savingsText": "(Save ₹251)",
+      "savingsText": "(Save â‚¹251)",
       "delivery": "Delivery in 2-3 days",
       "url": "https://www.nykaa.com/lakme-absolute-lipstick",
       "isBest": true
@@ -204,7 +204,7 @@ const products = [
       "price": 1299,
       "originalPrice": 1999,
       "discount": "35% Off",
-      "savingsText": "(Save ₹700)",
+      "savingsText": "(Save â‚¹700)",
       "delivery": "Free Delivery by Tomorrow",
       "url": "https://www.amazon.in/loreal-revitalift-serum",
       "isBest": true
@@ -232,7 +232,7 @@ const products = [
       "price": 189,
       "originalPrice": 250,
       "discount": "24% Off",
-      "savingsText": "(Save ₹61)",
+      "savingsText": "(Save â‚¹61)",
       "delivery": "Same Day Delivery",
       "url": "https://www.bigbasket.com/dettol-handwash",
       "isBest": true
@@ -259,7 +259,7 @@ const products = [
       "price": 145,
       "originalPrice": 180,
       "discount": "19% Off",
-      "savingsText": "(Save ₹35)",
+      "savingsText": "(Save â‚¹35)",
       "delivery": "Free Delivery",
       "url": "https://www.amazon.in/colgate-total-advanced",
       "isBest": true
@@ -290,7 +290,7 @@ const products = [
         "price": 66990,
         "originalPrice": 69900,
         "discount": "4% Off",
-        "savingsText": "(Save ₹2,910)",
+        "savingsText": "(Save â‚¹2,910)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-16-128gb-white-/p/309692",
         "isBest": true
@@ -359,7 +359,7 @@ const products = [
         "price": 66990,
         "originalPrice": 69900,
         "discount": "4% Off",
-        "savingsText": "(Save ₹2,910)",
+        "savingsText": "(Save â‚¹2,910)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-16-128gb-black-/p/309621",
         "isBest": true
@@ -428,7 +428,7 @@ const products = [
         "price": 66990,
         "originalPrice": 69900,
         "discount": "4% Off",
-        "savingsText": "(Save ₹2,910)",
+        "savingsText": "(Save â‚¹2,910)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-16-128gb-pink-/p/309693",
         "isBest": true
@@ -566,7 +566,7 @@ const products = [
         "price": 66990,
         "originalPrice": 69900,
         "discount": "4% Off",
-        "savingsText": "(Save ₹2,910)",
+        "savingsText": "(Save â‚¹2,910)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-16-128gb-ultramarine-/p/309694",
         "isBest": true
@@ -635,7 +635,7 @@ const products = [
         "price": 66990,
         "originalPrice": 69900,
         "discount": "4% Off",
-        "savingsText": "(Save ₹2,910)",
+        "savingsText": "(Save â‚¹2,910)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-16-128gb-teal-/p/309695",
         "isBest": true
@@ -773,7 +773,7 @@ const products = [
         "price": 76490,
         "originalPrice": 79900,
         "discount": "4% Off",
-        "savingsText": "(Save ₹3,410)",
+        "savingsText": "(Save â‚¹3,410)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-16-256gb-teal-/p/309701",
         "isBest": true
@@ -842,7 +842,7 @@ const products = [
         "price": 76490,
         "originalPrice": 79900,
         "discount": "4% Off",
-        "savingsText": "(Save ₹3,410)",
+        "savingsText": "(Save â‚¹3,410)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-16-256gb-black-/p/309696",
         "isBest": true
@@ -911,7 +911,7 @@ const products = [
         "price": 45690,
         "originalPrice": 49900,
         "discount": "8% Off",
-        "savingsText": "(Save ₹4,210)",
+        "savingsText": "(Save â‚¹4,210)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-13-128gb-blue-/p/243463",
         "isBest": true
@@ -980,7 +980,7 @@ const products = [
         "price": 67490,
         "originalPrice": 69900,
         "discount": "3% Off",
-        "savingsText": "(Save ₹2,410)",
+        "savingsText": "(Save â‚¹2,410)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-15-256gb-blue-/p/300738",
         "isBest": true
@@ -1049,7 +1049,7 @@ const products = [
         "price": 61790,
         "originalPrice": 69900,
         "discount": "12% Off",
-        "savingsText": "(Save ₹8,110)",
+        "savingsText": "(Save â‚¹8,110)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-16e-256gb-black-/p/310301",
         "isBest": true
@@ -1118,7 +1118,7 @@ const products = [
         "price": 76490,
         "originalPrice": 79900,
         "discount": "4% Off",
-        "savingsText": "(Save ₹3,410)",
+        "savingsText": "(Save â‚¹3,410)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-16-256gb-white-/p/309698",
         "isBest": true
@@ -1256,7 +1256,7 @@ const products = [
         "price": 76490,
         "originalPrice": 79900,
         "discount": "4% Off",
-        "savingsText": "(Save ₹3,410)",
+        "savingsText": "(Save â‚¹3,410)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-16-256gb-pink-/p/309699",
         "isBest": true
@@ -1463,7 +1463,7 @@ const products = [
         "price": 45690,
         "originalPrice": 49900,
         "discount": "8% Off",
-        "savingsText": "(Save ₹4,210)",
+        "savingsText": "(Save â‚¹4,210)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-13-128gb-starlight-white-/p/243460",
         "isBest": true
@@ -1532,7 +1532,7 @@ const products = [
         "price": 76590,
         "originalPrice": 79900,
         "discount": "4% Off",
-        "savingsText": "(Save ₹3,310)",
+        "savingsText": "(Save â‚¹3,310)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-16-plus-128gb-white-/p/309708",
         "isBest": true
@@ -1601,7 +1601,7 @@ const products = [
         "price": 66390,
         "originalPrice": 69900,
         "discount": "5% Off",
-        "savingsText": "(Save ₹3,510)",
+        "savingsText": "(Save â‚¹3,510)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-15-plus-128gb-yellow-/p/300773",
         "isBest": true
@@ -1670,7 +1670,7 @@ const products = [
         "price": 76590,
         "originalPrice": 79900,
         "discount": "4% Off",
-        "savingsText": "(Save ₹3,310)",
+        "savingsText": "(Save â‚¹3,310)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-16-plus-128gb-black-/p/309707",
         "isBest": true
@@ -1739,7 +1739,7 @@ const products = [
         "price": 76490,
         "originalPrice": 79900,
         "discount": "4% Off",
-        "savingsText": "(Save ₹3,410)",
+        "savingsText": "(Save â‚¹3,410)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-16-256gb-ultramarine-/p/309700",
         "isBest": true
@@ -1808,7 +1808,7 @@ const products = [
         "price": 80690,
         "originalPrice": 89900,
         "discount": "10% Off",
-        "savingsText": "(Save ₹9,210)",
+        "savingsText": "(Save â‚¹9,210)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-16e-512gb-black-/p/310303",
         "isBest": true
@@ -1877,7 +1877,7 @@ const products = [
         "price": 61790,
         "originalPrice": 69900,
         "discount": "12% Off",
-        "savingsText": "(Save ₹8,110)",
+        "savingsText": "(Save â‚¹8,110)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-16e-256gb-white-/p/310302",
         "isBest": true
@@ -1946,7 +1946,7 @@ const products = [
         "price": 76590,
         "originalPrice": 79900,
         "discount": "4% Off",
-        "savingsText": "(Save ₹3,310)",
+        "savingsText": "(Save â‚¹3,310)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-16-plus-128gb-pink-/p/309709",
         "isBest": true
@@ -2015,7 +2015,7 @@ const products = [
         "price": 45690,
         "originalPrice": 49900,
         "discount": "8% Off",
-        "savingsText": "(Save ₹4,210)",
+        "savingsText": "(Save â‚¹4,210)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-13-128gb-midnight-/p/243459",
         "isBest": true
@@ -2153,7 +2153,7 @@ const products = [
         "price": 76590,
         "originalPrice": 79900,
         "discount": "4% Off",
-        "savingsText": "(Save ₹3,310)",
+        "savingsText": "(Save â‚¹3,310)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-16-plus-128gb-teal-/p/309711",
         "isBest": true
@@ -2222,7 +2222,7 @@ const products = [
         "price": 66390,
         "originalPrice": 69900,
         "discount": "5% Off",
-        "savingsText": "(Save ₹3,510)",
+        "savingsText": "(Save â‚¹3,510)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-15-plus-128gb-pink-/p/300775",
         "isBest": true
@@ -2291,7 +2291,7 @@ const products = [
         "price": 52190,
         "originalPrice": 54900,
         "discount": "5% Off",
-        "savingsText": "(Save ₹2,710)",
+        "savingsText": "(Save â‚¹2,710)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-14-128gb-blue-/p/261934",
         "isBest": true
@@ -2360,7 +2360,7 @@ const products = [
         "price": 76590,
         "originalPrice": 79900,
         "discount": "4% Off",
-        "savingsText": "(Save ₹3,310)",
+        "savingsText": "(Save â‚¹3,310)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-16-plus-128gb-ultramarine-/p/309710",
         "isBest": true
@@ -2429,7 +2429,7 @@ const products = [
         "price": 112900,
         "originalPrice": 119900,
         "discount": "6% Off",
-        "savingsText": "(Save ₹7,000)",
+        "savingsText": "(Save â‚¹7,000)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-air-256gb-sky-blue-/p/317458",
         "isBest": true
@@ -2498,7 +2498,7 @@ const products = [
         "price": 52190,
         "originalPrice": 54900,
         "discount": "5% Off",
-        "savingsText": "(Save ₹2,710)",
+        "savingsText": "(Save â‚¹2,710)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-14-128gb-midnight-/p/261930",
         "isBest": true
@@ -2567,7 +2567,7 @@ const products = [
         "price": 52190,
         "originalPrice": 54900,
         "discount": "5% Off",
-        "savingsText": "(Save ₹2,710)",
+        "savingsText": "(Save â‚¹2,710)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-14-128gb-starlight-/p/261931",
         "isBest": true
@@ -2636,7 +2636,7 @@ const products = [
         "price": 112900,
         "originalPrice": 119900,
         "discount": "6% Off",
-        "savingsText": "(Save ₹7,000)",
+        "savingsText": "(Save â‚¹7,000)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-air-256gb-light-gold-/p/317457",
         "isBest": true
@@ -2705,7 +2705,7 @@ const products = [
         "price": 112900,
         "originalPrice": 119900,
         "discount": "6% Off",
-        "savingsText": "(Save ₹7,000)",
+        "savingsText": "(Save â‚¹7,000)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-air-256gb-space-black-/p/317453",
         "isBest": true
@@ -2774,7 +2774,7 @@ const products = [
         "price": 52190,
         "originalPrice": 59900,
         "discount": "13% Off",
-        "savingsText": "(Save ₹7,710)",
+        "savingsText": "(Save â‚¹7,710)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-14-128gb-product-red-/p/261933",
         "isBest": true
@@ -2843,7 +2843,7 @@ const products = [
         "price": 150900,
         "originalPrice": 159900,
         "discount": "6% Off",
-        "savingsText": "(Save ₹9,000)",
+        "savingsText": "(Save â‚¹9,000)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-air-1tb-light-gold-/p/317470",
         "isBest": true
@@ -2912,7 +2912,7 @@ const products = [
         "price": 112900,
         "originalPrice": 119900,
         "discount": "6% Off",
-        "savingsText": "(Save ₹7,000)",
+        "savingsText": "(Save â‚¹7,000)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-air-256gb-cloud-white-/p/317454",
         "isBest": true
@@ -2981,7 +2981,7 @@ const products = [
         "price": 150900,
         "originalPrice": 159900,
         "discount": "6% Off",
-        "savingsText": "(Save ₹9,000)",
+        "savingsText": "(Save â‚¹9,000)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-air-1tb-sky-blue-/p/317471",
         "isBest": true
@@ -3050,7 +3050,7 @@ const products = [
         "price": 131900,
         "originalPrice": 139900,
         "discount": "6% Off",
-        "savingsText": "(Save ₹8,000)",
+        "savingsText": "(Save â‚¹8,000)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-air-512gb-sky-blue-/p/317465",
         "isBest": true
@@ -3119,7 +3119,7 @@ const products = [
         "price": 80690,
         "originalPrice": 89900,
         "discount": "10% Off",
-        "savingsText": "(Save ₹9,210)",
+        "savingsText": "(Save â‚¹9,210)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-16e-512gb-white-/p/310305",
         "isBest": true
@@ -3188,7 +3188,7 @@ const products = [
         "price": 131900,
         "originalPrice": 139900,
         "discount": "6% Off",
-        "savingsText": "(Save ₹8,000)",
+        "savingsText": "(Save â‚¹8,000)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-air-512gb-light-gold-/p/317464",
         "isBest": true
@@ -3326,7 +3326,7 @@ const products = [
         "price": 52190,
         "originalPrice": 59900,
         "discount": "13% Off",
-        "savingsText": "(Save ₹7,710)",
+        "savingsText": "(Save â‚¹7,710)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-14-128gb-yellow-/p/270411",
         "isBest": true
@@ -3395,7 +3395,7 @@ const products = [
         "price": 131900,
         "originalPrice": 139900,
         "discount": "6% Off",
-        "savingsText": "(Save ₹8,000)",
+        "savingsText": "(Save â‚¹8,000)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-air-512gb-space-black-/p/317461",
         "isBest": true
@@ -3464,7 +3464,7 @@ const products = [
         "price": 150900,
         "originalPrice": 159900,
         "discount": "6% Off",
-        "savingsText": "(Save ₹9,000)",
+        "savingsText": "(Save â‚¹9,000)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-air-1tb-space-black-/p/317467",
         "isBest": true
@@ -3533,7 +3533,7 @@ const products = [
         "price": 150900,
         "originalPrice": 159900,
         "discount": "6% Off",
-        "savingsText": "(Save ₹9,000)",
+        "savingsText": "(Save â‚¹9,000)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-air-1tb-cloud-white-/p/317469",
         "isBest": true
@@ -3602,7 +3602,7 @@ const products = [
         "price": 53890,
         "originalPrice": 59900,
         "discount": "10% Off",
-        "savingsText": "(Save ₹6,010)",
+        "savingsText": "(Save â‚¹6,010)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-14-128gb-starlight-/p/310715",
         "isBest": true
@@ -3671,7 +3671,7 @@ const products = [
         "price": 53890,
         "originalPrice": 59900,
         "discount": "10% Off",
-        "savingsText": "(Save ₹6,010)",
+        "savingsText": "(Save â‚¹6,010)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-14-128gb-midnight-/p/310714",
         "isBest": true
@@ -3740,7 +3740,7 @@ const products = [
         "price": 53890,
         "originalPrice": 59900,
         "discount": "10% Off",
-        "savingsText": "(Save ₹6,010)",
+        "savingsText": "(Save â‚¹6,010)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-14-128gb-purple-/p/310716",
         "isBest": true
@@ -3809,7 +3809,7 @@ const products = [
         "price": 53890,
         "originalPrice": 59900,
         "discount": "10% Off",
-        "savingsText": "(Save ₹6,010)",
+        "savingsText": "(Save â‚¹6,010)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-14-128gb-blue-/p/310717",
         "isBest": true
@@ -3878,7 +3878,7 @@ const products = [
         "price": 131900,
         "originalPrice": 139900,
         "discount": "6% Off",
-        "savingsText": "(Save ₹8,000)",
+        "savingsText": "(Save â‚¹8,000)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-air-512gb-cloud-white-/p/317462",
         "isBest": true
@@ -3947,7 +3947,7 @@ const products = [
         "price": 52390,
         "originalPrice": 59900,
         "discount": "13% Off",
-        "savingsText": "(Save ₹7,510)",
+        "savingsText": "(Save â‚¹7,510)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-16e-128gb-white-/p/310300",
         "isBest": true
@@ -4016,7 +4016,7 @@ const products = [
         "price": 57990,
         "originalPrice": 59900,
         "discount": "3% Off",
-        "savingsText": "(Save ₹1,910)",
+        "savingsText": "(Save â‚¹1,910)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-15-128gb-blue-/p/300684",
         "isBest": true
@@ -4085,7 +4085,7 @@ const products = [
         "price": 52390,
         "originalPrice": 59900,
         "discount": "13% Off",
-        "savingsText": "(Save ₹7,510)",
+        "savingsText": "(Save â‚¹7,510)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-16e-128gb-black-/p/310298",
         "isBest": true
@@ -4154,7 +4154,7 @@ const products = [
         "price": 57990,
         "originalPrice": 59900,
         "discount": "3% Off",
-        "savingsText": "(Save ₹1,910)",
+        "savingsText": "(Save â‚¹1,910)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-15-128gb-black-/p/300652",
         "isBest": true
@@ -4223,7 +4223,7 @@ const products = [
         "price": 57990,
         "originalPrice": 59900,
         "discount": "3% Off",
-        "savingsText": "(Save ₹1,910)",
+        "savingsText": "(Save â‚¹1,910)",
         "delivery": "Standard Delivery by Sat, 27th Dec",
         "url": "https://www.croma.com/apple-iphone-15-128gb-pink-/p/300679",
         "isBest": true
@@ -4292,7 +4292,7 @@ const products = [
         "price": 57990,
         "originalPrice": 59900,
         "discount": "3% Off",
-        "savingsText": "(Save ₹1,910)",
+        "savingsText": "(Save â‚¹1,910)",
         "delivery": "Standard Delivery by Fri, 26th Dec",
         "url": "https://www.croma.com/apple-iphone-15-128gb-yellow-/p/300825",
         "isBest": true
@@ -53648,10 +53648,10 @@ const products = [
   },
   {
     "id": "elec-amazon-6",
-    "title": "Portronics SoundDrum 1 12W TWS Portable Bluetooth Speaker with Powerful Bass, Bluetooth 5.3V, 360° Surround Sound, USB Drive in, Type C Fast Charging(Blue)",
+    "title": "Portronics SoundDrum 1 12W TWS Portable Bluetooth Speaker with Powerful Bass, Bluetooth 5.3V, 360Â° Surround Sound, USB Drive in, Type C Fast Charging(Blue)",
     "brand": "Portronics",
-    "modelName": "Portronics SoundDrum 1 12W TWS Portable Bluetooth Speaker with Powerful Bass, Bluetooth 5.3V, 360° Surround Sound, USB Drive in, Type C Fast Charging",
-    "description": "Portronics SoundDrum 1 12W TWS Portable Bluetooth Speaker with Powerful Bass, Bluetooth 5.3V, 360° Surround Sound, USB Drive in, Type C Fast Charging(Blue). Marketplace: Amazon. Seller: Amazon India.",
+    "modelName": "Portronics SoundDrum 1 12W TWS Portable Bluetooth Speaker with Powerful Bass, Bluetooth 5.3V, 360Â° Surround Sound, USB Drive in, Type C Fast Charging",
+    "description": "Portronics SoundDrum 1 12W TWS Portable Bluetooth Speaker with Powerful Bass, Bluetooth 5.3V, 360Â° Surround Sound, USB Drive in, Type C Fast Charging(Blue). Marketplace: Amazon. Seller: Amazon India.",
     "category": "Electronics",
     "images": [
       "https://m.media-amazon.com/images/I/61ygYGBZUBL._AC_UL320_.jpg"
@@ -55598,8 +55598,8 @@ const products = [
         "seller": "Amazon India",
         "price": 14989,
         "originalPrice": 14989,
-        "discount": "Wed, 24 Dec, 7 am - 10 pm",
-        "delivery": "FREE delivery as soon as Wed, 24 Dec, 7 am - 10 pm",
+        "discount": "Wed, 24 Dec, 7â€¯am - 10â€¯pm",
+        "delivery": "FREE delivery as soon as Wed, 24 Dec, 7â€¯am - 10â€¯pm",
         "url": "https://www.amazon.in/Sony-HT-S20R-Soundbar-Bluetooth-Connectivity/dp/B084685MT1/ref=sr_1_34?dib=eyJ2IjoiMSJ9.-moltYGIhw4221kSOYOP-LanG7fUPPANcagPfMfTdf4u2j2TlvSCa469wIh2yV0IdEqBfaBInlZ2CaszFRsCeZV0NtIpDFsgPoBX_kDL4TB3qUr7fw5iLq7Sv3Op9rqSMQENGSxeFV2Z49TMvEwB-mlGsqSCq1w8vKp8v2ar5GB0262_EtS9bXwGiwczFKcvDS0BIJplGef_MHrINO359QRN3kHU39AQU13xEu_3lp2r08IvfvRSAyj5fz_IwihAUvFyfhT5m4LlwdVyE_hjBRIBgr_YYf70hIZ79v5_8Ko.qlzyG-zIzO_PDAakRPrJvv-59vO2aqUgvDy-Q6p3xzs&dib_tag=se&qid=1766398182&s=electronics&sr=1-34&xpid=qXN2WE3Eb1SqX",
         "isBest": true
       }
@@ -55787,10 +55787,10 @@ const products = [
   },
   {
     "id": "elec-amazon-37",
-    "title": "7 SEVEN® Compatible with Samsung Smart 4K Tv Remote Led UHD QLED Television and Monitor Suitable for Frame Ultra 6 7 8 Series with Hot Keys BN59 Model Without Voice Command, AA Battery, Black",
+    "title": "7 SEVENÂ® Compatible with Samsung Smart 4K Tv Remote Led UHD QLED Television and Monitor Suitable for Frame Ultra 6 7 8 Series with Hot Keys BN59 Model Without Voice Command, AA Battery, Black",
     "brand": "Samsung",
-    "modelName": "7 SEVEN® Compatible with Samsung Smart 4K Tv Remote Led UHD QLED Television and Monitor Suitable for Frame Ultra 6 7 8 Series with Hot Keys BN59 Model Without Voice Command, AA Battery, Black",
-    "description": "7 SEVEN® Compatible with Samsung Smart 4K Tv Remote Led UHD QLED Television and Monitor Suitable for Frame Ultra 6 7 8 Series with Hot Keys BN59 Model Without Voice Command, AA Battery, Black. Marketplace: Amazon. Seller: Amazon India.",
+    "modelName": "7 SEVENÂ® Compatible with Samsung Smart 4K Tv Remote Led UHD QLED Television and Monitor Suitable for Frame Ultra 6 7 8 Series with Hot Keys BN59 Model Without Voice Command, AA Battery, Black",
+    "description": "7 SEVENÂ® Compatible with Samsung Smart 4K Tv Remote Led UHD QLED Television and Monitor Suitable for Frame Ultra 6 7 8 Series with Hot Keys BN59 Model Without Voice Command, AA Battery, Black. Marketplace: Amazon. Seller: Amazon India.",
     "category": "Electronics",
     "images": [
       "https://m.media-amazon.com/images/I/41MCSc5LFxL._AC_UL320_.jpg"
@@ -56219,8 +56219,8 @@ const products = [
         "seller": "Amazon India",
         "price": 10999,
         "originalPrice": 10999,
-        "discount": "Wed, 24 Dec, 7 am - 10 pm",
-        "delivery": "FREE delivery as soon as Wed, 24 Dec, 7 am - 10 pm",
+        "discount": "Wed, 24 Dec, 7â€¯am - 10â€¯pm",
+        "delivery": "FREE delivery as soon as Wed, 24 Dec, 7â€¯am - 10â€¯pm",
         "url": "https://www.amazon.in/boAt-Partypal-390-Signature-Bluetooth/dp/B0CJMF9Z56/ref=sr_1_43?dib=eyJ2IjoiMSJ9.-moltYGIhw4221kSOYOP-LanG7fUPPANcagPfMfTdf4u2j2TlvSCa469wIh2yV0IdEqBfaBInlZ2CaszFRsCeZV0NtIpDFsgPoBX_kDL4TB3qUr7fw5iLq7Sv3Op9rqSMQENGSxeFV2Z49TMvEwB-mlGsqSCq1w8vKp8v2ar5GB0262_EtS9bXwGiwczFKcvDS0BIJplGef_MHrINO359QRN3kHU39AQU13xEu_3lp2r08IvfvRSAyj5fz_IwihAUvFyfhT5m4LlwdVyE_hjBRIBgr_YYf70hIZ79v5_8Ko.qlzyG-zIzO_PDAakRPrJvv-59vO2aqUgvDy-Q6p3xzs&dib_tag=se&qid=1766398182&s=electronics&sr=1-43&xpid=qXN2WE3Eb1SqX",
         "isBest": true
       }
@@ -57995,10 +57995,10 @@ const products = [
   },
   {
     "id": "elec-amazon-69",
-    "title": "7 SEVEN® Compatible With Samsung Tv Remote Control Universal Suitable For LCD LED OLED QLED UHD HD Plasma 3D Smart Hub Television With Hotkeys - Match Remotes Keys Exactly With Existing Remote, Black",
+    "title": "7 SEVENÂ® Compatible With Samsung Tv Remote Control Universal Suitable For LCD LED OLED QLED UHD HD Plasma 3D Smart Hub Television With Hotkeys - Match Remotes Keys Exactly With Existing Remote, Black",
     "brand": "Samsung",
-    "modelName": "7 SEVEN® Compatible With Samsung Tv Remote Control Universal Suitable For LCD LED OLED QLED UHD HD Plasma 3D Smart Hub Television With Hotkeys - Match Remotes Keys Exactly With Existing Remote, Black",
-    "description": "7 SEVEN® Compatible With Samsung Tv Remote Control Universal Suitable For LCD LED OLED QLED UHD HD Plasma 3D Smart Hub Television With Hotkeys - Match Remotes Keys Exactly With Existing Remote, Black. Marketplace: Amazon. Seller: Amazon India.",
+    "modelName": "7 SEVENÂ® Compatible With Samsung Tv Remote Control Universal Suitable For LCD LED OLED QLED UHD HD Plasma 3D Smart Hub Television With Hotkeys - Match Remotes Keys Exactly With Existing Remote, Black",
+    "description": "7 SEVENÂ® Compatible With Samsung Tv Remote Control Universal Suitable For LCD LED OLED QLED UHD HD Plasma 3D Smart Hub Television With Hotkeys - Match Remotes Keys Exactly With Existing Remote, Black. Marketplace: Amazon. Seller: Amazon India.",
     "category": "Electronics",
     "images": [
       "https://m.media-amazon.com/images/I/51ewz4ghGwL._AC_UL320_.jpg"
@@ -58358,8 +58358,8 @@ const products = [
         "seller": "Amazon India",
         "price": 9999,
         "originalPrice": 9999,
-        "discount": "Wed, 24 Dec, 7 am - 10 pm",
-        "delivery": "FREE delivery as soon as Wed, 24 Dec, 7 am - 10 pm",
+        "discount": "Wed, 24 Dec, 7â€¯am - 10â€¯pm",
+        "delivery": "FREE delivery as soon as Wed, 24 Dec, 7â€¯am - 10â€¯pm",
         "url": "https://www.amazon.in/JBL-Soundbar-Subwoofer-Bluetooth-Connectivity/dp/B0B6441RNK/ref=sr_1_74?dib=eyJ2IjoiMSJ9.u5om637pS_qh6imYfFVpCgcH_vUczUBW6LuxE91MRKXr0JY5uxZNLzy3OA3fVGaH2b1yAlxDKa6eUhrr6bpTpnGYDTHKC-ANTNPG3hqJI5ZE7pB2bsIbZmkkUlw9soy5ZLIc8pKtOEN5RgnlpKF1AX_Ygp2QSFFsPKF0KAfzif4tSZOntbt9Bs2np4-bmyX6DFRgXfU1cedSlPFn66U1hZU5dAZ3ta_L2JHlWwY8z43DUzZEG27xYeVQVMvRtSWkyIlj4y_3RIp9c2Iq-XBjreTXevLgZYyn3WTHImS_jxQ.KN_Fb9-IvlH1-wKmbhctUegduWG0Uj7TV-eHxRaqM8g&dib_tag=se&qid=1766398194&s=electronics&sr=1-74&xpid=qXN2WE3Eb1SqX",
         "isBest": true
       }
@@ -58427,8 +58427,8 @@ const products = [
         "seller": "Amazon India",
         "price": 8999,
         "originalPrice": 8999,
-        "discount": "Wed, 24 Dec, 7 am - 10 pm",
-        "delivery": "FREE delivery as soon as Wed, 24 Dec, 7 am - 10 pm",
+        "discount": "Wed, 24 Dec, 7â€¯am - 10â€¯pm",
+        "delivery": "FREE delivery as soon as Wed, 24 Dec, 7â€¯am - 10â€¯pm",
         "url": "https://www.amazon.in/boAt-Cinematic-Signature-Multiple-Bluetooth/dp/B0FDFRRMM3/ref=sr_1_75?dib=eyJ2IjoiMSJ9.u5om637pS_qh6imYfFVpCgcH_vUczUBW6LuxE91MRKXr0JY5uxZNLzy3OA3fVGaH2b1yAlxDKa6eUhrr6bpTpnGYDTHKC-ANTNPG3hqJI5ZE7pB2bsIbZmkkUlw9soy5ZLIc8pKtOEN5RgnlpKF1AX_Ygp2QSFFsPKF0KAfzif4tSZOntbt9Bs2np4-bmyX6DFRgXfU1cedSlPFn66U1hZU5dAZ3ta_L2JHlWwY8z43DUzZEG27xYeVQVMvRtSWkyIlj4y_3RIp9c2Iq-XBjreTXevLgZYyn3WTHImS_jxQ.KN_Fb9-IvlH1-wKmbhctUegduWG0Uj7TV-eHxRaqM8g&dib_tag=se&qid=1766398194&s=electronics&sr=1-75&xpid=qXN2WE3Eb1SqX",
         "isBest": true
       }
@@ -58685,10 +58685,10 @@ const products = [
   },
   {
     "id": "elec-amazon-79",
-    "title": "Sony SA-D40M2 All in One 4.1ch Home Theatre System with 100W Power Output and Powerful Subwoofer – Black",
+    "title": "Sony SA-D40M2 All in One 4.1ch Home Theatre System with 100W Power Output and Powerful Subwoofer â€“ Black",
     "brand": "Sony",
-    "modelName": "Sony SA-D40M2 All in One 4.1ch Home Theatre System with 100W Power Output and Powerful Subwoofer – Black",
-    "description": "Sony SA-D40M2 All in One 4.1ch Home Theatre System with 100W Power Output and Powerful Subwoofer – Black. Marketplace: Amazon. Seller: Amazon India.",
+    "modelName": "Sony SA-D40M2 All in One 4.1ch Home Theatre System with 100W Power Output and Powerful Subwoofer â€“ Black",
+    "description": "Sony SA-D40M2 All in One 4.1ch Home Theatre System with 100W Power Output and Powerful Subwoofer â€“ Black. Marketplace: Amazon. Seller: Amazon India.",
     "category": "Electronics",
     "images": [
       "https://m.media-amazon.com/images/I/81cKrOHbENL._AC_UL320_.jpg"
@@ -58823,10 +58823,10 @@ const products = [
   },
   {
     "id": "elec-amazon-81",
-    "title": "7SEVEN®Compatible with Tata Sky Set Top Box Remote Control Suitable for HD SD Tata Sky Setup Boxes Non-Voice Command - Match Keys Exactly with Existing Tata Play Set-Top Box Remote Controller",
+    "title": "7SEVENÂ®Compatible with Tata Sky Set Top Box Remote Control Suitable for HD SD Tata Sky Setup Boxes Non-Voice Command - Match Keys Exactly with Existing Tata Play Set-Top Box Remote Controller",
     "brand": "Tata Sky",
-    "modelName": "7SEVEN®Compatible with Tata Sky Set Top Box Remote Control Suitable for HD SD Tata Sky Setup Boxes Non-Voice Command - Match Keys Exactly with Existing Tata Play Set-Top Box Remote Controller",
-    "description": "7SEVEN®Compatible with Tata Sky Set Top Box Remote Control Suitable for HD SD Tata Sky Setup Boxes Non-Voice Command - Match Keys Exactly with Existing Tata Play Set-Top Box Remote Controller. Marketplace: Amazon. Seller: Amazon India.",
+    "modelName": "7SEVENÂ®Compatible with Tata Sky Set Top Box Remote Control Suitable for HD SD Tata Sky Setup Boxes Non-Voice Command - Match Keys Exactly with Existing Tata Play Set-Top Box Remote Controller",
+    "description": "7SEVENÂ®Compatible with Tata Sky Set Top Box Remote Control Suitable for HD SD Tata Sky Setup Boxes Non-Voice Command - Match Keys Exactly with Existing Tata Play Set-Top Box Remote Controller. Marketplace: Amazon. Seller: Amazon India.",
     "category": "Electronics",
     "images": [
       "https://m.media-amazon.com/images/I/41Xl+TdQ9KL._AC_UL320_.jpg"
@@ -58979,8 +58979,8 @@ const products = [
         "seller": "Amazon India",
         "price": 22999,
         "originalPrice": 22999,
-        "discount": "Wed, 24 Dec, 7 am - 10 pm",
-        "delivery": "FREE delivery as soon as Wed, 24 Dec, 7 am - 10 pm",
+        "discount": "Wed, 24 Dec, 7â€¯am - 10â€¯pm",
+        "delivery": "FREE delivery as soon as Wed, 24 Dec, 7â€¯am - 10â€¯pm",
         "url": "https://www.amazon.in/JBL-PartyBox-Bluetooth-Adjustable-Splashproof/dp/B09JVCT78G/ref=sr_1_83?dib=eyJ2IjoiMSJ9.u5om637pS_qh6imYfFVpCgcH_vUczUBW6LuxE91MRKXr0JY5uxZNLzy3OA3fVGaH2b1yAlxDKa6eUhrr6bpTpnGYDTHKC-ANTNPG3hqJI5ZE7pB2bsIbZmkkUlw9soy5ZLIc8pKtOEN5RgnlpKF1AX_Ygp2QSFFsPKF0KAfzif4tSZOntbt9Bs2np4-bmyX6DFRgXfU1cedSlPFn66U1hZU5dAZ3ta_L2JHlWwY8z43DUzZEG27xYeVQVMvRtSWkyIlj4y_3RIp9c2Iq-XBjreTXevLgZYyn3WTHImS_jxQ.KN_Fb9-IvlH1-wKmbhctUegduWG0Uj7TV-eHxRaqM8g&dib_tag=se&qid=1766398194&s=electronics&sr=1-83&xpid=qXN2WE3Eb1SqX",
         "isBest": true
       }
@@ -59186,8 +59186,8 @@ const products = [
         "seller": "Amazon India",
         "price": 11999,
         "originalPrice": 11999,
-        "discount": "Wed, 24 Dec, 7 am - 10 pm",
-        "delivery": "FREE delivery as soon as Wed, 24 Dec, 7 am - 10 pm",
+        "discount": "Wed, 24 Dec, 7â€¯am - 10â€¯pm",
+        "delivery": "FREE delivery as soon as Wed, 24 Dec, 7â€¯am - 10â€¯pm",
         "url": "https://www.amazon.in/boAt-Subwoofer-Satellites-Compatibility-Bluetooth/dp/B0F7XX996G/ref=sr_1_86?dib=eyJ2IjoiMSJ9.u5om637pS_qh6imYfFVpCgcH_vUczUBW6LuxE91MRKXr0JY5uxZNLzy3OA3fVGaH2b1yAlxDKa6eUhrr6bpTpnGYDTHKC-ANTNPG3hqJI5ZE7pB2bsIbZmkkUlw9soy5ZLIc8pKtOEN5RgnlpKF1AX_Ygp2QSFFsPKF0KAfzif4tSZOntbt9Bs2np4-bmyX6DFRgXfU1cedSlPFn66U1hZU5dAZ3ta_L2JHlWwY8z43DUzZEG27xYeVQVMvRtSWkyIlj4y_3RIp9c2Iq-XBjreTXevLgZYyn3WTHImS_jxQ.KN_Fb9-IvlH1-wKmbhctUegduWG0Uj7TV-eHxRaqM8g&dib_tag=se&qid=1766398194&s=electronics&sr=1-86&xpid=qXN2WE3Eb1SqX",
         "isBest": true
       }
@@ -59255,8 +59255,8 @@ const products = [
         "seller": "Amazon India",
         "price": 16999,
         "originalPrice": 16999,
-        "discount": "Wed, 24 Dec, 7 am - 9 pm",
-        "delivery": "FREE delivery as soon as Wed, 24 Dec, 7 am - 9 pm",
+        "discount": "Wed, 24 Dec, 7â€¯am - 9â€¯pm",
+        "delivery": "FREE delivery as soon as Wed, 24 Dec, 7â€¯am - 9â€¯pm",
         "url": "https://www.amazon.in/boAt-PartyPal-600-Signature-Microphone/dp/B0DNZ8RMMT/ref=sr_1_87?dib=eyJ2IjoiMSJ9.u5om637pS_qh6imYfFVpCgcH_vUczUBW6LuxE91MRKXr0JY5uxZNLzy3OA3fVGaH2b1yAlxDKa6eUhrr6bpTpnGYDTHKC-ANTNPG3hqJI5ZE7pB2bsIbZmkkUlw9soy5ZLIc8pKtOEN5RgnlpKF1AX_Ygp2QSFFsPKF0KAfzif4tSZOntbt9Bs2np4-bmyX6DFRgXfU1cedSlPFn66U1hZU5dAZ3ta_L2JHlWwY8z43DUzZEG27xYeVQVMvRtSWkyIlj4y_3RIp9c2Iq-XBjreTXevLgZYyn3WTHImS_jxQ.KN_Fb9-IvlH1-wKmbhctUegduWG0Uj7TV-eHxRaqM8g&dib_tag=se&qid=1766398194&s=electronics&sr=1-87&xpid=qXN2WE3Eb1SqX",
         "isBest": true
       }
@@ -59444,10 +59444,10 @@ const products = [
   },
   {
     "id": "elec-amazon-90",
-    "title": "7 SEVEN® Compatible With TCL Tv Remote Original RC802V Model Suitable For Any Iffalcon TCL Smart Android 4K FHD UHD QLED Television No Voice Command Or Google Assistance Feature",
+    "title": "7 SEVENÂ® Compatible With TCL Tv Remote Original RC802V Model Suitable For Any Iffalcon TCL Smart Android 4K FHD UHD QLED Television No Voice Command Or Google Assistance Feature",
     "brand": "7 SEVEN",
-    "modelName": "7 SEVEN® Compatible With TCL Tv Remote Original RC802V Model Suitable For Any Iffalcon TCL Smart Android 4K FHD UHD QLED Television No Voice Command Or Google Assistance Feature",
-    "description": "7 SEVEN® Compatible With TCL Tv Remote Original RC802V Model Suitable For Any Iffalcon TCL Smart Android 4K FHD UHD QLED Television No Voice Command Or Google Assistance Feature. Marketplace: Amazon. Seller: Amazon India.",
+    "modelName": "7 SEVENÂ® Compatible With TCL Tv Remote Original RC802V Model Suitable For Any Iffalcon TCL Smart Android 4K FHD UHD QLED Television No Voice Command Or Google Assistance Feature",
+    "description": "7 SEVENÂ® Compatible With TCL Tv Remote Original RC802V Model Suitable For Any Iffalcon TCL Smart Android 4K FHD UHD QLED Television No Voice Command Or Google Assistance Feature. Marketplace: Amazon. Seller: Amazon India.",
     "category": "Electronics",
     "images": [
       "https://m.media-amazon.com/images/I/41cXWfrPBFL._AC_UL320_.jpg"
@@ -59858,10 +59858,10 @@ const products = [
   },
   {
     "id": "elec-amazon-96",
-    "title": "marman® Compatible Voice Remote Control L5B83H for Amazon 1st & 2nd Generation Cube, 2nd Gen, 4K and Amazon Stick TV Pendant Design (3rd GEN)",
+    "title": "marmanÂ® Compatible Voice Remote Control L5B83H for Amazon 1st & 2nd Generation Cube, 2nd Gen, 4K and Amazon Stick TV Pendant Design (3rd GEN)",
     "brand": "Amazon",
-    "modelName": "marman® Compatible Voice Remote Control L5B83H for Amazon 1st & 2nd Generation Cube, 2nd Gen, 4K and Amazon Stick TV Pendant Design",
-    "description": "marman® Compatible Voice Remote Control L5B83H for Amazon 1st & 2nd Generation Cube, 2nd Gen, 4K and Amazon Stick TV Pendant Design (3rd GEN). Marketplace: Amazon. Seller: Amazon India.",
+    "modelName": "marmanÂ® Compatible Voice Remote Control L5B83H for Amazon 1st & 2nd Generation Cube, 2nd Gen, 4K and Amazon Stick TV Pendant Design",
+    "description": "marmanÂ® Compatible Voice Remote Control L5B83H for Amazon 1st & 2nd Generation Cube, 2nd Gen, 4K and Amazon Stick TV Pendant Design (3rd GEN). Marketplace: Amazon. Seller: Amazon India.",
     "category": "Electronics",
     "images": [
       "https://m.media-amazon.com/images/I/51xicYvLW1L._AC_UL320_.jpg"
@@ -79730,10 +79730,10 @@ const products = [
   },
   {
     "id": "beauty_fk_bcappnfam",
-    "title": "L'Oréal Paris Glycolic Gloss Serum for Hair, with Glyco...",
-    "modelName": "L'Oréal Paris Glycolic Gloss Serum for Hair",
-    "description": "L'Oréal Paris Glycolic Gloss Serum for Hair, with Glyco.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Glycolic Gloss Serum for Hair, with Glyco...",
+    "modelName": "L'OrÃ©al Paris Glycolic Gloss Serum for Hair",
+    "description": "L'OrÃ©al Paris Glycolic Gloss Serum for Hair, with Glyco.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -80006,10 +80006,10 @@ const products = [
   },
   {
     "id": "beauty_fk_inxc58li2",
-    "title": "L'Oréal Paris Glycolic Gloss Conditioner, with Glycolic...",
-    "modelName": "L'Oréal Paris Glycolic Gloss Conditioner",
-    "description": "L'Oréal Paris Glycolic Gloss Conditioner, with Glycolic.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Glycolic Gloss Conditioner, with Glycolic...",
+    "modelName": "L'OrÃ©al Paris Glycolic Gloss Conditioner",
+    "description": "L'OrÃ©al Paris Glycolic Gloss Conditioner, with Glycolic.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -80075,10 +80075,10 @@ const products = [
   },
   {
     "id": "beauty_fk_hv1a4fd9o",
-    "title": "L'Oréal Professionnel Xtenso Care Shampoo For Frizz-Fre...",
-    "modelName": "L'Oréal Professionnel Xtenso Care Shampoo For Frizz-Fre...",
-    "description": "L'Oréal Professionnel Xtenso Care Shampoo For Frizz-Fre.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Professionnel Xtenso Care Shampoo For Frizz-Fre...",
+    "modelName": "L'OrÃ©al Professionnel Xtenso Care Shampoo For Frizz-Fre...",
+    "description": "L'OrÃ©al Professionnel Xtenso Care Shampoo For Frizz-Fre.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -80420,10 +80420,10 @@ const products = [
   },
   {
     "id": "beauty_fk_kx4gnfchi",
-    "title": "L'Oréal Paris Glycolic Gloss Shampoo, Powered by Glycol...",
-    "modelName": "L'Oréal Paris Glycolic Gloss Shampoo",
-    "description": "L'Oréal Paris Glycolic Gloss Shampoo, Powered by Glycol.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Glycolic Gloss Shampoo, Powered by Glycol...",
+    "modelName": "L'OrÃ©al Paris Glycolic Gloss Shampoo",
+    "description": "L'OrÃ©al Paris Glycolic Gloss Shampoo, Powered by Glycol.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -80571,7 +80571,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/sunscreen/r/m/t/30-0-1-hyaluronic-aqua-gel-lightweight-no-white-cast-for-broad-original-imahch5yp9qzqaxb.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -80916,7 +80916,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-styling/c/j/h/hair-spray-100-rosemary-hair-growth-advanced-hair-spray-for-original-imahdnw3cjgyjhas.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -80985,7 +80985,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/skin-treatment/z/j/x/50-everyday-face-bright-cream-hydrates-brightens-reduces-dark-original-imahg9dzvfaabgyc.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -81123,7 +81123,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-styling/2/c/9/hair-spray-200-rosemary-water-spray-for-hair-growth-thickness-original-imahhqcavyejnpe2.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -81330,7 +81330,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/lip-balm/a/t/p/-original-imahh2wgm6fqcqcu.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -81468,7 +81468,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/concealer/f/l/l/-original-imah4ng484ffmdvz.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹20\r",
+    "badgeText": "Buy 2 items, save extra â‚¹20\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -81606,7 +81606,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-anti-ageing/k/k/x/30-kojic-acid-2-cream-for-pigmentation-blemishes-and-dark-spots-original-imahfnfkqqr9tjz2.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -81869,10 +81869,10 @@ const products = [
   },
   {
     "id": "beauty_fk_h070hiyeh",
-    "title": "L'Oréal Paris Total Repair 5 Shampoo | Pro-Keratin & Ce...",
-    "modelName": "L'Oréal Paris Total Repair 5 Shampoo | Pro-Keratin & Ce...",
-    "description": "L'Oréal Paris Total Repair 5 Shampoo | Pro-Keratin & Ce.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Total Repair 5 Shampoo | Pro-Keratin & Ce...",
+    "modelName": "L'OrÃ©al Paris Total Repair 5 Shampoo | Pro-Keratin & Ce...",
+    "description": "L'OrÃ©al Paris Total Repair 5 Shampoo | Pro-Keratin & Ce.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -82421,10 +82421,10 @@ const products = [
   },
   {
     "id": "beauty_fk_2uo47xi9e",
-    "title": "L'Oréal Paris Total Repair 5 Conditioner with Pro-Kerat...",
-    "modelName": "L'Oréal Paris Total Repair 5 Conditioner with Pro-Kerat...",
-    "description": "L'Oréal Paris Total Repair 5 Conditioner with Pro-Kerat.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Total Repair 5 Conditioner with Pro-Kerat...",
+    "modelName": "L'OrÃ©al Paris Total Repair 5 Conditioner with Pro-Kerat...",
+    "description": "L'OrÃ©al Paris Total Repair 5 Conditioner with Pro-Kerat.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -82710,7 +82710,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/concealer/e/2/v/-original-imah4ng4gqfuetm5.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹20\r",
+    "badgeText": "Buy 2 items, save extra â‚¹20\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -82779,7 +82779,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/shampoo/j/q/m/250-anti-dandruff-shampoo-strengthens-hair-with-salicylic-acid-original-imahexamrfszs65n.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹20\r",
+    "badgeText": "Buy 2 items, save extra â‚¹20\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -82917,7 +82917,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/skin-treatment/a/l/a/-original-imahdfgzctreu5gr.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹50\r",
+    "badgeText": "Buy 2 items, save extra â‚¹50\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -83193,7 +83193,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/lip-balm/8/q/f/4-0-1-kojic-acid-lip-balm-with-alpha-arbutin-hyaluronic-treats-original-imahckwurwhhzhvz.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -83400,7 +83400,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/toner/w/f/z/100-even-tone-underarm-mist-with-7-glycolic-acid-helps-fade-dark-original-imahhjshzmpa9ygp.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹20\r",
+    "badgeText": "Buy 2 items, save extra â‚¹20\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -83469,7 +83469,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-treatment/j/s/s/227-natural-hair-shampoo-with-amla-reetha-shikakai-and-methi-original-imahcaympbmgcmur.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -83607,7 +83607,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/skin-treatment/f/c/k/50-wart-cream-wart-remover-aha-bha-wart-cream-7days-natural-original-imahf57qzqrzrurg.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -84008,9 +84008,9 @@ const products = [
   },
   {
     "id": "beauty_fk_olpknlk2a",
-    "title": "Dr. Sheth’s Glow & Protect Combo | The Ultimate 2-Step ...",
-    "modelName": "Dr. Sheth’s Glow & Protect Combo | The Ultimate 2-Step ...",
-    "description": "Dr. Sheth’s Glow & Protect Combo | The Ultimate 2-Step .... Premium beauty care from Dr., now available on Flipkart.",
+    "title": "Dr. Shethâ€™s Glow & Protect Combo | The Ultimate 2-Step ...",
+    "modelName": "Dr. Shethâ€™s Glow & Protect Combo | The Ultimate 2-Step ...",
+    "description": "Dr. Shethâ€™s Glow & Protect Combo | The Ultimate 2-Step .... Premium beauty care from Dr., now available on Flipkart.",
     "brand": "Dr.",
     "category": "Beauty",
     "categories": [
@@ -84021,7 +84021,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/combo-kit/o/f/b/glow-protect-combo-the-ultimate-2-step-regime-for-brighter-original-imah4u5sfmgg7zup.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹40\r",
+    "badgeText": "Buy 2 items, save extra â‚¹40\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -84228,7 +84228,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/scrub/8/k/f/110-coffee-body-scrub-for-tan-removal-exfoliation-soft-glowing-original-imahygr4ht2fxfzp.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -84780,7 +84780,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-treatment/g/4/h/200-rosemary-water-with-mint-pack-of-2-soulflower-original-imahfjhxqncs9fj2.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -85250,10 +85250,10 @@ const products = [
   },
   {
     "id": "beauty_fk_654yicfgt",
-    "title": "L'Oréal Paris Glycolic Gloss Serum for Hair, with Glyco...",
-    "modelName": "L'Oréal Paris Glycolic Gloss Serum for Hair",
-    "description": "L'Oréal Paris Glycolic Gloss Serum for Hair, with Glyco.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Glycolic Gloss Serum for Hair, with Glyco...",
+    "modelName": "L'OrÃ©al Paris Glycolic Gloss Serum for Hair",
+    "description": "L'OrÃ©al Paris Glycolic Gloss Serum for Hair, with Glyco.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -85319,10 +85319,10 @@ const products = [
   },
   {
     "id": "beauty_fk_jpbomvo5e",
-    "title": "L'Oréal Paris Glycolic Gloss Conditioner, with Glycolic...",
-    "modelName": "L'Oréal Paris Glycolic Gloss Conditioner",
-    "description": "L'Oréal Paris Glycolic Gloss Conditioner, with Glycolic.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Glycolic Gloss Conditioner, with Glycolic...",
+    "modelName": "L'OrÃ©al Paris Glycolic Gloss Conditioner",
+    "description": "L'OrÃ©al Paris Glycolic Gloss Conditioner, with Glycolic.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -85595,10 +85595,10 @@ const products = [
   },
   {
     "id": "beauty_fk_x4yfn5k1a",
-    "title": "L'Oréal Professionnel Xtenso Care Shampoo For Frizz-Fre...",
-    "modelName": "L'Oréal Professionnel Xtenso Care Shampoo For Frizz-Fre...",
-    "description": "L'Oréal Professionnel Xtenso Care Shampoo For Frizz-Fre.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Professionnel Xtenso Care Shampoo For Frizz-Fre...",
+    "modelName": "L'OrÃ©al Professionnel Xtenso Care Shampoo For Frizz-Fre...",
+    "description": "L'OrÃ©al Professionnel Xtenso Care Shampoo For Frizz-Fre.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -85940,10 +85940,10 @@ const products = [
   },
   {
     "id": "beauty_fk_bhuloege0",
-    "title": "L'Oréal Paris Glycolic Gloss Shampoo, Powered by Glycol...",
-    "modelName": "L'Oréal Paris Glycolic Gloss Shampoo",
-    "description": "L'Oréal Paris Glycolic Gloss Shampoo, Powered by Glycol.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Glycolic Gloss Shampoo, Powered by Glycol...",
+    "modelName": "L'OrÃ©al Paris Glycolic Gloss Shampoo",
+    "description": "L'OrÃ©al Paris Glycolic Gloss Shampoo, Powered by Glycol.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -86091,7 +86091,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/sunscreen/r/m/t/30-0-1-hyaluronic-aqua-gel-lightweight-no-white-cast-for-broad-original-imahch5yp9qzqaxb.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -86367,7 +86367,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-styling/2/c/9/hair-spray-200-rosemary-water-spray-for-hair-growth-thickness-original-imahhqcavyejnpe2.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -86436,7 +86436,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-styling/c/j/h/hair-spray-100-rosemary-hair-growth-advanced-hair-spray-for-original-imahdnw3cjgyjhas.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -86505,7 +86505,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/skin-treatment/z/j/x/50-everyday-face-bright-cream-hydrates-brightens-reduces-dark-original-imahg9dzvfaabgyc.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -86988,7 +86988,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/concealer/f/l/l/-original-imah4ng484ffmdvz.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹20\r",
+    "badgeText": "Buy 2 items, save extra â‚¹20\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -87126,7 +87126,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-anti-ageing/k/k/x/30-kojic-acid-2-cream-for-pigmentation-blemishes-and-dark-spots-original-imahfnfkqqr9tjz2.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -87264,7 +87264,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/concealer/e/2/v/-original-imah4ng4gqfuetm5.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹20\r",
+    "badgeText": "Buy 2 items, save extra â‚¹20\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -87320,10 +87320,10 @@ const products = [
   },
   {
     "id": "beauty_fk_pq9qu7870",
-    "title": "L'Oréal Paris Total Repair 5 Conditioner with Pro-Kerat...",
-    "modelName": "L'Oréal Paris Total Repair 5 Conditioner with Pro-Kerat...",
-    "description": "L'Oréal Paris Total Repair 5 Conditioner with Pro-Kerat.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Total Repair 5 Conditioner with Pro-Kerat...",
+    "modelName": "L'OrÃ©al Paris Total Repair 5 Conditioner with Pro-Kerat...",
+    "description": "L'OrÃ©al Paris Total Repair 5 Conditioner with Pro-Kerat.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -87389,10 +87389,10 @@ const products = [
   },
   {
     "id": "beauty_fk_qob8nbzv4",
-    "title": "L'Oréal Paris Total Repair 5 Shampoo | Pro-Keratin & Ce...",
-    "modelName": "L'Oréal Paris Total Repair 5 Shampoo | Pro-Keratin & Ce...",
-    "description": "L'Oréal Paris Total Repair 5 Shampoo | Pro-Keratin & Ce.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Total Repair 5 Shampoo | Pro-Keratin & Ce...",
+    "modelName": "L'OrÃ©al Paris Total Repair 5 Shampoo | Pro-Keratin & Ce...",
+    "description": "L'OrÃ©al Paris Total Repair 5 Shampoo | Pro-Keratin & Ce.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -87540,7 +87540,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/lip-balm/a/t/p/-original-imahh2wgm6fqcqcu.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -88299,7 +88299,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/shampoo/j/q/m/250-anti-dandruff-shampoo-strengthens-hair-with-salicylic-acid-original-imahexamrfszs65n.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹20\r",
+    "badgeText": "Buy 2 items, save extra â‚¹20\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -88644,7 +88644,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/perfume/r/r/n/120-women-perfume-30-ml-pack-of-4-eau-de-parfum-envy-women-original-imah38fhhng2nd3r.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -88989,7 +88989,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-treatment/j/s/s/227-natural-hair-shampoo-with-amla-reetha-shikakai-and-methi-original-imahcaympbmgcmur.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -89127,7 +89127,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/deodorant/h/c/y/400-exotica-pack-of-2-2-deodorant-spray-ramsons-men-women-original-imahhrgfgarmz9g6.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹20\r",
+    "badgeText": "Buy 2 items, save extra â‚¹20\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -89528,9 +89528,9 @@ const products = [
   },
   {
     "id": "beauty_fk_j2ioe0ncq",
-    "title": "Dr. Sheth’s Glow & Protect Combo | The Ultimate 2-Step ...",
-    "modelName": "Dr. Sheth’s Glow & Protect Combo | The Ultimate 2-Step ...",
-    "description": "Dr. Sheth’s Glow & Protect Combo | The Ultimate 2-Step .... Premium beauty care from Dr., now available on Flipkart.",
+    "title": "Dr. Shethâ€™s Glow & Protect Combo | The Ultimate 2-Step ...",
+    "modelName": "Dr. Shethâ€™s Glow & Protect Combo | The Ultimate 2-Step ...",
+    "description": "Dr. Shethâ€™s Glow & Protect Combo | The Ultimate 2-Step .... Premium beauty care from Dr., now available on Flipkart.",
     "brand": "Dr.",
     "category": "Beauty",
     "categories": [
@@ -89541,7 +89541,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/combo-kit/o/f/b/glow-protect-combo-the-ultimate-2-step-regime-for-brighter-original-imah4u5sfmgg7zup.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹40\r",
+    "badgeText": "Buy 2 items, save extra â‚¹40\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -89610,7 +89610,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/scrub/8/k/f/110-coffee-body-scrub-for-tan-removal-exfoliation-soft-glowing-original-imahygr4ht2fxfzp.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -89817,7 +89817,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/sunscreen/w/t/3/50-0-bio-sandalwood-sunscreen-50-biotique-original-imahckrsw7ga8khw.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -90093,7 +90093,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-treatment/m/b/q/400-instant-water-softener-for-hairfall-control-maintains-ph-original-imah9gg2m8ft3gg9.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -90300,7 +90300,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-serum/a/k/h/25-scalptone-hair-growth-serum-enriched-with-nansyl-reduces-hair-original-imahepa2zc4vmeyj.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹50\r",
+    "badgeText": "Buy 2 items, save extra â‚¹50\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -90770,10 +90770,10 @@ const products = [
   },
   {
     "id": "beauty_fk_2q3d8jlqz",
-    "title": "L'Oréal Paris Glycolic Gloss Serum for Hair, with Glyco...",
-    "modelName": "L'Oréal Paris Glycolic Gloss Serum for Hair",
-    "description": "L'Oréal Paris Glycolic Gloss Serum for Hair, with Glyco.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Glycolic Gloss Serum for Hair, with Glyco...",
+    "modelName": "L'OrÃ©al Paris Glycolic Gloss Serum for Hair",
+    "description": "L'OrÃ©al Paris Glycolic Gloss Serum for Hair, with Glyco.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -90839,10 +90839,10 @@ const products = [
   },
   {
     "id": "beauty_fk_ttehqzvy8",
-    "title": "L'Oréal Paris Glycolic Gloss Conditioner, with Glycolic...",
-    "modelName": "L'Oréal Paris Glycolic Gloss Conditioner",
-    "description": "L'Oréal Paris Glycolic Gloss Conditioner, with Glycolic.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Glycolic Gloss Conditioner, with Glycolic...",
+    "modelName": "L'OrÃ©al Paris Glycolic Gloss Conditioner",
+    "description": "L'OrÃ©al Paris Glycolic Gloss Conditioner, with Glycolic.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -91115,10 +91115,10 @@ const products = [
   },
   {
     "id": "beauty_fk_6dkqpqsiv",
-    "title": "L'Oréal Professionnel Xtenso Care Shampoo For Frizz-Fre...",
-    "modelName": "L'Oréal Professionnel Xtenso Care Shampoo For Frizz-Fre...",
-    "description": "L'Oréal Professionnel Xtenso Care Shampoo For Frizz-Fre.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Professionnel Xtenso Care Shampoo For Frizz-Fre...",
+    "modelName": "L'OrÃ©al Professionnel Xtenso Care Shampoo For Frizz-Fre...",
+    "description": "L'OrÃ©al Professionnel Xtenso Care Shampoo For Frizz-Fre.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -91611,7 +91611,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/sunscreen/r/m/t/30-0-1-hyaluronic-aqua-gel-lightweight-no-white-cast-for-broad-original-imahch5yp9qzqaxb.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -91680,7 +91680,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-styling/2/c/9/hair-spray-200-rosemary-water-spray-for-hair-growth-thickness-original-imahhqcavyejnpe2.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -91874,10 +91874,10 @@ const products = [
   },
   {
     "id": "beauty_fk_ampdwwsmz",
-    "title": "L'Oréal Paris Glycolic Gloss Shampoo, Powered by Glycol...",
-    "modelName": "L'Oréal Paris Glycolic Gloss Shampoo",
-    "description": "L'Oréal Paris Glycolic Gloss Shampoo, Powered by Glycol.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Glycolic Gloss Shampoo, Powered by Glycol...",
+    "modelName": "L'OrÃ©al Paris Glycolic Gloss Shampoo",
+    "description": "L'OrÃ©al Paris Glycolic Gloss Shampoo, Powered by Glycol.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -91956,7 +91956,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-styling/c/j/h/hair-spray-100-rosemary-hair-growth-advanced-hair-spray-for-original-imahdnw3cjgyjhas.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -92025,7 +92025,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/skin-treatment/z/j/x/50-everyday-face-bright-cream-hydrates-brightens-reduces-dark-original-imahg9dzvfaabgyc.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -92370,7 +92370,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/concealer/f/l/l/-original-imah4ng484ffmdvz.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹20\r",
+    "badgeText": "Buy 2 items, save extra â‚¹20\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -92577,7 +92577,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/concealer/e/2/v/-original-imah4ng4gqfuetm5.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹20\r",
+    "badgeText": "Buy 2 items, save extra â‚¹20\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -92646,7 +92646,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-anti-ageing/k/k/x/30-kojic-acid-2-cream-for-pigmentation-blemishes-and-dark-spots-original-imahfnfkqqr9tjz2.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -92771,10 +92771,10 @@ const products = [
   },
   {
     "id": "beauty_fk_c4sfaqyvw",
-    "title": "L'Oréal Paris Total Repair 5 Conditioner with Pro-Kerat...",
-    "modelName": "L'Oréal Paris Total Repair 5 Conditioner with Pro-Kerat...",
-    "description": "L'Oréal Paris Total Repair 5 Conditioner with Pro-Kerat.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Total Repair 5 Conditioner with Pro-Kerat...",
+    "modelName": "L'OrÃ©al Paris Total Repair 5 Conditioner with Pro-Kerat...",
+    "description": "L'OrÃ©al Paris Total Repair 5 Conditioner with Pro-Kerat.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -92853,7 +92853,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/lip-balm/a/t/p/-original-imahh2wgm6fqcqcu.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -92909,10 +92909,10 @@ const products = [
   },
   {
     "id": "beauty_fk_s0ef3cp94",
-    "title": "L'Oréal Paris Total Repair 5 Shampoo | Pro-Keratin & Ce...",
-    "modelName": "L'Oréal Paris Total Repair 5 Shampoo | Pro-Keratin & Ce...",
-    "description": "L'Oréal Paris Total Repair 5 Shampoo | Pro-Keratin & Ce.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Total Repair 5 Shampoo | Pro-Keratin & Ce...",
+    "modelName": "L'OrÃ©al Paris Total Repair 5 Shampoo | Pro-Keratin & Ce...",
+    "description": "L'OrÃ©al Paris Total Repair 5 Shampoo | Pro-Keratin & Ce.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -93530,10 +93530,10 @@ const products = [
   },
   {
     "id": "beauty_fk_bic6027vs",
-    "title": "L'Oréal Paris Glycolic Gloss Serum for Hair, with Glyco...",
-    "modelName": "L'Oréal Paris Glycolic Gloss Serum for Hair",
-    "description": "L'Oréal Paris Glycolic Gloss Serum for Hair, with Glyco.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Glycolic Gloss Serum for Hair, with Glyco...",
+    "modelName": "L'OrÃ©al Paris Glycolic Gloss Serum for Hair",
+    "description": "L'OrÃ©al Paris Glycolic Gloss Serum for Hair, with Glyco.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -93599,10 +93599,10 @@ const products = [
   },
   {
     "id": "beauty_fk_ibfj4po29",
-    "title": "L'Oréal Paris Glycolic Gloss Conditioner, with Glycolic...",
-    "modelName": "L'Oréal Paris Glycolic Gloss Conditioner",
-    "description": "L'Oréal Paris Glycolic Gloss Conditioner, with Glycolic.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Glycolic Gloss Conditioner, with Glycolic...",
+    "modelName": "L'OrÃ©al Paris Glycolic Gloss Conditioner",
+    "description": "L'OrÃ©al Paris Glycolic Gloss Conditioner, with Glycolic.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -93875,10 +93875,10 @@ const products = [
   },
   {
     "id": "beauty_fk_ix0qxsr1w",
-    "title": "L'Oréal Professionnel Xtenso Care Shampoo For Frizz-Fre...",
-    "modelName": "L'Oréal Professionnel Xtenso Care Shampoo For Frizz-Fre...",
-    "description": "L'Oréal Professionnel Xtenso Care Shampoo For Frizz-Fre.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Professionnel Xtenso Care Shampoo For Frizz-Fre...",
+    "modelName": "L'OrÃ©al Professionnel Xtenso Care Shampoo For Frizz-Fre...",
+    "description": "L'OrÃ©al Professionnel Xtenso Care Shampoo For Frizz-Fre.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -94371,7 +94371,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/sunscreen/r/m/t/30-0-1-hyaluronic-aqua-gel-lightweight-no-white-cast-for-broad-original-imahch5yp9qzqaxb.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -94440,7 +94440,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-styling/2/c/9/hair-spray-200-rosemary-water-spray-for-hair-growth-thickness-original-imahhqcavyejnpe2.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -94634,10 +94634,10 @@ const products = [
   },
   {
     "id": "beauty_fk_153v6skpe",
-    "title": "L'Oréal Paris Glycolic Gloss Shampoo, Powered by Glycol...",
-    "modelName": "L'Oréal Paris Glycolic Gloss Shampoo",
-    "description": "L'Oréal Paris Glycolic Gloss Shampoo, Powered by Glycol.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Glycolic Gloss Shampoo, Powered by Glycol...",
+    "modelName": "L'OrÃ©al Paris Glycolic Gloss Shampoo",
+    "description": "L'OrÃ©al Paris Glycolic Gloss Shampoo, Powered by Glycol.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -94716,7 +94716,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-styling/c/j/h/hair-spray-100-rosemary-hair-growth-advanced-hair-spray-for-original-imahdnw3cjgyjhas.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -94785,7 +94785,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/skin-treatment/z/j/x/50-everyday-face-bright-cream-hydrates-brightens-reduces-dark-original-imahg9dzvfaabgyc.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -95130,7 +95130,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/concealer/f/l/l/-original-imah4ng484ffmdvz.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹20\r",
+    "badgeText": "Buy 2 items, save extra â‚¹20\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -95337,7 +95337,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/concealer/e/2/v/-original-imah4ng4gqfuetm5.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹20\r",
+    "badgeText": "Buy 2 items, save extra â‚¹20\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -95406,7 +95406,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-anti-ageing/k/k/x/30-kojic-acid-2-cream-for-pigmentation-blemishes-and-dark-spots-original-imahfnfkqqr9tjz2.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -95531,10 +95531,10 @@ const products = [
   },
   {
     "id": "beauty_fk_x3v16rlfj",
-    "title": "L'Oréal Paris Total Repair 5 Conditioner with Pro-Kerat...",
-    "modelName": "L'Oréal Paris Total Repair 5 Conditioner with Pro-Kerat...",
-    "description": "L'Oréal Paris Total Repair 5 Conditioner with Pro-Kerat.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Total Repair 5 Conditioner with Pro-Kerat...",
+    "modelName": "L'OrÃ©al Paris Total Repair 5 Conditioner with Pro-Kerat...",
+    "description": "L'OrÃ©al Paris Total Repair 5 Conditioner with Pro-Kerat.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -95613,7 +95613,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/lip-balm/a/t/p/-original-imahh2wgm6fqcqcu.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -95669,10 +95669,10 @@ const products = [
   },
   {
     "id": "beauty_fk_edtd8ja7h",
-    "title": "L'Oréal Paris Total Repair 5 Shampoo | Pro-Keratin & Ce...",
-    "modelName": "L'Oréal Paris Total Repair 5 Shampoo | Pro-Keratin & Ce...",
-    "description": "L'Oréal Paris Total Repair 5 Shampoo | Pro-Keratin & Ce.... Premium beauty care from L'Oréal, now available on Flipkart.",
-    "brand": "L'Oréal",
+    "title": "L'OrÃ©al Paris Total Repair 5 Shampoo | Pro-Keratin & Ce...",
+    "modelName": "L'OrÃ©al Paris Total Repair 5 Shampoo | Pro-Keratin & Ce...",
+    "description": "L'OrÃ©al Paris Total Repair 5 Shampoo | Pro-Keratin & Ce.... Premium beauty care from L'OrÃ©al, now available on Flipkart.",
+    "brand": "L'OrÃ©al",
     "category": "Beauty",
     "categories": [
       "Beauty"
@@ -96372,7 +96372,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/skin-treatment/a/l/a/-original-imahdfgzctreu5gr.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹50\r",
+    "badgeText": "Buy 2 items, save extra â‚¹50\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -96441,7 +96441,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/shampoo/j/q/m/250-anti-dandruff-shampoo-strengthens-hair-with-salicylic-acid-original-imahexamrfszs65n.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹20\r",
+    "badgeText": "Buy 2 items, save extra â‚¹20\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -96579,7 +96579,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/skin-treatment/f/c/k/50-wart-cream-wart-remover-aha-bha-wart-cream-7days-natural-original-imahf57qzqrzrurg.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -97131,7 +97131,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-treatment/j/s/s/227-natural-hair-shampoo-with-amla-reetha-shikakai-and-methi-original-imahcaympbmgcmur.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -97476,7 +97476,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/lip-balm/8/q/f/4-0-1-kojic-acid-lip-balm-with-alpha-arbutin-hyaluronic-treats-original-imahckwurwhhzhvz.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -97545,7 +97545,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/scrub/8/k/f/110-coffee-body-scrub-for-tan-removal-exfoliation-soft-glowing-original-imahygr4ht2fxfzp.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -97670,9 +97670,9 @@ const products = [
   },
   {
     "id": "beauty_fk_o7o86ckch",
-    "title": "Dr. Sheth’s Glow & Protect Combo | The Ultimate 2-Step ...",
-    "modelName": "Dr. Sheth’s Glow & Protect Combo | The Ultimate 2-Step ...",
-    "description": "Dr. Sheth’s Glow & Protect Combo | The Ultimate 2-Step .... Premium beauty care from Dr., now available on Flipkart.",
+    "title": "Dr. Shethâ€™s Glow & Protect Combo | The Ultimate 2-Step ...",
+    "modelName": "Dr. Shethâ€™s Glow & Protect Combo | The Ultimate 2-Step ...",
+    "description": "Dr. Shethâ€™s Glow & Protect Combo | The Ultimate 2-Step .... Premium beauty care from Dr., now available on Flipkart.",
     "brand": "Dr.",
     "category": "Beauty",
     "categories": [
@@ -97683,7 +97683,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/combo-kit/o/f/b/glow-protect-combo-the-ultimate-2-step-regime-for-brighter-original-imah4u5sfmgg7zup.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹40\r",
+    "badgeText": "Buy 2 items, save extra â‚¹40\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -97752,7 +97752,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/toner/w/f/z/100-even-tone-underarm-mist-with-7-glycolic-acid-helps-fade-dark-original-imahhjshzmpa9ygp.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹20\r",
+    "badgeText": "Buy 2 items, save extra â‚¹20\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -97959,7 +97959,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-treatment/g/4/h/200-rosemary-water-with-mint-pack-of-2-soulflower-original-imahfjhxqncs9fj2.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -98636,9 +98636,9 @@ const products = [
   },
   {
     "id": "beauty_fk_n3k9m4o62",
-    "title": "Hair Pure Hair Serum with Walnut Oil – Frizz Control, S...",
-    "modelName": "Hair Pure Hair Serum with Walnut Oil – Frizz Control",
-    "description": "Hair Pure Hair Serum with Walnut Oil – Frizz Control, S.... Premium beauty care from Hair, now available on Flipkart.",
+    "title": "Hair Pure Hair Serum with Walnut Oil â€“ Frizz Control, S...",
+    "modelName": "Hair Pure Hair Serum with Walnut Oil â€“ Frizz Control",
+    "description": "Hair Pure Hair Serum with Walnut Oil â€“ Frizz Control, S.... Premium beauty care from Hair, now available on Flipkart.",
     "brand": "Hair",
     "category": "Beauty",
     "categories": [
@@ -99132,7 +99132,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/skin-treatment/a/l/a/-original-imahdfgzctreu5gr.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹50\r",
+    "badgeText": "Buy 2 items, save extra â‚¹50\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -99201,7 +99201,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/shampoo/j/q/m/250-anti-dandruff-shampoo-strengthens-hair-with-salicylic-acid-original-imahexamrfszs65n.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹20\r",
+    "badgeText": "Buy 2 items, save extra â‚¹20\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -99339,7 +99339,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/skin-treatment/f/c/k/50-wart-cream-wart-remover-aha-bha-wart-cream-7days-natural-original-imahf57qzqrzrurg.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -99891,7 +99891,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-treatment/j/s/s/227-natural-hair-shampoo-with-amla-reetha-shikakai-and-methi-original-imahcaympbmgcmur.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -100236,7 +100236,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/lip-balm/8/q/f/4-0-1-kojic-acid-lip-balm-with-alpha-arbutin-hyaluronic-treats-original-imahckwurwhhzhvz.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -100305,7 +100305,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/scrub/8/k/f/110-coffee-body-scrub-for-tan-removal-exfoliation-soft-glowing-original-imahygr4ht2fxfzp.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -100430,9 +100430,9 @@ const products = [
   },
   {
     "id": "beauty_fk_hoj15niuy",
-    "title": "Dr. Sheth’s Glow & Protect Combo | The Ultimate 2-Step ...",
-    "modelName": "Dr. Sheth’s Glow & Protect Combo | The Ultimate 2-Step ...",
-    "description": "Dr. Sheth’s Glow & Protect Combo | The Ultimate 2-Step .... Premium beauty care from Dr., now available on Flipkart.",
+    "title": "Dr. Shethâ€™s Glow & Protect Combo | The Ultimate 2-Step ...",
+    "modelName": "Dr. Shethâ€™s Glow & Protect Combo | The Ultimate 2-Step ...",
+    "description": "Dr. Shethâ€™s Glow & Protect Combo | The Ultimate 2-Step .... Premium beauty care from Dr., now available on Flipkart.",
     "brand": "Dr.",
     "category": "Beauty",
     "categories": [
@@ -100443,7 +100443,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/combo-kit/o/f/b/glow-protect-combo-the-ultimate-2-step-regime-for-brighter-original-imah4u5sfmgg7zup.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹40\r",
+    "badgeText": "Buy 2 items, save extra â‚¹40\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -100512,7 +100512,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/toner/w/f/z/100-even-tone-underarm-mist-with-7-glycolic-acid-helps-fade-dark-original-imahhjshzmpa9ygp.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹20\r",
+    "badgeText": "Buy 2 items, save extra â‚¹20\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -100719,7 +100719,7 @@ const products = [
     "images": [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/hair-treatment/g/4/h/200-rosemary-water-with-mint-pack-of-2-soulflower-original-imahfjhxqncs9fj2.jpeg?q=70"
     ],
-    "badgeText": "Buy 2 items, save extra ₹30\r",
+    "badgeText": "Buy 2 items, save extra â‚¹30\r",
     "offers": [
       {
         "seller": "Flipkart",
@@ -101396,9 +101396,9 @@ const products = [
   },
   {
     "id": "beauty_fk_hqtcce1xv",
-    "title": "Hair Pure Hair Serum with Walnut Oil – Frizz Control, S...",
-    "modelName": "Hair Pure Hair Serum with Walnut Oil – Frizz Control",
-    "description": "Hair Pure Hair Serum with Walnut Oil – Frizz Control, S.... Premium beauty care from Hair, now available on Flipkart.",
+    "title": "Hair Pure Hair Serum with Walnut Oil â€“ Frizz Control, S...",
+    "modelName": "Hair Pure Hair Serum with Walnut Oil â€“ Frizz Control",
+    "description": "Hair Pure Hair Serum with Walnut Oil â€“ Frizz Control, S.... Premium beauty care from Hair, now available on Flipkart.",
     "brand": "Hair",
     "category": "Beauty",
     "categories": [
@@ -140883,7 +140883,7 @@ const products = [
         "seller": "Amazon",
         "price": 0.179,
         "originalPrice": 0.02983,
-        "discount": "M.R.P: ₹592",
+        "discount": "M.R.P: â‚¹592",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MToyNzU3OTYyOTA3MTM2NzM3OjE3NjY0MDc2NzY6c3Bfc2VhcmNoX3RoZW1hdGljOjIwMDk0MjQ5Nzk1Mzk4OjozOjo&url=%2FBoldfit-Organizer-Accessories-Travelling-Essentials%2Fdp%2FB0BK1457X3%2Fref%3Dsxin_14_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.0629fcb0-94ed-4eba-9abe-6c93c227c465%253Aamzn1.sym.0629fcb0-94ed-4eba-9abe-6c93c227c465%26cv_ct_cx%3Dessentials%26keywords%3Dessentials%26pd_rd_i%3DB0BK1457X3%26pd_rd_r%3Dee6b296d-52d3-4be7-bc4c-3d8dcc32073c%26pd_rd_w%3DeLuyZ%26pd_rd_wg%3DKfVKR%26pf_rd_p%3D0629fcb0-94ed-4eba-9abe-6c93c227c465%26pf_rd_r%3DS6QNE3R8EV9DFCP7GK6E%26qid%3D1766407676%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sr%3D1-4-66673dcf-083f-43ba-b782-d4a436cc5cfb-spons%26aref%3DqFp91e8MpT%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=qFp91e8MpT&sp_cr=ZAZ",
         "marketplace": "Amazon",
         "delivery": "Buy 2 items, get 2% off",
@@ -141504,7 +141504,7 @@ const products = [
         "seller": "Amazon",
         "price": 0.179,
         "originalPrice": 0.02983,
-        "discount": "M.R.P: ₹592",
+        "discount": "M.R.P: â‚¹592",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo1OTUxMDI2NTM5MjYwMjMzOjE3NjY0MDc2OTA6c3Bfc2VhcmNoX3RoZW1hdGljOjIwMDk0MjQ5Nzk1Mzk4OjoyOjo&url=%2FBoldfit-Organizer-Accessories-Travelling-Essentials%2Fdp%2FB0BK1457X3%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26cv_ct_cx%3Dessentials%26keywords%3Dessentials%26pd_rd_i%3DB0BK1457X3%26pd_rd_r%3D62512a5d-27a6-434d-805e-254ea00e7e1d%26pd_rd_w%3DFpFxT%26pd_rd_wg%3D92oDo%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3DHHAZATCSMAZTA83XD74C%26qid%3D1766407690%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sr%3D1-51-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3Dop9pK8UVEER8l%26aref%3DqFp91e8MpT%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=qFp91e8MpT&sp_cr=ZAZ",
         "marketplace": "Amazon",
         "delivery": "Buy 2 items, get 2% off",
@@ -142194,7 +142194,7 @@ const products = [
         "seller": "Amazon",
         "price": 0.284,
         "originalPrice": 0.028399999999999998,
-        "discount": "M.R.P: ₹1,165",
+        "discount": "M.R.P: â‚¹1,165",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo4MDU0NDM5NTI3MDE5NDI1OjE3NjY0MDc2OTk6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDUxNDAyMjkwOTczMjo6Mjo6&url=%2FSHOESHINE-Storage-Essentials-Transparent-Accessories%2Fdp%2FB0CKYX5XBR%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26cv_ct_cx%3Dessentials%26keywords%3Dessentials%26pd_rd_i%3DB0CKYX5XBR%26pd_rd_r%3D914fb8dc-86b0-44ea-b7f9-7a8e98177de2%26pd_rd_w%3DwaYrb%26pd_rd_wg%3D5yjFS%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3DGQE0QKQKMPYGCVC5X26Y%26qid%3D1766407699%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sr%3D1-99-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3Dop9pK8UVEER8l%26aref%3DzEsNCFauct%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=zEsNCFauct&sp_cr=ZAZ",
         "marketplace": "Amazon",
         "delivery": "",
@@ -142677,7 +142677,7 @@ const products = [
         "seller": "Amazon",
         "price": 0.284,
         "originalPrice": 0.028399999999999998,
-        "discount": "M.R.P: ₹1,165",
+        "discount": "M.R.P: â‚¹1,165",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo4MjM4MDQ1MTc3MTQzOTE2OjE3NjY0MDc2OTk6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA1MTQwMjI5MDk3MzI6OjQ6Og&url=%2FSHOESHINE-Storage-Essentials-Transparent-Accessories%2Fdp%2FB0CKYX5XBR%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26cv_ct_cx%3Dessentials%26keywords%3Dessentials%26pd_rd_i%3DB0CKYX5XBR%26pd_rd_r%3Ddf574af4-a7e4-476e-9493-c1a269b53ce3%26pd_rd_w%3DsVM4O%26pd_rd_wg%3D2TUGQ%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DGQE0QKQKMPYGCVC5X26Y%26qid%3D1766407699%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sr%3D1-101-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3Dop9pK8UVEER8l%26aref%3DzEsNCFauct%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=zEsNCFauct&sp_cr=ZAZ",
         "marketplace": "Amazon",
         "delivery": "",
@@ -143022,7 +143022,7 @@ const products = [
         "seller": "Amazon",
         "price": 0.449,
         "originalPrice": 44.9,
-        "discount": "M.R.P: ₹999",
+        "discount": "M.R.P: â‚¹999",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTozNTIyNTg4MzUzOTk3NzUwOjE3NjY0MDc3MDg6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDYwMjY0MTgzNTgzMjo6NDo6&url=%2FVR-PRIME-Travel-Essentials-Running%2Fdp%2FB0F9PY1YCY%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26cv_ct_cx%3Dessentials%26keywords%3Dessentials%26pd_rd_i%3DB0F9PY1YCY%26pd_rd_r%3Dfe36809e-2805-48ec-a89e-7f570bf7feda%26pd_rd_w%3Dr1ove%26pd_rd_wg%3D2Pfw3%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3DTHB5MG6C8NRN8FN5RTEW%26qid%3D1766407708%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sr%3D1-149-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3Dop9pK8UVEER8l%26aref%3DdLn5Wh7Z3t%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=dLn5Wh7Z3t&sp_cr=ZAZ",
         "marketplace": "Amazon",
         "delivery": "",
@@ -143229,7 +143229,7 @@ const products = [
         "seller": "Amazon",
         "price": 0.449,
         "originalPrice": 44.9,
-        "discount": "M.R.P: ₹999",
+        "discount": "M.R.P: â‚¹999",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTozMjk1MzQ5NjY5NjY2MDg3OjE3NjY0MDc3MDg6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA2MDI2NDE4MzU4MzI6OjI6Og&url=%2FVR-PRIME-Travel-Essentials-Running%2Fdp%2FB0F9PY1YCY%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26cv_ct_cx%3Dessentials%26keywords%3Dessentials%26pd_rd_i%3DB0F9PY1YCY%26pd_rd_r%3D1726ac27-2551-4c27-a228-c4cbc8ceab17%26pd_rd_w%3DjKZHi%26pd_rd_wg%3DhvmhV%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DTHB5MG6C8NRN8FN5RTEW%26qid%3D1766407708%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sr%3D1-147-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3Dop9pK8UVEER8l%26aref%3DdLn5Wh7Z3t%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=dLn5Wh7Z3t&sp_cr=ZAZ",
         "marketplace": "Amazon",
         "delivery": "",
@@ -143437,7 +143437,7 @@ const products = [
         "originalPrice": 50,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo4MjQyMDU4ODczODkzNTUzOjE3NjY0MDY3NDM6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDgyNjg2Mjg4NzUzMjo6MDo6&url=%2FAthmonk-Compression-Leggings-Tights-Men%2Fdp%2FB0CQTDBD3B%2Fref%3Dsxin_14_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.0629fcb0-94ed-4eba-9abe-6c93c227c465%253Aamzn1.sym.0629fcb0-94ed-4eba-9abe-6c93c227c465%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0CQTDBD3B%26pd_rd_r%3D4e6e7c6e-2be0-4f21-a698-a8a77dc11a43%26pd_rd_w%3Dgy95x%26pd_rd_wg%3DFMk46%26pf_rd_p%3D0629fcb0-94ed-4eba-9abe-6c93c227c465%26pf_rd_r%3D6DE3FSVF3C0YDQR07AAB%26qid%3D1766406743%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-1-66673dcf-083f-43ba-b782-d4a436cc5cfb-spons%26aref%3Df8be1MV4ek%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1%26smid%3DA30MZCYSPWYLIH&aref=f8be1MV4ek&sp_cr=ZAZ",
-        "discount": "₹1,390",
+        "discount": "â‚¹1,390",
         "delivery": "2-4 days"
       },
       {
@@ -143815,10 +143815,10 @@ const products = [
   },
   {
     "id": "prod_401",
-    "title": "SHODOX® Mens Athletic Shorts|Breathable Quick Dry Sports Knit Fabric with Side Pockets, Signature Contrast Bottom Straps|Gym,Workout, Fitness, for Boys & Mens (Pack of 1)",
-    "modelName": "SHODOX® Mens Athletic Shorts|Breathable Quick Dry ...",
+    "title": "SHODOXÂ® Mens Athletic Shorts|Breathable Quick Dry Sports Knit Fabric with Side Pockets, Signature Contrast Bottom Straps|Gym,Workout, Fitness, for Boys & Mens (Pack of 1)",
+    "modelName": "SHODOXÂ® Mens Athletic Shorts|Breathable Quick Dry ...",
     "brand": "Shodox",
-    "description": "Premium quality SHODOX® Mens Athletic Shorts|Breathable Quick Dry Sports Knit Fabric with Side Pockets, Signature Contrast Bottom Straps|Gym,Workout, Fitness, for Boys & Mens (Pack of 1) for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
+    "description": "Premium quality SHODOXÂ® Mens Athletic Shorts|Breathable Quick Dry Sports Knit Fabric with Side Pockets, Signature Contrast Bottom Straps|Gym,Workout, Fitness, for Boys & Mens (Pack of 1) for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
     "category": "Sports",
     "images": [
       "https://m.media-amazon.com/images/I/716V-G43DbL._AC_UL320_.jpg"
@@ -143835,7 +143835,7 @@ const products = [
         "originalPrice": 1059,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo4MjQyMDU4ODczODkzNTUzOjE3NjY0MDY3NDM6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDg0NjkzNzcxMjEzMjo6MTo6&url=%2FSHODOX%25C2%25AE-Athletic-Breathable-Signature-Contrast%2Fdp%2FB0G4R3121L%2Fref%3Dsxin_14_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.0629fcb0-94ed-4eba-9abe-6c93c227c465%253Aamzn1.sym.0629fcb0-94ed-4eba-9abe-6c93c227c465%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0G4R3121L%26pd_rd_r%3D4e6e7c6e-2be0-4f21-a698-a8a77dc11a43%26pd_rd_w%3Dgy95x%26pd_rd_wg%3DFMk46%26pf_rd_p%3D0629fcb0-94ed-4eba-9abe-6c93c227c465%26pf_rd_r%3D6DE3FSVF3C0YDQR07AAB%26qid%3D1766406743%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-2-66673dcf-083f-43ba-b782-d4a436cc5cfb-spons%26aref%3DjS6DpWtlY9%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=jS6DpWtlY9&sp_cr=ZAZ",
-        "discount": "₹1,999",
+        "discount": "â‚¹1,999",
         "delivery": "2-4 days"
       },
       {
@@ -144233,7 +144233,7 @@ const products = [
         "originalPrice": 50,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo4MjQyMDU4ODczODkzNTUzOjE3NjY0MDY3NDM6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDEzNTE1NzA0NzQzMjo6Mzo6&url=%2FRynoGear-Regular-Super-Stretchable-Track%2Fdp%2FB0CQ4ZTBXB%2Fref%3Dsxin_14_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.0629fcb0-94ed-4eba-9abe-6c93c227c465%253Aamzn1.sym.0629fcb0-94ed-4eba-9abe-6c93c227c465%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0CQ4ZTBXB%26pd_rd_r%3D4e6e7c6e-2be0-4f21-a698-a8a77dc11a43%26pd_rd_w%3Dgy95x%26pd_rd_wg%3DFMk46%26pf_rd_p%3D0629fcb0-94ed-4eba-9abe-6c93c227c465%26pf_rd_r%3D6DE3FSVF3C0YDQR07AAB%26qid%3D1766406743%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-4-66673dcf-083f-43ba-b782-d4a436cc5cfb-spons%26aref%3DqiYV2R1yvT%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=qiYV2R1yvT&sp_cr=ZAZ",
-        "discount": "₹999",
+        "discount": "â‚¹999",
         "delivery": "2-4 days"
       },
       {
@@ -144631,7 +144631,7 @@ const products = [
         "originalPrice": 999,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo4MjQyMDU4ODczODkzNTUzOjE3NjY0MDY3NDM6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDgwOTM1NTY0ODQzMjo6NDo6&url=%2FSWEATHEADS-Origin-T-Shirt-Technology-Workout%2Fdp%2FB0FXXFPG5D%2Fref%3Dsxin_14_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.0629fcb0-94ed-4eba-9abe-6c93c227c465%253Aamzn1.sym.0629fcb0-94ed-4eba-9abe-6c93c227c465%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0FXXFPG5D%26pd_rd_r%3D4e6e7c6e-2be0-4f21-a698-a8a77dc11a43%26pd_rd_w%3Dgy95x%26pd_rd_wg%3DFMk46%26pf_rd_p%3D0629fcb0-94ed-4eba-9abe-6c93c227c465%26pf_rd_r%3D6DE3FSVF3C0YDQR07AAB%26qid%3D1766406743%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-5-66673dcf-083f-43ba-b782-d4a436cc5cfb-spons%26aref%3Dp5QmnSJ41z%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1%26smid%3DA2EWEWFO5NUP5S&aref=p5QmnSJ41z&sp_cr=ZAZ",
-        "discount": "₹899",
+        "discount": "â‚¹899",
         "delivery": "2-4 days"
       },
       {
@@ -145029,7 +145029,7 @@ const products = [
         "originalPrice": 798,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MToyODYwMDY3NzY3NjU0MTM3OjE3NjY0MDY3NDM6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3NzY0NzI3NTU1MzI6OjA6Og&url=%2FBODYCARE-Unisex-Thermal-Bottoms-Melange%2Fdp%2FB0BQQZLJDF%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.9b27384e-008a-4e4f-8d54-68a57c429828%253Aamzn1.sym.9b27384e-008a-4e4f-8d54-68a57c429828%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0BQQZLJDF%26pd_rd_r%3D8c2704d6-22e1-403e-a2a7-6669709795a5%26pd_rd_w%3DRKhrP%26pd_rd_wg%3DxiuqM%26pf_rd_p%3D9b27384e-008a-4e4f-8d54-68a57c429828%26pf_rd_r%3D6DE3FSVF3C0YDQR07AAB%26qid%3D1766406743%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-1-2907eac4-8056-42c7-8014-fdf7bd4c5395-spons%26aref%3DDomBmdFkYG%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=DomBmdFkYG&sp_cr=ZAZ",
-        "discount": "₹335",
+        "discount": "â‚¹335",
         "delivery": "2-4 days"
       },
       {
@@ -145407,10 +145407,10 @@ const products = [
   },
   {
     "id": "prod_405",
-    "title": "PROBEROS® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout",
-    "modelName": "PROBEROS® 3 Pairs Professional Sport Socks for Men...",
+    "title": "PROBEROSÂ® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout",
+    "modelName": "PROBEROSÂ® 3 Pairs Professional Sport Socks for Men...",
     "brand": "Proberos",
-    "description": "Premium quality PROBEROS® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
+    "description": "Premium quality PROBEROSÂ® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
     "category": "Sports",
     "images": [
       "https://m.media-amazon.com/images/I/61NCc4EpZWL._AC_UL320_.jpg"
@@ -145427,7 +145427,7 @@ const products = [
         "originalPrice": 200,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MToyODYwMDY3NzY3NjU0MTM3OjE3NjY0MDY3NDM6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDAxMDA2MzM4ODU4MzI6OjI6Og&url=%2FProberos%25C2%25AE-Professional-Breathable-Cushioning-Basketball%2Fdp%2FB0CP41J3RZ%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.9b27384e-008a-4e4f-8d54-68a57c429828%253Aamzn1.sym.9b27384e-008a-4e4f-8d54-68a57c429828%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0CP41J3RZ%26pd_rd_r%3D8c2704d6-22e1-403e-a2a7-6669709795a5%26pd_rd_w%3DRKhrP%26pd_rd_wg%3DxiuqM%26pf_rd_p%3D9b27384e-008a-4e4f-8d54-68a57c429828%26pf_rd_r%3D6DE3FSVF3C0YDQR07AAB%26qid%3D1766406743%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-3-2907eac4-8056-42c7-8014-fdf7bd4c5395-spons%26aref%3DRBCagYXBnH%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=RBCagYXBnH&sp_cr=ZAZ",
-        "discount": "₹740",
+        "discount": "â‚¹740",
         "delivery": "2-4 days"
       },
       {
@@ -145825,7 +145825,7 @@ const products = [
         "originalPrice": 50,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MToyODYwMDY3NzY3NjU0MTM3OjE3NjY0MDY3NDM6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDAxMzUxNTcwNDc0MzI6OjM6Og&url=%2FRynoGear-Regular-Super-Stretchable-Track%2Fdp%2FB0CQ4ZTBXB%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.9b27384e-008a-4e4f-8d54-68a57c429828%253Aamzn1.sym.9b27384e-008a-4e4f-8d54-68a57c429828%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0CQ4ZTBXB%26pd_rd_r%3D8c2704d6-22e1-403e-a2a7-6669709795a5%26pd_rd_w%3DRKhrP%26pd_rd_wg%3DxiuqM%26pf_rd_p%3D9b27384e-008a-4e4f-8d54-68a57c429828%26pf_rd_r%3D6DE3FSVF3C0YDQR07AAB%26qid%3D1766406743%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-4-2907eac4-8056-42c7-8014-fdf7bd4c5395-spons%26aref%3DqiYV2R1yvT%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=qiYV2R1yvT&sp_cr=ZAZ",
-        "discount": "₹999",
+        "discount": "â‚¹999",
         "delivery": "2-4 days"
       },
       {
@@ -146203,10 +146203,10 @@ const products = [
   },
   {
     "id": "prod_407",
-    "title": "CULT Men’s Cotton Socks – Ultra Soft, Breathable & Anti-Microbial – Ankle Length Casual & Sports Socks with Moisture-Absorbent Fabric, Superior Fit Technology & Durable Design - Pack of 3",
-    "modelName": "CULT Men’s Cotton Socks – Ultra Soft, Breathable &...",
+    "title": "CULT Menâ€™s Cotton Socks â€“ Ultra Soft, Breathable & Anti-Microbial â€“ Ankle Length Casual & Sports Socks with Moisture-Absorbent Fabric, Superior Fit Technology & Durable Design - Pack of 3",
+    "modelName": "CULT Menâ€™s Cotton Socks â€“ Ultra Soft, Breathable &...",
     "brand": "Cult",
-    "description": "Premium quality CULT Men’s Cotton Socks – Ultra Soft, Breathable & Anti-Microbial – Ankle Length Casual & Sports Socks with Moisture-Absorbent Fabric, Superior Fit Technology & Durable Design - Pack of 3 for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
+    "description": "Premium quality CULT Menâ€™s Cotton Socks â€“ Ultra Soft, Breathable & Anti-Microbial â€“ Ankle Length Casual & Sports Socks with Moisture-Absorbent Fabric, Superior Fit Technology & Durable Design - Pack of 3 for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
     "category": "Sports",
     "images": [
       "https://m.media-amazon.com/images/I/51Si9z-NbvL._AC_UL320_.jpg"
@@ -146223,7 +146223,7 @@ const products = [
         "originalPrice": 814,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MToyODYwMDY3NzY3NjU0MTM3OjE3NjY0MDY3NDM6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3MDY0OTIzODIyMzI6OjQ6Og&url=%2FCULT-Mens-Cotton-Socks-Moisture-Absorbent%2Fdp%2FB0FJ8L2XD3%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.9b27384e-008a-4e4f-8d54-68a57c429828%253Aamzn1.sym.9b27384e-008a-4e4f-8d54-68a57c429828%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0FJ8L2XD3%26pd_rd_r%3D8c2704d6-22e1-403e-a2a7-6669709795a5%26pd_rd_w%3DRKhrP%26pd_rd_wg%3DxiuqM%26pf_rd_p%3D9b27384e-008a-4e4f-8d54-68a57c429828%26pf_rd_r%3D6DE3FSVF3C0YDQR07AAB%26qid%3D1766406743%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-5-2907eac4-8056-42c7-8014-fdf7bd4c5395-spons%26aref%3DDLizVmcnGD%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=DLizVmcnGD&sp_cr=ZAZ",
-        "discount": "₹649",
+        "discount": "â‚¹649",
         "delivery": "2-4 days"
       },
       {
@@ -146621,7 +146621,7 @@ const products = [
         "originalPrice": 50,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo2OTEzNTI3ODMxOTg5NDUxOjE3NjY0MDY3NjI6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDgyNjg2Mjg4NzUzMjo6MDo6&url=%2FAthmonk-Compression-Leggings-Tights-Men%2Fdp%2FB0CQTDBD3B%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0CQTDBD3B%26pd_rd_r%3Db647f7dd-23d3-4f3a-9667-9e6b75352b9f%26pd_rd_w%3DghDiY%26pd_rd_wg%3DNaJ7W%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3DPVVTW29KPPYTF0DE4T84%26qid%3D1766406762%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-49-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3Df8be1MV4ek%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1%26smid%3DA30MZCYSPWYLIH&aref=f8be1MV4ek&sp_cr=ZAZ",
-        "discount": "₹1,390",
+        "discount": "â‚¹1,390",
         "delivery": "2-4 days"
       },
       {
@@ -147019,7 +147019,7 @@ const products = [
         "originalPrice": 1604,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo2OTEzNTI3ODMxOTg5NDUxOjE3NjY0MDY3NjI6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDE3OTIzNzk3MDczMjo6MTo6&url=%2FSURF-CUZ-Weight-Running-Multicolor%2Fdp%2FB0BGZXGD9X%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0BGZXGD9X%26pd_rd_r%3Db647f7dd-23d3-4f3a-9667-9e6b75352b9f%26pd_rd_w%3DghDiY%26pd_rd_wg%3DNaJ7W%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3DPVVTW29KPPYTF0DE4T84%26qid%3D1766406762%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-50-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3D7hw7oeRu7f%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=7hw7oeRu7f&sp_cr=ZAZ",
-        "discount": "₹1,799",
+        "discount": "â‚¹1,799",
         "delivery": "2-4 days"
       },
       {
@@ -147397,10 +147397,10 @@ const products = [
   },
   {
     "id": "prod_410",
-    "title": "PROBEROS® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout",
-    "modelName": "PROBEROS® 3 Pairs Professional Sport Socks for Men...",
+    "title": "PROBEROSÂ® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout",
+    "modelName": "PROBEROSÂ® 3 Pairs Professional Sport Socks for Men...",
     "brand": "Proberos",
-    "description": "Premium quality PROBEROS® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
+    "description": "Premium quality PROBEROSÂ® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
     "category": "Sports",
     "images": [
       "https://m.media-amazon.com/images/I/61NCc4EpZWL._AC_UL320_.jpg"
@@ -147417,7 +147417,7 @@ const products = [
         "originalPrice": 200,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo2OTEzNTI3ODMxOTg5NDUxOjE3NjY0MDY3NjI6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDEwMDYzMzg4NTgzMjo6Mjo6&url=%2FProberos%25C2%25AE-Professional-Breathable-Cushioning-Basketball%2Fdp%2FB0CP41J3RZ%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0CP41J3RZ%26pd_rd_r%3Db647f7dd-23d3-4f3a-9667-9e6b75352b9f%26pd_rd_w%3DghDiY%26pd_rd_wg%3DNaJ7W%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3DPVVTW29KPPYTF0DE4T84%26qid%3D1766406762%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-51-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DRBCagYXBnH%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=RBCagYXBnH&sp_cr=ZAZ",
-        "discount": "₹740",
+        "discount": "â‚¹740",
         "delivery": "2-4 days"
       },
       {
@@ -147815,7 +147815,7 @@ const products = [
         "originalPrice": 50,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo3MTI5NTk3NTk3MjAzNjYwOjE3NjY0MDY3NzQ6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDgyNjg2Mjg4NzUzMjo6MDo6&url=%2FAthmonk-Compression-Leggings-Tights-Men%2Fdp%2FB0CQTDBD3B%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0CQTDBD3B%26pd_rd_r%3D4fc4d823-c113-4773-ac15-0d7767e05a83%26pd_rd_w%3DkoRcX%26pd_rd_wg%3DK6g4c%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3D8QHAP1T3M8VN9CEVKVXE%26qid%3D1766406774%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-97-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3Df8be1MV4ek%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1%26smid%3DA30MZCYSPWYLIH&aref=f8be1MV4ek&sp_cr=ZAZ",
-        "discount": "₹1,390",
+        "discount": "â‚¹1,390",
         "delivery": "2-4 days"
       },
       {
@@ -148213,7 +148213,7 @@ const products = [
         "originalPrice": 1219,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo3MTI5NTk3NTk3MjAzNjYwOjE3NjY0MDY3NzQ6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDg0OTczODA5OTkzMjo6MTo6&url=%2FVan-Heusen-Cotton-50006_Charcoal-Melange_M%2Fdp%2FB083C2H5QK%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB083C2H5QK%26pd_rd_r%3D4fc4d823-c113-4773-ac15-0d7767e05a83%26pd_rd_w%3DkoRcX%26pd_rd_wg%3DK6g4c%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3D8QHAP1T3M8VN9CEVKVXE%26qid%3D1766406774%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-98-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3Dir0vEzlKaK%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=ir0vEzlKaK&sp_cr=ZAZ",
-        "discount": "₹799",
+        "discount": "â‚¹799",
         "delivery": "2-4 days"
       },
       {
@@ -148611,7 +148611,7 @@ const products = [
         "originalPrice": 1604,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo3MTI5NTk3NTk3MjAzNjYwOjE3NjY0MDY3NzQ6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDE3OTIzNzk3MDczMjo6Mjo6&url=%2FSURF-CUZ-Weight-Running-Multicolor%2Fdp%2FB0BGZXGD9X%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0BGZXGD9X%26pd_rd_r%3D4fc4d823-c113-4773-ac15-0d7767e05a83%26pd_rd_w%3DkoRcX%26pd_rd_wg%3DK6g4c%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3D8QHAP1T3M8VN9CEVKVXE%26qid%3D1766406774%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-99-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3D7hw7oeRu7f%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=7hw7oeRu7f&sp_cr=ZAZ",
-        "discount": "₹1,799",
+        "discount": "â‚¹1,799",
         "delivery": "2-4 days"
       },
       {
@@ -148989,10 +148989,10 @@ const products = [
   },
   {
     "id": "prod_414",
-    "title": "PROBEROS® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout",
-    "modelName": "PROBEROS® 3 Pairs Professional Sport Socks for Men...",
+    "title": "PROBEROSÂ® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout",
+    "modelName": "PROBEROSÂ® 3 Pairs Professional Sport Socks for Men...",
     "brand": "Proberos",
-    "description": "Premium quality PROBEROS® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
+    "description": "Premium quality PROBEROSÂ® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
     "category": "Sports",
     "images": [
       "https://m.media-amazon.com/images/I/61NCc4EpZWL._AC_UL320_.jpg"
@@ -149009,7 +149009,7 @@ const products = [
         "originalPrice": 200,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo3ODMzMjY0OTQ2MTg1OTk3OjE3NjY0MDY3NzQ6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDAxMDA2MzM4ODU4MzI6OjE6Og&url=%2FProberos%25C2%25AE-Professional-Breathable-Cushioning-Basketball%2Fdp%2FB0CP41J3RZ%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0CP41J3RZ%26pd_rd_r%3D2279f0e5-a29b-491e-a6af-290d53ca38b2%26pd_rd_w%3DIDQrh%26pd_rd_wg%3DF0NO4%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3D8QHAP1T3M8VN9CEVKVXE%26qid%3D1766406774%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-98-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DRBCagYXBnH%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=RBCagYXBnH&sp_cr=ZAZ",
-        "discount": "₹740",
+        "discount": "â‚¹740",
         "delivery": "2-4 days"
       },
       {
@@ -149387,10 +149387,10 @@ const products = [
   },
   {
     "id": "prod_415",
-    "title": "Cult Men’s Sports Crew Length Cotton Socks – Ultra Soft, Sweat-Absorbent & Breathable – Anti-Microbial Fabric with Arch Support, Midfoot Compression & Reinforced Toe for Comfort & Durability Pack of 3",
-    "modelName": "Cult Men’s Sports Crew Length Cotton Socks – Ultra...",
+    "title": "Cult Menâ€™s Sports Crew Length Cotton Socks â€“ Ultra Soft, Sweat-Absorbent & Breathable â€“ Anti-Microbial Fabric with Arch Support, Midfoot Compression & Reinforced Toe for Comfort & Durability Pack of 3",
+    "modelName": "Cult Menâ€™s Sports Crew Length Cotton Socks â€“ Ultra...",
     "brand": "Cult",
-    "description": "Premium quality Cult Men’s Sports Crew Length Cotton Socks – Ultra Soft, Sweat-Absorbent & Breathable – Anti-Microbial Fabric with Arch Support, Midfoot Compression & Reinforced Toe for Comfort & Durability Pack of 3 for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
+    "description": "Premium quality Cult Menâ€™s Sports Crew Length Cotton Socks â€“ Ultra Soft, Sweat-Absorbent & Breathable â€“ Anti-Microbial Fabric with Arch Support, Midfoot Compression & Reinforced Toe for Comfort & Durability Pack of 3 for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
     "category": "Sports",
     "images": [
       "https://m.media-amazon.com/images/I/51QbA8x-21L._AC_UL320_.jpg"
@@ -149407,7 +149407,7 @@ const products = [
         "originalPrice": 949,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo3ODMzMjY0OTQ2MTg1OTk3OjE3NjY0MDY3NzQ6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3MDY0OTIzODM1MzI6OjM6Og&url=%2FCULT-Sports-Length-Cotton-Socks%2Fdp%2FB0FJ8HP5PN%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0FJ8HP5PN%26pd_rd_r%3D2279f0e5-a29b-491e-a6af-290d53ca38b2%26pd_rd_w%3DIDQrh%26pd_rd_wg%3DF0NO4%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3D8QHAP1T3M8VN9CEVKVXE%26qid%3D1766406774%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-100-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DWnYHVn1OAa%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=WnYHVn1OAa&sp_cr=ZAZ",
-        "discount": "₹999",
+        "discount": "â‚¹999",
         "delivery": "2-4 days"
       },
       {
@@ -149805,7 +149805,7 @@ const products = [
         "originalPrice": 798,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo3ODMzMjY0OTQ2MTg1OTk3OjE3NjY0MDY3NzQ6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3NzY0NzI3NTU1MzI6OjQ6Og&url=%2FBODYCARE-Unisex-Thermal-Bottoms-Melange%2Fdp%2FB0BQQZLJDF%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0BQQZLJDF%26pd_rd_r%3D2279f0e5-a29b-491e-a6af-290d53ca38b2%26pd_rd_w%3DIDQrh%26pd_rd_wg%3DF0NO4%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3D8QHAP1T3M8VN9CEVKVXE%26qid%3D1766406774%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-101-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DDomBmdFkYG%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=DomBmdFkYG&sp_cr=ZAZ",
-        "discount": "₹335",
+        "discount": "â‚¹335",
         "delivery": "2-4 days"
       },
       {
@@ -150203,7 +150203,7 @@ const products = [
         "originalPrice": 50,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo2MzYxMzY5ODAwMDE1MDA6MTc2NjQwNjc4MTpzcF9zZWFyY2hfdGhlbWF0aWM6MzAwODI2ODYyODg3NTMyOjowOjo&url=%2FAthmonk-Compression-Leggings-Tights-Men%2Fdp%2FB0CQTDBD3B%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0CQTDBD3B%26pd_rd_r%3Dbc10b9d8-9385-4c28-af49-6d0cfcfd90b5%26pd_rd_w%3Di10J7%26pd_rd_wg%3DtH2U2%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3DRAWJPWY5PDDFGXCFH0J0%26qid%3D1766406781%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-145-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3Df8be1MV4ek%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1%26smid%3DA30MZCYSPWYLIH&aref=f8be1MV4ek&sp_cr=ZAZ",
-        "discount": "₹1,390",
+        "discount": "â‚¹1,390",
         "delivery": "2-4 days"
       },
       {
@@ -150601,7 +150601,7 @@ const products = [
         "originalPrice": 1219,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo2MzYxMzY5ODAwMDE1MDA6MTc2NjQwNjc4MTpzcF9zZWFyY2hfdGhlbWF0aWM6MzAwODQ5NzM4MDk5OTMyOjoxOjo&url=%2FVan-Heusen-Cotton-50006_Charcoal-Melange_M%2Fdp%2FB083C2H5QK%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB083C2H5QK%26pd_rd_r%3Dbc10b9d8-9385-4c28-af49-6d0cfcfd90b5%26pd_rd_w%3Di10J7%26pd_rd_wg%3DtH2U2%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3DRAWJPWY5PDDFGXCFH0J0%26qid%3D1766406781%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-146-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3Dir0vEzlKaK%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=ir0vEzlKaK&sp_cr=ZAZ",
-        "discount": "₹799",
+        "discount": "â‚¹799",
         "delivery": "2-4 days"
       },
       {
@@ -150999,7 +150999,7 @@ const products = [
         "originalPrice": 1604,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo2MzYxMzY5ODAwMDE1MDA6MTc2NjQwNjc4MTpzcF9zZWFyY2hfdGhlbWF0aWM6MzAwMTc5MjM3OTcwNzMyOjoyOjo&url=%2FSURF-CUZ-Weight-Running-Multicolor%2Fdp%2FB0BGZXGD9X%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0BGZXGD9X%26pd_rd_r%3Dbc10b9d8-9385-4c28-af49-6d0cfcfd90b5%26pd_rd_w%3Di10J7%26pd_rd_wg%3DtH2U2%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3DRAWJPWY5PDDFGXCFH0J0%26qid%3D1766406781%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-147-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3D7hw7oeRu7f%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=7hw7oeRu7f&sp_cr=ZAZ",
-        "discount": "₹1,799",
+        "discount": "â‚¹1,799",
         "delivery": "2-4 days"
       },
       {
@@ -151397,7 +151397,7 @@ const products = [
         "originalPrice": 700,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo2MzYxMzY5ODAwMDE1MDA6MTc2NjQwNjc4MTpzcF9zZWFyY2hfdGhlbWF0aWM6MzAwMjU5Mzc0MjY3MTMyOjozOjo&url=%2FBoldfit-Mens-Sports-Shorts-BFTBM7001TBlackL_Black_L%2Fdp%2FB0D6BQHSGL%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0D6BQHSGL%26pd_rd_r%3Dbc10b9d8-9385-4c28-af49-6d0cfcfd90b5%26pd_rd_w%3Di10J7%26pd_rd_wg%3DtH2U2%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3DRAWJPWY5PDDFGXCFH0J0%26qid%3D1766406781%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-148-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DqgfHSprZDM%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=qgfHSprZDM&sp_cr=ZAZ",
-        "discount": "₹999",
+        "discount": "â‚¹999",
         "delivery": "2-4 days"
       },
       {
@@ -151775,10 +151775,10 @@ const products = [
   },
   {
     "id": "prod_421",
-    "title": "Cult Men’s Sports Crew Length Cotton Socks – Ultra Soft, Sweat-Absorbent & Breathable – Anti-Microbial Fabric with Arch Support, Midfoot Compression & Reinforced Toe for Comfort & Durability Pack of 3",
-    "modelName": "Cult Men’s Sports Crew Length Cotton Socks – Ultra...",
+    "title": "Cult Menâ€™s Sports Crew Length Cotton Socks â€“ Ultra Soft, Sweat-Absorbent & Breathable â€“ Anti-Microbial Fabric with Arch Support, Midfoot Compression & Reinforced Toe for Comfort & Durability Pack of 3",
+    "modelName": "Cult Menâ€™s Sports Crew Length Cotton Socks â€“ Ultra...",
     "brand": "Cult",
-    "description": "Premium quality Cult Men’s Sports Crew Length Cotton Socks – Ultra Soft, Sweat-Absorbent & Breathable – Anti-Microbial Fabric with Arch Support, Midfoot Compression & Reinforced Toe for Comfort & Durability Pack of 3 for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
+    "description": "Premium quality Cult Menâ€™s Sports Crew Length Cotton Socks â€“ Ultra Soft, Sweat-Absorbent & Breathable â€“ Anti-Microbial Fabric with Arch Support, Midfoot Compression & Reinforced Toe for Comfort & Durability Pack of 3 for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
     "category": "Sports",
     "images": [
       "https://m.media-amazon.com/images/I/51QbA8x-21L._AC_UL320_.jpg"
@@ -151795,7 +151795,7 @@ const products = [
         "originalPrice": 949,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo1ODQyNjAyMjIzNTYxNTk5OjE3NjY0MDY3ODE6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3MDY0OTIzODM1MzI6OjI6Og&url=%2FCULT-Sports-Length-Cotton-Socks%2Fdp%2FB0FJ8HP5PN%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0FJ8HP5PN%26pd_rd_r%3De0a74303-0bb0-481a-9b43-e205cfb4f3b6%26pd_rd_w%3DhJGu8%26pd_rd_wg%3Dqd8xa%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DRAWJPWY5PDDFGXCFH0J0%26qid%3D1766406781%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-147-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DWnYHVn1OAa%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=WnYHVn1OAa&sp_cr=ZAZ",
-        "discount": "₹999",
+        "discount": "â‚¹999",
         "delivery": "2-4 days"
       },
       {
@@ -152173,10 +152173,10 @@ const products = [
   },
   {
     "id": "prod_422",
-    "title": "PROBEROS® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout",
-    "modelName": "PROBEROS® 3 Pairs Professional Sport Socks for Men...",
+    "title": "PROBEROSÂ® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout",
+    "modelName": "PROBEROSÂ® 3 Pairs Professional Sport Socks for Men...",
     "brand": "Proberos",
-    "description": "Premium quality PROBEROS® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
+    "description": "Premium quality PROBEROSÂ® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
     "category": "Sports",
     "images": [
       "https://m.media-amazon.com/images/I/61NCc4EpZWL._AC_UL320_.jpg"
@@ -152193,7 +152193,7 @@ const products = [
         "originalPrice": 200,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo1ODQyNjAyMjIzNTYxNTk5OjE3NjY0MDY3ODE6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDAxMDA2MzM4ODU4MzI6OjM6Og&url=%2FProberos%25C2%25AE-Professional-Breathable-Cushioning-Basketball%2Fdp%2FB0CP41J3RZ%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0CP41J3RZ%26pd_rd_r%3De0a74303-0bb0-481a-9b43-e205cfb4f3b6%26pd_rd_w%3DhJGu8%26pd_rd_wg%3Dqd8xa%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DRAWJPWY5PDDFGXCFH0J0%26qid%3D1766406781%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-148-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DRBCagYXBnH%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=RBCagYXBnH&sp_cr=ZAZ",
-        "discount": "₹740",
+        "discount": "â‚¹740",
         "delivery": "2-4 days"
       },
       {
@@ -152591,7 +152591,7 @@ const products = [
         "originalPrice": 798,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo1ODQyNjAyMjIzNTYxNTk5OjE3NjY0MDY3ODE6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3NzY0NzI3NTU1MzI6OjQ6Og&url=%2FBODYCARE-Unisex-Thermal-Bottoms-Melange%2Fdp%2FB0BQQZLJDF%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0BQQZLJDF%26pd_rd_r%3De0a74303-0bb0-481a-9b43-e205cfb4f3b6%26pd_rd_w%3DhJGu8%26pd_rd_wg%3Dqd8xa%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DRAWJPWY5PDDFGXCFH0J0%26qid%3D1766406781%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-149-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DDomBmdFkYG%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=DomBmdFkYG&sp_cr=ZAZ",
-        "discount": "₹335",
+        "discount": "â‚¹335",
         "delivery": "2-4 days"
       },
       {
@@ -152989,7 +152989,7 @@ const products = [
         "originalPrice": 798,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo1ODQyNjAyMjIzNTYxNTk5OjE3NjY0MDY3ODE6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3NzY0NzI3NTU1MzI6OjQ6Og&url=%2FBODYCARE-Unisex-Thermal-Bottoms-Melange%2Fdp%2FB0BQQZLJDF%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0BQQZLJDF%26pd_rd_r%3De0a74303-0bb0-481a-9b43-e205cfb4f3b6%26pd_rd_w%3DhJGu8%26pd_rd_wg%3Dqd8xa%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DRAWJPWY5PDDFGXCFH0J0%26qid%3D1766406781%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-149-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DDomBmdFkYG%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=DomBmdFkYG&sp_cr=ZAZ",
-        "discount": "₹335",
+        "discount": "â‚¹335",
         "delivery": "2-4 days"
       },
       {
@@ -153387,7 +153387,7 @@ const products = [
         "originalPrice": 798,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo1ODQyNjAyMjIzNTYxNTk5OjE3NjY0MDY3ODE6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3NzY0NzI3NTU1MzI6OjQ6Og&url=%2FBODYCARE-Unisex-Thermal-Bottoms-Melange%2Fdp%2FB0BQQZLJDF%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0BQQZLJDF%26pd_rd_r%3De0a74303-0bb0-481a-9b43-e205cfb4f3b6%26pd_rd_w%3DhJGu8%26pd_rd_wg%3Dqd8xa%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DRAWJPWY5PDDFGXCFH0J0%26qid%3D1766406781%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-149-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DDomBmdFkYG%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=DomBmdFkYG&sp_cr=ZAZ",
-        "discount": "₹335",
+        "discount": "â‚¹335",
         "delivery": "2-4 days"
       },
       {
@@ -153785,7 +153785,7 @@ const products = [
         "originalPrice": 798,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo1ODQyNjAyMjIzNTYxNTk5OjE3NjY0MDY3ODE6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3NzY0NzI3NTU1MzI6OjQ6Og&url=%2FBODYCARE-Unisex-Thermal-Bottoms-Melange%2Fdp%2FB0BQQZLJDF%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0BQQZLJDF%26pd_rd_r%3De0a74303-0bb0-481a-9b43-e205cfb4f3b6%26pd_rd_w%3DhJGu8%26pd_rd_wg%3Dqd8xa%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DRAWJPWY5PDDFGXCFH0J0%26qid%3D1766406781%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-149-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DDomBmdFkYG%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=DomBmdFkYG&sp_cr=ZAZ",
-        "discount": "₹335",
+        "discount": "â‚¹335",
         "delivery": "2-4 days"
       },
       {
@@ -154183,7 +154183,7 @@ const products = [
         "originalPrice": 798,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo1ODQyNjAyMjIzNTYxNTk5OjE3NjY0MDY3ODE6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3NzY0NzI3NTU1MzI6OjQ6Og&url=%2FBODYCARE-Unisex-Thermal-Bottoms-Melange%2Fdp%2FB0BQQZLJDF%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0BQQZLJDF%26pd_rd_r%3De0a74303-0bb0-481a-9b43-e205cfb4f3b6%26pd_rd_w%3DhJGu8%26pd_rd_wg%3Dqd8xa%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DRAWJPWY5PDDFGXCFH0J0%26qid%3D1766406781%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-149-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DDomBmdFkYG%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=DomBmdFkYG&sp_cr=ZAZ",
-        "discount": "₹335",
+        "discount": "â‚¹335",
         "delivery": "2-4 days"
       },
       {
@@ -154581,7 +154581,7 @@ const products = [
         "originalPrice": 798,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo1ODQyNjAyMjIzNTYxNTk5OjE3NjY0MDY3ODE6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3NzY0NzI3NTU1MzI6OjQ6Og&url=%2FBODYCARE-Unisex-Thermal-Bottoms-Melange%2Fdp%2FB0BQQZLJDF%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0BQQZLJDF%26pd_rd_r%3De0a74303-0bb0-481a-9b43-e205cfb4f3b6%26pd_rd_w%3DhJGu8%26pd_rd_wg%3Dqd8xa%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DRAWJPWY5PDDFGXCFH0J0%26qid%3D1766406781%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-149-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DDomBmdFkYG%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=DomBmdFkYG&sp_cr=ZAZ",
-        "discount": "₹335",
+        "discount": "â‚¹335",
         "delivery": "2-4 days"
       },
       {
@@ -154979,7 +154979,7 @@ const products = [
         "originalPrice": 798,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo1ODQyNjAyMjIzNTYxNTk5OjE3NjY0MDY3ODE6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3NzY0NzI3NTU1MzI6OjQ6Og&url=%2FBODYCARE-Unisex-Thermal-Bottoms-Melange%2Fdp%2FB0BQQZLJDF%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0BQQZLJDF%26pd_rd_r%3De0a74303-0bb0-481a-9b43-e205cfb4f3b6%26pd_rd_w%3DhJGu8%26pd_rd_wg%3Dqd8xa%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DRAWJPWY5PDDFGXCFH0J0%26qid%3D1766406781%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-149-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DDomBmdFkYG%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=DomBmdFkYG&sp_cr=ZAZ",
-        "discount": "₹335",
+        "discount": "â‚¹335",
         "delivery": "2-4 days"
       },
       {
@@ -155377,7 +155377,7 @@ const products = [
         "originalPrice": 798,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo1ODQyNjAyMjIzNTYxNTk5OjE3NjY0MDY3ODE6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3NzY0NzI3NTU1MzI6OjQ6Og&url=%2FBODYCARE-Unisex-Thermal-Bottoms-Melange%2Fdp%2FB0BQQZLJDF%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0BQQZLJDF%26pd_rd_r%3De0a74303-0bb0-481a-9b43-e205cfb4f3b6%26pd_rd_w%3DhJGu8%26pd_rd_wg%3Dqd8xa%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DRAWJPWY5PDDFGXCFH0J0%26qid%3D1766406781%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-149-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DDomBmdFkYG%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=DomBmdFkYG&sp_cr=ZAZ",
-        "discount": "₹335",
+        "discount": "â‚¹335",
         "delivery": "2-4 days"
       },
       {
@@ -155775,7 +155775,7 @@ const products = [
         "originalPrice": 798,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo1ODQyNjAyMjIzNTYxNTk5OjE3NjY0MDY3ODE6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3NzY0NzI3NTU1MzI6OjQ6Og&url=%2FBODYCARE-Unisex-Thermal-Bottoms-Melange%2Fdp%2FB0BQQZLJDF%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0BQQZLJDF%26pd_rd_r%3De0a74303-0bb0-481a-9b43-e205cfb4f3b6%26pd_rd_w%3DhJGu8%26pd_rd_wg%3Dqd8xa%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DRAWJPWY5PDDFGXCFH0J0%26qid%3D1766406781%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-149-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DDomBmdFkYG%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=DomBmdFkYG&sp_cr=ZAZ",
-        "discount": "₹335",
+        "discount": "â‚¹335",
         "delivery": "2-4 days"
       },
       {
@@ -156173,7 +156173,7 @@ const products = [
         "originalPrice": 798,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo1ODQyNjAyMjIzNTYxNTk5OjE3NjY0MDY3ODE6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3NzY0NzI3NTU1MzI6OjQ6Og&url=%2FBODYCARE-Unisex-Thermal-Bottoms-Melange%2Fdp%2FB0BQQZLJDF%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0BQQZLJDF%26pd_rd_r%3De0a74303-0bb0-481a-9b43-e205cfb4f3b6%26pd_rd_w%3DhJGu8%26pd_rd_wg%3Dqd8xa%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DRAWJPWY5PDDFGXCFH0J0%26qid%3D1766406781%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-149-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DDomBmdFkYG%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=DomBmdFkYG&sp_cr=ZAZ",
-        "discount": "₹335",
+        "discount": "â‚¹335",
         "delivery": "2-4 days"
       },
       {
@@ -156571,7 +156571,7 @@ const products = [
         "originalPrice": 50,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MToxMDY5NzM0ODcyMjQwMDcyOjE3NjY0MDY3OTM6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDgyNjg2Mjg4NzUzMjo6MDo6&url=%2FAthmonk-Compression-Leggings-Tights-Men%2Fdp%2FB0CQTDBD3B%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0CQTDBD3B%26pd_rd_r%3D87df6f77-3176-4eba-b087-4d29c49244d5%26pd_rd_w%3DERIMp%26pd_rd_wg%3Djjks4%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3DDYCNF4EMNK44XX000KMT%26qid%3D1766406793%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-193-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3Df8be1MV4ek%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1%26smid%3DA30MZCYSPWYLIH&aref=f8be1MV4ek&sp_cr=ZAZ",
-        "discount": "₹1,390",
+        "discount": "â‚¹1,390",
         "delivery": "2-4 days"
       },
       {
@@ -156969,7 +156969,7 @@ const products = [
         "originalPrice": 1219,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MToxMDY5NzM0ODcyMjQwMDcyOjE3NjY0MDY3OTM6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDg0OTczODA5OTkzMjo6MTo6&url=%2FVan-Heusen-Cotton-50006_Charcoal-Melange_M%2Fdp%2FB083C2H5QK%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB083C2H5QK%26pd_rd_r%3D87df6f77-3176-4eba-b087-4d29c49244d5%26pd_rd_w%3DERIMp%26pd_rd_wg%3Djjks4%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3DDYCNF4EMNK44XX000KMT%26qid%3D1766406793%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-194-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3Dir0vEzlKaK%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=ir0vEzlKaK&sp_cr=ZAZ",
-        "discount": "₹799",
+        "discount": "â‚¹799",
         "delivery": "2-4 days"
       },
       {
@@ -157367,7 +157367,7 @@ const products = [
         "originalPrice": 1604,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MToxMDY5NzM0ODcyMjQwMDcyOjE3NjY0MDY3OTM6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDE3OTIzNzk3MDczMjo6Mjo6&url=%2FSURF-CUZ-Weight-Running-Multicolor%2Fdp%2FB0BGZXGD9X%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0BGZXGD9X%26pd_rd_r%3D87df6f77-3176-4eba-b087-4d29c49244d5%26pd_rd_w%3DERIMp%26pd_rd_wg%3Djjks4%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3DDYCNF4EMNK44XX000KMT%26qid%3D1766406793%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-195-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3D7hw7oeRu7f%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=7hw7oeRu7f&sp_cr=ZAZ",
-        "discount": "₹1,799",
+        "discount": "â‚¹1,799",
         "delivery": "2-4 days"
       },
       {
@@ -157765,7 +157765,7 @@ const products = [
         "originalPrice": 700,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MToxMDY5NzM0ODcyMjQwMDcyOjE3NjY0MDY3OTM6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDI1OTM3NDI2NzEzMjo6Mzo6&url=%2FBoldfit-Mens-Sports-Shorts-BFTBM7001TBlackL_Black_L%2Fdp%2FB0D6BQHSGL%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0D6BQHSGL%26pd_rd_r%3D87df6f77-3176-4eba-b087-4d29c49244d5%26pd_rd_w%3DERIMp%26pd_rd_wg%3Djjks4%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3DDYCNF4EMNK44XX000KMT%26qid%3D1766406793%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-196-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DqgfHSprZDM%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=qgfHSprZDM&sp_cr=ZAZ",
-        "discount": "₹999",
+        "discount": "â‚¹999",
         "delivery": "2-4 days"
       },
       {
@@ -158143,10 +158143,10 @@ const products = [
   },
   {
     "id": "prod_437",
-    "title": "Cult Men’s Sports Crew Length Cotton Socks – Ultra Soft, Sweat-Absorbent & Breathable – Anti-Microbial Fabric with Arch Support, Midfoot Compression & Reinforced Toe for Comfort & Durability Pack of 3",
-    "modelName": "Cult Men’s Sports Crew Length Cotton Socks – Ultra...",
+    "title": "Cult Menâ€™s Sports Crew Length Cotton Socks â€“ Ultra Soft, Sweat-Absorbent & Breathable â€“ Anti-Microbial Fabric with Arch Support, Midfoot Compression & Reinforced Toe for Comfort & Durability Pack of 3",
+    "modelName": "Cult Menâ€™s Sports Crew Length Cotton Socks â€“ Ultra...",
     "brand": "Cult",
-    "description": "Premium quality Cult Men’s Sports Crew Length Cotton Socks – Ultra Soft, Sweat-Absorbent & Breathable – Anti-Microbial Fabric with Arch Support, Midfoot Compression & Reinforced Toe for Comfort & Durability Pack of 3 for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
+    "description": "Premium quality Cult Menâ€™s Sports Crew Length Cotton Socks â€“ Ultra Soft, Sweat-Absorbent & Breathable â€“ Anti-Microbial Fabric with Arch Support, Midfoot Compression & Reinforced Toe for Comfort & Durability Pack of 3 for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
     "category": "Sports",
     "images": [
       "https://m.media-amazon.com/images/I/51QbA8x-21L._AC_UL320_.jpg"
@@ -158163,7 +158163,7 @@ const products = [
         "originalPrice": 949,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo4NDY0MDY0MzY4ODg0MjE3OjE3NjY0MDY3OTM6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3MDY0OTIzODM1MzI6OjI6Og&url=%2FCULT-Sports-Length-Cotton-Socks%2Fdp%2FB0FJ8HP5PN%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0FJ8HP5PN%26pd_rd_r%3D783994b0-f35f-4a7e-bcaf-e4b1220cfc58%26pd_rd_w%3DZPgIx%26pd_rd_wg%3DUxKoL%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DDYCNF4EMNK44XX000KMT%26qid%3D1766406793%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-195-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DWnYHVn1OAa%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=WnYHVn1OAa&sp_cr=ZAZ",
-        "discount": "₹999",
+        "discount": "â‚¹999",
         "delivery": "2-4 days"
       },
       {
@@ -158541,10 +158541,10 @@ const products = [
   },
   {
     "id": "prod_438",
-    "title": "CULT Men’s Cotton Socks – Ultra Soft, Breathable & Anti-Microbial – Ankle Length Casual & Sports Socks with Moisture-Absorbent Fabric, Superior Fit Technology & Durable Design - Pack of 3",
-    "modelName": "CULT Men’s Cotton Socks – Ultra Soft, Breathable &...",
+    "title": "CULT Menâ€™s Cotton Socks â€“ Ultra Soft, Breathable & Anti-Microbial â€“ Ankle Length Casual & Sports Socks with Moisture-Absorbent Fabric, Superior Fit Technology & Durable Design - Pack of 3",
+    "modelName": "CULT Menâ€™s Cotton Socks â€“ Ultra Soft, Breathable &...",
     "brand": "Cult",
-    "description": "Premium quality CULT Men’s Cotton Socks – Ultra Soft, Breathable & Anti-Microbial – Ankle Length Casual & Sports Socks with Moisture-Absorbent Fabric, Superior Fit Technology & Durable Design - Pack of 3 for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
+    "description": "Premium quality CULT Menâ€™s Cotton Socks â€“ Ultra Soft, Breathable & Anti-Microbial â€“ Ankle Length Casual & Sports Socks with Moisture-Absorbent Fabric, Superior Fit Technology & Durable Design - Pack of 3 for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
     "category": "Sports",
     "images": [
       "https://m.media-amazon.com/images/I/51Si9z-NbvL._AC_UL320_.jpg"
@@ -158561,7 +158561,7 @@ const products = [
         "originalPrice": 814,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo4NDY0MDY0MzY4ODg0MjE3OjE3NjY0MDY3OTM6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3MDY0OTIzODIyMzI6OjM6Og&url=%2FCULT-Mens-Cotton-Socks-Moisture-Absorbent%2Fdp%2FB0FJ8L2XD3%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0FJ8L2XD3%26pd_rd_r%3D783994b0-f35f-4a7e-bcaf-e4b1220cfc58%26pd_rd_w%3DZPgIx%26pd_rd_wg%3DUxKoL%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DDYCNF4EMNK44XX000KMT%26qid%3D1766406793%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-196-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DDLizVmcnGD%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=DLizVmcnGD&sp_cr=ZAZ",
-        "discount": "₹649",
+        "discount": "â‚¹649",
         "delivery": "2-4 days"
       },
       {
@@ -158959,7 +158959,7 @@ const products = [
         "originalPrice": 814,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo4NDY0MDY0MzY4ODg0MjE3OjE3NjY0MDY3OTM6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3Mzg1NDgyMjk4MzI6OjQ6Og&url=%2FSockSoho-Night-Solid-Black-Length%2Fdp%2FB0FBGWH7L6%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0FBGWH7L6%26pd_rd_r%3D783994b0-f35f-4a7e-bcaf-e4b1220cfc58%26pd_rd_w%3DZPgIx%26pd_rd_wg%3DUxKoL%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DDYCNF4EMNK44XX000KMT%26qid%3D1766406793%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-197-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3D2CNjctzt5k%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=2CNjctzt5k&sp_cr=ZAZ",
-        "discount": "₹499",
+        "discount": "â‚¹499",
         "delivery": "2-4 days"
       },
       {
@@ -159337,10 +159337,10 @@ const products = [
   },
   {
     "id": "prod_440",
-    "title": "Cult Men’s Sports Crew Length Cotton Socks – Ultra Soft, Sweat-Absorbent & Breathable – Anti-Microbial Fabric with Arch Support, Midfoot Compression & Reinforced Toe for Comfort & Durability Pack of 3",
-    "modelName": "Cult Men’s Sports Crew Length Cotton Socks – Ultra...",
+    "title": "Cult Menâ€™s Sports Crew Length Cotton Socks â€“ Ultra Soft, Sweat-Absorbent & Breathable â€“ Anti-Microbial Fabric with Arch Support, Midfoot Compression & Reinforced Toe for Comfort & Durability Pack of 3",
+    "modelName": "Cult Menâ€™s Sports Crew Length Cotton Socks â€“ Ultra...",
     "brand": "Cult",
-    "description": "Premium quality Cult Men’s Sports Crew Length Cotton Socks – Ultra Soft, Sweat-Absorbent & Breathable – Anti-Microbial Fabric with Arch Support, Midfoot Compression & Reinforced Toe for Comfort & Durability Pack of 3 for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
+    "description": "Premium quality Cult Menâ€™s Sports Crew Length Cotton Socks â€“ Ultra Soft, Sweat-Absorbent & Breathable â€“ Anti-Microbial Fabric with Arch Support, Midfoot Compression & Reinforced Toe for Comfort & Durability Pack of 3 for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
     "category": "Sports",
     "images": [
       "https://m.media-amazon.com/images/I/51QbA8x-21L._AC_UL320_.jpg"
@@ -159357,7 +159357,7 @@ const products = [
         "originalPrice": 949,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo0NDYwNjgwNDUzMjg4NTQ0OjE3NjY0MDY4MDI6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA3MDY0OTIzODM1MzI6OjI6Og&url=%2FCULT-Sports-Length-Cotton-Socks%2Fdp%2FB0FJ8HP5PN%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0FJ8HP5PN%26pd_rd_r%3D75b97d9d-07e9-4c6a-a9af-ff14ef1af539%26pd_rd_w%3DCsgl8%26pd_rd_wg%3DDmaCz%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DP9ZZMZG94FYB20YXAENW%26qid%3D1766406802%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-243-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DWnYHVn1OAa%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=WnYHVn1OAa&sp_cr=ZAZ",
-        "discount": "₹999",
+        "discount": "â‚¹999",
         "delivery": "2-4 days"
       },
       {
@@ -159735,10 +159735,10 @@ const products = [
   },
   {
     "id": "prod_441",
-    "title": "PROBEROS® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout",
-    "modelName": "PROBEROS® 3 Pairs Professional Sport Socks for Men...",
+    "title": "PROBEROSÂ® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout",
+    "modelName": "PROBEROSÂ® 3 Pairs Professional Sport Socks for Men...",
     "brand": "Proberos",
-    "description": "Premium quality PROBEROS® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
+    "description": "Premium quality PROBEROSÂ® 3 Pairs Professional Sport Socks for Men, Breathable Cricket Socks, Anti-Slip Sole Design, Towel Cushioning Athletic Sports for Basketball, Football, Running, Cycling, Workout for professional and amateur sports enthusiasts. Part of our curated selection of high-performance gear.",
     "category": "Sports",
     "images": [
       "https://m.media-amazon.com/images/I/61NCc4EpZWL._AC_UL320_.jpg"
@@ -159755,7 +159755,7 @@ const products = [
         "originalPrice": 200,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo0NDYwNjgwNDUzMjg4NTQ0OjE3NjY0MDY4MDI6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDAxMDA2MzM4ODU4MzI6OjM6Og&url=%2FProberos%25C2%25AE-Professional-Breathable-Cushioning-Basketball%2Fdp%2FB0CP41J3RZ%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0CP41J3RZ%26pd_rd_r%3D75b97d9d-07e9-4c6a-a9af-ff14ef1af539%26pd_rd_w%3DCsgl8%26pd_rd_wg%3DDmaCz%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DP9ZZMZG94FYB20YXAENW%26qid%3D1766406802%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-244-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DRBCagYXBnH%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=RBCagYXBnH&sp_cr=ZAZ",
-        "discount": "₹740",
+        "discount": "â‚¹740",
         "delivery": "2-4 days"
       },
       {
@@ -160153,7 +160153,7 @@ const products = [
         "originalPrice": 2549,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo0NDYwNjgwNDUzMjg4NTQ0OjE3NjY0MDY4MDI6c3Bfc2VhcmNoX3RoZW1hdGljX2J0ZjozMDA2NjQyMjY4NjQxMzI6OjQ6Og&url=%2FTURMS-Stripped-Repellent-Stretchable-Available%2Fdp%2FB0F6Y49F2R%2Fref%3Dsxbs_pa_sp_search_thematic_btf_sspa%3Fcontent-id%3Damzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%253Aamzn1.sym.1ee134bc-32b2-41b4-b087-995ae57bc094%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0F6Y49F2R%26pd_rd_r%3D75b97d9d-07e9-4c6a-a9af-ff14ef1af539%26pd_rd_w%3DCsgl8%26pd_rd_wg%3DDmaCz%26pf_rd_p%3D1ee134bc-32b2-41b4-b087-995ae57bc094%26pf_rd_r%3DP9ZZMZG94FYB20YXAENW%26qid%3D1766406802%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-245-39d2cf51-924d-44a4-921d-0c8fa4cce3c9-spons%26xpid%3DJXiBejouzSJ9P%26aref%3D0qmSQsJNGt%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWNfYnRm%26psc%3D1&aref=0qmSQsJNGt&sp_cr=ZAZ",
-        "discount": "₹2,499",
+        "discount": "â‚¹2,499",
         "delivery": "2-4 days"
       },
       {
@@ -160551,7 +160551,7 @@ const products = [
         "originalPrice": 50,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo2MDM2MjEzMTI3NDQ5OTc3OjE3NjY0MDY4MDg6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDgxNjk4MTY0NjUzMjo6MDo6&url=%2FXYXX-Antibacterial-Friendly-Retention-IntelliHeat%2Fdp%2FB09GYLJ157%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB09GYLJ157%26pd_rd_r%3Df8b4dee5-56f5-451c-818d-003921172538%26pd_rd_w%3DYcJZu%26pd_rd_wg%3Db4xmj%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3D3DZMVPCQ9HTDXXHVKJR3%26qid%3D1766406808%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-289-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3Dl63QbK6dix%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=l63QbK6dix&sp_cr=ZAZ",
-        "discount": "₹749",
+        "discount": "â‚¹749",
         "delivery": "2-4 days"
       },
       {
@@ -160949,7 +160949,7 @@ const products = [
         "originalPrice": 700,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo2MDM2MjEzMTI3NDQ5OTc3OjE3NjY0MDY4MDg6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDI1OTM3NDI2NzEzMjo6MTo6&url=%2FBoldfit-Mens-Sports-Shorts-BFTBM7001TBlackL_Black_L%2Fdp%2FB0D6BQHSGL%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0D6BQHSGL%26pd_rd_r%3Df8b4dee5-56f5-451c-818d-003921172538%26pd_rd_w%3DYcJZu%26pd_rd_wg%3Db4xmj%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3D3DZMVPCQ9HTDXXHVKJR3%26qid%3D1766406808%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-290-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3DqgfHSprZDM%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=qgfHSprZDM&sp_cr=ZAZ",
-        "discount": "₹999",
+        "discount": "â‚¹999",
         "delivery": "2-4 days"
       },
       {
@@ -161347,7 +161347,7 @@ const products = [
         "originalPrice": 50,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo2MDM2MjEzMTI3NDQ5OTc3OjE3NjY0MDY4MDg6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDgyNjg2Mjg4NzUzMjo6Mjo6&url=%2FAthmonk-Compression-Leggings-Tights-Men%2Fdp%2FB0CQTDBD3B%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0CQTDBD3B%26pd_rd_r%3Df8b4dee5-56f5-451c-818d-003921172538%26pd_rd_w%3DYcJZu%26pd_rd_wg%3Db4xmj%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3D3DZMVPCQ9HTDXXHVKJR3%26qid%3D1766406808%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-291-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3Df8be1MV4ek%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1%26smid%3DA30MZCYSPWYLIH&aref=f8be1MV4ek&sp_cr=ZAZ",
-        "discount": "₹1,390",
+        "discount": "â‚¹1,390",
         "delivery": "2-4 days"
       },
       {
@@ -161745,7 +161745,7 @@ const products = [
         "originalPrice": 1449,
         "marketplace": "Amazon",
         "url": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo2MDM2MjEzMTI3NDQ5OTc3OjE3NjY0MDY4MDg6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDgwNjY2NDk0OTAzMjo6Mzo6&url=%2FMens-Full-Sleeve-Compression-T-Shirt%2Fdp%2FB0B51VF935%2Fref%3Dsxin_13_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%253Aamzn1.sym.f4325b99-8968-4d6c-a274-a54cc530dfac%26crid%3D1S4CUIY39GCX9%26cv_ct_cx%3Dsports%26keywords%3Dsports%26pd_rd_i%3DB0B51VF935%26pd_rd_r%3Df8b4dee5-56f5-451c-818d-003921172538%26pd_rd_w%3DYcJZu%26pd_rd_wg%3Db4xmj%26pf_rd_p%3Df4325b99-8968-4d6c-a274-a54cc530dfac%26pf_rd_r%3D3DZMVPCQ9HTDXXHVKJR3%26qid%3D1766406808%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dsports%252Caps%252C238%26sr%3D1-292-2ec22325-1003-449d-8aaf-c0bcc24717ae-spons%26xpid%3DJXiBejouzSJ9P%26aref%3D52JxsiE6dt%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1&aref=52JxsiE6dt&sp_cr=ZAZ",
-        "discount": "₹2,499",
+        "discount": "â‚¹2,499",
         "delivery": "2-4 days"
       },
       {
@@ -162145,24 +162145,142 @@ app.get('/api/v1/user/profile', (req, res) => {
   });
 });
 
+
+// Mock Phones for Smart Specifications
+// Start of Mock Phones
+const mockPhones = [
+  {
+    id: 'ph_op12r',
+    title: 'OnePlus 12R',
+    brand: 'OnePlus',
+    category: 'Mobiles',
+    price: 499 * 85,
+    rating: 4.6,
+    reviewCount: "1.2k",
+    image: 'https://images.unsplash.com/photo-1628148856453-29402518e95c?auto=format&fit=crop&q=80&w=500',
+    description: '8GB RAM, 128GB Storage, AMOLED Display, 120Hz Smooth UI, Fast Charging, Snapdragon High-end Processor',
+    offers: [{ price: 499 * 85, store: 'Amazon' }]
+  },
+  {
+    id: 'ph_s23',
+    title: 'Samsung Galaxy S23',
+    brand: 'Samsung',
+    category: 'Mobiles',
+    price: 749 * 85,
+    rating: 4.7,
+    reviewCount: "850",
+    image: 'https://images.unsplash.com/photo-1675769273919-4cb50de00578?auto=format&fit=crop&q=80&w=500',
+    description: 'High-Resolution Main Camera, OIS Camera, AMOLED Display, Wireless Charging, 256GB Storage, Water Resistant',
+    offers: [{ price: 749 * 85, store: 'Samsung Shop' }]
+  },
+  {
+    id: 'ph_iqoo',
+    title: 'iQOO Neo 7 Pro',
+    brand: 'iQOO',
+    category: 'Mobiles',
+    price: 429 * 85,
+    rating: 4.5,
+    reviewCount: "500",
+    image: 'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&q=80&w=500',
+    description: 'Gaming Focus, 144Hz Refresh Rate, 12GB RAM, Thermal Cooling for Gaming, Fast Charging 120W',
+    offers: [{ price: 429 * 85, store: 'Amazon' }]
+  },
+  {
+    id: 'ph_pixel7a',
+    title: 'Google Pixel 7a',
+    brand: 'Google',
+    category: 'Mobiles',
+    price: 449 * 85,
+    rating: 4.7,
+    reviewCount: "2k",
+    image: 'https://images.unsplash.com/photo-1610438235354-a6ae5528385c?auto=format&fit=crop&q=80&w=500',
+    description: 'Best Camera, Good Selfie Camera, Stock Android, 5G Support, 128GB, OIS',
+    offers: [{ price: 449 * 85, store: 'Flipkart' }]
+  }
+];
+
+products.push(...mockPhones);
+// End of Mock Phones
 app.get('/api/v1/products/search', (req, res) => {
-  const query = (req.query.q || '').toLowerCase().trim();
-  const category = req.query.category;
+    const query = (req.query.q || '').toLowerCase().trim();
+    const category = req.query.category;
 
-  let filtered = products;
+    // Filter Params
+    let brands = req.query.brands;
+    if (brands && !Array.isArray(brands)) brands = [brands];
 
-  if (category && category !== 'All') {
-    filtered = filtered.filter(p => p.category === category);
-  }
+    let attributes = req.query.attributes;
+    if (attributes && !Array.isArray(attributes)) attributes = [attributes];
 
-  if (query) {
-    const searchTerms = query.split(/\s+/).filter(t => t.length > 0);
-    filtered = filtered.filter(p => {
-      const searchStr = `${p.title} ${p.brand} ${p.modelName || ''} ${p.description || ''}`.toLowerCase();
-      return searchTerms.every(term => searchStr.includes(term));
-    });
-  }
+    const minPrice = parseFloat(req.query.min_price) || 0;
+    const maxPrice = parseFloat(req.query.max_price) || Number.MAX_VALUE;
 
+    let filtered = products;
+
+    // 1. Initial Filtering by Category
+    if (category && category !== 'All') {
+        const catLower = category.toLowerCase();
+        if (catLower === 'laptop' || catLower === 'laptops') {
+            filtered = filtered.filter(p =>
+                (p.category === 'Electronics' || p.category === 'Computers' || p.category === 'Laptops') &&
+                (p.title.toLowerCase().includes('laptop') || (p.description && p.description.toLowerCase().includes('laptop')))
+            );
+        } else if (catLower === 'phone' || catLower === 'smartphone' || catLower === 'mobiles' || catLower === 'mobiles') {
+            filtered = filtered.filter(p =>
+                (p.category === 'Electronics' || p.category === 'Mobiles' || p.category === 'Phones' || p.category === 'Smartphones' || p.category === 'Smart Phone') &&
+                (p.title.toLowerCase().includes('phone') || p.title.toLowerCase().includes('mobile') || p.id.startsWith('ph_'))
+            );
+        } else {
+            filtered = filtered.filter(p => p.category && p.category.toLowerCase() === catLower);
+        }
+    }
+
+    // 2. Initial Filtering by Query string
+    if (query) {
+        const searchTerms = query.split(/\s+/).filter(t => t.length > 0);
+        filtered = filtered.filter(p => {
+            const searchStr = `${p.title} ${p.brand} ${p.modelName || p.title} ${p.description || ''} ${p.category || ''}`.toLowerCase();
+            return searchTerms.every(term => searchStr.includes(term));
+        });
+    }
+
+    // Store "Regular" results state before applying specific preference filters
+    const regularResults = [...filtered];
+
+    // 3. Apply Brand Filter
+    if (brands && brands.length > 0) {
+        const lowerBrands = brands.map(b => b.toLowerCase());
+        filtered = filtered.filter(p => p.brand && lowerBrands.includes(p.brand.toLowerCase()));
+    }
+
+    // 4. Apply Attributes (Improved fuzzy matching for "AMOLED / OLED" styles)
+    if (attributes && attributes.length > 0) {
+        filtered = filtered.filter(p => {
+            const pStr = JSON.stringify(p).toLowerCase();
+            // Lenient: match ANY selected attribute preference
+            return attributes.some(attr => {
+                // Handle "AMOLED / OLED" or "12GB | 16GB" by splitting
+                const parts = attr.toLowerCase().split(/\s*[\/|]\s*/).filter(s => s.length > 1);
+                if (parts.length === 0) return pStr.includes(attr.toLowerCase());
+                return parts.some(part => pStr.includes(part));
+            });
+        });
+    }
+
+    // 5. Fallback Logic: If preferences filtered out everything, show the regular query results
+    if (filtered.length === 0 && regularResults.length > 0 && (brands?.length > 0 || attributes?.length > 0)) {
+        console.log('No preference matches, falling back to regular search results');
+        filtered = regularResults;
+    }
+
+    // 6. Price Filter (Final constraint)
+    if (minPrice > 0 || maxPrice < Number.MAX_VALUE) {
+        filtered = filtered.filter(p => {
+            let price = p.price || 0;
+            if (p.offers && p.offers.length > 0) price = p.offers[0].price;
+            return price >= minPrice && price <= maxPrice;
+        });
+    }
   // Prioritize Visible Products (Images) & Jumble All
   const hasImage = (p) => (p.images && p.images.length > 0 && p.images[0]) || (p.image && p.image.length > 0);
 
@@ -162226,7 +162344,7 @@ app.post('/api/v1/track', (req, res) => {
 
 app.post('/api/v1/kits/generate', (req, res) => {
   const { userId, category, budget } = req.body;
-  console.log(`Generating Kit: Cat=${category}, Budget=₹${budget}`);
+  console.log(`Generating Kit: Cat=${category}, Budget=â‚¹${budget}`);
 
   let catFilter = category;
   if (category === 'Cosmetics') catFilter = 'Cosmetics'; // Match real data

@@ -9,6 +9,7 @@ import '../models/product.dart';
 import '../state/app_providers.dart';
 import '../widgets/empty_and_loading.dart';
 import '../widgets/product_detail_modal.dart';
+import '../../features/search/widgets/smart_preferences_panel.dart';
 
 class DealsScreen extends ConsumerStatefulWidget {
   const DealsScreen({super.key, this.searchQuery});
@@ -22,26 +23,56 @@ class DealsScreen extends ConsumerStatefulWidget {
 class _DealsScreenState extends ConsumerState<DealsScreen> {
   late Future<List<ProductDeal>> _futureDeals;
   late TextEditingController _searchController;
+  
+  // Smart Preferences State
+  String? _detectedCategory;
+  Map<String, dynamic> _currentFilters = {};
 
   @override
   void initState() {
     super.initState();
-    // Initialize with searchQuery from widget or provider
     final providerQuery = ref.read(dealSearchQueryProvider);
     final initialQuery = widget.searchQuery ?? providerQuery ?? '';
     _searchController = TextEditingController(text: initialQuery);
+    _searchController.addListener(_onSearchChanged); // Add listener
     _loadDeals();
   }
 
+  void _onSearchChanged() {
+    final text = _searchController.text;
+    final lowerText = text.toLowerCase();
+    
+    String? newCategory;
+    if (lowerText.contains('laptop')) {
+      newCategory = 'Laptop';
+    } else if (lowerText.contains('phone') || lowerText.contains('smartphone')) {
+      newCategory = 'Phone';
+    }
 
+    if (newCategory != _detectedCategory) {
+      setState(() {
+        _detectedCategory = newCategory;
+        if (newCategory == null) {
+          _currentFilters = {};
+          // Optionally reload deals here if we want to clear filters immediately
+        }
+      });
+    }
+  }
+
+  void _applyFilters(Map<String, dynamic> filters) {
+    setState(() {
+      _currentFilters = filters;
+    });
+    _loadDeals(); // Reload with filters
+  }
 
   void _loadDeals() {
     final repo = ref.read(productRepositoryProvider);
     final query = _searchController.text.trim();
     if (query.isNotEmpty) {
-      _futureDeals = repo.searchForDeals(query);
+      _futureDeals = repo.searchForDeals(query, filters: _currentFilters);
     } else {
-      // Empty query - show empty state
       _futureDeals = Future.value([]);
     }
     setState(() {});
@@ -49,20 +80,19 @@ class _DealsScreenState extends ConsumerState<DealsScreen> {
 
   @override
   void dispose() {
+    _searchController.removeListener(_onSearchChanged);
     _searchController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Listen to changes in search query provider
     ref.listen(dealSearchQueryProvider, (previous, next) {
       if (next != null && next.isNotEmpty && next != _searchController.text) {
         setState(() {
           _searchController.text = next;
         });
         _loadDeals();
-        // Clear the provider after using it to prevent loop
         ref.read(dealSearchQueryProvider.notifier).state = null;
       }
     });
@@ -79,7 +109,7 @@ class _DealsScreenState extends ConsumerState<DealsScreen> {
               controller: _searchController,
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
-                hintText: 'Search products to compare prices...',
+                hintText: 'Search products (type "Phone")...',
                 hintStyle: const TextStyle(color: Colors.white54),
                 prefixIcon: const Icon(Icons.search, color: Colors.white70),
                 suffixIcon: _searchController.text.isNotEmpty
@@ -87,6 +117,10 @@ class _DealsScreenState extends ConsumerState<DealsScreen> {
                         icon: const Icon(Icons.clear, color: Colors.white70),
                         onPressed: () {
                           _searchController.clear();
+                          setState(() {
+                             _detectedCategory = null;
+                             _currentFilters = {};
+                          });
                           _loadDeals();
                         },
                       )
@@ -103,35 +137,58 @@ class _DealsScreenState extends ConsumerState<DealsScreen> {
           ),
         ),
       ),
-      body: FutureBuilder<List<ProductDeal>>(
-        future: _futureDeals,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const LoadingShimmer();
-          }
+      body: CustomScrollView(
+        slivers: [
+          // 1. Smart Preferences Panel (Sliver)
+          if (_detectedCategory != null)
+            SliverToBoxAdapter(
+              child: AnimatedSize(
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeOutCubic,
+                child: SmartPreferencesPanel(
+                  category: _detectedCategory!,
+                  onApply: _applyFilters,
+                ),
+              ),
+            ),
 
-          final deals = snapshot.data!;
-          if (deals.isEmpty) {
-            return EmptyStateCard(
-              title: _searchController.text.isEmpty
-                  ? 'Start Your Search'
-                  : 'No deals found',
-              message: _searchController.text.isEmpty
-                  ? 'Search for a product to compare prices across platforms'
-                  : 'Try a different search term or check back later',
-            );
-          }
+          // 2. Results List (Sliver)
+          FutureBuilder<List<ProductDeal>>(
+            future: _futureDeals,
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const SliverToBoxAdapter(child: LoadingShimmer());
+              }
 
-          return ListView.separated(
-            padding: const EdgeInsets.all(16),
-            itemCount: deals.length,
-            separatorBuilder: (_, __) => const SizedBox(height: 24),
-            itemBuilder: (context, index) {
-              final deal = deals[index];
-              return _ProductComparisonCard(deal: deal);
+              final deals = snapshot.data!;
+              if (deals.isEmpty) {
+                return SliverToBoxAdapter(
+                  child: EmptyStateCard(
+                    title: _searchController.text.isEmpty
+                        ? 'Start Your Search'
+                        : 'No deals found',
+                    message: _searchController.text.isEmpty
+                        ? 'Search for a product to compare prices across platforms'
+                        : 'Try a different search term or check filters',
+                  ),
+                );
+              }
+
+              return SliverPadding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      final deal = deals[index];
+                      return _ProductComparisonCard(deal: deal);
+                    },
+                    childCount: deals.length,
+                  ),
+                ),
+              );
             },
-          );
-        },
+          ),
+        ],
       ),
     );
   }

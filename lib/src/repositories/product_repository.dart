@@ -30,7 +30,7 @@ class ProductRepository {
     final params = <String, dynamic>{
       'q': query ?? '',
       if (category != null && category.isNotEmpty) 'category': category,
-      // Backend doesn't support pagination yet, but keeping params for future
+      if (filters != null) ...filters,
     };
 
     final Response<dynamic> response =
@@ -98,14 +98,19 @@ class ProductRepository {
   }
 
   /// Search for product deals with price comparison across platforms
-  Future<List<ProductDeal>> searchForDeals(String query) async {
+  Future<List<ProductDeal>> searchForDeals(String query, {Map<String, dynamic>? filters}) async {
+    final params = <String, dynamic>{
+      'q': query,
+      if (filters != null) ...filters,
+    };
+
     final Response<dynamic> response = await _client.dio.get(
-      '/search/compare',
-      queryParameters: {'q': query},
+      '/products/search', // Updated to use the smart filtering endpoint
+      queryParameters: params,
     );
 
-    final data = response.data as Map<String, dynamic>;
-    final List<dynamic> results = data['results'] as List<dynamic>? ?? [];
+    // Backend returns List<dynamic> directly for /products/search
+    final List<dynamic> results = response.data as List<dynamic>;
 
     return results
         .map((e) => ProductDeal.fromJson(e as Map<String, dynamic>))

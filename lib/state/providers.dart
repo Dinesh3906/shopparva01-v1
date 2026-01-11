@@ -63,3 +63,9 @@ final homeFeedProvider = FutureProvider<List<Product>>((ref) async {
   // Empty query returns the full catalog from the mock backend.
   return api.searchProducts('');
 });
+
+// Filtered search provider (Manual definition to avoid code gen issues)
+final filteredSearchProvider = FutureProvider.autoDispose.family<List<Product>, ({String query, Map<String, dynamic> filters})>((ref, args) async {
+  final api = ref.read(apiServiceProvider);
+  return api.searchProducts(args.query, filters: args.filters);
+});
