@@ -5,7 +5,7 @@ import 'dart:math';
 
 import '../../core/theme_tokens.dart';
 import '../models/product_deal.dart';
-import '../models/product.dart';
+import 'package:shopparva/models/product.dart';
 import '../state/app_providers.dart';
 import '../widgets/empty_and_loading.dart';
 import '../widgets/product_detail_modal.dart';
@@ -438,12 +438,16 @@ class _PlatformOfferCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Text(
-                      offer.platform,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
+                    Expanded(
+                      child: Text(
+                        offer.platform,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
                     ),
                     if (offer.isBestPrice) ...[
                       const SizedBox(width: 8),
@@ -471,6 +475,8 @@ class _PlatformOfferCard extends StatelessWidget {
                 ),
                 Text(
                   offer.seller,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall
@@ -479,56 +485,66 @@ class _PlatformOfferCard extends StatelessWidget {
               ],
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (offer.discount != null && offer.discount!.isNotEmpty)
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: ThemeTokens.accent.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Text(
-                        offer.discount!,
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelSmall
-                            ?.copyWith(
-                              color: ThemeTokens.accent,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 10,
-                            ),
-                      ),
-                    ),
-                  if (offer.discount != null && offer.discount!.isNotEmpty)
-                    const SizedBox(width: 8),
-                  Text(
-                    '${offer.currency.replaceAll('\$', '₹')}${offer.price.toStringAsFixed(0)}',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: offer.isBestPrice
-                              ? ThemeTokens.accent
-                              : Colors.white,
-                          fontWeight: FontWeight.bold,
+          const SizedBox(width: 8),
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    if (offer.discount != null && offer.discount!.isNotEmpty)
+                      Flexible(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: ThemeTokens.accent.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            offer.discount!,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall
+                                ?.copyWith(
+                                  color: ThemeTokens.accent,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 10,
+                                ),
+                          ),
                         ),
-                  ),
-                ],
-              ),
-              if (offer.delivery != null)
-                Padding(
-                  padding: const EdgeInsets.only(top: 4),
-                  child: Text(
-                    offer.delivery!,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall
-                        ?.copyWith(color: Colors.white54, fontSize: 10),
-                  ),
+                      ),
+                    if (offer.discount != null && offer.discount!.isNotEmpty)
+                      const SizedBox(width: 4),
+                    Text(
+                      '${offer.currency.replaceAll('\$', '₹')}${offer.price.toStringAsFixed(0)}',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: offer.isBestPrice
+                                ? ThemeTokens.accent
+                                : Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ],
                 ),
-            ],
+                if (offer.delivery != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: Text(
+                      offer.delivery!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: Colors.white54, fontSize: 10),
+                    ),
+                  ),
+              ],
+            ),
           ),
           const SizedBox(width: 8),
           Icon(

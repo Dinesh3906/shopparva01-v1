@@ -1,10 +1,12 @@
 
+import 'dart:convert';
+import 'package:flutter/services.dart';
 
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/api_client.dart';
-import '../models/product.dart';
+import 'package:shopparva/models/product.dart';
 import '../models/product_deal.dart';
 
 class ProductRepository {
@@ -13,11 +15,32 @@ class ProductRepository {
   final ApiClient _client;
 
   final Map<String, Product> _productCache = {};
+  List<Product>? _allLocalProducts;
+
+  Future<void> _ensureLocalProductsLoaded() async {
+    if (_allLocalProducts != null) return;
+    try {
+      final jsonString = await rootBundle.loadString('assets/products.json');
+      final List<dynamic> jsonList = jsonDecode(jsonString);
+      _allLocalProducts = jsonList
+          .map((item) => Product.fromJson(item as Map<String, dynamic>))
+          .toList();
+      
+      for (final p in _allLocalProducts!) {
+        _productCache[p.id] = p;
+      }
+    } catch (e) {
+      print('Error loading local products: $e');
+      _allLocalProducts = [];
+    }
+  }
 
   Future<Map<String, dynamic>> getFiltersMeta() async {
-    final Response<dynamic> response =
-        await _client.dio.get('/filters/meta');
-    return response.data as Map<String, dynamic>;
+    // Return mock filters for offline mode
+    return {
+      'categories': ['Fashion', 'Electronics', 'Sports', 'Beauty', 'Essentials'],
+      'brands': _allLocalProducts?.map((p) => p.brand).toSet().toList() ?? [],
+    };
   }
 
   Future<List<Product>> getProducts({
@@ -27,46 +50,67 @@ class ProductRepository {
     int limit = 20,
     Map<String, dynamic>? filters,
   }) async {
-    final params = <String, dynamic>{
-      'q': query ?? '',
-      if (category != null && category.isNotEmpty) 'category': category,
-      if (filters != null) ...filters,
-    };
+    await _ensureLocalProductsLoaded();
+    
+    var filtered = _allLocalProducts!;
 
-    final Response<dynamic> response =
-        await _client.dio.get('/products/search', queryParameters: params);
-
-    // Backend returns a direct List<dynamic>
-    final List<dynamic> items = response.data as List<dynamic>;
-
-    final products = items
-        .map((e) => Product.fromJson(e as Map<String, dynamic>))
-        .toList();
-
-    for (final p in products) {
-      _productCache[p.id] = p;
+    // 1. Filter by Query
+    if (query != null && query.isNotEmpty) {
+      final q = query.toLowerCase();
+      filtered = filtered.where((p) {
+        return p.name.toLowerCase().contains(q) ||
+               p.brand.toLowerCase().contains(q) ||
+               p.description.toLowerCase().contains(q) ||
+               p.categories.any((c) => c.toLowerCase().contains(q));
+      }).toList();
     }
 
-    return products;
+    // 2. Filter by Category
+    if (category != null && category.isNotEmpty) {
+      filtered = filtered.where((p) => p.categories.any((c) => c.toLowerCase() == category.toLowerCase())).toList();
+    }
+
+    // 3. Simple pagination (optional)
+    // final startIndex = (page - 1) * limit;
+    // if (startIndex >= filtered.length) return [];
+    // final endIndex = (startIndex + limit).clamp(0, filtered.length);
+    // return filtered.sublist(startIndex, endIndex);
+    
+    return filtered;
   }
 
   Future<Product> getProductById(String id) async {
     if (_productCache.containsKey(id)) return _productCache[id]!;
+    
+    await _ensureLocalProductsLoaded();
+    
+    Product? localProduct;
+    try {
+      localProduct = _allLocalProducts?.firstWhere((p) => p.id == id);
+    } catch (_) {
+      // Not found locally
+    }
+    
+    if (localProduct != null) {
+      _productCache[id] = localProduct;
+      return localProduct;
+    }
 
-    final Response<dynamic> response =
-        await _client.dio.get('/products/$id');
-    final product = Product.fromJson(response.data as Map<String, dynamic>);
-    _productCache[id] = product;
-    return product;
+    // Fallback to network if strictly needed, but mainly relying on offline for this build
+    try {
+      final Response<dynamic> response =
+          await _client.dio.get('/products/$id');
+      final p = Product.fromJson(response.data as Map<String, dynamic>);
+      _productCache[id] = p;
+      return p;
+    } catch (e) {
+      print('Error fetching product $id: $e');
+      throw Exception('Product Not Found Locally or Remotely');
+    }
   }
 
   Future<void> trackProduct({required String productId, required String userId}) async {
-    await _client.dio.post('/track', data: {
-      'productId': productId,
-      'userId': userId,
-    });
-
-    // Persist locally as part of price tracker.
+    // Offline mode: Just save to SharedPreferences
     final prefs = await SharedPreferences.getInstance();
     final tracked = prefs.getStringList('tracked_products') ?? <String>[];
     if (!tracked.contains(productId)) {
@@ -86,12 +130,15 @@ class ProductRepository {
     final tracked = prefs.getStringList('tracked_products') ?? <String>[];
     if (tracked.isEmpty) return [];
 
+    await _ensureLocalProductsLoaded();
+    
     final results = <Product>[];
     for (final id in tracked) {
       try {
-        results.add(await getProductById(id));
-      } catch (_) {
-        // ignore individual failures
+        final product = await getProductById(id);
+        results.add(product);
+      } catch (e) {
+        print('Error loading tracked product $id: $e');
       }
     }
     return results;
@@ -99,21 +146,40 @@ class ProductRepository {
 
   /// Search for product deals with price comparison across platforms
   Future<List<ProductDeal>> searchForDeals(String query, {Map<String, dynamic>? filters}) async {
-    final params = <String, dynamic>{
-      'q': query,
-      if (filters != null) ...filters,
-    };
+    // For offline mode, just return products wrapped as deals
+    // In real app, this might have different logic
+    final products = await getProducts(query: query, filters: filters);
+    
+    return products.map((p) {
+      final deals = p.offers.map((o) => DealOffer(
+        platform: o.marketplace,
+        seller: o.seller,
+        price: o.price,
+        currency: o.currency ?? '₹',
+        url: o.url,
+        isBestPrice: o.isBestPrice,
+        delivery: o.delivery,
+        discount: o.discount,
+      )).toList();
+      
+      if (deals.isEmpty) {
+        deals.add(DealOffer(
+          platform: 'Store',
+          seller: 'Official',
+          price: p.price,
+          currency: p.currency,
+        ));
+      }
 
-    final Response<dynamic> response = await _client.dio.get(
-      '/products/search', // Updated to use the smart filtering endpoint
-      queryParameters: params,
-    );
-
-    // Backend returns List<dynamic> directly for /products/search
-    final List<dynamic> results = response.data as List<dynamic>;
-
-    return results
-        .map((e) => ProductDeal.fromJson(e as Map<String, dynamic>))
-        .toList();
+      return ProductDeal(
+        productId: p.id,
+        modelName: p.name,
+        brand: p.brand,
+        category: p.categories.isNotEmpty ? p.categories.first : 'General',
+        rating: p.rating,
+        image: p.image,
+        deals: deals,
+      );
+    }).toList();
   }
 }

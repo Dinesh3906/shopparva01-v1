@@ -13,7 +13,15 @@ class ThemeTokens {
 
   // Neutrals & surfaces
   static const Color backgroundLight = Color(0xFFF8F9FA);
-  static const Color backgroundDark = Color(0xFF0F1720); // Deep navy/charcoal
+  static const Color backgroundDark = Color(0xFF050B14); // Darker navy/black
+  static const LinearGradient backgroundGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      Color(0xFF0F172A), // Dark Navy
+      Color(0xFF000000), // Black
+    ],
+  );
   static const Color surfaceLight = Colors.white;
   static const Color surfaceDark = Color(0xFF141821); // Card background
   static const Color surfaceMuted = Color(0xFF1B2328); // Muted surfaces / panels

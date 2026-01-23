@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../state/providers.dart';
-import '../../src/models/product.dart';
+import 'package:shopparva/models/product.dart';
 import '../home/widgets/product_card.dart';
 import 'widgets/smart_preferences_panel.dart';
 import 'data/smart_preferences_data.dart';

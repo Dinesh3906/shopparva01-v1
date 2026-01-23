@@ -66,7 +66,7 @@ class AppTheme {
         surface: ThemeTokens.surfaceDark,
         brightness: Brightness.dark,
       ),
-      scaffoldBackgroundColor: ThemeTokens.backgroundDark,
+      scaffoldBackgroundColor: Colors.transparent, // Allow gradient to show through
       visualDensity: VisualDensity.adaptivePlatformDensity,
       textTheme: TextTheme(
         headlineLarge: ThemeTokens.headlineLarge.copyWith(color: Colors.white),

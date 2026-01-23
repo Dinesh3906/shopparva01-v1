@@ -12,7 +12,7 @@ class ApiService {
 
   Future<List<Product>> searchProducts(String query, {Map<String, dynamic>? filters}) async {
     try {
-      final queryParams = {'q': query};
+      final queryParams = <String, dynamic>{'q': query};
       if (filters != null) {
         queryParams.addAll(filters);
       }

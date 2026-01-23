@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/theme_tokens.dart';
-import '../models/product.dart';
+import 'package:shopparva/models/product.dart';
 
 class ProductGrid extends StatelessWidget {
   const ProductGrid({
@@ -27,7 +27,7 @@ class ProductGrid extends StatelessWidget {
             crossAxisCount: crossAxisCount,
             mainAxisSpacing: 20, // Increased spacing
             crossAxisSpacing: 20, // Increased spacing
-            childAspectRatio: 0.80, // Shorter cards (25% reduction approx)
+            childAspectRatio: 0.72, // Increased height to prevent overflow
           ),
           itemCount: products.length,
           itemBuilder: (context, index) {

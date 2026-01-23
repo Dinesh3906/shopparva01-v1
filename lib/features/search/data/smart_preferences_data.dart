@@ -1,5 +1,5 @@
 
-import '../../../src/models/product.dart';
+import 'package:shopparva/models/product.dart';
 
 class SmartPreferencesData {
   // Laptop Filters (Unchanged)

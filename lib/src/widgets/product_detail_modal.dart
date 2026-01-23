@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/theme_tokens.dart';
-import '../models/product.dart';
+import 'package:shopparva/models/product.dart';
 import '../state/app_providers.dart';
 import '../screens/price_tracker_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -79,7 +79,7 @@ class ProductDetailModal extends ConsumerWidget {
                 ),
                 const SizedBox(height: 16),
                 if (p.priceHistory != null && p.priceHistory!.isNotEmpty)
-                  _PriceSparkline(data: p.priceHistory!),
+                  _PriceSparkline(data: p.priceHistory!.map((e) => e.price).toList()),
                 const SizedBox(height: 16),
                 Text(
                   'Price comparison',

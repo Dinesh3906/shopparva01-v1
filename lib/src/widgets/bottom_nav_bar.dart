@@ -103,40 +103,50 @@ class _NavItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final baseColor = isSelected ? ThemeTokens.primary : Colors.white70;
-    return GestureDetector(
-      onTap: () => onTap(index),
-      child: Semantics(
-        button: true,
-        selected: isSelected,
-        label: label,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          decoration: BoxDecoration(
-            color: isSelected ? ThemeTokens.primary.withOpacity(0.12) : Colors.transparent,
-            borderRadius: BorderRadius.circular(28),
-            boxShadow: isSelected
-                ? [
-                    BoxShadow(
-                      color: ThemeTokens.primary.withOpacity(0.4),
-                      blurRadius: 16,
-                      spreadRadius: 1,
+    return Flexible(
+      child: GestureDetector(
+        onTap: () => onTap(index),
+        child: Semantics(
+          button: true,
+          selected: isSelected,
+          label: label,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            decoration: BoxDecoration(
+              color: isSelected
+                  ? ThemeTokens.primary.withOpacity(0.12)
+                  : Colors.transparent,
+              borderRadius: BorderRadius.circular(28),
+              boxShadow: isSelected
+                  ? [
+                      BoxShadow(
+                        color: ThemeTokens.primary.withOpacity(0.4),
+                        blurRadius: 16,
+                        spreadRadius: 1,
+                      ),
+                    ]
+                  : null,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon, color: baseColor, size: 24),
+                if (isSelected) ...[
+                  const SizedBox(width: 6),
+                  Flexible(
+                    child: Text(
+                      label,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: baseColor, fontWeight: FontWeight.w600),
                     ),
-                  ]
-                : null,
-          ),
-          child: Row(
-            children: [
-              Icon(icon, color: baseColor, size: 22),
-              const SizedBox(width: 6),
-              Text(
-                label,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
-                    ?.copyWith(color: baseColor, fontWeight: FontWeight.w600),
-              ),
-            ],
+                  ),
+                ],
+              ],
+            ),
           ),
         ),
       ),

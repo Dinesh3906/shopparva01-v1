@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/theme_tokens.dart';
-import '../models/product.dart';
+import 'package:shopparva/models/product.dart';
 import '../models/user.dart';
 
 import '../state/app_providers.dart';

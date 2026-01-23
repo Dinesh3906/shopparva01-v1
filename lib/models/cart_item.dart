@@ -1,4 +1,4 @@
-import 'product.dart';
+import 'package:shopparva/models/product.dart';
 
 class CartItem {
   final Product product;

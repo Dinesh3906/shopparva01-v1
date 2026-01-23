@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/theme_tokens.dart';
+import '../state/app_providers.dart';
+import 'package:shopparva/models/product.dart';
 
 // --- Data Models ---
 
@@ -519,7 +521,38 @@ class _KitPreviewModal extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.all(24),
             child: ElevatedButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                // Add items to cart
+                final cartNotifier = ref.read(cartProvider.notifier);
+                
+                for (final item in items) {
+                  // Create a mock product from the kit item definition
+                  final product = Product(
+                    id: 'kit-${item.id}', // unique prefix
+                    name: item.label,
+                    brand: 'ShopParva Kit', // Mock brand
+                    price: item.estimatedCost,
+                    image: '', // Placeholder, will show default icon
+                    rating: 5.0,
+                    stores: 1,
+                    description: 'Part of your custom makeup kit: ${item.subtitle}',
+                    categories: ['Kit', 'Cosmetics'], // Mock categories
+                    offers: [],
+                    priceHistory: [],
+                  );
+                  cartNotifier.addToCart(product);
+                }
+
+                if (context.mounted) {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Added ${items.length} items to cart!'),
+                      backgroundColor: ThemeTokens.success,
+                    ),
+                  );
+                }
+              },
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white, foregroundColor: Colors.black, minimumSize: const Size(double.infinity, 56),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),

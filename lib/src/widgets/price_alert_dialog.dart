@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/theme_tokens.dart';
 import '../models/price_alert.dart';
-import '../models/product.dart';
+import 'package:shopparva/models/product.dart';
 import '../state/app_providers.dart';
 
 class PriceAlertDialog extends ConsumerStatefulWidget {

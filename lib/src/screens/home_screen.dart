@@ -4,11 +4,10 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../core/theme_tokens.dart';
-import '../models/product.dart';
+import 'package:shopparva/models/product.dart';
 import '../state/app_providers.dart';
 import '../widgets/empty_and_loading.dart';
 import '../widgets/product_detail_modal.dart';
-import '../widgets/product_grid.dart';
 import '../widgets/product_grid.dart';
 import 'price_tracker_screen.dart';
 import 'cart_screen.dart';
@@ -70,68 +69,66 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final dealsAsync = ref.watch(smartDealsProvider);
 
     return Scaffold(
-      backgroundColor: ThemeTokens.backgroundDark,
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: _buildTopBar(context, userAsync),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: _buildSearchBar(context),
-            ),
-            const SizedBox(height: 12),
-            _buildCategoryChips(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Smart Deals For You',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(color: Colors.white.withOpacity(0.9)),
-                  ),
-                  IconButton(
-                    tooltip: 'Price Tracker',
-                    icon: const Icon(Icons.show_chart_rounded,
-                        color: Colors.white70),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (_) => const PriceTrackerScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+      // backgroundColor: transparent (from theme)
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: ThemeTokens.backgroundGradient,
+        ),
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: _buildTopBar(context, userAsync),
               ),
-            ),
-            Expanded(
-              child: dealsAsync.when(
-                data: (products) => products.isEmpty
-                    ? const EmptyStateCard(
-                        title: 'No products found',
-                        message:
-                            'Try adjusting your filters or searching for something else.',
-                      )
-                    : ProductGrid(
-                        products: products,
-                        onProductTap: (product) => _openProductDetail(context, product),
-                      ),
-                loading: () => const LoadingShimmer(),
-                error: (error, stack) => EmptyStateCard(
-                  title: 'Error Loading Deals',
-                  message: '$error\n\n$stack',
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: _buildSearchBar(context),
+              ),
+              const SizedBox(height: 12),
+              _buildCategoryChips(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Smart Deals For You',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(color: Colors.white.withOpacity(0.9)),
+                    ),
+                    IconButton(
+                      tooltip: 'Price Tracker',
+                      icon: const Icon(Icons.show_chart_rounded,
+                          color: Colors.white70),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => const PriceTrackerScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ],
+              Expanded(
+                child: dealsAsync.when(
+                  data: (products) => products.isEmpty
+                      ? _buildEmptyStateWithSuggestions(context)
+                      : ProductGrid(
+                          products: products,
+                          onProductTap: (product) => _openProductDetail(context, product),
+                        ),
+                  loading: () => const LoadingShimmer(),
+                  error: (error, stack) => _buildErrorStateWithSuggestions(context, error),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -425,5 +422,70 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void _stopListening() async {
     await _speech.stop();
     setState(() => _isListening = false);
+  }
+
+  Widget _buildEmptyStateWithSuggestions(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const EmptyStateCard(
+            title: 'No products found',
+            message: 'Try adjusting your filters or searching for something else.',
+          ),
+          SizedBox(
+            height: 400,
+            child: _buildSuggestedSection(context),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildErrorStateWithSuggestions(BuildContext context, Object error) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          EmptyStateCard(
+            title: 'Error Loading Deals',
+            message: error.toString(),
+          ),
+          SizedBox(
+            height: 400,
+            child: _buildSuggestedSection(context),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSuggestedSection(BuildContext context) {
+    final repo = ref.read(productRepositoryProvider);
+    
+    return FutureBuilder<List<Product>>(
+      future: repo.getProducts(limit: 10),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData || snapshot.data!.isEmpty) return const SizedBox.shrink();
+        
+        final suggestions = snapshot.data!;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'Featured for You',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white),
+              ),
+            ),
+            Expanded(
+              child: ProductGrid(
+                products: suggestions,
+                onProductTap: (product) => _openProductDetail(context, product),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

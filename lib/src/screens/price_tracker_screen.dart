@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import '../../core/theme_tokens.dart';
 import 'dart:math';
 import '../../core/constants.dart';
-import '../models/product.dart';
+import 'package:shopparva/models/product.dart';
 import '../models/price_history_point.dart';
 import '../state/app_providers.dart';
 import '../widgets/empty_and_loading.dart';
@@ -13,6 +13,7 @@ import '../widgets/price_history_chart.dart';
 import '../widgets/time_range_selector.dart';
 import '../widgets/ai_insight_card.dart';
 import '../widgets/price_alert_dialog.dart';
+import '../state/fab_state.dart';
 
 class PriceTrackerScreen extends ConsumerStatefulWidget {
   const PriceTrackerScreen({super.key});
@@ -31,9 +32,9 @@ class _PriceTrackerScreenState extends ConsumerState<PriceTrackerScreen> {
     final priceAlerts = ref.watch(priceAlertsProvider);
 
     return Scaffold(
-      backgroundColor: ThemeTokens.backgroundDark,
+      // backgroundColor: transparent (from theme)
       appBar: AppBar(
-        backgroundColor: ThemeTokens.backgroundDark,
+        backgroundColor: Colors.transparent, // Transparent for gradient
         elevation: 0,
         title: const Text(
           'Price Tracker',
@@ -44,44 +45,49 @@ class _PriceTrackerScreenState extends ConsumerState<PriceTrackerScreen> {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: trackedAsync.when(
-        data: (products) {
-          if (products.isEmpty) {
-            return const EmptyStateCard(
-              title: 'No tracked products yet',
-              message: 'Start tracking products to monitor their price history and get smart buying recommendations.',
-            );
-          }
+      extendBodyBehindAppBar: true, // Allow gradient behind AppBar
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: ThemeTokens.backgroundGradient,
+        ),
+        child: SafeArea(
+          child: trackedAsync.when(
+            data: (products) {
+              if (products.isEmpty) {
+                return _buildEmptyStateWithSuggestions(context);
+              }
 
-          // If no product is selected, select the first one
-          if (selectedProduct == null && products.isNotEmpty) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              ref.read(selectedTrackedProductProvider.notifier).state = products.first;
-            });
-            return const Center(child: CircularProgressIndicator());
-          }
+              // If no product is selected, select the first one
+              if (selectedProduct == null && products.isNotEmpty) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  ref.read(selectedTrackedProductProvider.notifier).state = products.first;
+                });
+                return const Center(child: CircularProgressIndicator());
+              }
 
-          return Column(
-            children: [
-              // Stats Header
-              _buildStatsHeader(products.length, priceAlerts.where((a) => a.isActive).length),
-              
-              // Product Selector
-              _buildProductSelector(products, selectedProduct),
-              
-              // Main Content
-              Expanded(
-                child: selectedProduct != null
-                    ? _buildProductAnalysis(selectedProduct)
-                    : const Center(child: CircularProgressIndicator()),
-              ),
-            ],
-          );
-        },
-        loading: () => const LoadingShimmer(),
-        error: (_, __) => const EmptyStateCard(
-          title: 'Could not load tracker',
-          message: 'Please try again in a moment.',
+              return Column(
+                children: [
+                  // Stats Header
+                  _buildStatsHeader(products.length, priceAlerts.where((a) => a.isActive).length),
+                  
+                  // Product Selector
+                  _buildProductSelector(products, selectedProduct),
+                  
+                  // Main Content
+                  Expanded(
+                    child: selectedProduct != null
+                        ? _buildProductAnalysis(selectedProduct)
+                        : const Center(child: CircularProgressIndicator()),
+                  ),
+                ],
+              );
+            },
+            loading: () => const LoadingShimmer(),
+            error: (_, __) => const EmptyStateCard(
+              title: 'Could not load tracker',
+              message: 'Please try again in a moment.',
+            ),
+          ),
         ),
       ),
     );
@@ -294,18 +300,34 @@ class _PriceTrackerScreenState extends ConsumerState<PriceTrackerScreen> {
 
         final data = snapshot.data!;
         
-        // Handle both camelCase (priceHistory) and snake_case (price_history)
+        // Product model now parses priceHistory directly during JSON deserialization.
+        // We handle legacy cases or direct API responses here.
         final rawHistory = data['price_history'] ?? data['priceHistory'];
-        final priceHistory = (rawHistory != null && rawHistory is List)
-            ? rawHistory.map((e) => PriceHistoryPoint.fromJson(e as Map<String, dynamic>)).toList()
-            : <PriceHistoryPoint>[];
+        List<PriceHistoryPoint> priceHistory;
         
-        final priceTrend = data['price_trend'] as Map<String, dynamic>? ?? {
-          'trend': 'stable',
-          'percentage': 0.0,
-          'lowest': product.price,
-          'highest': product.price,
-          'average': product.price,
+        if (rawHistory is List) {
+          if (rawHistory.isNotEmpty && rawHistory.first is PriceHistoryPoint) {
+            priceHistory = List<PriceHistoryPoint>.from(rawHistory);
+          } else {
+            priceHistory = rawHistory.map((e) => PriceHistoryPoint.fromJson(e as Map<String, dynamic>)).toList();
+          }
+        } else {
+          priceHistory = product.priceHistory ?? [];
+        }
+        
+        // Helper for resilience
+        double _toDouble(dynamic v) {
+          if (v is num) return v.toDouble();
+          return double.tryParse(v.toString()) ?? 0.0;
+        }
+
+        final trendData = data['price_trend'] as Map<String, dynamic>?;
+        final priceTrend = {
+          'trend': trendData?['trend']?.toString() ?? 'stable',
+          'percentage': _toDouble(trendData?['percentage'] ?? 0.0),
+          'lowest': _toDouble(trendData?['lowest'] ?? product.price),
+          'highest': _toDouble(trendData?['highest'] ?? product.price),
+          'average': _toDouble(trendData?['average'] ?? product.price),
         };
 
         // Mark lowest and highest points
@@ -647,4 +669,102 @@ class _PriceTrackerScreenState extends ConsumerState<PriceTrackerScreen> {
       };
     }
   }
+
+  Widget _buildEmptyStateWithSuggestions(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          EmptyStateCard(
+            title: 'No tracked products yet',
+            message: 'Start tracking products to monitor their price history and get smart buying recommendations.',
+            action: FilledButton(
+              onPressed: () {
+                // Navigate back to Home and trigger FAB highlight
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                ref.read(navigationIndexProvider.notifier).state = 0; // Ensure Home tab
+                
+                // Trigger FAB highlight animation
+                ref.read(fabHighlightProvider.notifier).state = true;
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  Future.delayed(const Duration(seconds: 2), () {
+                    if (mounted) {
+                       ref.read(fabHighlightProvider.notifier).state = false;
+                    }
+                  });
+                });
+              },
+              child: const Text('Start Tracking'),
+            ),
+          ),
+          _buildPriceTrackerSuggestedSection(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPriceTrackerSuggestedSection(BuildContext context) {
+    final repo = ref.read(productRepositoryProvider);
+    
+    return FutureBuilder<List<Product>>(
+      future: repo.getProducts(limit: 6),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData || snapshot.data!.isEmpty) return const SizedBox.shrink();
+        
+        final suggestions = snapshot.data!;
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Top Products to Track',
+                style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 12),
+              ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: suggestions.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 12),
+                itemBuilder: (context, index) {
+                  final p = suggestions[index];
+                  return Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: ThemeTokens.surfaceDark,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(p.image, width: 50, height: 50, fit: BoxFit.cover),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(p.name, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                              Text('₹${p.price.toStringAsFixed(0)}', style: const TextStyle(color: ThemeTokens.primary)),
+                            ],
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => ref.read(trackedProductsNotifierProvider.notifier).trackProduct(p),
+                          child: const Text('Track'),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  // --- End of State Class ---
 }

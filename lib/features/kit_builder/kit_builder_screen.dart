@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:go_router/go_router.dart';
 import '../../state/providers.dart';
+import '../../src/state/app_providers.dart';
 import '../../core/theme_tokens.dart';
-import '../../src/models/product.dart';
-import '../../models/cart_item.dart';
+import 'package:shopparva/models/product.dart';
+import 'package:shopparva/models/cart_item.dart';
 
 // Provider to hold the generated kit state locally for the wizard
 final localKitProvider = StateProvider<AsyncValue<dynamic>>((ref) => const AsyncValue.data(null));
