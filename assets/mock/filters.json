@@ -1,0 +1,14 @@
+[
+    {
+        "id": "glasses_1",
+        "name": "Cool Shades",
+        "url": "https://raw.githubusercontent.com/Dinesh3906/shopparva01-v1/main/assets/mock/filters/glasses.png",
+        "type": "png"
+    },
+    {
+        "id": "hat_1",
+        "name": "Casual Cap",
+        "url": "https://raw.githubusercontent.com/Dinesh3906/shopparva01-v1/main/assets/mock/filters/cap.png",
+        "type": "png"
+    }
+]

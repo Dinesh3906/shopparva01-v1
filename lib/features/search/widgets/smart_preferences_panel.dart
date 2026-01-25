@@ -27,9 +27,9 @@ class _SmartPreferencesPanelState extends State<SmartPreferencesPanel> {
   void initState() {
     super.initState();
     // Initialize empty sets for known keys to be safe
-    for (var key in SmartPreferencesData.phoneRam) {
-       // Just ensuring keys exist if needed, but putIfAbsent handles it.
-    }
+    // Initialize empty sets for known keys to be safe
+    // for (var key in SmartPreferencesData.phoneRam) { ... } -> Removed unused loop
+
   }
 
   void _toggleExpanded() {
@@ -143,8 +143,8 @@ class _SmartPreferencesPanelState extends State<SmartPreferencesPanel> {
   @override
   Widget build(BuildContext context) {
     final isLaptop = widget.category == 'Laptop';
-    final screenHeight = MediaQuery.of(context).size.height;
-    final maxPanelHeight = screenHeight * 0.70; // 70% Max Height
+    // final screenHeight = MediaQuery.of(context).size.height;
+    // final maxPanelHeight = screenHeight * 0.70; // 70% Max Height (Unused)
 
     return Container(
       width: double.infinity,

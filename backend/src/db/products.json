@@ -1,92 +1,4 @@
-﻿const express = require('express');
-const cors = require('cors');
-
-// ... (existing code)
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-const trackerOrchestrator = require('./src/trackers/orchestrator');
-const db = require('./src/db/json_db');
-const alertService = require('./src/services/alert.service');
-
-// Multi-Platform Price Tracking Endpoint
-app.post('/api/v1/track-product', async (req, res) => {
-  const { url, userId } = req.body;
-
-  try {
-    console.log(`[Server] Tracking request for ${url} by user ${userId}`);
-    const product = await trackerOrchestrator.trackProduct(url);
-
-    // Save to DB and Historize
-    await db.saveProduct(product);
-
-    // Check for alerts (Mocking user alerts for now)
-    const mockUserAlerts = [{ type: 'pct_drop', value: 10 }];
-    const triggeredAlerts = alertService.checkAlerts(product, mockUserAlerts);
-
-    if (triggeredAlerts.length > 0) {
-      await alertService.notify(product, triggeredAlerts);
-    }
-
-    res.json({
-      success: true,
-      product,
-      triggeredAlerts
-    });
-  } catch (error) {
-    console.error('[Server] Tracking Error:', error.message);
-    res.status(500).json({
-      success: false,
-      message: error.message
-    });
-  }
-});
-
-// Mock Kit Generation Endpoint
-app.post('/kits/generate', (req, res) => {
-  const { userId, category, budget } = req.body;
-  console.log('Generating kit for:', { userId, category, budget });
-
-  // Simple mock logic to return a kit
-  // In a real app, this would use the selections and budget to find compatible parts
-  const mockKitItems = [
-    {
-      id: "kit-item-1",
-      name: "Generated Item 1",
-      price: budget * 0.4,
-      image: "https://via.placeholder.com/150",
-      description: "Best component for your budget",
-      brand: "PremiumBrand"
-    },
-    {
-      id: "kit-item-2",
-      name: "Generated Item 2",
-      price: budget * 0.3,
-      image: "https://via.placeholder.com/150",
-      description: "Compatible accessory",
-      brand: "ReliableBrand"
-    }
-  ];
-
-  const kit = {
-    id: `kit-${Date.now()}`,
-    userId: userId,
-    category: category,
-    items: mockKitItems,
-    totalPrice: mockKitItems.reduce((sum, item) => sum + item.price, 0),
-    createdAt: new Date().toISOString()
-  };
-
-  res.json(kit);
-});
-
-// ... (rest of the file)
-
-const products = [
-
-  // === FASHION CATEGORY ===
+[
   {
     "id": "fashion-nike-airmax",
     "title": "Nike Air Max 270 Running Shoes",
@@ -94,24 +6,34 @@ const products = [
     "modelName": "Air Max 270",
     "description": "Nike Air Max 270 Running Shoes - Black/White",
     "category": "Fashion",
-    "images": ["https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop"],
+    "images": [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop"
+    ],
     "rating": 4.6,
     "reviewCount": "1892",
     "badgeText": "Best Seller",
-    "offers": [{
-      "marketplace": "Amazon",
-      "seller": "Nike Official Store",
-      "price": 12995,
-      "originalPrice": 14995,
-      "discount": "13% Off",
-      "savingsText": "(Save â‚¹2,000)",
-      "delivery": "Free Delivery by Tomorrow",
-      "url": "https://www.amazon.in/nike-air-max-270",
-      "isBest": true
-    }],
+    "offers": [
+      {
+        "marketplace": "Amazon",
+        "seller": "Nike Official Store",
+        "price": 12995,
+        "originalPrice": 14995,
+        "discount": "13% Off",
+        "savingsText": "(Save â‚¹2,000)",
+        "delivery": "Free Delivery by Tomorrow",
+        "url": "https://www.amazon.in/nike-air-max-270",
+        "isBest": true
+      }
+    ],
     "priceHistory": [
-      { "date": "2025-12-01", "price": 13500 },
-      { "date": "2025-12-15", "price": 12995 }
+      {
+        "date": "2025-12-01",
+        "price": 13500
+      },
+      {
+        "date": "2025-12-15",
+        "price": 12995
+      }
     ]
   },
   {
@@ -121,27 +43,36 @@ const products = [
     "modelName": "511 Slim Fit",
     "description": "Classic Levi's 511 Slim Fit Jeans in Dark Blue Denim",
     "category": "Fashion",
-    "images": ["https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=400&fit=crop"],
+    "images": [
+      "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=400&fit=crop"
+    ],
     "rating": 4.4,
     "reviewCount": "2341",
     "badgeText": "Trending",
-    "offers": [{
-      "marketplace": "Myntra",
-      "seller": "Levi's Official",
-      "price": 2999,
-      "originalPrice": 4999,
-      "discount": "40% Off",
-      "savingsText": "(Save â‚¹2,000)",
-      "delivery": "Delivery in 2-3 days",
-      "url": "https://www.myntra.com/levis-511-jeans",
-      "isBest": true
-    }],
+    "offers": [
+      {
+        "marketplace": "Myntra",
+        "seller": "Levi's Official",
+        "price": 2999,
+        "originalPrice": 4999,
+        "discount": "40% Off",
+        "savingsText": "(Save â‚¹2,000)",
+        "delivery": "Delivery in 2-3 days",
+        "url": "https://www.myntra.com/levis-511-jeans",
+        "isBest": true
+      }
+    ],
     "priceHistory": [
-      { "date": "2025-12-01", "price": 3499 },
-      { "date": "2025-12-15", "price": 2999 }
+      {
+        "date": "2025-12-01",
+        "price": 3499
+      },
+      {
+        "date": "2025-12-15",
+        "price": 2999
+      }
     ]
   },
-  // === SPORTS CATEGORY ===
   {
     "id": "sports-adidas-predator",
     "title": "Adidas Predator Edge Football Boots",
@@ -149,24 +80,34 @@ const products = [
     "modelName": "Predator Edge",
     "description": "Professional football boots with superior grip and control",
     "category": "Sports",
-    "images": ["https://images.unsplash.com/photo-1511886929837-354d827aae26?w=400&h=400&fit=crop"],
+    "images": [
+      "https://images.unsplash.com/photo-1511886929837-354d827aae26?w=400&h=400&fit=crop"
+    ],
     "rating": 4.7,
     "reviewCount": "876",
     "badgeText": "Pro Choice",
-    "offers": [{
-      "marketplace": "Decathlon",
-      "seller": "Adidas Official",
-      "price": 8999,
-      "originalPrice": 12999,
-      "discount": "31% Off",
-      "savingsText": "(Save â‚¹4,000)",
-      "delivery": "Free Delivery",
-      "url": "https://www.decathlon.in/adidas-predator",
-      "isBest": true
-    }],
+    "offers": [
+      {
+        "marketplace": "Decathlon",
+        "seller": "Adidas Official",
+        "price": 8999,
+        "originalPrice": 12999,
+        "discount": "31% Off",
+        "savingsText": "(Save â‚¹4,000)",
+        "delivery": "Free Delivery",
+        "url": "https://www.decathlon.in/adidas-predator",
+        "isBest": true
+      }
+    ],
     "priceHistory": [
-      { "date": "2025-12-01", "price": 9999 },
-      { "date": "2025-12-15", "price": 8999 }
+      {
+        "date": "2025-12-01",
+        "price": 9999
+      },
+      {
+        "date": "2025-12-15",
+        "price": 8999
+      }
     ]
   },
   {
@@ -176,27 +117,36 @@ const products = [
     "modelName": "Nanoray 900",
     "description": "Professional badminton racket for advanced players",
     "category": "Sports",
-    "images": ["https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=400&h=400&fit=crop"],
+    "images": [
+      "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=400&h=400&fit=crop"
+    ],
     "rating": 4.6,
     "reviewCount": "543",
     "badgeText": "Tournament Grade",
-    "offers": [{
-      "marketplace": "Amazon",
-      "seller": "Yonex India",
-      "price": 6499,
-      "originalPrice": 8999,
-      "discount": "28% Off",
-      "savingsText": "(Save â‚¹2,500)",
-      "delivery": "Free Delivery by Tomorrow",
-      "url": "https://www.amazon.in/yonex-nanoray-900",
-      "isBest": true
-    }],
+    "offers": [
+      {
+        "marketplace": "Amazon",
+        "seller": "Yonex India",
+        "price": 6499,
+        "originalPrice": 8999,
+        "discount": "28% Off",
+        "savingsText": "(Save â‚¹2,500)",
+        "delivery": "Free Delivery by Tomorrow",
+        "url": "https://www.amazon.in/yonex-nanoray-900",
+        "isBest": true
+      }
+    ],
     "priceHistory": [
-      { "date": "2025-12-01", "price": 7499 },
-      { "date": "2025-12-15", "price": 6499 }
+      {
+        "date": "2025-12-01",
+        "price": 7499
+      },
+      {
+        "date": "2025-12-15",
+        "price": 6499
+      }
     ]
   },
-  // === BEAUTY CATEGORY ===
   {
     "id": "beauty-lakme-absolute",
     "title": "Lakme Absolute Matte Lipstick - Red Rush",
@@ -204,24 +154,34 @@ const products = [
     "modelName": "Absolute Matte",
     "description": "Long-lasting matte lipstick in Red Rush shade",
     "category": "Beauty",
-    "images": ["https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&h=400&fit=crop"],
+    "images": [
+      "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&h=400&fit=crop"
+    ],
     "rating": 4.5,
     "reviewCount": "3421",
     "badgeText": "Best Seller",
-    "offers": [{
-      "marketplace": "Nykaa",
-      "seller": "Lakme Official",
-      "price": 599,
-      "originalPrice": 850,
-      "discount": "30% Off",
-      "savingsText": "(Save â‚¹251)",
-      "delivery": "Delivery in 2-3 days",
-      "url": "https://www.nykaa.com/lakme-absolute-lipstick",
-      "isBest": true
-    }],
+    "offers": [
+      {
+        "marketplace": "Nykaa",
+        "seller": "Lakme Official",
+        "price": 599,
+        "originalPrice": 850,
+        "discount": "30% Off",
+        "savingsText": "(Save â‚¹251)",
+        "delivery": "Delivery in 2-3 days",
+        "url": "https://www.nykaa.com/lakme-absolute-lipstick",
+        "isBest": true
+      }
+    ],
     "priceHistory": [
-      { "date": "2025-12-01", "price": 650 },
-      { "date": "2025-12-15", "price": 599 }
+      {
+        "date": "2025-12-01",
+        "price": 650
+      },
+      {
+        "date": "2025-12-15",
+        "price": 599
+      }
     ]
   },
   {
@@ -231,27 +191,36 @@ const products = [
     "modelName": "Revitalift Hyaluronic Acid",
     "description": "Anti-aging serum with hyaluronic acid - 30ml",
     "category": "Beauty",
-    "images": ["https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop"],
+    "images": [
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop"
+    ],
     "rating": 4.6,
     "reviewCount": "2187",
     "badgeText": "Dermatologist Recommended",
-    "offers": [{
-      "marketplace": "Amazon",
-      "seller": "L'Oreal India",
-      "price": 1299,
-      "originalPrice": 1999,
-      "discount": "35% Off",
-      "savingsText": "(Save â‚¹700)",
-      "delivery": "Free Delivery by Tomorrow",
-      "url": "https://www.amazon.in/loreal-revitalift-serum",
-      "isBest": true
-    }],
+    "offers": [
+      {
+        "marketplace": "Amazon",
+        "seller": "L'Oreal India",
+        "price": 1299,
+        "originalPrice": 1999,
+        "discount": "35% Off",
+        "savingsText": "(Save â‚¹700)",
+        "delivery": "Free Delivery by Tomorrow",
+        "url": "https://www.amazon.in/loreal-revitalift-serum",
+        "isBest": true
+      }
+    ],
     "priceHistory": [
-      { "date": "2025-12-01", "price": 1499 },
-      { "date": "2025-12-15", "price": 1299 }
+      {
+        "date": "2025-12-01",
+        "price": 1499
+      },
+      {
+        "date": "2025-12-15",
+        "price": 1299
+      }
     ]
   },
-  // === ESSENTIALS CATEGORY ===
   {
     "id": "essentials-dettol-handwash",
     "title": "Dettol Original Handwash Refill Pack - 750ml",
@@ -259,24 +228,34 @@ const products = [
     "modelName": "Original Handwash",
     "description": "Antibacterial handwash refill pack 750ml",
     "category": "Essentials",
-    "images": ["https://images.unsplash.com/photo-1584305574647-0cc949a2bb9f?w=400&h=400&fit=crop"],
+    "images": [
+      "https://images.unsplash.com/photo-1584305574647-0cc949a2bb9f?w=400&h=400&fit=crop"
+    ],
     "rating": 4.7,
     "reviewCount": "5234",
     "badgeText": "Essential Item",
-    "offers": [{
-      "marketplace": "BigBasket",
-      "seller": "Dettol Official",
-      "price": 189,
-      "originalPrice": 250,
-      "discount": "24% Off",
-      "savingsText": "(Save â‚¹61)",
-      "delivery": "Same Day Delivery",
-      "url": "https://www.bigbasket.com/dettol-handwash",
-      "isBest": true
-    }],
+    "offers": [
+      {
+        "marketplace": "BigBasket",
+        "seller": "Dettol Official",
+        "price": 189,
+        "originalPrice": 250,
+        "discount": "24% Off",
+        "savingsText": "(Save â‚¹61)",
+        "delivery": "Same Day Delivery",
+        "url": "https://www.bigbasket.com/dettol-handwash",
+        "isBest": true
+      }
+    ],
     "priceHistory": [
-      { "date": "2025-12-01", "price": 199 },
-      { "date": "2025-12-15", "price": 189 }
+      {
+        "date": "2025-12-01",
+        "price": 199
+      },
+      {
+        "date": "2025-12-15",
+        "price": 189
+      }
     ]
   },
   {
@@ -286,27 +265,36 @@ const products = [
     "modelName": "Total Advanced",
     "description": "Complete oral care toothpaste 200g",
     "category": "Essentials",
-    "images": ["https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=400&h=400&fit=crop"],
+    "images": [
+      "https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=400&h=400&fit=crop"
+    ],
     "rating": 4.6,
     "reviewCount": "6543",
     "badgeText": "Dentist Recommended",
-    "offers": [{
-      "marketplace": "Amazon",
-      "seller": "Colgate India",
-      "price": 145,
-      "originalPrice": 180,
-      "discount": "19% Off",
-      "savingsText": "(Save â‚¹35)",
-      "delivery": "Free Delivery",
-      "url": "https://www.amazon.in/colgate-total-advanced",
-      "isBest": true
-    }],
+    "offers": [
+      {
+        "marketplace": "Amazon",
+        "seller": "Colgate India",
+        "price": 145,
+        "originalPrice": 180,
+        "discount": "19% Off",
+        "savingsText": "(Save â‚¹35)",
+        "delivery": "Free Delivery",
+        "url": "https://www.amazon.in/colgate-total-advanced",
+        "isBest": true
+      }
+    ],
     "priceHistory": [
-      { "date": "2025-12-01", "price": 155 },
-      { "date": "2025-12-15", "price": 145 }
+      {
+        "date": "2025-12-01",
+        "price": 155
+      },
+      {
+        "date": "2025-12-15",
+        "price": 145
+      }
     ]
   },
-
   {
     "id": "elec-croma-1",
     "title": "Apple iPhone 16 (128GB, White)",
@@ -162158,304 +162146,4 @@ const products = [
       }
     ]
   }
-];
-
-// --- PROFESSIONAL PRODUCTION LOGIC BY ANTIGRAVITY (REFINED) ---
-
-app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-  next();
-});
-
-app.get('/api/v1/user/profile', (req, res) => {
-  res.json({
-    id: "user_live_01",
-    name: "Dinesh",
-    email: "dinesh@shopparva.com",
-    avatar: "https://ui-avatars.com/api/?name=Dinesh&background=6366f1&color=fff",
-    loyaltyPoints: 1250,
-    membership: "Gold",
-    preferences: {
-      categories: ["Electronics", "Fashion", "Groceries"],
-      budgetGoal: 50000
-    }
-  });
-});
-
-
-// Mock Phones for Smart Specifications
-// Start of Mock Phones
-const mockPhones = [
-  {
-    id: 'ph_op12r',
-    title: 'OnePlus 12R',
-    brand: 'OnePlus',
-    category: 'Mobiles',
-    price: 499 * 85,
-    rating: 4.6,
-    reviewCount: "1.2k",
-    image: 'https://images.unsplash.com/photo-1628148856453-29402518e95c?auto=format&fit=crop&q=80&w=500',
-    description: '8GB RAM, 128GB Storage, AMOLED Display, 120Hz Smooth UI, Fast Charging, Snapdragon High-end Processor',
-    offers: [{ price: 499 * 85, store: 'Amazon' }]
-  },
-  {
-    id: 'ph_s23',
-    title: 'Samsung Galaxy S23',
-    brand: 'Samsung',
-    category: 'Mobiles',
-    price: 749 * 85,
-    rating: 4.7,
-    reviewCount: "850",
-    image: 'https://images.unsplash.com/photo-1675769273919-4cb50de00578?auto=format&fit=crop&q=80&w=500',
-    description: 'High-Resolution Main Camera, OIS Camera, AMOLED Display, Wireless Charging, 256GB Storage, Water Resistant',
-    offers: [{ price: 749 * 85, store: 'Samsung Shop' }]
-  },
-  {
-    id: 'ph_iqoo',
-    title: 'iQOO Neo 7 Pro',
-    brand: 'iQOO',
-    category: 'Mobiles',
-    price: 429 * 85,
-    rating: 4.5,
-    reviewCount: "500",
-    image: 'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&q=80&w=500',
-    description: 'Gaming Focus, 144Hz Refresh Rate, 12GB RAM, Thermal Cooling for Gaming, Fast Charging 120W',
-    offers: [{ price: 429 * 85, store: 'Amazon' }]
-  },
-  {
-    id: 'ph_pixel7a',
-    title: 'Google Pixel 7a',
-    brand: 'Google',
-    category: 'Mobiles',
-    price: 449 * 85,
-    rating: 4.7,
-    reviewCount: "2k",
-    image: 'https://images.unsplash.com/photo-1610438235354-a6ae5528385c?auto=format&fit=crop&q=80&w=500',
-    description: 'Best Camera, Good Selfie Camera, Stock Android, 5G Support, 128GB, OIS',
-    offers: [{ price: 449 * 85, store: 'Flipkart' }]
-  }
-];
-
-products.push(...mockPhones);
-// End of Mock Phones
-app.get('/api/v1/products/search', (req, res) => {
-  const query = (req.query.q || '').toLowerCase().trim();
-  const category = req.query.category;
-
-  // Filter Params
-  let brands = req.query.brands;
-  if (brands && !Array.isArray(brands)) brands = [brands];
-
-  let attributes = req.query.attributes;
-  if (attributes && !Array.isArray(attributes)) attributes = [attributes];
-
-  const minPrice = parseFloat(req.query.min_price) || 0;
-  const maxPrice = parseFloat(req.query.max_price) || Number.MAX_VALUE;
-
-  let filtered = products;
-
-  // 1. Initial Filtering by Category
-  if (category && category !== 'All') {
-    const catLower = category.toLowerCase();
-    if (catLower === 'laptop' || catLower === 'laptops') {
-      filtered = filtered.filter(p =>
-        (p.category === 'Electronics' || p.category === 'Computers' || p.category === 'Laptops') &&
-        (p.title.toLowerCase().includes('laptop') || (p.description && p.description.toLowerCase().includes('laptop')))
-      );
-    } else if (catLower === 'phone' || catLower === 'smartphone' || catLower === 'mobiles' || catLower === 'mobiles') {
-      filtered = filtered.filter(p =>
-        (p.category === 'Electronics' || p.category === 'Mobiles' || p.category === 'Phones' || p.category === 'Smartphones' || p.category === 'Smart Phone') &&
-        (p.title.toLowerCase().includes('phone') || p.title.toLowerCase().includes('mobile') || p.id.startsWith('ph_'))
-      );
-    } else {
-      filtered = filtered.filter(p => p.category && p.category.toLowerCase() === catLower);
-    }
-  }
-
-  // 2. Initial Filtering by Query string
-  if (query) {
-    const searchTerms = query.split(/\s+/).filter(t => t.length > 0);
-    filtered = filtered.filter(p => {
-      const searchStr = `${p.title} ${p.brand} ${p.modelName || p.title} ${p.description || ''} ${p.category || ''}`.toLowerCase();
-      return searchTerms.every(term => searchStr.includes(term));
-    });
-  }
-
-  // Store "Regular" results state before applying specific preference filters
-  const regularResults = [...filtered];
-
-  // 3. Apply Brand Filter
-  if (brands && brands.length > 0) {
-    const lowerBrands = brands.map(b => b.toLowerCase());
-    filtered = filtered.filter(p => p.brand && lowerBrands.includes(p.brand.toLowerCase()));
-  }
-
-  // 4. Apply Attributes (Improved fuzzy matching for "AMOLED / OLED" styles)
-  if (attributes && attributes.length > 0) {
-    filtered = filtered.filter(p => {
-      const pStr = JSON.stringify(p).toLowerCase();
-      // Lenient: match ANY selected attribute preference
-      return attributes.some(attr => {
-        // Handle "AMOLED / OLED" or "12GB | 16GB" by splitting
-        const parts = attr.toLowerCase().split(/\s*[\/|]\s*/).filter(s => s.length > 1);
-        if (parts.length === 0) return pStr.includes(attr.toLowerCase());
-        return parts.some(part => pStr.includes(part));
-      });
-    });
-  }
-
-  // 5. Fallback Logic: If preferences filtered out everything, show the regular query results
-  if (filtered.length === 0 && regularResults.length > 0 && (brands?.length > 0 || attributes?.length > 0)) {
-    console.log('No preference matches, falling back to regular search results');
-    filtered = regularResults;
-  }
-
-  // 6. Price Filter (Final constraint)
-  if (minPrice > 0 || maxPrice < Number.MAX_VALUE) {
-    filtered = filtered.filter(p => {
-      let price = p.price || 0;
-      if (p.offers && p.offers.length > 0) price = p.offers[0].price;
-      return price >= minPrice && price <= maxPrice;
-    });
-  }
-  // Prioritize Visible Products (Images) & Jumble All
-  const hasImage = (p) => (p.images && p.images.length > 0 && p.images[0]) || (p.image && p.image.length > 0);
-
-  const visible = filtered.filter(p => hasImage(p));
-  const others = filtered.filter(p => !hasImage(p));
-
-  // Fisher-Yates Shuffle
-  const shuffle = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  };
-
-  // Return shuffled visible first, then shuffled others
-  res.json([...shuffle(visible), ...shuffle(others)]);
-});
-
-app.get('/api/v1/products/:id', (req, res) => {
-  const product = products.find(p => p.id === req.params.id);
-  if (product) {
-    res.json(product);
-  } else {
-    // Try fuzzy match by ID if not found (sometimes frontend adds prefixes)
-    const fuzzy = products.find(p => req.params.id.includes(p.id) || p.id.includes(req.params.id));
-    if (fuzzy) return res.json(fuzzy);
-    res.status(404).json({ error: 'Product not found' });
-  }
-});
-
-app.get('/api/v1/search/compare', (req, res) => {
-  const query = (req.query.q || '').toLowerCase().trim();
-  if (!query) return res.json({ results: [] });
-
-  const searchTerms = query.split(/\s+/).filter(t => t.length > 0);
-  const matchedProducts = products.filter(p => {
-    const searchStr = `${p.title} ${p.brand} ${p.modelName || ''}`.toLowerCase();
-    return searchTerms.some(term => searchStr.includes(term)); // Use .some for broader search in comparison
-  }).slice(0, 10);
-
-  const results = matchedProducts.map(p => ({
-    productId: p.id,
-    modelName: p.modelName || p.title,
-    brand: p.brand,
-    category: p.category || 'Electronics',
-    rating: p.rating || 4.2,
-    reviewCount: p.reviewCount || "10",
-    image: p.images ? p.images[0] : (p.image || ''),
-    deals: p.offers || []
-  }));
-
-  res.json({ results });
-});
-
-app.post('/api/v1/track', (req, res) => {
-  const { productId, userId } = req.body;
-  console.log(`Tracking: User ${userId} -> Product ${productId}`);
-  res.json({ success: true, message: 'Product tracking active' });
-});
-
-app.post('/api/v1/kits/generate', (req, res) => {
-  const { userId, category, budget } = req.body;
-  console.log(`Generating Kit: Cat=${category}, Budget=â‚¹${budget}`);
-
-  let catFilter = category;
-  if (category === 'Cosmetics') catFilter = 'Cosmetics'; // Match real data
-
-  let categoryProducts = products.filter(p => p.category === catFilter);
-
-  if (categoryProducts.length < 5) {
-    categoryProducts = products.filter(p => p.id.toLowerCase().includes(category.toLowerCase().slice(0, 3)));
-  }
-
-  // If still empty, just use highest rated products
-  if (categoryProducts.length === 0) {
-    categoryProducts = [...products].sort((a, b) => (b.rating || 0) - (a.rating || 0)).slice(0, 100);
-  }
-
-  categoryProducts.sort((a, b) => (b.rating || 0) - (a.rating || 0));
-
-  const kitItems = [];
-  let currentTotal = 0;
-
-  // Pick core item
-  const coreItem = categoryProducts.find(p => {
-    const price = p.offers && p.offers[0] ? p.offers[0].price : (p.price || 0);
-    return price > 0 && price <= (budget * 0.7);
-  });
-
-  if (coreItem) {
-    const p_price = coreItem.offers && coreItem.offers[0] ? coreItem.offers[0].price : (coreItem.price || 0);
-    kitItems.push({
-      id: coreItem.id,
-      name: coreItem.title,
-      price: p_price,
-      image: coreItem.images ? coreItem.images[0] : (coreItem.image || ''),
-      description: coreItem.description,
-      brand: coreItem.brand,
-      preference: "Core Premium"
-    });
-    currentTotal += p_price;
-  }
-
-  const others = categoryProducts.filter(p => !kitItems.find(ki => ki.id === p.id));
-  for (const p of others) {
-    const p_price = p.offers && p.offers[0] ? p.offers[0].price : (p.price || 0);
-    if (p_price > 0 && (currentTotal + p_price) <= budget && kitItems.length < 4) {
-      kitItems.push({
-        id: p.id,
-        name: p.title,
-        price: p_price,
-        image: p.images ? p.images[0] : (p.image || ''),
-        description: p.description,
-        brand: p.brand,
-        preference: kitItems.length === 1 ? "Essential" : "Bonus"
-      });
-      currentTotal += p_price;
-    }
-  }
-
-  res.json({
-    id: `kit-${Date.now()}`,
-    userId: userId,
-    category: category,
-    items: kitItems,
-    totalPrice: currentTotal,
-    createdAt: new Date().toISOString(),
-    aiInsight: "Professionally curated kit using real-time market data."
-  });
-});
-
-app.get('/api/v1/user/wishlist', (req, res) => res.json([]));
-app.get('/api/v1/user/orders', (req, res) => res.json([]));
-app.get('/api/v1/user/addresses', (req, res) => res.json([]));
-app.get('/api/v1/user/preferences', (req, res) => res.json({ budget: 50000, categories: ['Electronics', 'Fashion'] }));
-
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+]

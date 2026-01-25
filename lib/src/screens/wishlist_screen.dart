@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/theme_tokens.dart';
@@ -183,10 +184,11 @@ class _WishlistItemCard extends StatelessWidget {
                         topLeft: Radius.circular(16),
                         bottomLeft: Radius.circular(16),
                       ),
-                      child: Image.network(
-                        item.product.image,
+                      child: CachedNetworkImage(
+                        imageUrl: item.product.image,
                         fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => const Icon(Icons.image, color: Colors.white54),
+                        placeholder: (context, url) => Container(color: Colors.grey[800]),
+                        errorWidget: (_, __, ___) => const Icon(Icons.image, color: Colors.white54),
                       ),
                     )
                   : const Icon(Icons.image, color: Colors.white54),

@@ -205,8 +205,8 @@ class _RootShellState extends ConsumerState<_RootShell>
                child: ListView(
                  controller: scrollController,
                  padding: const EdgeInsets.all(16),
-                 children: [
-                   const Align(
+                 children: const [
+                   Align(
                      alignment: Alignment.centerLeft,
                      child: Card(
                        color: ThemeTokens.surfaceMuted,

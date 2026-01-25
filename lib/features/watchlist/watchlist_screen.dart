@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../state/providers.dart';
@@ -19,7 +20,14 @@ class WatchlistScreen extends ConsumerWidget {
               itemBuilder: (context, index) {
                 final product = watchlist[index];
                 return ListTile(
-                  leading: Image.network(product.images.first, width: 50, height: 50, fit: BoxFit.cover),
+                  leading: CachedNetworkImage(
+                    imageUrl: product.images.first,
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                  ),
                   title: Text(product.title),
                   subtitle: Text('\$${product.offers.isNotEmpty ? product.offers.first.price : "?"}'),
                   trailing: IconButton(

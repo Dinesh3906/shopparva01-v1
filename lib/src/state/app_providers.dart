@@ -99,7 +99,7 @@ class TrackedProductsNotifier extends StateNotifier<AsyncValue<List<Product>>> {
 
   Future<void> trackProduct(Product product) async {
     try {
-      await _repository.trackProduct(productId: product.id, userId: 'user123');
+      await _repository.trackProduct(productId: product.id, userId: 'user123', product: product);
       await loadTrackedProducts();
     } catch (error, stackTrace) {
       state = AsyncValue.error(error, stackTrace);

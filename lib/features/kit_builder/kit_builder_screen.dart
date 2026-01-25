@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+
 import '../../state/providers.dart';
 import '../../src/state/app_providers.dart';
 import '../../core/theme_tokens.dart';
 import 'package:shopparva/models/product.dart';
-import 'package:shopparva/models/cart_item.dart';
+
 
 // Provider to hold the generated kit state locally for the wizard
 final localKitProvider = StateProvider<AsyncValue<dynamic>>((ref) => const AsyncValue.data(null));
@@ -197,12 +198,13 @@ class _KitBuilderScreenState extends ConsumerState<KitBuilderScreen> {
                   return ListTile(
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                        item.image ?? 'https://via.placeholder.com/50',
+                      child: CachedNetworkImage(
+                        imageUrl: item.image ?? 'https://via.placeholder.com/50',
                         width: 50,
                         height: 50,
                         fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => const Icon(Icons.computer),
+                        placeholder: (context, url) => const Center(child: SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2))),
+                        errorWidget: (context, url, error) => const Icon(Icons.computer),
                       ),
                     ),
                     title: Text(

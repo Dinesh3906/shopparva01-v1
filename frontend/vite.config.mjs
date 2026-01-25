@@ -6,7 +6,11 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      '/products': 'http://localhost:4000'
+      '/products': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/products/, '/api/v1/products')
+      }
     }
   }
 });
