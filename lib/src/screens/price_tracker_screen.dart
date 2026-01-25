@@ -25,7 +25,10 @@ class PriceTrackerScreen extends ConsumerStatefulWidget {
 }
 
 class _PriceTrackerScreenState extends ConsumerState<PriceTrackerScreen> {
-  final Dio _dio = Dio();
+  final Dio _dio = Dio(BaseOptions(
+    connectTimeout: const Duration(seconds: 2),
+    receiveTimeout: const Duration(seconds: 3),
+  ));
 
   @override
   Widget build(BuildContext context) {
@@ -651,24 +654,38 @@ class _PriceTrackerScreenState extends ConsumerState<PriceTrackerScreen> {
          }
       } catch (_) {}
 
-      debugPrint('Generating fallback mock data...');
-      
       // Fallback: Generate mock data if backend fails
       final random = Random();
       final now = DateTime.now();
+      
+      // Generate global history
       final history = <Map<String, dynamic>>[];
       double price = 50000.0;
-      
       for (int i = days; i >= 0; i--) {
         final date = now.subtract(Duration(days: i));
-        // Random walk
         price = price * (1 + (random.nextDouble() * 0.1 - 0.05));
         if (price < 10000) price = 10000;
-        
         history.add({
           'date': date.toIso8601String(),
           'price': price,
         });
+      }
+      
+      // Generate platform-specific history for "all graphs"
+      final platforms = ['Amazon', 'Flipkart', 'Myntra', 'AJIO', 'Croma'];
+      final platformHistory = <String, List<Map<String, dynamic>>>{};
+      for (final p in platforms) {
+        final pHistory = <Map<String, dynamic>>[];
+        double pPrice = price * (0.9 + random.nextDouble() * 0.2);
+        for (int i = days; i >= 0; i--) {
+          final date = now.subtract(Duration(days: i));
+          pPrice = pPrice * (1 + (random.nextDouble() * 0.1 - 0.05));
+          pHistory.add({
+            'date': date.toIso8601String(),
+            'price': pPrice,
+          });
+        }
+        platformHistory[p] = pHistory;
       }
       
       // Calculate basic trend
@@ -686,11 +703,17 @@ class _PriceTrackerScreenState extends ConsumerState<PriceTrackerScreen> {
 
       return {
         'id': productId,
-        'title': 'Product Name', // Placeholder
+        'title': 'Product Name', 
         'price': price,
         'price_history': history,
+        'platform_history': platformHistory,
         'price_trend': trend,
-        'comparisons': []
+        'comparisons': platforms.map((p) => {
+          'store': p,
+          'price': price * (0.95 + random.nextDouble() * 0.1),
+          'rating': 4.0 + random.nextDouble(),
+          'shipping': random.nextBool() ? 0.0 : 50.0,
+        }).toList()
       };
     }
   }
