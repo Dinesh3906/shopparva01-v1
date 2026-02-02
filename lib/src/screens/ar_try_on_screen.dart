@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/theme_tokens.dart';
@@ -25,6 +26,11 @@ class _ArTryOnScreenState extends ConsumerState<ArTryOnScreen> {
 
   Future<void> _initCamera() async {
     try {
+      final status = await Permission.camera.request();
+      if (status.isDenied || status.isPermanentlyDenied) {
+        debugPrint('Camera permission denied');
+        return;
+      }
       _cameras = await availableCameras();
       if (_cameras == null || _cameras!.isEmpty) return;
 
