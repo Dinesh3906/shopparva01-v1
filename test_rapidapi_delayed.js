@@ -1,47 +1,61 @@
 const https = require('https');
+const secrets = require('./secrets.js');
 
-// Wait 10 seconds then make request
-setTimeout(() => {
-    const options = {
-        method: 'GET',
-        hostname: 'ecommerce-api15.p.rapidapi.com',
-        path: '/api/malefootwear',
-        headers: {
-            'x-rapidapi-key': '04730925femsh70545419490ad98p1f07e1jsn62f7886cfed9',
-            'x-rapidapi-host': 'ecommerce-api15.p.rapidapi.com'
-        }
-    };
+const categories = [
+    'smartphones', 'laptops', 'fragrances', 'skincare', 'groceries',
+    'home-decoration', 'furniture', 'tops', 'womens-dresses', 'womens-shoes'
+];
 
-    const req = https.request(options, (res) => {
-        const chunks = [];
-        res.on('data', (chunk) => chunks.push(chunk));
-        res.on('end', () => {
-            const body = Buffer.concat(chunks).toString();
-            console.log('Status:', res.statusCode);
+function fetchCategory(category) {
+    return new Promise((resolve, reject) => {
+        const options = {
+            hostname: 'ecommerce-api15.p.rapidapi.com',
+            port: null,
+            path: `/api/${category}`,
+            method: 'GET',
+            headers: {
+                'x-rapidapi-key': secrets.rapidApiKey,
+                'x-rapidapi-host': 'ecommerce-api15.p.rapidapi.com'
+            }
+        };
 
-            if (res.statusCode === 200) {
-                const json = JSON.parse(body);
-                console.log('Type:', Array.isArray(json) ? 'Array' : 'Object');
-
-                if (Array.isArray(json)) {
-                    console.log('Total items:', json.length);
-                    if (json.length > 0) {
-                        console.log('\n=== First Item Structure ===');
-                        console.log(JSON.stringify(json[0], null, 2));
+        const req = https.request(options, (res) => {
+            const chunks = [];
+            res.on('data', (chunk) => chunks.push(chunk));
+            res.on('end', () => {
+                const body = Buffer.concat(chunks).toString();
+                if (res.statusCode === 200) {
+                    try {
+                        const json = JSON.parse(body);
+                        resolve({ category, count: json.length, sample: json[0] });
+                    } catch (e) {
+                        reject(e);
                     }
                 } else {
-                    console.log('Keys:', Object.keys(json));
-                    console.log('\n=== Response ===');
-                    console.log(JSON.stringify(json, null, 2).substring(0, 1000));
+                    reject(new Error(`Status ${res.statusCode}: ${body}`));
                 }
-            } else {
-                console.log('Error:', body);
-            }
+            });
         });
+
+        req.on('error', (e) => reject(e));
+        req.end();
     });
+}
 
-    req.on('error', (e) => console.error('Request error:', e));
-    req.end();
-}, 10000);
+// Fetch all categories sequentially to avoid rate limits
+async function fetchAll() {
+    console.log('Starting fetch...');
+    for (const category of categories) {
+        try {
+            console.log(`Fetching ${category}...`);
+            const result = await fetchCategory(category);
+            console.log(`✅ ${category}: ${result.count} items`);
+        } catch (e) {
+            console.error(`❌ ${category}: ${e.message}`);
+        }
+        // Wait 1s between requests
+        await new Promise(r => setTimeout(r, 1000));
+    }
+}
 
-console.log('Waiting 10 seconds to avoid rate limit...');
+fetchAll();
