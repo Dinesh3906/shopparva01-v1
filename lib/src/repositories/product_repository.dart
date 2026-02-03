@@ -9,11 +9,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../core/api_client.dart';
 import 'package:shopparva/models/product.dart';
 import '../models/product_deal.dart';
+import 'package:shopparva/core/secrets.dart';
 
 class ProductRepository {
   ProductRepository(this._client);
 
   final ApiClient _client;
+
+  // RapidAPI Configuration
+  static const String _rapidApiKey = Secrets.rapidApiKey;
+  static const String _rapidApiHost = 'ecommerce-api3.p.rapidapi.com';
+  static const List<String> _rapidApiCategories = [
+    'mobiles',
+    'kidsfootwear',
+    'malefootwear',
+    'books',
+    'kidswear',
+    'womenswear',
+    'menswear',
+    'watches',
+    'laptops',
+    'femalefootwear',
+  ];
 
   final Map<String, Product> _productCache = {};
   List<Product>? _allLocalProducts;
@@ -51,7 +68,49 @@ class ProductRepository {
   }) async {
     await _ensureLocalProductsLoaded();
     
-    var filtered = _allLocalProducts!;
+    // 0. Fetch External Data (if no specific filtering that would exclude it)
+    List<Product> externalProducts = [];
+    try {
+      debugPrint('Fetching external products for query: $query');
+      final response = await _client.dio.get('https://fakestoreapiserver.reactbd.org/api/products');
+      if (response.data is Map && response.data['data'] is List) {
+        externalProducts = (response.data['data'] as List).map((data) => Product(
+          id: data['_id'].toString(),
+          name: data['title'] ?? 'Unknown Product',
+          brand: data['brand'] ?? 'External Brand',
+          price: (data['price'] as num).toDouble(),
+          currency: 'USD',
+          image: data['image'] ?? '',
+          stores: 0,
+          rating: (data['rating'] as num).toDouble(),
+          description: data['description'] ?? '',
+          categories: [data['category'] ?? 'General'],
+          priceHistory: [],
+          comparisons: [],
+          images: [data['image'] ?? ''],
+        )).toList();
+        debugPrint('Fetched ${externalProducts.length} external products');
+        for (var p in externalProducts.take(3)) {
+          debugPrint('External Product: "${p.name}" (ID: ${p.id})');
+        }
+      }
+    } catch (e) {
+      debugPrint('Error fetching external products: $e');
+      // Continue with local products only on error
+    }
+
+    // 0.5 Fetch RapidAPI Products
+    List<Product> rapidApiProducts = [];
+    try {
+      rapidApiProducts = await fetchRapidAPIProducts();
+      debugPrint('Fetched ${rapidApiProducts.length} RapidAPI products');
+    } catch (e) {
+      debugPrint('Error fetching RapidAPI products: $e');
+      // Continue without RapidAPI products on error
+    }
+
+    var filtered = [..._allLocalProducts!, ...externalProducts, ...rapidApiProducts];
+    debugPrint('Total products before filter: ${filtered.length}');
 
     // 1. Filter by Query
     if (query != null && query.isNotEmpty) {
@@ -62,6 +121,7 @@ class ProductRepository {
                p.description.toLowerCase().contains(q) ||
                p.categories.any((c) => c.toLowerCase().contains(q));
       }).toList();
+      debugPrint('Filtered count after query "$q": ${filtered.length}');
     }
 
     // 2. Filter by Category
@@ -253,6 +313,117 @@ class ProductRepository {
         deals: deals,
       );
     }).toList();
+  }
+
+  /// Fetch a test product from External API by ID
+  Future<Product> fetchExternalProduct(String id) async {
+    try {
+      final response = await _client.dio.get('https://fakestoreapiserver.reactbd.org/api/products/$id');
+      final data = response.data as Map<String, dynamic>;
+      
+      return Product(
+        id: data['_id'].toString(),
+        name: data['title'] ?? 'Unknown Product',
+        brand: data['brand'] ?? 'External Brand',
+        price: (data['price'] as num).toDouble(),
+        currency: 'USD',
+        image: data['image'] ?? '',
+        stores: 0,
+        rating: (data['rating'] as num).toDouble(),
+        description: data['description'] ?? '',
+        categories: [data['category'] ?? 'General'],
+        priceHistory: [],
+        comparisons: [],
+        images: [data['image'] ?? ''],
+      );
+    } catch (e) {
+      debugPrint('Error fetching external product $id: $e');
+      rethrow;
+    }
+  }
+
+  /// Fetch products from all RapidAPI categories
+  Future<List<Product>> fetchRapidAPIProducts() async {
+    final List<Product> allProducts = [];
+    
+    for (final category in _rapidApiCategories) {
+      try {
+        debugPrint('Fetching RapidAPI category: $category');
+        
+        final response = await _client.dio.get(
+          'https://$_rapidApiHost/$category',
+          options: Options(
+            headers: {
+              'x-rapidapi-key': _rapidApiKey,
+              'x-rapidapi-host': _rapidApiHost,
+            },
+            followRedirects: true,
+            maxRedirects: 5,
+          ),
+        );
+        
+        if (response.data is List) {
+          final products = (response.data as List).map((data) {
+            // Parse price (remove ₹ symbol and convert to double)
+            final priceStr = (data['Price'] ?? '₹0').toString().replaceAll('₹', '').replaceAll(',', '');
+            final price = double.tryParse(priceStr) ?? 0.0;
+            
+            // Generate unique ID
+            final id = 'rapid_${category}_${data['Unnamed: 0'] ?? allProducts.length}';
+            
+            return Product(
+              id: id,
+              name: data['Description'] ?? 'Unknown Product',
+              brand: data['Brand'] ?? 'Unknown Brand',
+              price: price,
+              currency: '₹',
+              image: data['Image'] ?? '',
+              stores: 1,
+              rating: 4.0, // Default rating
+              description: data['Description'] ?? '',
+              categories: [_mapToShopparvaCategory(category)],
+              priceHistory: [],
+              comparisons: [],
+              images: [data['Image'] ?? ''],
+            );
+          }).toList();
+          
+          allProducts.addAll(products);
+          debugPrint('Fetched ${products.length} products from $category');
+        }
+      } catch (e) {
+        debugPrint('Error fetching RapidAPI category $category: $e');
+        // Continue with other categories on error
+      }
+    }
+    
+    debugPrint('Total RapidAPI products: ${allProducts.length}');
+    return allProducts;
+  }
+
+  /// Map RapidAPI category to Shopparva category
+  String _mapToShopparvaCategory(String rapidApiCategory) {
+    // Map RapidAPI categories to existing Shopparva categories
+    switch (rapidApiCategory.toLowerCase()) {
+      case 'mobiles':
+      case 'laptops':
+      case 'watches':
+        return 'Electronics';
+      
+      case 'kidsfootwear':
+      case 'malefootwear':
+      case 'femalefootwear':
+      case 'kidswear':
+      case 'menswear':
+      case 'womenswear':
+        return 'Fashion';
+      
+      case 'books':
+        return 'Essentials';
+      
+      default:
+        return 'Fashion'; // Default category
+    }
   }
 }
 
