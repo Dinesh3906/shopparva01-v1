@@ -16,7 +16,26 @@ ShopParva is an AI-driven multi-platform shopping ecosystem built with Flutter. 
 
 ## Getting Started
 
-### 1. Setup Backend
+### 1. Secrets Setup
+**Important:** This project uses API keys that are not checked into version control. You must create the following files manually.
+
+**File 1: `lib/core/secrets.dart`**
+Create this file and add your RapidAPI key:
+```dart
+class Secrets {
+  static const String rapidApiKey = 'YOUR_RAPID_API_KEY';
+}
+```
+
+**File 2: `secrets.js`**
+Create this file in the root directory:
+```javascript
+module.exports = {
+    rapidApiKey: 'YOUR_RAPID_API_KEY'
+};
+```
+
+### 2. Setup Backend
 The app relies on a mock backend for data.
 
 ```bash
@@ -26,7 +45,7 @@ npm start
 ```
 Server will run on `http://localhost:3000`.
 
-### 2. Setup Flutter App
+### 3. Setup Flutter App
 
 ```bash
 # Get dependencies
