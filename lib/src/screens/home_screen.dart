@@ -1,3 +1,4 @@
+import 'dart:math'; // Added for Random
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;

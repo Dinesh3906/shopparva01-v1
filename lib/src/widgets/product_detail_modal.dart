@@ -18,22 +18,16 @@ class ProductDetailModal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final repo = ref.read(productRepositoryProvider);
+    final p = product;
+    final comparisons = p.comparisons ?? const [];
 
-    return FutureBuilder<Product>(
-      future: repo.getProductById(product.id),
-      initialData: product,
-      builder: (context, snapshot) {
-        final p = snapshot.data ?? product;
-        final comparisons = p.comparisons ?? const [];
+    // Calculate potential discount or mock it for the "deal" look
+    // If we don't have real MRP, assume current price is discounted by 40% for the visual
+    final double currentPrice = p.price;
+    final double mockMrp = currentPrice * 1.4; // 40% off calculation reverse
+    final int discountPercent = 40;
 
-        // Calculate potential discount or mock it for the "deal" look
-        // If we don't have real MRP, assume current price is discounted by 40% for the visual
-        final double currentPrice = p.price;
-        final double mockMrp = currentPrice * 1.4; // 40% off calculation reverse
-        final int discountPercent = 40;
-
-        return Container(
+    return Container(
           decoration: const BoxDecoration(
             color: ThemeTokens.surfaceDark,
             borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -394,8 +388,6 @@ class ProductDetailModal extends ConsumerWidget {
             ),
           ),
         );
-      },
-    );
   }
 }
 
