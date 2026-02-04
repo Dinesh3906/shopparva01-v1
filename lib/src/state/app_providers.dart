@@ -2,10 +2,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/api_client.dart';
 import '../models/kit.dart';
-import 'package:shopparva/models/product.dart';
+import '../models/product.dart';
 import '../models/user.dart';
 import '../models/price_alert.dart';
-import 'package:shopparva/models/cart_item.dart';
+import '../models/cart_item.dart';
 import '../repositories/ar_repository.dart';
 import '../repositories/kit_repository.dart';
 import '../repositories/product_repository.dart';

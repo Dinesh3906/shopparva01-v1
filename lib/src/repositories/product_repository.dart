@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/api_client.dart';
+import '../../core/secrets.dart';
 import 'package:shopparva/models/product.dart';
 import '../models/product_deal.dart';
 
@@ -16,7 +17,7 @@ class ProductRepository {
   final ApiClient _client;
 
   // RapidAPI Configuration
-  static const String _rapidApiKey = '04730925femsh70545419490ad98p1f07e1jsn62f7886cfed9';
+  static const String _rapidApiKey = Secrets.rapidApiKey;
   static const String _rapidApiHost = 'ecommerce-api3.p.rapidapi.com';
   static const List<String> _rapidApiCategories = [
     'mobiles',
@@ -134,6 +135,7 @@ class ProductRepository {
     // final endIndex = (startIndex + limit).clamp(0, filtered.length);
     // return filtered.sublist(startIndex, endIndex);
     
+    filtered.shuffle();
     return filtered;
   }
 

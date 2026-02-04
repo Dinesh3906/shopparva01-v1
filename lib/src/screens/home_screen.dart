@@ -12,6 +12,8 @@ import '../widgets/product_detail_modal.dart';
 import '../widgets/product_grid.dart';
 import 'price_tracker_screen.dart';
 import 'cart_screen.dart';
+import '../../services/api_service.dart';
+import 'dart:developer' as developer;
 
 
 class HomeScreen extends ConsumerStatefulWidget {

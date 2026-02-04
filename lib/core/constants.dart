@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'secrets.dart';
 
 class AppConstants {
   static const String appName = 'ShopParva';
@@ -11,4 +12,10 @@ class AppConstants {
   static const String apiBaseUrl = kIsWeb 
       ? 'http://localhost:3000/api/v1'  // Web (Chrome)
       : 'http://10.0.2.2:3000/api/v1';   // Android emulator (change to localhost for iOS/desktop)
+
+  // New APIs
+  static const String fakeStoreApiUrl = 'https://fakestoreapiserver.reactbd.org/api/products';
+  static const String rapidApiBaseUrl = 'https://ecommerce-api3.p.rapidapi.com';
+  static const String rapidApiKey = Secrets.rapidApiKey;
+  static const String rapidApiHost = 'ecommerce-api3.p.rapidapi.com';
 }

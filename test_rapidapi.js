@@ -1,11 +1,12 @@
 const https = require('https');
+const secrets = require('./secrets');
 
 const options = {
     method: 'GET',
     hostname: 'ecommerce-api3.p.rapidapi.com',
     path: '/malefootwear',
     headers: {
-        'x-rapidapi-key': '04730925femsh70545419490ad98p1f07e1jsn62f7886cfed9',
+        'x-rapidapi-key': secrets.rapidApiKey,
         'x-rapidapi-host': 'ecommerce-api3.p.rapidapi.com'
     }
 };

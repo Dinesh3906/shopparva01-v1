@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.shopparva.v2"
+    namespace = "com.example.shopparva"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 

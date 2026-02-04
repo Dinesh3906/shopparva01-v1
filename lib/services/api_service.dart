@@ -70,4 +70,44 @@ class ApiService {
       throw Exception('Failed to generate kit');
     }
   }
+
+  Future<List<Product>> fetchFakeStoreProducts() async {
+    try {
+      final response = await Dio().get(AppConstants.fakeStoreApiUrl);
+      final List<dynamic> data = response.data;
+      return data.map((json) => Product.fromJson(json as Map<String, dynamic>)).toList();
+    } catch (e) {
+      developer.log('Error fetching Fake Store products: $e', name: 'ApiService.fetchFakeStoreProducts');
+      return [];
+    }
+  }
+
+  Future<Product?> fetchFakeStoreProductById(int id) async {
+    try {
+      final response = await Dio().get('${AppConstants.fakeStoreApiUrl}/$id');
+      return Product.fromJson(response.data as Map<String, dynamic>);
+    } catch (e) {
+      developer.log('Error fetching Fake Store product $id: $e', name: 'ApiService.fetchFakeStoreProductById');
+      return null;
+    }
+  }
+
+  Future<List<Product>> fetchRapidAPIProducts(String category) async {
+    try {
+      final response = await Dio().get(
+        '${AppConstants.rapidApiBaseUrl}/$category',
+        options: Options(
+          headers: {
+            'x-rapidapi-key': AppConstants.rapidApiKey,
+            'x-rapidapi-host': AppConstants.rapidApiHost,
+          },
+        ),
+      );
+      final List<dynamic> data = response.data;
+      return data.map((json) => Product.fromJson(json as Map<String, dynamic>)).toList();
+    } catch (e) {
+      developer.log('Error fetching RapidAPI products ($category): $e', name: 'ApiService.fetchRapidAPIProducts');
+      return [];
+    }
+  }
 }

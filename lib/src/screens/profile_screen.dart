@@ -11,6 +11,8 @@ import 'edit_profile_screen.dart';
 import 'orders_screen.dart';
 import 'preferences_screen.dart';
 import 'wishlist_screen.dart';
+import 'cart_screen.dart';
+import 'price_tracker_screen.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
@@ -139,12 +141,21 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             onTap: () => _showRecentlyViewed(context),
           ),
         ),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const CartScreen()),
+            ),
+          ),
+        ),
         SliverToBoxAdapter(
           child: _buildMenuTile(
-            icon: Icons.apps_outlined,
-            title: 'Saved Kits',
-            subtitle: 'Your saved Make My Kit builds',
-            onTap: () => _showSavedKits(context),
+            icon: Icons.show_chart_rounded,
+            title: 'Price Tracker',
+            subtitle: 'Monitor price drops for saved items',
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const PriceTrackerScreen()),
+            ),
           ),
         ),
         // Payments & Addresses Section

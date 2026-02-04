@@ -10,6 +10,8 @@ import 'src/screens/deals_screen.dart';
 import 'src/screens/make_my_kit_screen.dart';
 import 'src/screens/profile_screen.dart';
 import 'src/screens/search_screen.dart';
+import 'src/screens/cart_screen.dart';
+import 'src/screens/price_tracker_screen.dart';
 import 'src/state/app_providers.dart';
 import 'src/widgets/bottom_nav_bar.dart';
 import 'src/widgets/empty_and_loading.dart';
@@ -99,6 +101,8 @@ class _RootShellState extends ConsumerState<_RootShell>
       const MakeMyKitScreen(),
       const ArTryOnScreen(),
       const ProfileScreen(),
+      const CartScreen(),
+      const PriceTrackerScreen(),
     ];
 
     return Scaffold(

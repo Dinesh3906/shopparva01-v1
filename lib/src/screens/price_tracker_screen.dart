@@ -6,7 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../../core/theme_tokens.dart';
 import 'dart:math';
 import '../../core/constants.dart';
-import 'package:shopparva/models/product.dart';
+import '../models/product.dart';
 import '../models/price_history_point.dart';
 import '../state/app_providers.dart';
 import '../widgets/empty_and_loading.dart';
