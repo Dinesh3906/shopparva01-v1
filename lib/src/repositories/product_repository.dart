@@ -10,6 +10,7 @@ import '../core/api_client.dart';
 import '../../core/secrets.dart';
 import 'package:shopparva/models/product.dart';
 import '../models/product_deal.dart';
+import 'package:shopparva/core/secrets.dart';
 
 class ProductRepository {
   ProductRepository(this._client);

@@ -1,5 +1,5 @@
 import 'package:google_generative_ai/google_generative_ai.dart';
-import '../../core/constants.dart';
+import '../../core/secrets.dart';
 
 class GeminiService {
   late final GenerativeModel _model;
@@ -7,7 +7,7 @@ class GeminiService {
   GeminiService() {
     _model = GenerativeModel(
       model: 'gemini-pro',
-      apiKey: AppConstants.geminiApiKey,
+      apiKey: Secrets.geminiApiKey,
     );
   }
 

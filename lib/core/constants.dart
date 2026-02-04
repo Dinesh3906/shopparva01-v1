@@ -3,7 +3,6 @@ import 'secrets.dart';
 
 class AppConstants {
   static const String appName = 'ShopParva';
-  static const String geminiApiKey = 'AIzaSyDK53ZnkAFQWEREVAtm6jIeJkHa8yfQvBk';
   static const String currencySymbol = '₹';
   // Base URL points at the mock backend API root so that
   // ApiService paths like `/products/search` become
