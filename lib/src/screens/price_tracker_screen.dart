@@ -6,7 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../../core/theme_tokens.dart';
 import 'dart:math';
 import '../../core/constants.dart';
-import '../models/product.dart';
+import '../../models/product.dart';
 import '../models/price_history_point.dart';
 import '../state/app_providers.dart';
 import '../widgets/empty_and_loading.dart';
@@ -350,7 +350,7 @@ class _PriceTrackerScreenState extends ConsumerState<PriceTrackerScreen> {
         }
 
         return SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

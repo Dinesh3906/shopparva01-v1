@@ -25,6 +25,12 @@ class ThemeTokens {
   static const Color surfaceLight = Colors.white;
   static const Color surfaceDark = Color(0xFF141821); // Card background
   static const Color surfaceMuted = Color(0xFF1B2328); // Muted surfaces / panels
+  
+  // Glassmorphism tokens
+  static const double glassBlur = 16.0;
+  static const double glassOpacity = 0.08;
+  static const double glassBorderOpacity = 0.12;
+
   static const Color neutral100 = Color(0xFFF5F5F5);
   static const Color neutral200 = Color(0xFFE5E7EB);
   static const Color neutral300 = Color(0xFFD1D5DB);
@@ -52,6 +58,7 @@ class ThemeTokens {
   static const double r12 = 12.0;
   static const double r16 = 16.0;
   static const double r24 = 24.0;
+  static const double r32 = 32.0; 
 
   // Elevation tokens
   static const double elevationLow = 1.0;

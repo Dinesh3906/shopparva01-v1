@@ -34,7 +34,22 @@ class FloatingAssistantButton extends StatelessWidget {
           backgroundColor: ThemeTokens.accent,
           elevation: 8,
           shape: const CircleBorder(),
-          child: const Icon(Icons.smart_toy_rounded, color: Colors.black),
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  ThemeTokens.accent.withOpacity(0.8),
+                  ThemeTokens.accent,
+                ],
+              ),
+            ),
+            child: const Center(
+              child: Icon(Icons.smart_toy_rounded, color: Colors.black, size: 28),
+            ),
+          ),
         ),
       ),
     );

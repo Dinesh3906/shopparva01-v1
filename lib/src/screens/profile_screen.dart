@@ -141,6 +141,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             onTap: () => _showRecentlyViewed(context),
           ),
         ),
+        SliverToBoxAdapter(
+          child: _buildMenuTile(
+            icon: Icons.shopping_cart_outlined,
+            title: 'Cart',
+            subtitle: 'View items in your cart',
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => const CartScreen()),
@@ -282,7 +287,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ),
         ),
         const SliverToBoxAdapter(
-          child: SizedBox(height: 24),
+          child: SizedBox(height: 120),
         ),
       ],
     );

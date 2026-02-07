@@ -175,7 +175,7 @@ class _DealsScreenState extends ConsumerState<DealsScreen> {
               }
 
               return SliverPadding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
                 sliver: SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {

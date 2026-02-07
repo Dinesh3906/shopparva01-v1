@@ -2,10 +2,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/api_client.dart';
 import '../models/kit.dart';
-import '../models/product.dart';
+import '../../models/product.dart';
 import '../models/user.dart';
 import '../models/price_alert.dart';
-import '../models/cart_item.dart';
+import '../../models/cart_item.dart';
 import '../repositories/ar_repository.dart';
 import '../repositories/kit_repository.dart';
 import '../repositories/product_repository.dart';
@@ -52,6 +52,7 @@ final smartDealsProvider = FutureProvider<List<Product>>((ref) async {
   // No limit - show all products in the category
   return repo.getProducts(
     category: category == 'All' ? null : category,
+    limit: 40,
   );
 });
 

@@ -92,7 +92,7 @@ class _ArTryOnScreenState extends ConsumerState<ArTryOnScreen> {
 
           // UI Overlays
           Positioned(
-            bottom: 40,
+            bottom: 110,
             left: 0,
             right: 0,
             child: _buildFilterSelector(),

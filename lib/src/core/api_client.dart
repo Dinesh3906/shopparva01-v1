@@ -15,8 +15,8 @@ class ApiClient {
         ) {
     _dio.interceptors.addAll([
       LogInterceptor(
-        requestBody: true,
-        responseBody: true,
+        requestBody: false,
+        responseBody: false,
       ),
       _RetryInterceptor(_dio),
     ]);

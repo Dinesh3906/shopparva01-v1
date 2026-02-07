@@ -16,7 +16,7 @@ import 'src/state/app_providers.dart';
 import 'src/widgets/bottom_nav_bar.dart';
 import 'src/widgets/empty_and_loading.dart';
 import 'src/widgets/floating_assistant_button.dart';
-import 'package:shopparva/models/product.dart';
+import 'models/product.dart';
 import 'src/state/fab_state.dart';
 import 'src/widgets/assistant_sheet.dart';
 
@@ -106,7 +106,8 @@ class _RootShellState extends ConsumerState<_RootShell>
     ];
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      extendBody: true, // Allow content to go behind the glass nav bar
+      resizeToAvoidBottomInset: false,
       body: IndexedStack(
         index: currentIndex,
         children: pages,
@@ -115,7 +116,8 @@ class _RootShellState extends ConsumerState<_RootShell>
         currentIndex: currentIndex,
         onTap: (index) => ref.read(navigationIndexProvider.notifier).state = index,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      // Position the FAB within the gap we created in the nav bar
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: currentIndex == 0
           ? _buildHomeFab(shouldHighlightFab)
           : FloatingAssistantButton(
@@ -144,8 +146,24 @@ class _RootShellState extends ConsumerState<_RootShell>
           _simulateAddProduct();
         },
         backgroundColor: ThemeTokens.primary, // Teal
+        elevation: 8,
         shape: const CircleBorder(),
-        child: const Icon(Icons.add_a_photo_rounded, color: Colors.white),
+        child: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                ThemeTokens.primary.withOpacity(0.8),
+                ThemeTokens.primary,
+              ],
+            ),
+          ),
+          child: const Center(
+            child: Icon(Icons.add_a_photo_rounded, color: Colors.white, size: 28),
+          ),
+        ),
       ),
     );
   }

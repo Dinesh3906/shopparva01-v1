@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/theme_tokens.dart';
 import 'package:shopparva/models/product.dart';
 import '../state/app_providers.dart';
 import '../screens/price_tracker_screen.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'glass_container.dart';
 
 class ProductDetailModal extends ConsumerWidget {
   const ProductDetailModal({
@@ -22,291 +25,263 @@ class ProductDetailModal extends ConsumerWidget {
     final comparisons = p.comparisons ?? const [];
 
     // Calculate potential discount or mock it for the "deal" look
-    // If we don't have real MRP, assume current price is discounted by 40% for the visual
     final double currentPrice = p.price;
-    final double mockMrp = currentPrice * 1.4; // 40% off calculation reverse
+    final double mockMrp = currentPrice * 1.4; 
     final int discountPercent = 40;
 
-    return Container(
-          decoration: const BoxDecoration(
-            color: ThemeTokens.surfaceDark,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-          ),
-          child: SafeArea(
+    return GlassContainer(
+      opacity: 0.1,
+      blur: 20,
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+      child: Stack(
+        children: [
+          // Content
+          SafeArea(
             top: false,
             child: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   // Close Button Row
-                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        icon: const Icon(Icons.close_rounded),
+                  Center(
+                    child: Container(
+                      width: 40,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(2),
                       ),
-                    ],
+                    ),
                   ),
+                  const SizedBox(height: 24),
                   
-                  // PROMINENT IMAGE SECTION (Amazon Style)
-                  Container(
-                    width: double.infinity,
-                    height: 250,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    padding: const EdgeInsets.all(16),
-                    child: CachedNetworkImage(
-                      imageUrl: p.image,
-                      fit: BoxFit.contain,
-                      placeholder: (context, url) => Center(
-                        child: CircularProgressIndicator(color: Colors.grey.shade300),
+                  // PROMINENT IMAGE SECTION
+                  Hero(
+                    tag: 'product_image_${p.id}',
+                    child: Container(
+                      width: double.infinity,
+                      height: 280,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(24),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 20,
+                            offset: const Offset(0, 10),
+                          ),
+                        ],
                       ),
-                      errorWidget: (context, url, error) => const Icon(
-                        Icons.image_not_supported_outlined,
-                        size: 50,
-                        color: Colors.grey,
+                      padding: const EdgeInsets.all(24),
+                      child: CachedNetworkImage(
+                        imageUrl: p.image,
+                        fit: BoxFit.contain,
+                        placeholder: (context, url) => Center(
+                          child: CircularProgressIndicator(color: Colors.grey.shade300),
+                        ),
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.image_not_supported_outlined,
+                          size: 50,
+                          color: Colors.grey,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
+                  ).animate().scale(duration: 400.ms, curve: Curves.easeOutBack),
+                  
+                  const SizedBox(height: 24),
 
                   // Brand & Title
                   if (p.brand.isNotEmpty)
                     Text(
-                      p.brand,
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      p.brand.toUpperCase(),
+                      style: ThemeTokens.labelLarge.copyWith(
+                        color: ThemeTokens.primary,
+                        letterSpacing: 1.2,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
                       ),
-                    ),
+                    ).animate().fadeIn(delay: 100.ms).slideX(begin: -0.1),
+                  
+                  const SizedBox(height: 8),
+                  
                   Text(
                     p.name,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Colors.white70,
-                      height: 1.3,
+                    style: ThemeTokens.headlineMedium.copyWith(
+                      color: Colors.white,
+                      height: 1.1,
                     ),
-                  ),
-                  const SizedBox(height: 8),
+                  ).animate().fadeIn(delay: 200.ms).slideX(begin: -0.1),
+                  
+                  const SizedBox(height: 16),
 
                   // Ratings
                   Row(
                     children: [
-                      Text(
-                        p.rating.toStringAsFixed(1),
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: Colors.amber.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.amber.withOpacity(0.5)),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.star_rounded, color: Colors.amber, size: 16),
+                            const SizedBox(width: 4),
+                            Text(
+                              p.rating.toStringAsFixed(1),
+                              style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.amber),
+                            ),
+                          ],
+                        ),
                       ),
-                      const SizedBox(width: 4),
-                      Row(
-                        children: List.generate(5, (index) {
-                          if (index < p.rating.floor()) {
-                            return const Icon(Icons.star, color: Colors.amber, size: 16);
-                          } else if (index < p.rating && (p.rating - index) >= 0.5) {
-                            return const Icon(Icons.star_half, color: Colors.amber, size: 16);
-                          } else {
-                            return const Icon(Icons.star_border, color: Colors.amber, size: 16);
-                          }
-                        }),
-                      ),
-                      const SizedBox(width: 8),
-                      // Mock review count as we don't have it in model usually, or use stores count
+                      const SizedBox(width: 12),
                       Text(
-                        '(${p.stores * 32})', // Fake correlation for density
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.blue.shade300),
+                        '${p.stores * 32} reviews', 
+                        style: ThemeTokens.bodySmall.copyWith(color: Colors.white54),
                       ),
                     ],
-                  ),
-                  const SizedBox(height: 12),
-
-                  // DEAL BADGE
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFCC0C39), // Amazon Deal Red
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: const Text(
-                      'Limited time deal',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
+                  ).animate().fadeIn(delay: 300.ms),
+                  
+                  const SizedBox(height: 24),
 
                   // PRICE BLOCK
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                       Text(
-                        '-$discountPercent%',
-                        style: const TextStyle(
-                          color: Color(0xFFCC0C39), // Amazon Red
-                          fontSize: 28,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      // Currency Symbol Superscript
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4),
-                        child: Text(
-                          p.currency.isEmpty ? '₹' : p.currency.replaceAll('\$', '₹'),
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
+                   GlassContainer(
+                    opacity: 0.05,
+                    borderRadius: BorderRadius.circular(20),
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          '${p.currency.isEmpty ? '₹' : p.currency.replaceAll('\$', '₹')}${p.price.toStringAsFixed(0)}',
+                          style: ThemeTokens.headlineLarge.copyWith(
+                            color: Colors.white,
+                            fontSize: 36,
                           ),
                         ),
-                      ),
-                      Text(
-                        p.price.toStringAsFixed(0),
-                        style: const TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          height: 0.9,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4),
-                        child: Text(
-                          '00', // Mock cents/paisa
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
+                        const SizedBox(width: 8),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 6),
+                          child: Text(
+                            '${p.currency.isEmpty ? '₹' : p.currency.replaceAll('\$', '₹')}${mockMrp.toStringAsFixed(0)}',
+                            style: TextStyle(
+                              color: Colors.white30,
+                              decoration: TextDecoration.lineThrough,
+                              decorationColor: Colors.white30,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  
-                  // MRP Strike-through
-                  Row(
-                    children: [
-                      Text(
-                        'M.R.P.: ',
-                        style: TextStyle(color: Colors.grey.shade400),
-                      ),
-                      Text(
-                        '${p.currency.isEmpty ? '₹' : p.currency.replaceAll('\$', '₹')}${mockMrp.toStringAsFixed(0)}',
-                        style: TextStyle(
-                          color: Colors.grey.shade400,
-                          decoration: TextDecoration.lineThrough,
+                        const Spacer(),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: ThemeTokens.secondary,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: ThemeTokens.secondary.withOpacity(0.4),
+                                blurRadius: 8,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: Text(
+                            '-$discountPercent%',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
+                      ],
+                    ),
+                  ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.1),
 
-                  // Prime Mock
-                  Row(
-                    children: [
-                      const Icon(Icons.check, color: Colors.orange, size: 18),
-                      const Text(
-                        'prime',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          'FREE delivery',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                      ),
-                    ],
-                  ),
+                  const SizedBox(height: 32),
 
-                  const Divider(height: 32, color: Colors.white10),
-
-                  // CHART SECTION (Keep functionality)
+                  // CHART SECTION
                   if (p.priceHistory != null && p.priceHistory!.isNotEmpty) ...[
                      Text(
-                      'Price History',
-                      style: Theme.of(context).textTheme.titleMedium,
+                      'Price Trend',
+                      style: ThemeTokens.titleLarge.copyWith(fontSize: 18),
                     ),
-                    const SizedBox(height: 8),
-                    _PriceSparkline(data: p.priceHistory!.map((e) => e.price).toList()),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: 120,
+                      child: _PriceSparkline(data: p.priceHistory!.map((e) => e.price).toList()),
+                    ).animate().fadeIn(delay: 500.ms),
+                    const SizedBox(height: 32),
                   ],
 
                   // COMPARISON SECTION
-                  Text(
-                    'Price comparison',
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 16),
-                  ),
-                  const SizedBox(height: 8),
-                  if (comparisons.isEmpty)
+                  if (comparisons.isNotEmpty) ...[
                     Text(
-                      'No comparison data available.',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white70),
-                    )
-                  else
+                      'Best Prices',
+                      style: ThemeTokens.titleLarge.copyWith(fontSize: 18),
+                    ),
+                    const SizedBox(height: 16),
                     ListView.separated(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: comparisons.length,
-                      separatorBuilder: (_, __) => const SizedBox(height: 8),
+                      separatorBuilder: (_, __) => const SizedBox(height: 12),
                       itemBuilder: (context, index) {
                         final c = comparisons[index];
-                        return Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: ThemeTokens.surfaceMuted,
-                            borderRadius: BorderRadius.circular(16),
-                          ),
+                        return GlassContainer(
+                          opacity: 0.05,
+                          borderRadius: BorderRadius.circular(16),
+                          padding: const EdgeInsets.all(16),
                           child: Row(
                             children: [
+                              Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.1),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(Icons.storefront, color: Colors.white70, size: 20),
+                              ),
+                              const SizedBox(width: 16),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       c.store,
-                                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                                      style: ThemeTokens.labelLarge.copyWith(fontWeight: FontWeight.w600),
                                     ),
                                     if (c.shipping != null)
                                       Text(
                                         'Shipping: ${c.shipping!.toStringAsFixed(2)}',
-                                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white70),
+                                        style: ThemeTokens.bodySmall.copyWith(color: Colors.white38),
                                       ),
                                   ],
                                 ),
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    '${p.currency.isNotEmpty ? p.currency.replaceAll('\$', '₹') : '₹'}${c.price.toStringAsFixed(0)}',
-                                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 16, color: ThemeTokens.accent),
-                                  ),
-                                ],
+                              Text(
+                                '${p.currency.isEmpty ? '₹' : p.currency.replaceAll('\$', '₹')}${c.price.toStringAsFixed(0)}',
+                                style: ThemeTokens.titleLarge.copyWith(fontSize: 18, color: ThemeTokens.accent),
                               ),
                             ],
                           ),
-                        );
+                        ).animate().fadeIn(delay: Duration(milliseconds: 600 + (index * 100))).slideX(begin: 0.1);
                       },
                     ),
-
-                  const SizedBox(height: 24),
+                    const SizedBox(height: 32),
+                  ],
                   
-                  // ACTIONS ROW
+                  // ACTIONS
                   Row(
                     children: [
                       Expanded(
-                        child: FilledButton(
+                        child: ElevatedButton(
                           onPressed: () {
+                             // .. existing log
                             ref.read(cartProvider.notifier).addToCart(p);
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -315,19 +290,21 @@ class ProductDetailModal extends ConsumerWidget {
                               Navigator.of(context).pop();
                             }
                           },
-                          // Amazon yellow button style mock
-                          style: FilledButton.styleFrom(
-                            backgroundColor: const Color(0xFFF7CA00),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
                             foregroundColor: Colors.black,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                           ),
-                          child: const Text('Add to Cart'),
+                          child: const Text('Add to Cart', style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      const SizedBox(width: 16),
                       Expanded(
-                        child: FilledButton( // Changed to Filled for Buy Now style
+                        child: ElevatedButton(
                           onPressed: () async {
-                             final query = Uri.encodeComponent(p.name);
+                              final query = Uri.encodeComponent(p.name);
                              final url = Uri.parse('https://www.google.com/search?q=$query&tbm=shop');
                              if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
                                 if (context.mounted) {
@@ -335,18 +312,23 @@ class ProductDetailModal extends ConsumerWidget {
                                 }
                              }
                           },
-                          style: FilledButton.styleFrom(
-                            backgroundColor: const Color(0xFFFA8900), // Amazon orange
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: ThemeTokens.accent,
                             foregroundColor: Colors.black,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            elevation: 8,
+                            shadowColor: ThemeTokens.accent.withOpacity(0.5),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                           ),
-                          child: const Text('View Deal'),
+                          child: const Text('Buy Now', style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ),
                     ],
-                  ),
-                  const SizedBox(height: 12),
+                  ).animate().fadeIn(delay: 800.ms).slideY(begin: 0.2),
                   
-                  // TRACKING BUTTON
+                  const SizedBox(height: 16),
+                  
+                  // TRACKING
                   SizedBox(
                     width: double.infinity,
                     child: Consumer(
@@ -354,7 +336,7 @@ class ProductDetailModal extends ConsumerWidget {
                         final trackedNotifier = ref.watch(trackedProductsNotifierProvider.notifier);
                         final isTracked = trackedNotifier.isTracked(p.id);
 
-                        return OutlinedButton.icon(
+                        return TextButton.icon(
                           onPressed: () async {
                             if (isTracked) {
                               await trackedNotifier.untrackProduct(p.id);
@@ -372,12 +354,13 @@ class ProductDetailModal extends ConsumerWidget {
                           },
                           icon: Icon(
                             isTracked ? Icons.notifications_active : Icons.notifications_none,
-                            // color: isTracked ? ThemeTokens.primary : Colors.white70,
+                            color: isTracked ? ThemeTokens.primary : Colors.white54,
                           ),
-                          label: Text(isTracked ? 'Tracking Active' : 'Track Price'),
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            side: const BorderSide(color: Colors.white30),
+                          label: Text(
+                            isTracked ? 'Tracking Active' : 'Track Price',
+                            style: TextStyle(
+                              color: isTracked ? ThemeTokens.primary : Colors.white54,
+                            ),
                           ),
                         );
                       },
@@ -387,7 +370,22 @@ class ProductDetailModal extends ConsumerWidget {
               ),
             ),
           ),
-        );
+          
+          // Close Button (Floating)
+          Positioned(
+            top: 16,
+            right: 16,
+            child: CircleAvatar(
+              backgroundColor: Colors.black.withOpacity(0.2),
+              child: IconButton(
+                icon: const Icon(Icons.close, color: Colors.white),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -401,18 +399,59 @@ class _PriceSparkline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // charts_flutter is broken on newer Flutter versions.
-    // Placeholder for future fl_chart implementation.
-    return Container(
-      height: 72,
-      decoration: BoxDecoration(
-        color: ThemeTokens.surfaceMuted,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      alignment: Alignment.center,
-      child: Text(
-        'Price History Chart',
-        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white30),
+    if (data.isEmpty) return const SizedBox.shrink();
+
+    // Normalize data for chart
+    final spots = data.asMap().entries.map((e) {
+      return FlSpot(e.key.toDouble(), e.value);
+    }).toList();
+    
+    final minPrice = data.reduce((curr, next) => curr < next ? curr : next);
+    final maxPrice = data.reduce((curr, next) => curr > next ? curr : next);
+    final range = maxPrice - minPrice;
+    final padding = range * 0.2; // Add 20% padding
+
+    return LineChart(
+      LineChartData(
+        gridData: const FlGridData(show: false),
+        titlesData: const FlTitlesData(show: false),
+        borderData: FlBorderData(show: false),
+        minY: minPrice - padding,
+        maxY: maxPrice + padding,
+        lineBarsData: [
+          LineChartBarData(
+            spots: spots,
+            isCurved: true,
+            color: ThemeTokens.accent,
+            barWidth: 3,
+            isStrokeCapRound: true,
+            dotData: const FlDotData(show: false),
+            belowBarData: BarAreaData(
+              show: true,
+              gradient: LinearGradient(
+                colors: [
+                  ThemeTokens.accent.withOpacity(0.3),
+                  ThemeTokens.accent.withOpacity(0.0),
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+          ),
+        ],
+        lineTouchData: LineTouchData(
+          touchTooltipData: LineTouchTooltipData(
+            tooltipBgColor: ThemeTokens.surfaceDark,
+            getTooltipItems: (touchedSpots) {
+              return touchedSpots.map((spot) {
+                return LineTooltipItem(
+                  spot.y.toStringAsFixed(0),
+                  const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                );
+              }).toList();
+            },
+          ),
+        ),
       ),
     );
   }

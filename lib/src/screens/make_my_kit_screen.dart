@@ -239,7 +239,7 @@ class _MakeMyKitScreenState extends ConsumerState<MakeMyKitScreen> {
 
   Widget _buildGenerateButton(BuildContext context, double budget, Set<String> selections) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.fromLTRB(24, 24, 24, 100),
       decoration: BoxDecoration(
         color: ThemeTokens.backgroundDark,
         border: Border(top: BorderSide(color: Colors.white.withOpacity(0.05))),

@@ -24,23 +24,24 @@ class AppTheme {
       ),
       appBarTheme: AppBarTheme(
         centerTitle: true,
-        backgroundColor: ThemeTokens.surfaceLight,
+        backgroundColor: Colors.transparent, // Modern transparent app bar
         elevation: 0,
         titleTextStyle: ThemeTokens.titleLarge.copyWith(color: ThemeTokens.neutral900),
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       cardTheme: CardThemeData(
         color: ThemeTokens.surfaceLight,
-        elevation: ThemeTokens.elevationMedium,
+        elevation: 0, // Flat modern look
         margin: const EdgeInsets.all(8),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(ThemeTokens.r16),
+          side: BorderSide(color: ThemeTokens.neutral200),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(ThemeTokens.r8),
+            borderRadius: BorderRadius.circular(ThemeTokens.r12),
           ),
           textStyle: ThemeTokens.labelLarge,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
@@ -48,7 +49,12 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(ThemeTokens.r8),
+          borderRadius: BorderRadius.circular(ThemeTokens.r12),
+          borderSide: BorderSide(color: ThemeTokens.neutral300),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(ThemeTokens.r12),
+          borderSide: BorderSide(color: ThemeTokens.neutral300),
         ),
         filled: true,
         fillColor: ThemeTokens.surfaceLight,

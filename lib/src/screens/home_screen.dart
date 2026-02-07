@@ -5,7 +5,7 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../core/theme_tokens.dart';
-import 'package:shopparva/models/product.dart';
+import '../../models/product.dart';
 import '../state/app_providers.dart';
 import '../widgets/empty_and_loading.dart';
 import '../widgets/product_detail_modal.dart';

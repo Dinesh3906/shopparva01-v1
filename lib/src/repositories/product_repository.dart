@@ -69,49 +69,54 @@ class ProductRepository {
   }) async {
     await _ensureLocalProductsLoaded();
     
-    // 0. Fetch External Data (if no specific filtering that would exclude it)
-    List<Product> externalProducts = [];
-    try {
-      debugPrint('Fetching external products for query: $query');
-      final response = await _client.dio.get('https://fakestoreapiserver.reactbd.org/api/products');
-      if (response.data is Map && response.data['data'] is List) {
-        externalProducts = (response.data['data'] as List).map((data) => Product(
-          id: data['_id'].toString(),
-          name: data['title'] ?? 'Unknown Product',
-          brand: data['brand'] ?? 'External Brand',
-          price: (data['price'] as num).toDouble(),
-          currency: 'USD',
-          image: data['image'] ?? '',
-          stores: 0,
-          rating: (data['rating'] as num).toDouble(),
-          description: data['description'] ?? '',
-          categories: [data['category'] ?? 'General'],
-          priceHistory: [],
-          comparisons: [],
-          images: [data['image'] ?? ''],
-        )).toList();
-        debugPrint('Fetched ${externalProducts.length} external products');
-        for (var p in externalProducts.take(3)) {
-          debugPrint('External Product: "${p.name}" (ID: ${p.id})');
-        }
-      }
-    } catch (e) {
-      debugPrint('Error fetching external products: $e');
-      // Continue with local products only on error
-    }
+    // Parallelize all data sources
+    final List<List<Product>> results = await Future.wait([
+      // Source 1: External Mock Store
+      _client.dio.get('https://fakestoreapiserver.reactbd.org/api/products')
+          .timeout(const Duration(seconds: 5))
+          .then((response) {
+            if (response.data is Map && response.data['data'] is List) {
+              return (response.data['data'] as List).map((data) => Product(
+                id: data['_id'].toString(),
+                name: data['title'] ?? 'Unknown Product',
+                brand: data['brand'] ?? 'External Brand',
+                price: (data['price'] as num).toDouble(),
+                currency: 'USD',
+                image: data['image'] ?? '',
+                stores: 0,
+                rating: (data['rating'] as num).toDouble(),
+                description: data['description'] ?? '',
+                categories: [data['category'] ?? 'General'],
+                priceHistory: [],
+                comparisons: [],
+                images: [data['image'] ?? ''],
+              )).toList();
+            }
+            return <Product>[];
+          })
+          .catchError((e) {
+            debugPrint('Error fetching external products: $e');
+            return <Product>[];
+          }),
 
-    // 0.5 Fetch RapidAPI Products
-    List<Product> rapidApiProducts = [];
-    try {
-      rapidApiProducts = await fetchRapidAPIProducts();
-      debugPrint('Fetched ${rapidApiProducts.length} RapidAPI products');
-    } catch (e) {
-      debugPrint('Error fetching RapidAPI products: $e');
-      // Continue without RapidAPI products on error
-    }
+      // Source 2: RapidAPI
+      fetchRapidAPIProducts()
+          .timeout(const Duration(seconds: 8)) // Slightly longer for multiple categories
+          .catchError((e) {
+            debugPrint('Error fetching RapidAPI products: $e');
+            return <Product>[];
+          }),
+    ]);
+
+    final List<Product> externalProducts = results[0];
+    final List<Product> rapidApiProducts = results[1];
 
     var filtered = [..._allLocalProducts!, ...externalProducts, ...rapidApiProducts];
-    debugPrint('Total products before filter: ${filtered.length}');
+    
+    // Filter out products without valid absolute images
+    filtered = filtered.where((p) => p.image.isNotEmpty && p.image.startsWith('http')).toList();
+    
+    debugPrint('Total products before query/category filter: ${filtered.length}');
 
     // 1. Filter by Query
     if (query != null && query.isNotEmpty) {
@@ -130,14 +135,14 @@ class ProductRepository {
       filtered = filtered.where((p) => p.categories.any((c) => c.toLowerCase() == category.toLowerCase())).toList();
     }
 
-    // 3. Simple pagination (optional)
-    // final startIndex = (page - 1) * limit;
-    // if (startIndex >= filtered.length) return [];
-    // final endIndex = (startIndex + limit).clamp(0, filtered.length);
-    // return filtered.sublist(startIndex, endIndex);
-    
     filtered.shuffle();
-    return filtered;
+    
+    // 3. Apply Pagination
+    final startIndex = (page - 1) * limit;
+    if (startIndex >= filtered.length) return [];
+    final endIndex = (startIndex + limit).clamp(0, filtered.length);
+    
+    return filtered.sublist(startIndex, endIndex);
   }
 
   Future<Product> getProductById(String id) async {
@@ -344,14 +349,10 @@ class ProductRepository {
     }
   }
 
-  /// Fetch products from all RapidAPI categories
+  /// Fetch products from all RapidAPI categories in parallel
   Future<List<Product>> fetchRapidAPIProducts() async {
-    final List<Product> allProducts = [];
-    
-    for (final category in _rapidApiCategories) {
+    final List<Future<List<Product>>> categoryFutures = _rapidApiCategories.map((category) async {
       try {
-        debugPrint('Fetching RapidAPI category: $category');
-        
         final response = await _client.dio.get(
           'https://$_rapidApiHost/$category',
           options: Options(
@@ -362,16 +363,13 @@ class ProductRepository {
             followRedirects: true,
             maxRedirects: 5,
           ),
-        );
+        ).timeout(const Duration(seconds: 4));
         
         if (response.data is List) {
-          final products = (response.data as List).map((data) {
-            // Parse price (remove ₹ symbol and convert to double)
+          return (response.data as List).map((data) {
             final priceStr = (data['Price'] ?? '₹0').toString().replaceAll('₹', '').replaceAll(',', '');
             final price = double.tryParse(priceStr) ?? 0.0;
-            
-            // Generate unique ID
-            final id = 'rapid_${category}_${data['Unnamed: 0'] ?? allProducts.length}';
+            final id = 'rapid_${category}_${data['Unnamed: 0'] ?? DateTime.now().millisecondsSinceEpoch}';
             
             return Product(
               id: id,
@@ -381,7 +379,7 @@ class ProductRepository {
               currency: '₹',
               image: data['Image'] ?? '',
               stores: 1,
-              rating: 4.0, // Default rating
+              rating: 4.0,
               description: data['Description'] ?? '',
               categories: [_mapToShopparvaCategory(category)],
               priceHistory: [],
@@ -389,17 +387,18 @@ class ProductRepository {
               images: [data['Image'] ?? ''],
             );
           }).toList();
-          
-          allProducts.addAll(products);
-          debugPrint('Fetched ${products.length} products from $category');
         }
+        return <Product>[];
       } catch (e) {
         debugPrint('Error fetching RapidAPI category $category: $e');
-        // Continue with other categories on error
+        return <Product>[];
       }
-    }
+    }).toList();
+
+    final List<List<Product>> categoryResults = await Future.wait(categoryFutures);
+    final List<Product> allProducts = categoryResults.expand((list) => list).toList();
     
-    debugPrint('Total RapidAPI products: ${allProducts.length}');
+    debugPrint('Total RapidAPI products fetched in parallel: ${allProducts.length}');
     return allProducts;
   }
 
