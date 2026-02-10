@@ -8,7 +8,7 @@ part 'product.g.dart';
 @freezed
 class Product with _$Product {
   const factory Product({
-    required String id,
+    @JsonKey(readValue: _readId) required String id,
     @JsonKey(readValue: _readName) required String name,
     @JsonKey(readValue: _readPrice) required double price,
     @Default('₹') String currency,
@@ -29,7 +29,18 @@ class Product with _$Product {
   factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
 }
 
-Object? _readName(Map json, String key) => json['name'] ?? json['title'] ?? 'Unknown';
+Object? _readId(Map json, String key) => 
+    json['id']?.toString() ?? 
+    json['sku']?.toString() ?? 
+    json['product_id']?.toString() ?? 
+    json['_id']?.toString() ?? 
+    '0';
+
+Object? _readName(Map json, String key) => 
+    json['name'] ?? 
+    json['title'] ?? 
+    json['product_name'] ?? 
+    'Unknown';
 
 Object? _readPrice(Map json, String key) {
   final val = json['price'];
@@ -43,7 +54,13 @@ Object? _readPrice(Map json, String key) {
 }
 
 Object? _readImage(Map json, String key) {
-  if (json['image'] != null && json['image'] != "") return json['image'].toString();
+  final img = json['image'] ?? 
+              json['image_link'] ?? 
+              json['thumbnail'] ?? 
+              json['image_front_url'];
+  
+  if (img != null && img != "") return img.toString();
+
   final images = json['images'] as List?;
   if (images != null && images.isNotEmpty) {
     return images.first.toString();

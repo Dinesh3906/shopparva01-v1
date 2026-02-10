@@ -4,7 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/theme_tokens.dart';
 import '../state/app_providers.dart';
-import 'package:shopparva/models/product.dart';
+import '../../models/product.dart';
+import '../../core/constants.dart';
+import 'package:shopparva/services/api_service.dart';
 
 // --- Data Models ---
 
@@ -101,6 +103,55 @@ final kitSelectionsProvider = StateProvider<Set<String>>((ref) => {});
 // Store variant selections: ItemID -> { VariantTitle -> Choice }
 final kitVariantSelectionsProvider = StateProvider<Map<String, Map<String, String>>>((ref) => {});
 
+// --- NEW PROVIDERS FOR API INTEGRATION ---
+final selectedSourceProvider = StateProvider<ProductSource>((ref) => ProductSource.fakeStore);
+
+final apiProductsProvider = FutureProvider<List<Product>>((ref) async {
+  final source = ref.watch(selectedSourceProvider);
+  final apiService = ApiService(); // Should ideally be a provider, but for now
+  
+  switch (source) {
+    case ProductSource.fakeStore:
+      return apiService.fetchFakeStoreProducts();
+    case ProductSource.platzi:
+      return apiService.fetchPlatziProducts();
+    case ProductSource.makeup:
+      return apiService.fetchBeautyProducts();
+    case ProductSource.openFoodFacts:
+      return apiService.fetchGroceries('healthy');
+    case ProductSource.dummyProducts:
+      return apiService.fetchDummyProducts();
+    case ProductSource.bestBuy:
+      return apiService.fetchBestBuyProducts('laptop');
+    case ProductSource.ebay:
+      return apiService.fetchEbayProducts('watch');
+    case ProductSource.etsy:
+      return apiService.fetchEtsyProducts('handmade');
+    case ProductSource.flipkart:
+      return apiService.fetchFlipkartProducts('phone');
+    case ProductSource.lazada:
+      return apiService.fetchLazadaProducts('camera');
+    case ProductSource.mercadolibre:
+      return apiService.fetchMercadolibreProducts('tablet');
+    case ProductSource.octopart:
+      return apiService.fetchOctopartProducts('resistor');
+    case ProductSource.olxPoland:
+      return apiService.fetchOlxPolandProducts('bike');
+    case ProductSource.rappi:
+      return apiService.fetchRappiProducts('burger');
+    case ProductSource.shopee:
+      return apiService.fetchShopeeProducts('shoes');
+    case ProductSource.tokopedia:
+      return apiService.fetchTokopediaProducts('gadget');
+    case ProductSource.wooCommerce:
+      return apiService.fetchWooCommerceProducts();
+    case ProductSource.digiKey:
+      return apiService.fetchDigiKeyProducts('sensor');
+    default:
+      return apiService.fetchFakeStoreProducts();
+  }
+});
+
 class MakeMyKitScreen extends ConsumerStatefulWidget {
   const MakeMyKitScreen({super.key});
 
@@ -109,7 +160,7 @@ class MakeMyKitScreen extends ConsumerStatefulWidget {
 }
 
 class _MakeMyKitScreenState extends ConsumerState<MakeMyKitScreen> {
-  final String _selectedCategory = 'Cosmetics';
+  // We'll use the provider instead of a local variable
 
   @override
   Widget build(BuildContext context) {
@@ -136,9 +187,15 @@ class _MakeMyKitScreenState extends ConsumerState<MakeMyKitScreen> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  ...(_categoryItems[_selectedCategory] ?? []).map((item) {
-                    return _KitItemCard(item: item);
-                  }),
+                  ref.watch(apiProductsProvider).when(
+                    data: (products) => Column(
+                      children: products.take(15).map((product) {
+                        return _ApiProductCard(product: product);
+                      }).toList(),
+                    ),
+                    loading: () => const Center(child: CircularProgressIndicator(color: ThemeTokens.primary)),
+                    error: (err, stack) => Center(child: Text('Error: $err', style: const TextStyle(color: Colors.white))),
+                  ),
                 ],
               ),
             ),
@@ -177,25 +234,7 @@ class _MakeMyKitScreenState extends ConsumerState<MakeMyKitScreen> {
                   letterSpacing: -0.5,
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  color: ThemeTokens.primary.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: ThemeTokens.primary.withOpacity(0.5)),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.auto_awesome, color: ThemeTokens.primary, size: 16),
-                    const SizedBox(width: 8),
-                    Text(
-                      'AI Powered',
-                      style: GoogleFonts.inter(
-                          color: ThemeTokens.primary, fontWeight: FontWeight.w600, fontSize: 12),
-                    ),
-                  ],
-                ),
-              ),
+              _buildSourceSelector(ref),
             ],
           ),
           const SizedBox(height: 32),
@@ -233,6 +272,36 @@ class _MakeMyKitScreenState extends ConsumerState<MakeMyKitScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildSourceSelector(WidgetRef ref) {
+    final selectedSource = ref.watch(selectedSourceProvider);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      decoration: BoxDecoration(
+        color: ThemeTokens.surfaceMuted,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<ProductSource>(
+          value: selectedSource,
+          dropdownColor: ThemeTokens.surfaceDark,
+          style: GoogleFonts.inter(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),
+          icon: const Icon(Icons.keyboard_arrow_down, color: ThemeTokens.primary, size: 16),
+          onChanged: (ProductSource? newValue) {
+            if (newValue != null) {
+              ref.read(selectedSourceProvider.notifier).state = newValue;
+            }
+          },
+          items: ProductSource.values.map<DropdownMenuItem<ProductSource>>((ProductSource value) {
+            return DropdownMenuItem<ProductSource>(
+              value: value,
+              child: Text(value.name.toUpperCase()),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
@@ -442,124 +511,183 @@ class _KitPreviewModal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final items = _categoryItems['Cosmetics']!.where((i) => selections.contains(i.id)).toList();
+    final productsAsync = ref.watch(apiProductsProvider);
     final variants = ref.watch(kitVariantSelectionsProvider);
 
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.85,
-      decoration: BoxDecoration(
-        color: ThemeTokens.backgroundDark,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
-      ),
-      child: Column(
-        children: [
-          Center(
-              child: Container(
-                  margin: const EdgeInsets.only(top: 12), width: 40, height: 4, decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2)))),
-          Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              children: [
-                const Icon(Icons.check_circle, color: ThemeTokens.primary, size: 48),
-                const SizedBox(height: 16),
-                Text('Perfect Match Found!', style: GoogleFonts.outfit(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
-                Text('Optimized for your ₹${budget.toStringAsFixed(0)} budget', style: GoogleFonts.inter(color: ThemeTokens.primary, fontWeight: FontWeight.w500)),
-              ],
-            ),
+    return productsAsync.when(
+      data: (allProducts) {
+        final selectedProducts = allProducts.where((p) => selections.contains(p.id)).toList();
+        
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.85,
+          decoration: BoxDecoration(
+            color: ThemeTokens.surfaceDark,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+            border: Border.all(color: Colors.white.withOpacity(0.1)),
           ),
-          const Divider(color: Colors.white10),
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(24),
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                final item = items[index];
-                final itemVariants = variants[item.id] ?? {};
-                
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 64, height: 64,
-                        decoration: BoxDecoration(
-                            color: ThemeTokens.surfaceDark,
+          child: Column(
+            children: [
+              Center(
+                  child: Container(
+                      margin: const EdgeInsets.only(top: 12), width: 40, height: 4, decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2)))),
+              Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  children: [
+                    const Icon(Icons.check_circle, color: ThemeTokens.primary, size: 48),
+                    const SizedBox(height: 16),
+                    Text('Perfect Match Found!', style: GoogleFonts.outfit(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+                    Text('Optimized for your ₹${budget.toStringAsFixed(0)} budget', style: GoogleFonts.inter(color: ThemeTokens.primary, fontWeight: FontWeight.w500)),
+                  ],
+                ),
+              ),
+              const Divider(color: Colors.white10),
+              Expanded(
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(24),
+                  itemCount: selectedProducts.length,
+                  itemBuilder: (context, index) {
+                    final product = selectedProducts[index];
+                    
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: Row(
+                        children: [
+                          ClipRRect(
                             borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Colors.white12)),
-                        child: const Icon(Icons.shopping_bag_outlined, color: Colors.white54),
+                            child: Image.network(
+                              product.image,
+                              width: 64, height: 64, fit: BoxFit.cover,
+                              errorBuilder: (c, e, s) => Container(
+                                width: 64, height: 64, color: ThemeTokens.surfaceMuted,
+                                child: const Icon(Icons.shopping_bag_outlined, color: Colors.white54),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(product.name, style: GoogleFonts.inter(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white), maxLines: 1, overflow: TextOverflow.ellipsis),
+                                Text('${AppConstants.currencySymbol}${product.price}', style: GoogleFonts.inter(fontSize: 12, color: ThemeTokens.primary)),
+                              ],
+                            ),
+                          ),
+                          const Icon(Icons.check_circle_outline, color: ThemeTokens.success),
+                        ],
                       ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(item.label, style: GoogleFonts.inter(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white)),
-                            if (itemVariants.isNotEmpty)
-                              Padding(
-                                padding: const EdgeInsets.only(top: 4),
-                                child: Wrap(
-                                  spacing: 4,
-                                  children: itemVariants.entries.map((e) => Text(
-                                    '${e.value} · ',
-                                    style: GoogleFonts.inter(fontSize: 11, color: Colors.white54),
-                                  )).toList(),
-                                ),
-                              )
-                            else 
-                               Text('Optimized · ${item.priority.toUpperCase()}', style: GoogleFonts.inter(fontSize: 12, color: Colors.white54)),
-                          ],
+                    );
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(24),
+                child: ElevatedButton(
+                  onPressed: () {
+                    final cartNotifier = ref.read(cartProvider.notifier);
+                    for (final product in selectedProducts) {
+                      cartNotifier.addToCart(product);
+                    }
+                    if (context.mounted) {
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Added ${selectedProducts.length} items to cart!'),
+                          backgroundColor: ThemeTokens.success,
                         ),
-                      ),
-                      const Icon(Icons.check_circle_outline, color: ThemeTokens.success),
-                    ],
-                  ),
-                );
-              },
-            ),
+                      );
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white, foregroundColor: Colors.black, minimumSize: const Size(double.infinity, 60),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
+                  child: Text('Add Kit to Cart', style: GoogleFonts.outfit(fontWeight: FontWeight.bold, fontSize: 18)),
+                ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(24),
-            child: ElevatedButton(
-              onPressed: () {
-                // Add items to cart
-                final cartNotifier = ref.read(cartProvider.notifier);
-                
-                for (final item in items) {
-                  // Create a mock product from the kit item definition
-                  final product = Product(
-                    id: 'kit-${item.id}', // unique prefix
-                    name: item.label,
-                    brand: 'ShopParva Kit', // Mock brand
-                    price: item.estimatedCost,
-                    image: '', // Placeholder, will show default icon
-                    rating: 5.0,
-                    stores: 1,
-                    description: 'Part of your custom makeup kit: ${item.subtitle}',
-                    categories: ['Kit', 'Cosmetics'], // Mock categories
-                    offers: [],
-                    priceHistory: [],
-                  );
-                  cartNotifier.addToCart(product);
-                }
+        );
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (e, s) => Center(child: Text('Error loading preview: $e')),
+    );
+  }
+}
+// --- NEW COMPONENT FOR API PRODUCTS ---
 
-                if (context.mounted) {
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Added ${items.length} items to cart!'),
-                      backgroundColor: ThemeTokens.success,
-                    ),
-                  );
+class _ApiProductCard extends ConsumerWidget {
+  final Product product;
+  const _ApiProductCard({required this.product});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selections = ref.watch(kitSelectionsProvider);
+    final isSelected = selections.contains(product.id);
+
+    return GestureDetector(
+      onTap: () {
+        final current = ref.read(kitSelectionsProvider);
+        if (current.contains(product.id)) {
+          ref.read(kitSelectionsProvider.notifier).state = {...current}..remove(product.id);
+        } else {
+          ref.read(kitSelectionsProvider.notifier).state = {...current, product.id};
+        }
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: isSelected ? ThemeTokens.primary.withOpacity(0.08) : ThemeTokens.surfaceDark,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isSelected ? ThemeTokens.primary : Colors.white.withOpacity(0.05),
+            width: isSelected ? 1.5 : 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                product.image,
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
+                errorBuilder: (c, e, s) => Container(
+                  width: 50, height: 50, color: ThemeTokens.surfaceMuted,
+                  child: const Icon(Icons.image_not_supported, size: 20, color: Colors.white24),
+                ),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(product.name, maxLines: 1, overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white)),
+                  Text('${AppConstants.currencySymbol}${product.price}', 
+                    style: GoogleFonts.inter(fontSize: 12, color: ThemeTokens.primary, fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+            Checkbox(
+              value: isSelected,
+              onChanged: (v) {
+                final current = ref.read(kitSelectionsProvider);
+                if (current.contains(product.id)) {
+                  ref.read(kitSelectionsProvider.notifier).state = {...current}..remove(product.id);
+                } else {
+                  ref.read(kitSelectionsProvider.notifier).state = {...current, product.id};
                 }
               },
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white, foregroundColor: Colors.black, minimumSize: const Size(double.infinity, 56),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
-              child: Text('Add Kit to Cart', style: GoogleFonts.outfit(fontWeight: FontWeight.bold)),
+              activeColor: ThemeTokens.primary,
+              checkColor: Colors.black,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

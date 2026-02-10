@@ -20,6 +20,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Product {
+  @JsonKey(readValue: _readId)
   String get id => throw _privateConstructorUsedError;
   @JsonKey(readValue: _readName)
   String get name => throw _privateConstructorUsedError;
@@ -61,7 +62,7 @@ abstract class $ProductCopyWith<$Res> {
       _$ProductCopyWithImpl<$Res, Product>;
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(readValue: _readId) String id,
       @JsonKey(readValue: _readName) String name,
       @JsonKey(readValue: _readPrice) double price,
       String currency,
@@ -188,7 +189,7 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(readValue: _readId) String id,
       @JsonKey(readValue: _readName) String name,
       @JsonKey(readValue: _readPrice) double price,
       String currency,
@@ -309,7 +310,7 @@ class __$$ProductImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProductImpl implements _Product {
   const _$ProductImpl(
-      {required this.id,
+      {@JsonKey(readValue: _readId) required this.id,
       @JsonKey(readValue: _readName) required this.name,
       @JsonKey(readValue: _readPrice) required this.price,
       this.currency = '₹',
@@ -337,6 +338,7 @@ class _$ProductImpl implements _Product {
       _$$ProductImplFromJson(json);
 
   @override
+  @JsonKey(readValue: _readId)
   final String id;
   @override
   @JsonKey(readValue: _readName)
@@ -493,7 +495,7 @@ class _$ProductImpl implements _Product {
 
 abstract class _Product implements Product {
   const factory _Product(
-      {required final String id,
+      {@JsonKey(readValue: _readId) required final String id,
       @JsonKey(readValue: _readName) required final String name,
       @JsonKey(readValue: _readPrice) required final double price,
       final String currency,
@@ -513,6 +515,7 @@ abstract class _Product implements Product {
   factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
 
   @override
+  @JsonKey(readValue: _readId)
   String get id;
   @override
   @JsonKey(readValue: _readName)
