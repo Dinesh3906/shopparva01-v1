@@ -42,7 +42,7 @@ class LoginScreen extends ConsumerWidget {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
-                            child: Image.asset('assets/logo.jpg', height: 72),
+                            child: Image.asset('assets/logo.png', height: 72),
                           ),
                           const SizedBox(width: 12),
                           Text(

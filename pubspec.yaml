@@ -72,6 +72,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/logo.png
     - assets/logo.jpg
     - assets/demo_models/
     - assets/overlays/
