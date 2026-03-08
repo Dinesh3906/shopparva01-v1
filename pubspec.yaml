@@ -81,9 +81,9 @@ flutter:
 flutter_icons:
   android: true
   ios: false
-  image_path: "assets/logo.jpg" # Fallback
-  image_path_android: "assets/logo_android_512.png"
-  image_path_ios: "assets/logo_ios_1024.png"
-  adaptive_icon_background: "#1A1C2E" 
-  adaptive_icon_foreground: "assets/logo_android_512.png"
+  image_path: "assets/logo.png"
+  image_path_android: "assets/logo.png"
+  image_path_ios: "assets/logo.png"
+  adaptive_icon_background: "#050B14" 
+  adaptive_icon_foreground: "assets/logo.png"
 
