@@ -1,4 +1,3 @@
-import 'dart:math'; // Added for Random
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
@@ -12,8 +11,7 @@ import '../widgets/product_detail_modal.dart';
 import '../widgets/product_grid.dart';
 import 'price_tracker_screen.dart';
 import 'cart_screen.dart';
-import '../../services/api_service.dart';
-import 'dart:developer' as developer;
+
 
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -274,7 +272,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           onTap: _isListening ? _stopListening : _startListening,
           borderRadius: BorderRadius.circular(20),
           child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
+            duration: const Duration(milliseconds: 250),
+            curve: Curves.easeOutCubic,
             decoration: BoxDecoration(
               color: _isListening 
                   ? ThemeTokens.primary.withOpacity(0.3)
@@ -315,38 +314,33 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             },
             child: AnimatedScale(
               duration: const Duration(milliseconds: 200),
+              curve: Curves.easeOutCubic,
               scale: selected ? 1.05 : 1.0,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: selected
-                      ? ThemeTokens.surfaceDark
-                      : ThemeTokens.surfaceMuted,
-                  borderRadius: BorderRadius.circular(24),
-                  border: Border.all(
-                    color: selected
-                        ? ThemeTokens.primary.withOpacity(0.8)
-                        : Colors.white24,
-                  ),
-                  boxShadow: selected
-                      ? [
-                          BoxShadow(
-                            color: ThemeTokens.primary.withOpacity(0.5),
-                            blurRadius: 16,
-                            spreadRadius: 1,
-                          ),
-                        ]
-                      : null,
-                ),
-                child: Padding(
+              child: RepaintBoundary(
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 250),
+                  curve: Curves.easeOutCubic,
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Center(
-                    child: Text(
-                      category,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white,
-                          ),
+                      const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: selected
+                        ? ThemeTokens.surfaceDark
+                        : ThemeTokens.surfaceMuted,
+                    borderRadius: BorderRadius.circular(100), // Fully pill-shaped
+                    border: Border.all(
+                      color: selected
+                          ? ThemeTokens.primary.withOpacity(0.8)
+                          : Colors.transparent,
+                      width: selected ? 1.5 : 1,
                     ),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    category,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: selected ? FontWeight.bold : FontWeight.normal,
+                        ),
                   ),
                 ),
               ),
@@ -361,14 +355,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
+      useSafeArea: true,
       backgroundColor: Colors.transparent,
-      barrierColor: Colors.black54,
+      barrierColor: Colors.black87,
       builder: (context) {
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOut,
-          child: ProductDetailModal(product: product),
-        );
+        return ProductDetailModal(product: product);
       },
     );
   }

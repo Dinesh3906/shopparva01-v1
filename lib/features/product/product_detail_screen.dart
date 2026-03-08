@@ -6,6 +6,7 @@ import '../../state/providers.dart';
 import '../../core/theme_tokens.dart';
 import 'widgets/comparison_table.dart';
 import 'widgets/price_chart.dart';
+import '../../services/shopping_service.dart';
 
 // Helper provider to fetch fresh details including comparison
 final productDetailsProvider = FutureProvider.family<Product?, String>((ref, id) async {
@@ -51,8 +52,13 @@ class ProductDetailScreen extends ConsumerWidget {
                   background: Hero(
                     tag: 'product_${product.id}',
                     child: CachedNetworkImage(
-                      imageUrl: product.images.first,
-                      fit: BoxFit.cover,
+                      imageUrl: product.image,
+                      fit: BoxFit.contain, // Changed to contain for better product visibility
+                      placeholder: (context, _) => Container(color: ThemeTokens.surfaceMuted),
+                      errorWidget: (context, _, __) => Container(
+                        color: ThemeTokens.surfaceMuted,
+                        child: const Icon(Icons.image_not_supported, color: Colors.white24),
+                      ),
                     ),
                   ),
                 ),
@@ -82,8 +88,8 @@ class ProductDetailScreen extends ConsumerWidget {
                          children: [
                            Expanded(
                              child: Text(
-                               product.title,
-                               style: ThemeTokens.headlineMedium,
+                               product.name,
+                               style: ThemeTokens.headlineMedium.copyWith(color: Colors.white),
                              ),
                            ),
                            Container(
@@ -93,9 +99,7 @@ class ProductDetailScreen extends ConsumerWidget {
                                borderRadius: BorderRadius.circular(20),
                              ),
                              child: Text(
-                               product.offers.isNotEmpty
-                                   ? '\$${product.offers.first.price.toStringAsFixed(2)}'
-                                   : 'Price unavailable',
+                               '₹${product.price.toStringAsFixed(0)}',
                                style: const TextStyle(
                                  color: Colors.white,
                                  fontWeight: FontWeight.bold,
@@ -106,10 +110,12 @@ class ProductDetailScreen extends ConsumerWidget {
                          ],
                        ),
                        const SizedBox(height: 8),
-                       Text(product.brand, style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.grey)),
+                       Text(product.brand, style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white54)),
                        const SizedBox(height: 16),
-                       Text(product.description, style: ThemeTokens.bodyMedium),
-                       const SizedBox(height: 32),
+                       if (product.description.isNotEmpty) ...[
+                         Text(product.description, style: ThemeTokens.bodyMedium.copyWith(color: Colors.white.withValues(alpha: 0.8))),
+                         const SizedBox(height: 32),
+                       ],
                        
                        // Comparison Table
                        ComparisonTable(offers: product.offers),
@@ -132,6 +138,72 @@ class ProductDetailScreen extends ConsumerWidget {
         },
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text('Error loading details: $e')),
+      ),
+      bottomNavigationBar: productAsync.when(
+        data: (product) => product == null 
+          ? null 
+          : Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: ThemeTokens.surfaceDark,
+                border: Border(top: BorderSide(color: Colors.white.withValues(alpha: 0.05))),
+              ),
+              child: SafeArea(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                           ref.read(cartProvider.notifier).addToCart(product);
+                           ScaffoldMessenger.of(context).showSnackBar(
+                             SnackBar(content: Text('${product.name} added to cart'), duration: const Duration(seconds: 1)),
+                           );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ThemeTokens.surfaceMuted,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        ),
+                        child: const Text('Add to Cart', style: TextStyle(fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () async {
+                           final sc = ShoppingService();
+                           final success = await sc.launchCheapestSearch(product.name);
+                           if (!success && context.mounted) {
+                             ScaffoldMessenger.of(context).showSnackBar(
+                               const SnackBar(content: Text('Could not open shopping search')),
+                             );
+                           }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ThemeTokens.accent,
+                          foregroundColor: Colors.black,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          elevation: 8,
+                          shadowColor: ThemeTokens.accent.withOpacity(0.5),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.flash_on_rounded, size: 18),
+                            SizedBox(width: 4),
+                            Text('Buy Cheapest', style: TextStyle(fontWeight: FontWeight.bold)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        loading: () => null,
+        error: (_, __) => null,
       ),
     );
   }

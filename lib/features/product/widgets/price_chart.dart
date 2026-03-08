@@ -23,14 +23,15 @@ class PriceChart extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
          decoration: BoxDecoration(
-            color: ThemeTokens.surfaceLight,
+            color: ThemeTokens.surfaceDark,
             borderRadius: BorderRadius.circular(ThemeTokens.r16),
-            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10)],
+            border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 10)],
          ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Price History', style: ThemeTokens.titleLarge),
+            Text('Price History', style: ThemeTokens.titleLarge.copyWith(color: Colors.white)),
             const SizedBox(height: 24),
             Expanded(
               child: LineChart(
@@ -39,7 +40,7 @@ class PriceChart extends StatelessWidget {
                     show: true,
                     drawVerticalLine: false,
                     horizontalInterval: (maxPrice - minPrice) / 3, // Roughly 3 lines
-                    getDrawingHorizontalLine: (value) => FlLine(color: Colors.grey[200], strokeWidth: 1),
+                    getDrawingHorizontalLine: (value) => FlLine(color: Colors.white.withValues(alpha: 0.05), strokeWidth: 1),
                   ),
                   titlesData: FlTitlesData(
                     show: true,

@@ -68,6 +68,8 @@ class _RootShell extends ConsumerStatefulWidget {
 
 class _RootShellState extends ConsumerState<_RootShell>
     with SingleTickerProviderStateMixin {
+  // Lazy page cache — only create pages when first visited
+  final Map<int, Widget> _pageCache = {};
   late final AnimationController _assistantController = AnimationController(
     vsync: this,
     duration: const Duration(seconds: 2),
@@ -90,27 +92,37 @@ class _RootShellState extends ConsumerState<_RootShell>
     super.dispose();
   }
 
+  Widget _buildPage(int index) {
+    return _pageCache.putIfAbsent(index, () {
+      const pages = [
+        HomeScreen(),
+        DealsScreen(),
+        MakeMyKitScreen(),
+        ArTryOnScreen(),
+        ProfileScreen(),
+        CartScreen(),
+        PriceTrackerScreen(),
+      ];
+      return RepaintBoundary(child: pages[index]);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final currentIndex = ref.watch(navigationIndexProvider);
     final shouldHighlightFab = ref.watch(fabHighlightProvider);
-    
-    final pages = [
-      const HomeScreen(),
-      const DealsScreen(),
-      const MakeMyKitScreen(),
-      const ArTryOnScreen(),
-      const ProfileScreen(),
-      const CartScreen(),
-      const PriceTrackerScreen(),
-    ];
 
     return Scaffold(
       extendBody: true, // Allow content to go behind the glass nav bar
       resizeToAvoidBottomInset: false,
-      body: IndexedStack(
-        index: currentIndex,
-        children: pages,
+      body: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 250),
+        switchInCurve: Curves.easeOutCubic,
+        switchOutCurve: Curves.easeInCubic,
+        child: KeyedSubtree(
+          key: ValueKey<int>(currentIndex),
+          child: _buildPage(currentIndex),
+        ),
       ),
       bottomNavigationBar: BottomNavBar(
         currentIndex: currentIndex,

@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../services/shopping_service.dart';
 
 import '../../core/theme_tokens.dart';
 import 'package:shopparva/models/product.dart';
@@ -29,10 +30,12 @@ class ProductDetailModal extends ConsumerWidget {
     final double mockMrp = currentPrice * 1.4; 
     final int discountPercent = 40;
 
-    return GlassContainer(
-      opacity: 0.1,
-      blur: 20,
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+    return Container(
+      decoration: BoxDecoration(
+        color: ThemeTokens.surfaceDark.withValues(alpha: 0.95),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+      ),
       child: Stack(
         children: [
           // Content
@@ -57,26 +60,25 @@ class ProductDetailModal extends ConsumerWidget {
                   const SizedBox(height: 24),
                   
                   // PROMINENT IMAGE SECTION
-                  Hero(
-                    tag: 'product_image_${p.id}',
-                    child: Container(
-                      width: double.infinity,
-                      height: 280,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(24),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 20,
-                            offset: const Offset(0, 10),
-                          ),
-                        ],
-                      ),
-                      padding: const EdgeInsets.all(24),
+                  Container(
+                    width: double.infinity,
+                    height: 280,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent, // Transparent so background blends natively
+                      borderRadius: BorderRadius.circular(24),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 20,
+                          offset: const Offset(0, 10),
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(24),
                       child: CachedNetworkImage(
                         imageUrl: p.image,
-                        fit: BoxFit.contain,
+                        fit: BoxFit.contain, // Maintain aspect ratio without cropping
                         placeholder: (context, url) => Center(
                           child: CircularProgressIndicator(color: Colors.grey.shade300),
                         ),
@@ -87,7 +89,7 @@ class ProductDetailModal extends ConsumerWidget {
                         ),
                       ),
                     ),
-                  ).animate().scale(duration: 400.ms, curve: Curves.easeOutBack),
+                  ),
                   
                   const SizedBox(height: 24),
 
@@ -95,12 +97,14 @@ class ProductDetailModal extends ConsumerWidget {
                   if (p.brand.isNotEmpty)
                     Text(
                       p.brand.toUpperCase(),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: ThemeTokens.labelLarge.copyWith(
                         color: ThemeTokens.primary,
                         letterSpacing: 1.2,
                         fontWeight: FontWeight.bold,
                       ),
-                    ).animate().fadeIn(delay: 100.ms).slideX(begin: -0.1),
+                    ).animate().fadeIn(delay: 50.ms),
                   
                   const SizedBox(height: 8),
                   
@@ -112,9 +116,20 @@ class ProductDetailModal extends ConsumerWidget {
                       color: Colors.white,
                       height: 1.1,
                     ),
-                  ).animate().fadeIn(delay: 200.ms).slideX(begin: -0.1),
+                  ).animate().fadeIn(delay: 100.ms),
                   
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
+
+                  if (p.description.isNotEmpty) ...[
+                    Text(
+                      p.description,
+                      style: ThemeTokens.bodyMedium.copyWith(
+                        color: Colors.white.withOpacity(0.85),
+                        height: 1.4,
+                      ),
+                    ).animate().fadeIn(delay: 120.ms),
+                    const SizedBox(height: 16),
+                  ],
 
                   // Ratings
                   Row(
@@ -143,14 +158,17 @@ class ProductDetailModal extends ConsumerWidget {
                         style: ThemeTokens.bodySmall.copyWith(color: Colors.white54),
                       ),
                     ],
-                  ).animate().fadeIn(delay: 300.ms),
+                  ),
                   
                   const SizedBox(height: 24),
 
                   // PRICE BLOCK
-                   GlassContainer(
-                    opacity: 0.05,
-                    borderRadius: BorderRadius.circular(20),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: ThemeTokens.surfaceMuted,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+                    ),
                     padding: const EdgeInsets.all(16),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -200,7 +218,7 @@ class ProductDetailModal extends ConsumerWidget {
                         ),
                       ],
                     ),
-                  ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.1),
+                  ),
 
                   const SizedBox(height: 32),
 
@@ -211,10 +229,21 @@ class ProductDetailModal extends ConsumerWidget {
                       style: ThemeTokens.titleLarge.copyWith(fontSize: 18),
                     ),
                     const SizedBox(height: 16),
-                    SizedBox(
-                      height: 120,
-                      child: _PriceSparkline(data: p.priceHistory!.map((e) => e.price).toList()),
-                    ).animate().fadeIn(delay: 500.ms),
+                    FutureBuilder(
+                      future: Future.delayed(const Duration(milliseconds: 400)),
+                      builder: (context, snapshot) {
+                        return AnimatedOpacity(
+                          opacity: snapshot.connectionState == ConnectionState.done ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 300),
+                          child: SizedBox(
+                            height: 120,
+                            child: snapshot.connectionState == ConnectionState.done 
+                                ? _PriceSparkline(data: p.priceHistory!.map((e) => e.price).toList())
+                                : const SizedBox.shrink(),
+                          ),
+                        );
+                      },
+                    ),
                     const SizedBox(height: 32),
                   ],
 
@@ -232,9 +261,12 @@ class ProductDetailModal extends ConsumerWidget {
                       separatorBuilder: (_, __) => const SizedBox(height: 12),
                       itemBuilder: (context, index) {
                         final c = comparisons[index];
-                        return GlassContainer(
-                          opacity: 0.05,
-                          borderRadius: BorderRadius.circular(16),
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: ThemeTokens.surfaceMuted,
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+                          ),
                           padding: const EdgeInsets.all(16),
                           child: Row(
                             children: [
@@ -269,7 +301,7 @@ class ProductDetailModal extends ConsumerWidget {
                               ),
                             ],
                           ),
-                        ).animate().fadeIn(delay: Duration(milliseconds: 600 + (index * 100))).slideX(begin: 0.1);
+                        );
                       },
                     ),
                     const SizedBox(height: 32),
@@ -304,13 +336,13 @@ class ProductDetailModal extends ConsumerWidget {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () async {
-                              final query = Uri.encodeComponent(p.name);
-                             final url = Uri.parse('https://www.google.com/search?q=$query&tbm=shop');
-                             if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-                                if (context.mounted) {
-                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Could not open link')));
-                                }
-                             }
+                            final sc = ShoppingService();
+                            final success = await sc.launchCheapestSearch(p.name);
+                            if (!success && context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Could not open shopping search')),
+                              );
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: ThemeTokens.accent,
@@ -320,11 +352,23 @@ class ProductDetailModal extends ConsumerWidget {
                             shadowColor: ThemeTokens.accent.withOpacity(0.5),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                           ),
-                          child: const Text('Buy Now', style: TextStyle(fontWeight: FontWeight.bold)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.flash_on_rounded, size: 18),
+                              const SizedBox(width: 4),
+                              Text(
+                                comparisons.isNotEmpty
+                                    ? 'Buy Cheapest'
+                                    : 'Buy Now',
+                                style: const TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
-                  ).animate().fadeIn(delay: 800.ms).slideY(begin: 0.2),
+                  ),
                   
                   const SizedBox(height: 16),
                   
@@ -373,13 +417,17 @@ class ProductDetailModal extends ConsumerWidget {
           
           // Close Button (Floating)
           Positioned(
-            top: 16,
-            right: 16,
-            child: CircleAvatar(
-              backgroundColor: Colors.black.withOpacity(0.2),
-              child: IconButton(
-                icon: const Icon(Icons.close, color: Colors.white),
-                onPressed: () => Navigator.of(context).pop(),
+            top: 20, // Align top with the content scroll padding
+            right: 20, // Align exactly with the edge of the image container
+            child: GestureDetector(
+              onTap: () => Navigator.of(context).pop(),
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.5), // Darker for better contrast against white images when overlapping
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.close, color: Colors.white, size: 20),
               ),
             ),
           ),
